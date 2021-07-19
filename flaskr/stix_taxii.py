@@ -42,3 +42,14 @@ def generate():
 
     return error
 
+
+
+class technique_mitigation():
+    def __init__(self, tid, technique, tactics, mid,mitigation,description,application):
+        self.tid = tid
+        self.technique = technique
+        self.tactis = tactics
+        self.mid = mid
+        self.mitigation = mitigation
+        self.description = description
+        self.application = application

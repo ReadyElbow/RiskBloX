@@ -1,7 +1,7 @@
 import tqdm
 from stix2 import TAXIICollectionSource, MemorySource, Filter
 from taxii2client.v20 import Collection
-
+from . import stix_taxii
 
 
 def build_taxii_source(collection_name):
@@ -194,15 +194,15 @@ def do_mapping(data_source, relationship_type, type_filter, source_name, groups,
         for relationship in relationships:
             stix_results = filter_by_type_and_id(data_source, type_filter, relationship.source_ref, source_name)
             if stix_results:
-                row_data = [
-                    grab_external_id(attack_pattern, source_name), 
-                    attack_pattern.name,
-                    tactics,
-                    grab_external_id(stix_results[0], source_name), 
-                    stix_results[0].name,
-                    escape_chars(stix_results[0].description), 
-                    escape_chars(relationship.description),
-                ]
+                row_data = stix_taxii.technique_mitigation(
+                            grab_external_id(attack_pattern, source_name), 
+                            attack_pattern.name,
+                            tactics,
+                            grab_external_id(stix_results[0], source_name), 
+                            stix_results[0].name,
+                            escape_chars(stix_results[0].description), 
+                            escape_chars(relationship.description),
+                        )
 
             else:
                 row_data = fetch_alternate_detection(attack_pattern,source_name, tactics, detection_id)
@@ -212,16 +212,14 @@ def do_mapping(data_source, relationship_type, type_filter, source_name, groups,
     return writable_results
 
 def fetch_alternate_detection(attack_pattern, source_name, tactics, detection_id):
-    row_data = [
+    return stix_taxii.technique_mitigation(
                     grab_external_id(attack_pattern, source_name), 
                     attack_pattern.name,
                     tactics,
                     "D%d" % detection_id, 
                     "This mitigation has been revoked or deprecated.",
                     escape_chars("Detection Suggestions: %s" % attack_pattern.x_mitre_detection),
-                    "N/A",
-                ]
-    return row_data
+                    "N/A")
 
 def main(domain, groups, tactics, platforms, sub_techniques):
     data_source = build_taxii_source(domain)
