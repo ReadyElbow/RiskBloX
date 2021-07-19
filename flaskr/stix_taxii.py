@@ -5,7 +5,6 @@ from flask import (
         request, session, url_for
 )
 
-from flaskr.db import get_db
 
 bp = Blueprint('stix_taxii', __name__, url_prefix='/stix_taxii')
 
@@ -17,9 +16,7 @@ def generate():
             tactics = request.form['tactics']
             platforms = request.form['platforms']
             sub_techniques = request.form['include_sub_technique']
-            
-            init_db()
-            db = get_db()
+
             accepted_tactics = ["Reconnaissance", "Resource Development", "Initial Access", "Execution", "Persistence",
                                 "Privilege Escalation", "Defense Evasion", "Credential Access", "Discovery",
                                 "Lateral Movement", "Collection", "Command and Control", "Exfiltration", "Impact"]
