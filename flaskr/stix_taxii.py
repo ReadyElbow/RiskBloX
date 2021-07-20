@@ -1,10 +1,11 @@
 import functools
+from sys import platform
 from . import technique_mitigation_mapping
 from flask import (
         Blueprint, flash, g, redirect, render_template,
         request, session, url_for
 )
-
+import json
 
 bp = Blueprint('stix_taxii', __name__, url_prefix='/stix_taxii')
 
@@ -42,14 +43,11 @@ def generate():
 
     return error
 
+@bp.route('/attack_layer',methods=('POST'))
+def attack_layer():
+    if request.method == "POST":
+        scored_techniques = request.form['techniques'] #will contain tid, tactics, mid, comment, score
+        domain = request.form['domain']
+        platforms = request.form['platforms']
 
 
-class technique_mitigation():
-    def __init__(self, tid, technique, tactics, mid,mitigation,description,application):
-        self.tid = tid
-        self.technique = technique
-        self.tactis = tactics
-        self.mid = mid
-        self.mitigation = mitigation
-        self.description = description
-        self.application = application

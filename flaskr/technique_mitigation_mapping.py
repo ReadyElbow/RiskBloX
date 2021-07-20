@@ -1,7 +1,9 @@
+from taxii2client.common import _to_json
 import tqdm
 from stix2 import TAXIICollectionSource, MemorySource, Filter
 from taxii2client.v20 import Collection
-from . import stix_taxii
+import pandas as pd
+import json
 
 
 def build_taxii_source(collection_name):
@@ -177,49 +179,50 @@ def do_mapping(data_source, relationship_type, type_filter, source_name, groups,
     detection_id = 1
     
     all_attack_patterns = get_techniques(data_source, source_name, groups, tactics, platforms, include_sub_tech)
-    writable_results = []
+    json_data = []
 
     for attack_pattern in tqdm.tqdm(all_attack_patterns, desc="parsing data for techniques"):
-
+        technique = {}
+        mitigations = []
         tactics = []
         for phase in attack_pattern.kill_chain_phases:
             tactics.append(phase.phase_name)
         
+        technique["tid"] = grab_external_id(attack_pattern, source_name)
+        technique["technique_name"] = attack_pattern.name
+        technique["tactic"] = tactics
+
         relationships = filter_for_term_relationships(data_source, relationship_type, attack_pattern.id)
 
         if not relationships:
-            writable_results.append(fetch_alternate_detection(attack_pattern,source_name, tactics, detection_id))
+            mitigations.append(fetch_alternate_detection(attack_pattern,source_name, tactics, detection_id))
             detection_id+=1
 
         for relationship in relationships:
             stix_results = filter_by_type_and_id(data_source, type_filter, relationship.source_ref, source_name)
             if stix_results:
-                row_data = stix_taxii.technique_mitigation(
-                            grab_external_id(attack_pattern, source_name), 
-                            attack_pattern.name,
-                            tactics,
-                            grab_external_id(stix_results[0], source_name), 
-                            stix_results[0].name,
-                            escape_chars(stix_results[0].description), 
-                            escape_chars(relationship.description),
-                        )
-
+                mitigation =    {
+                                "mid" : grab_external_id(stix_results[0], source_name), 
+                                "mitigation_name" : stix_results[0].name,
+                                "description" : escape_chars(stix_results[0].description),
+                                "application" : escape_chars(relationship.description)
+                                }
             else:
                 row_data = fetch_alternate_detection(attack_pattern,source_name, tactics, detection_id)
                 detection_id +=1
-            writable_results.append(row_data)
-
-    return writable_results
+            mitigations.append(mitigation)
+        technique["mitigations"] = mitigations
+        json_data.append(json.dumps(technique))
+    return json_data
 
 def fetch_alternate_detection(attack_pattern, source_name, tactics, detection_id):
-    return stix_taxii.technique_mitigation(
-                    grab_external_id(attack_pattern, source_name), 
-                    attack_pattern.name,
-                    tactics,
-                    "D%d" % detection_id, 
-                    "This mitigation has been revoked or deprecated.",
-                    escape_chars("Detection Suggestions: %s" % attack_pattern.x_mitre_detection),
-                    "N/A")
+    return  {
+            "mid" : "D%d" % detection_id, 
+            "mitigation_name" : "This mitigation has been revoked or deprecated.",
+            "description" : escape_chars("Detection Suggestions: %s" % attack_pattern.x_mitre_detection),
+            "application" : "N/A"
+            }
+
 
 def main(domain, groups, tactics, platforms, sub_techniques):
     data_source = build_taxii_source(domain)
@@ -232,5 +235,7 @@ def main(domain, groups, tactics, platforms, sub_techniques):
     source_name = source_map[domain]
     technique_source = tactics
 
-    return do_mapping(data_source, "mitigates", "course-of-action", source_name, groups, tactics, platforms, sub_techniques)
-    
+    data = do_mapping(data_source, "mitigates", "course-of-action", source_name, groups, tactics, platforms, sub_techniques)
+    print(data)
+
+main("enterprise_attack", [], ["Discovery"], ["Azure AD"], False)
