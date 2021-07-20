@@ -1,6 +1,7 @@
 import functools
+from logging import error
 from sys import platform
-from . import technique_mitigation_mapping
+from . import technique_mitigation_mapping, attack_layer
 from flask import (
         Blueprint, flash, g, redirect, render_template,
         request, session, url_for
@@ -45,9 +46,20 @@ def generate():
 
 @bp.route('/attack_layer',methods=('POST'))
 def attack_layer():
+    """
+    Accepting a list of JSON Objects
+    """
     if request.method == "POST":
-        scored_techniques = request.form['techniques'] #will contain tid, tactics, mid, comment, score
-        domain = request.form['domain']
-        platforms = request.form['platforms']
+        scored_techniques = request.form['techniques'] #will contain tid, tactics, comment, score
+        domain = request.form['domain'] #Must be a string
+        platforms = request.form['platforms'] #must be a list of platforms
+
+        """
+        Error checking is required on the inputs
+        """
+        if error is None:
+            json_layer = attack_layer.create_attack_layer(domain,platforms,scored_techniques)
+            return json_layer
+    return error
 
 
