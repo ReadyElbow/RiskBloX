@@ -1,0 +1,95 @@
+body{
+    background-color: lightgrey;
+    color: #555;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16;
+    line-height: 1.6em;
+    margin: 0;
+}
+
+.container{
+    width: 90%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.container a{
+    text-decoration: none;
+    font-weight: 700;
+    color: rgb(39, 34, 34);
+}
+
+#main-header{
+    background-color: black;
+    color: white;
+    padding: 20px;
+}
+
+#navbar{
+    background-color: darkgray;
+    color: white;
+    margin-bottom: 50px;
+
+}
+
+#navbar ul{
+    padding: 0px;
+    list-style: none;
+}
+#navbar li{
+    display: inline;
+    padding: 10px;
+}
+#navbar a{
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding-right: 15px;
+}
+
+
+#technique-information {
+    border: 1px lightgrey solid;
+
+}
+
+#technique-information ul{
+    padding: 0px;
+    list-style: none;
+}
+
+#technique-information li{
+    display: inline;
+}
+
+
+
+@media(min-width:1100px){
+    .mitigation {
+        display: flex;
+    }
+}
+
+.mitigation div{
+    padding: 10px;
+}
+
+#description {
+    flex: 2;
+}
+
+#application {
+    flex: 3;
+}
+
+#notes {
+    flex: 2;
+}
+
+#confidence {
+    flex: 1;
+}
+
+.textarea{
+    resize: none;
+}

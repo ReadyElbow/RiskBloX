@@ -5,85 +5,96 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mitigation Scoring</title>
+    <link rel="stylesheet" text="text/css" href="../css/filters.css">
 </head>
 
 <body>
-    <header>MITRE ATT&CK® Mitgiation Scorer</header>
+    <header id="main-header">
+        <div class="container">
+            <h1>MITRE ATT&CK® Navigator Mitgiation TxA</h1>
+        </div> 
+    </header>
 
-    <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="to be filled" ></a>Start</li>
-            <li><a href="https://attack.mitre.org/" target="_blank">MITRE ATT&CK</a></li>
-            <li><a href="https://mitre-attack.github.io/attack-navigator/" target="_blank">MITRE ATT&CK Navigator</a></li>
-        </ul>
+    <nav id="navbar">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="filters.html">Start</a></li>
+                <li><a href="https://attack.mitre.org/" target="_blank">MITRE ATT&CK</a></li>
+                <li><a href="https://mitre-attack.github.io/attack-navigator/" target="_blank">MITRE ATT&CK Navigator</a></li>
+            </ul>
+        </div>
+        
     </nav>
 
-    <section>
-        <p>
-            Please select which filters you would like to apply by
-            selecting in the dropdown menu.
-        </p>
 
-        <label>Domain
-            <select name="Domain" size="1">
-                <option value="enterprise_attack" selected>Enterprise</option>
-                <option value="mobile_attack">Mobile</option>
-            </select>
-        </label>
-        
-        
-        <!-- An onload script may be required to set it up so that it correctly setups the All Select on Group tactic and
-             platform-->
-        <label>Tactic
-            <select name="Tactic" size="1" onchange="">
-                <option value="All" selected>All</option>
-                <option value="Reconnaissance">Reconnaissance</option>
-                <option value="Resource Development">Resource Development</option>
-                <option value="Initial Access">Initial Access</option>
-                <option value="Execution">Execution</option>
-                <option value="Persistence">Persistence</option>
-                <option value="Privilege Escalation">Privilege Escalation</option>
-                <option value="Defense Evasion">Defense Evasion</option>
-                <option value="Credential Access">Credential Access</option>
-                <option value="Discovery">Discovery</option>
-                <option value="Lateral Movement">Lateral Movement</option>
-                <option value="Collection">Collection</option>
-                <option value="Command and Control">Command and Control</option>
-                <option value="Exfiltration">Exfiltration</option>
-                <option value="Impact">Impact</option>
-            </select>
-        </label>
+    <div class="container">
+        <section>
+            <p>
+                Please select which filters you would like to apply by
+                selecting in the dropdown menu.
+            </p>
 
-        <label>Platforms
-            <select name="Platforms" size="1" onchange="">
-                <option value="All" selected>All</option>
-                <option value="Linux">Linux</option>
-                <option value="macOS">macOS</option>
-                <option value="Windows">Windows</option>
-                <option value="Azure AD">Azure AD</option>
-                <option value="Office 365">Office 365</option>
-                <option value="SaaS">SaaS</option>
-                <option value="IaaS">IaaS</option>
-                <option value="Google Workspace">Google Workspace</option>
-                <option value="PRE">PRE</option>
-                <option value="Network">Network</option>
-                <option value="Containers">Containers</option>
-            </select>
-        </label>
-        
-        <label>Groups
-            <select name="Groups" size="1">
-                <option value="All" selected>All</option>
-                <!-- Need to find a way of filling this with stuff returned by the API 
-                 call because the number of Groups is too long -->
-            </select>
-        </label>
-        
+            <label>Domain
+                <select class="filters" name="Domain" size="1">
+                    <option value="enterprise_attack" selected>Enterprise</option>
+                    <option value="mobile_attack">Mobile</option>
+                </select>
+            </label>
+            
+            
+            <!-- An onload script may be required to set it up so that it correctly setups the All Select on Group tactic and
+                platform-->
+            <label>Tactic
+                <select class="filters" name="Tactic" size="1" onchange="">
+                    <option value="All" selected>All</option>
+                    <option value="Reconnaissance">Reconnaissance</option>
+                    <option value="Resource Development">Resource Development</option>
+                    <option value="Initial Access">Initial Access</option>
+                    <option value="Execution">Execution</option>
+                    <option value="Persistence">Persistence</option>
+                    <option value="Privilege Escalation">Privilege Escalation</option>
+                    <option value="Defense Evasion">Defense Evasion</option>
+                    <option value="Credential Access">Credential Access</option>
+                    <option value="Discovery">Discovery</option>
+                    <option value="Lateral Movement">Lateral Movement</option>
+                    <option value="Collection">Collection</option>
+                    <option value="Command and Control">Command and Control</option>
+                    <option value="Exfiltration">Exfiltration</option>
+                    <option value="Impact">Impact</option>
+                </select>
+            </label>
 
-        <button onclick="redirect">Submit</button>
+            <label>Platforms
+                <select class="filters" name="Platforms" size="1" onchange="">
+                    <option value="All" selected>All</option>
+                    <option value="Linux">Linux</option>
+                    <option value="macOS">macOS</option>
+                    <option value="Windows">Windows</option>
+                    <option value="Azure AD">Azure AD</option>
+                    <option value="Office 365">Office 365</option>
+                    <option value="SaaS">SaaS</option>
+                    <option value="IaaS">IaaS</option>
+                    <option value="Google Workspace">Google Workspace</option>
+                    <option value="PRE">PRE</option>
+                    <option value="Network">Network</option>
+                    <option value="Containers">Containers</option>
+                </select>
+            </label>
+            
+            <label>Groups
+                <select class="filters" name="Groups" size="1">
+                    <option value="All" selected>All</option>
+                    <!-- Need to find a way of filling this with stuff returned by the API 
+                    call because the number of Groups is too long -->
+                </select>
+            </label>
+            
 
-    </section>
+            <button onclick="">Submit</button>
+
+        </section>
+    </div>
 </body>
 
 </html>
