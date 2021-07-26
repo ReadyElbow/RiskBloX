@@ -1,6 +1,5 @@
 import argparse
 from sys import platform
-from flaskr.stix_taxii import attack_layer
 import json
 import re
 

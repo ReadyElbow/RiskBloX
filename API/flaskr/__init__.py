@@ -18,6 +18,10 @@ def create_app(test_config=None):
                 os.makedirs(app.instance_path)
         except OSError:
                 pass
+
+        from . import stix_taxii
+        app.register_blueprint(stix_taxii.bp)
+        return app
         
 
         

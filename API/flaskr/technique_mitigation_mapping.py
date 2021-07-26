@@ -179,16 +179,17 @@ def do_mapping(data_source, relationship_type, type_filter, source_name, groups,
     detection_id = 1
     
     all_attack_patterns = get_techniques(data_source, source_name, groups, tactics, platforms, include_sub_tech)
-    json_data = []
+    json_data = {}
 
     for attack_pattern in tqdm.tqdm(all_attack_patterns, desc="parsing data for techniques"):
         technique = {}
         mitigations = []
         tactics = []
+        
         for phase in attack_pattern.kill_chain_phases:
             tactics.append(phase.phase_name)
         
-        technique["tid"] = grab_external_id(attack_pattern, source_name)
+        tid = grab_external_id(attack_pattern, source_name)
         technique["technique_name"] = attack_pattern.name
         technique["tactic"] = tactics
 
@@ -201,18 +202,18 @@ def do_mapping(data_source, relationship_type, type_filter, source_name, groups,
         for relationship in relationships:
             stix_results = filter_by_type_and_id(data_source, type_filter, relationship.source_ref, source_name)
             if stix_results:
-                mitigation =    {
-                                "mid" : grab_external_id(stix_results[0], source_name), 
-                                "mitigation_name" : stix_results[0].name,
-                                "description" : escape_chars(stix_results[0].description),
-                                "application" : escape_chars(relationship.description)
-                                }
+                mitigations.append({
+                                    "mid" : grab_external_id(stix_results[0], source_name), 
+                                    "mitigation_name" : stix_results[0].name,
+                                    "description" : escape_chars(stix_results[0].description),
+                                    "application" : escape_chars(relationship.description)
+                                    })
             else:
-                row_data = fetch_alternate_detection(attack_pattern,source_name, tactics, detection_id)
+                mitigations.append(fetch_alternate_detection(attack_pattern,source_name, tactics, detection_id))
                 detection_id +=1
-            mitigations.append(mitigation)
+
         technique["mitigations"] = mitigations
-        json_data.append(json.dumps(technique))
+        json_data[tid] = technique
     return json_data
 
 def fetch_alternate_detection(attack_pattern, source_name, tactics, detection_id):
@@ -227,6 +228,7 @@ def fetch_alternate_detection(attack_pattern, source_name, tactics, detection_id
 def main(domain, groups, tactics, platforms, sub_techniques):
     data_source = build_taxii_source(domain)
 
+    
     source_map = {
         "enterprise_attack": "mitre-attack",
         "mobile_attack": "mitre-mobile-attack",
@@ -236,6 +238,4 @@ def main(domain, groups, tactics, platforms, sub_techniques):
     technique_source = tactics
 
     data = do_mapping(data_source, "mitigates", "course-of-action", source_name, groups, tactics, platforms, sub_techniques)
-    print(data)
-
-main("enterprise_attack", [], ["Discovery"], ["Azure AD"], False)
+    return data

@@ -1,2 +1,4 @@
-venv/
+API/venv/
 .vscode/
+API_call_test.py
+API/flaskr/__pycache__
