@@ -55,6 +55,8 @@ function redirect(){
     let platforms = document.getElementById('platformsList').value;
     let includeSub = document.getElementById('subTechList').value;
 
+    var dataReturned = false;
+
     document.cookie = "domain=" + domain;
     document.cookie = "tactics=" + tactics;
     document.cookie = "groups=" + groups;
@@ -74,9 +76,11 @@ function redirect(){
         for (let key in data) {
             let value = data[key];
             console.log(key, value);
-            localStorage.setItem(key, value);
-          }
+            localStorage.setItem(key, JSON.stringify(value));
+        }
+        document.cookie = "currentTechnique=T1;"
+        //Must change this to a promise
+        window.location.replace("technique-forms.html");
         })
-    window.location.replace("technique-forms.html");
 }
 

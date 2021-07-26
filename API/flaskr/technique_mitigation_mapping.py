@@ -191,6 +191,7 @@ def do_mapping(data_source, relationship_type, type_filter, source_name, groups,
             tactics.append(phase.phase_name)
         
         technique["tid"] = grab_external_id(attack_pattern, source_name)
+        technique["description"] = attack_pattern.description
         technique["technique_name"] = attack_pattern.name
         technique["tactic"] = tactics
 
@@ -221,7 +222,7 @@ def do_mapping(data_source, relationship_type, type_filter, source_name, groups,
 def fetch_alternate_detection(attack_pattern, source_name, tactics, detection_id):
     return  {
             "mid" : "D%d" % detection_id, 
-            "mitigation_name" : "This mitigation has been revoked or deprecated.",
+            "mitigation_name" : "This mitigation has been revoked or deprecated. Instead the technique detection is given",
             "description" : escape_chars("Detection Suggestions: %s" % attack_pattern.x_mitre_detection),
             "application" : "N/A"
             }
