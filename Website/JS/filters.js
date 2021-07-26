@@ -20,10 +20,12 @@ function addPost(){
         groups = parse("Groups", data.groups)
         platforms = get_platforms(domain)
 
+
         function parse(filter, filterData){
             output = ""
             output +=`<label>${filter} <select id=${filter} name=${filter} size="1"> <option value="All" selected>All</option>`;
             for (let i = 0; i < filterData.length; i++){
+                console.log(filterData[i]);
                 output += `<option value=${filterData[i]}>${filterData[i]}</option>`;
             }
             output += `</select></label>`
@@ -41,14 +43,18 @@ function addPost(){
             }
         }
 
+        let includeSub = `<label>Include SubTechniques? <select id=includeSub name=includeSub size="1"> <option value="True" selected>Yes</option><option value="False" selected>No</option></select>`;
+
         let allFilters = `<button id="submitFilters" onclick="redirect()">Submit</button>`
 
         document.getElementById('output').innerHTML = title;
         document.getElementById('tacticDiv').innerHTML = tactics;
         document.getElementById('groupDiv').innerHTML = groups;
         document.getElementById('platformDiv').innerHTML = platforms;
-        document.getElementById('submitDomain').remove()
+        document.getElementById('subTechniques').innerHTML = includeSub;
         document.getElementById('fullSubmit').innerHTML = allFilters;
+        document.getElementById('submitDomain').remove()
+        
     });
                 
 }   
@@ -58,11 +64,13 @@ function redirect(){
     let tactics = document.getElementById('Tactics').value;
     let groups = document.getElementById('Groups').value;
     let platforms = document.getElementById('Platforms').value;
+    let includeSub = document.getElementById('includeSub').value;
 
     document.cookie = "domain=" + domain;
     document.cookie = "tactics=" + tactics;
     document.cookie = "groups=" + groups;
     document.cookie = "platforms=" + platforms;
+    document.cookie = "subTechnique=" + includeSub;
     window.location.replace("technique-forms.html");
 }
 
