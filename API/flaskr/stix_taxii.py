@@ -40,9 +40,14 @@ def generate():
         if domain not in ['enterprise_attack', 'mobile_attack']:
             error = 'An incorrect Domain has been passed: %s' % domain
 
-        if not all(map(lambda v: v in accepted_tactics, tactics)):
+        if tactics == ["All"]:
+            tactics = accepted_tactics
+        elif not all(map(lambda v: v in accepted_tactics, tactics)):
             error = 'An incorrect Tactic has been submitted: %s' % tactics
-        if not all(map(lambda v: v in accepted_platforms, platforms)):
+        
+        if platforms == ["All"]:
+            platforms = accepted_platforms
+        elif not all(map(lambda v: v in accepted_platforms, platforms)):
             error = 'An incorrect Platform has been submitted: %s' % platforms
 
         if error is None:

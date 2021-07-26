@@ -46,13 +46,42 @@
             
             <button id="submitDomain" onclick="addPost()">Submit</button>
 
-            <div id="output"></div>
+            <h2 hidden id="additionalFilterTitle">Additional Filters</h2>
 
-            <div id="groupDiv"></div>
-            <div id="tacticDiv"></div>
-            <div id="platformDiv"></div>
-            <div id="subTechniques"></div>
-            <div id="fullSubmit"></div>
+            <div hidden id="additionalFilters">
+                <div id="groupDiv">
+                    <label>Groups
+                        <select name="groupsList" id="groupsList" size="1">
+                            <option value="All">All</option>
+                        </select>
+                    </label>
+                </div>
+                    
+                <div id="tacticDiv">
+                    <label>Tactics
+                        <select name="tacticsList" id="tacticsList" size="1">
+                            <option value="All">All</option>
+                        </select>
+                    </label>
+                </div>
+                <div id="platformDiv">
+                    <label>Platforms
+                        <select name="platformsList" id="platformsList" size="1">
+                            <option value="All">All</option>
+                        </select>
+                    </label>
+                </div>
+                <div id="subTechniques">
+                    <label>Include subTechniques?
+                        <select name="subTechList" id="subTechList" size="1">
+                            <option value="True" selected>Yes</option>
+                            <option value="False">No</option>
+                        </select>
+                    </label>
+                </div>
+                <button id="submitFilters" onclick="redirect()">Submit</button>
+            </div>
+
             
             
         </section>

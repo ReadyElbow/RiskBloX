@@ -59,7 +59,7 @@ def get_techniques(data_source, source_name, groups, tactics, platforms, include
         filters.append(
             Filter("x_mitre_platforms", "in", platforms))
 
-    if groups:
+    if groups and groups != ["All"]:
         group_ids = fetch_groups(data_source, groups)
         ''' 
         We make sure that the user supplied information has fetched an associated group ID before filtering to avoid incorrect 
@@ -180,6 +180,7 @@ def do_mapping(data_source, relationship_type, type_filter, source_name, groups,
     
     all_attack_patterns = get_techniques(data_source, source_name, groups, tactics, platforms, include_sub_tech)
     json_data = {}
+    id = 1
 
     for attack_pattern in tqdm.tqdm(all_attack_patterns, desc="parsing data for techniques"):
         technique = {}
@@ -189,7 +190,7 @@ def do_mapping(data_source, relationship_type, type_filter, source_name, groups,
         for phase in attack_pattern.kill_chain_phases:
             tactics.append(phase.phase_name)
         
-        tid = grab_external_id(attack_pattern, source_name)
+        technique["tid"] = grab_external_id(attack_pattern, source_name)
         technique["technique_name"] = attack_pattern.name
         technique["tactic"] = tactics
 
@@ -213,7 +214,8 @@ def do_mapping(data_source, relationship_type, type_filter, source_name, groups,
                 detection_id +=1
 
         technique["mitigations"] = mitigations
-        json_data[tid] = technique
+        json_data["T%s" % id] = technique
+        id+=1
     return json_data
 
 def fetch_alternate_detection(attack_pattern, source_name, tactics, detection_id):
