@@ -32,7 +32,6 @@ function fetchTechnique(){
 
 function displayMitigations(mitigations) {
     for (let i =0; i < mitigations.length; i++) {
-        let i = 0;
         let mid = mitigations[i].mid;
         let mitigation_name = mitigations[i].mitigation_name;
         let description = mitigations[i].description;
@@ -42,29 +41,29 @@ function displayMitigations(mitigations) {
         mitigationInformation = "Mitigation: " + mitigation_name +" (" + mid + ")";
 
         var mitigationStructure = document.createElement("div");
-        mitigationStructure.class = "mitigation"
+        mitigationStructure.className = "mitigation"
 
         var descriptionStructure = mitigationDetail("description", "Description", description);
 
         var applicationStructure = mitigationDetail("application", "Application", application);
 
         var notesStructure = document.createElement("div");
-        notesStructure.class = "notes";
-        let heading = document.createElement("h1");
-        heading.innerHTML = "Notes";
+        notesStructure.className = "notes";
+        let label = document.createElement("label");
+        label.innerHTML = "Notes";
         let userInput = document.createElement("textarea");
-        userInput.class = "textarea";
+        userInput.className = "textarea";
         userInput.cols = "50";
         userInput.rows = "15";
-        notesStructure.append(heading, userInput);
+        notesStructure.append(label, userInput);
 
 
         var confidenceStructure = document.createElement("div");
-        confidenceStructure.class = "confidence";
-        heading = document.createElement("h1");
-        heading.innerHTML = "Confidence Score";
+        confidenceStructure.className = "confidence";
+        label = document.createElement("label");
+        label.innerHTML = "Confidence Score";
         confidenceForm = document.createElement("select");
-        confidenceForm.class = "confidence-score";
+        confidenceForm.className = "confidence-score";
         confidenceForm.size = "1";
         
         for (let i = 0; i <= 10; i+=2){
@@ -73,7 +72,7 @@ function displayMitigations(mitigations) {
             option.innerHTML = i;
             confidenceForm.appendChild(option);
         }
-        confidenceStructure.append(heading,confidenceForm);
+        confidenceStructure.append(label,confidenceForm);
         
 
         mitigationStructure.append(descriptionStructure, applicationStructure, notesStructure, confidenceStructure);
@@ -85,7 +84,7 @@ function displayMitigations(mitigations) {
 
 function mitigationDetail(classname, header, information){
     var Structure = document.createElement("div");
-    Structure.class = classname;
+    Structure.className = classname;
     let heading = document.createElement("h1");
     heading.innerHTML = header;
     let paragraph = document.createElement("p");

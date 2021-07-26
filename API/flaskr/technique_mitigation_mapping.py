@@ -68,7 +68,17 @@ def get_techniques(data_source, source_name, groups, tactics, platforms, include
         if group_ids:
             filters.append(Filter("id", "in", group_ids))
     results = data_source.query(filters)
-    return remove_deprecated(results)
+    return sorted(remove_deprecated(results), key=lambda x: techName(x))
+
+def techName(x):
+    externalRef = x.external_references
+    for source in externalRef:
+        if source["source_name"] == "mitre-attack":
+            return source["external_id"]
+        else:
+            return "T1"
+            
+
 
 
 def fetch_groups(data_source, user_input):

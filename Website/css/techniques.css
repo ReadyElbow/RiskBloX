@@ -53,43 +53,35 @@ body{
 
 }
 
-#technique-information ul{
-    padding: 0px;
-    list-style: none;
-}
 
-#technique-information li{
-    display: inline;
-}
-
-
-
-@media(min-width:1100px){
-    .mitigation {
-        display: flex;
-    }
+.mitigation{
+    display: flex;
+    flex-wrap: wrap;
+    /*
+    align-items: flex-start;
+    */
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .mitigation div{
+    border: 1px #ccc solid;
     padding: 10px;
+
 }
 
-#description {
+.description{
+    flex:2;
+}
+
+.application{
     flex: 2;
 }
 
-#application {
-    flex: 3;
-}
-
-#notes {
-    flex: 2;
-}
-
-#confidence {
+.notes{
     flex: 1;
 }
 
-.textarea{
-    resize: none;
+.confidence{
+    flex: 1;
 }
