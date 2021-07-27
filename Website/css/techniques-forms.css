@@ -53,6 +53,19 @@ body{
 
 }
 
+#technique-information{
+    display: flex;
+    flex-wrap: wrap;
+}
+#technique-details{
+    flex: 3;
+}
+#technique-score{
+    flex: 1;
+}
+
+
+
 
 .mitigation{
     display: flex;

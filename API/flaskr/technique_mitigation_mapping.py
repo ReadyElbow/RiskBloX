@@ -196,6 +196,7 @@ def do_mapping(data_source, relationship_type, type_filter, source_name, groups,
         technique = {}
         mitigations = []
         tactics = []
+        foundDeprecatedMitigation = False
         
         for phase in attack_pattern.kill_chain_phases:
             tactics.append(phase.phase_name)
@@ -204,12 +205,15 @@ def do_mapping(data_source, relationship_type, type_filter, source_name, groups,
         technique["description"] = attack_pattern.description
         technique["technique_name"] = attack_pattern.name
         technique["tactic"] = tactics
+        technique["score"] = 0
 
         relationships = filter_for_term_relationships(data_source, relationship_type, attack_pattern.id)
 
         if not relationships:
-            mitigations.append(fetch_alternate_detection(attack_pattern,source_name, tactics, detection_id))
-            detection_id+=1
+            if not foundDeprecatedMitigation:
+                foundDeprecatedMitigation = True
+                mitigations.append(fetch_alternate_detection(attack_pattern,source_name, tactics, detection_id))
+                detection_id+=1
 
         for relationship in relationships:
             stix_results = filter_by_type_and_id(data_source, type_filter, relationship.source_ref, source_name)
@@ -218,11 +222,16 @@ def do_mapping(data_source, relationship_type, type_filter, source_name, groups,
                                     "mid" : grab_external_id(stix_results[0], source_name), 
                                     "mitigation_name" : stix_results[0].name,
                                     "description" : escape_chars(stix_results[0].description),
-                                    "application" : escape_chars(relationship.description)
+                                    "application" : escape_chars(relationship.description),
+                                    "notes": "",
+                                    "confidenceScore": 0,
+                                    "weighting": 0
                                     })
             else:
-                mitigations.append(fetch_alternate_detection(attack_pattern,source_name, tactics, detection_id))
-                detection_id +=1
+                if not foundDeprecatedMitigation:
+                    foundDeprecatedMitigation = True
+                    mitigations.append(fetch_alternate_detection(attack_pattern,source_name, tactics, detection_id))
+                    detection_id +=1
 
         technique["mitigations"] = mitigations
         json_data["T%s" % id] = technique
@@ -234,8 +243,11 @@ def fetch_alternate_detection(attack_pattern, source_name, tactics, detection_id
             "mid" : "D%d" % detection_id, 
             "mitigation_name" : "This mitigation has been revoked or deprecated. Instead the technique detection is given",
             "description" : escape_chars("Detection Suggestions: %s" % attack_pattern.x_mitre_detection),
-            "application" : "N/A"
-            }
+            "application" : "N/A",
+            "notes": "",
+            "confidenceScore": 0,
+            "weighting": 0
+    }
 
 
 def main(domain, groups, tactics, platforms, sub_techniques):

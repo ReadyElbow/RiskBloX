@@ -5,14 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mitigation Scoring</title>
-    <link rel="stylesheet" text="text/css" href="../css/techniques-forms.css">
+    <link rel="stylesheet" text="text/css" href="../css/main.css">
 </head>
 
-<body onload="fetchTechnique()">
+<body onload="createView()">
+   
     <header id="main-header">
         <div class="container">
             <h1>MITRE ATT&CK® Navigator Mitgiation TxA</h1>
-        </div>
+        </div> 
     </header>
 
     <nav id="navbar">
@@ -23,20 +24,9 @@
                 <li><a href="https://attack.mitre.org/" target="_blank">MITRE ATT&CK</a></li>
                 <li><a href="https://mitre-attack.github.io/attack-navigator/" target="_blank">MITRE ATT&CK Navigator</a></li>
             </ul>
-        </div>
+        </div>    
     </nav>
 
-
-    <div class="container">
-        <div id="technique-information">
-            <div id=technique-details></div>
-            <div id=technique-score></div>
-        </div>
-        <div id="mitigations"></div>
-    </div>
-
-    <button id="back" onclick="previousTechnique()">Back</button>
-    <button id="next" onclick="nextTechnique()">Next</button>
-    
-    <script type="text/javascript" src="../JS/technique.js"></script>
+    <div id="navigator"></div>
+    <script type="text/javascript" src="../JS/navigatorView.js"></script>
 </body>

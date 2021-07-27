@@ -1,11 +1,9 @@
-import argparse
 from sys import platform
 import json
 import re
 
 
 def create_attack_layer(domain, platforms, data):
-
 
     '''
     Takes the information stored in the Excel File to generate a compatible JSON Attack Layer.
@@ -54,8 +52,7 @@ def create_attack_layer(domain, platforms, data):
         "selectSubtechniquesWithParent": False
     }
     for row in data:
-
-        for tactic in row["tactics"].split(","):
+        for tactic in row["tactics"]:
             escaped = row["comment"].translate(str.maketrans({"-":  r"\-",
                                           "]":  r"\]",
                                           "\\": r"\\",

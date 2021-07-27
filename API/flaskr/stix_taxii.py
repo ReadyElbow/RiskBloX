@@ -26,7 +26,7 @@ def generate():
         groups = request_data['groups']
         tactics = request_data['tactics']
         platforms = request_data['platforms']
-        sub_techniques = request_data['include_sub_technique']
+        sub_techniques = eval(request_data['include_sub_technique'])
         accepted_tactics = ["Reconnaissance", "Resource Development", "Initial Access", "Execution", "Persistence",
                             "Privilege Escalation", "Defense Evasion", "Credential Access", "Discovery",
                             "Lateral Movement", "Collection", "Command and Control", "Exfiltration", "Impact"]
@@ -58,15 +58,16 @@ def generate():
     return error
 
 @bp.route('/attack_layer',methods=["POST"])
-def attack_layer():
+def generate_attack_layer():
     """
     Accepting a list of JSON Objects
     """
+    error = None
     if request.method == "POST":
-        scored_techniques = request.form['techniques'] #will contain tid, tactics, comment, score
-        domain = request.form['domain'] #Must be a string
-        platforms = request.form['platforms'] #must be a list of platforms
-
+        request_data = request.get_json()
+        scored_techniques = request_data['techniques'] #will contain tid, tactics, comment, score
+        domain = request_data['domain'] #Must be a string
+        platforms = request_data['platforms'] #must be a list of platforms
         """
         Error checking is required on the inputs
         """
