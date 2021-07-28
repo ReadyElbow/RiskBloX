@@ -1,6 +1,8 @@
-from sys import platform
+from os import path
 import json
 import re
+import secrets
+import string
 
 
 def create_attack_layer(domain, platforms, data):
@@ -82,6 +84,4 @@ def create_attack_layer(domain, platforms, data):
         "maxValue": 100
     }
 
-
     return  json.dumps(layer_json, indent=8)
-

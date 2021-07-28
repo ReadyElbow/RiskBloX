@@ -144,7 +144,7 @@ function nextTechnique(){
     var nextTechnique = increDecreString(currentTechnique, "increment");
 
     if (localStorage.getItem(nextTechnique) == null){
-        generateAttackLayerCall();
+        window.location.replace("navigatorView.html");
     }
     else{
         document.cookie = "currentTechnique=" + nextTechnique;
@@ -197,46 +197,4 @@ function increDecreString(str, type) {
     if (type == "decrement"){
         return str.substr(0, count.index) + (--count[0]);
     }
-}
-
-
-function generateAttackLayerCall(){
-    toPost = {}
-    techniques = new Array(localStorage.length);
-    var positionCounter = 0;
-    for (let [key, stringValue] of Object.entries(localStorage)) {
-        value = JSON.parse(stringValue);
-        let tid = value.tid;
-        let tactics = value.tactic;
-        let score = value.score;
-        let comment = "";
-
-        for (i=0; i < value.mitigations;i++){
-            comment += value.mitigations[i].notes + "\n";
-        }
-        var technique = {};
-        technique["tid"] = tid;
-        technique["tactics"] = tactics;
-        technique["score"] = score;
-        technique["comment"] = comment;
-        techniques[positionCounter] = technique;
-        positionCounter++;
-    };
-    toPost["domain"] = getCookie("domain");
-    toPost["platforms"] = getCookie("platforms").split(',');
-    toPost["techniques"] = techniques;
-
-    fetch('http://127.0.0.1:5000/stix_taxii/attack_layer', {
-        method:'POST',
-        headers:{
-            'Accept':'application/json, text/plain, */*',
-            'Content-type':'application/json'
-        },
-        body:JSON.stringify(toPost)
-    })
-    .then((res) => res.json())
-    .then((data) => {
-        localStorage.setItem("attackLayer", JSON.stringify(data));
-        window.location.replace("navigatorView.html");
-        })
 }
