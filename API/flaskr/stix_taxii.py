@@ -13,20 +13,12 @@ bp = Blueprint('stix_taxii', __name__, url_prefix='/stix_taxii')
 @bp.route('/generate', methods=["POST"])
 def generate():
     if request.method == 'POST':
-        '''
-        This is directly for when forms are submitted
-        domain = request.form['domain']
-        groups = request.form['groups']
-        tactics = request.form['tactics']
-        platforms = request.form['platforms']
-        sub_techniques = request.form['include_sub_technique']
-        '''
         request_data = request.get_json()
         domain = request_data['domain']
         groups = request_data['groups']
         tactics = request_data['tactics']
         platforms = request_data['platforms']
-        sub_techniques = eval(request_data['include_sub_technique'])
+        sub_techniques = request_data['include_sub_technique']
         accepted_tactics = ["Reconnaissance", "Resource Development", "Initial Access", "Execution", "Persistence",
                             "Privilege Escalation", "Defense Evasion", "Credential Access", "Discovery",
                             "Lateral Movement", "Collection", "Command and Control", "Exfiltration", "Impact"]

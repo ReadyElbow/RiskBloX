@@ -2,7 +2,7 @@
 //Standard Post request using Fetch
 function addPost(){
     
-    let domain = document.getElementById('domain').value;
+    let domain = document.getElementById('domainChoice').value;
 
     fetch('http://127.0.0.1:5000/stix_taxii/tactic-groups', {
         method:'POST',
@@ -17,7 +17,6 @@ function addPost(){
         
         parse("tacticsList", data.tactics);
         parse("groupsList", data.groups);
-
         var platforms = get_platforms(domain);
         parse("platformsList", platforms);
 
@@ -41,19 +40,21 @@ function addPost(){
                 return platforms
             }
         }
-        document.getElementById('submitDomain').remove()
+        document.getElementById('domainSubmit').remove();
         document.getElementById('additionalFilters').removeAttribute('hidden');
-        document.getElementById('additionalFilterTitle').removeAttribute('hidden');
+        document.querySelector(".box");
+            
     });
+        
                 
 }   
 
 function redirect(){
-    let domain = document.getElementById('domain').value;
+    let domain = document.getElementById('domainChoice').value;
     let tactics = document.getElementById('tacticsList').value;
     let groups = document.getElementById('groupsList').value;
     let platforms = document.getElementById('platformsList').value;
-    let includeSub = document.getElementById('subTechList').value;
+    let includeSub = document.getElementById('includeSubTech').checked;
 
     var dataReturned = false;
 
@@ -75,11 +76,9 @@ function redirect(){
     .then((data) => {
         for (let key in data) {
             let value = data[key];
-            console.log(key, value);
             localStorage.setItem(key, JSON.stringify(value));
         }
         document.cookie = "currentTechnique=T1;"
-        //Must change this to a promise
         window.location.replace("technique-forms.html");
         })
 }

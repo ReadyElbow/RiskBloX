@@ -16,23 +16,43 @@ function fetchTechnique(){
     var score = technique.score;
 
     //Technique Information
-    var techniqueHeader = document.createElement("h2");
-    techniqueHeader.innerHTML = techniqueName + " (" + tid +")";
+    var techniqueHeader = document.createElement("h1");
+    techniqueHeader.innerHTML = "Technique: " + techniqueName + " (" + tid +")";
     
-    var tacticsListinfo = document.createElement("p");
-    tacticsListinfo.innerHTML = "Tactics found in: " + tactic
+    var techniqueScore = document.createElement("h2");
+    techniqueScore.id = "overallScore"
+    techniqueScore.innerHTML = "Risk Score: " + score;
+    
+    document.getElementById("technique-header").append(techniqueHeader, techniqueScore);
+
+
+    var techniqueCardBody = document.createElement("card-body");
+
+    var tacticsListinfo = document.createElement("h5");
+    tacticsListinfo.className = "card-title";
+    tacticsListinfo.innerHTML = "Found in: " + tactic + " tactics";
 
     var description = document.createElement("p");
+    description.className = "card-text";
     description.innerHTML = techniqueDescription;
 
-    document.getElementById("technique-score").innerHTML = score;
-    document.getElementById("technique-details").append(techniqueHeader, tacticsListinfo, description);
+    
+{/* <div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+     */}
+    techniqueCardBody.append(tacticsListinfo, description);
+    document.getElementById("technique-details").append(techniqueCardBody);
 
     displayMitigations(mitigations);
 }
 
 function displayMitigations(mitigations) {
+
     for (let i =0; i < mitigations.length; i++) {
+        let mitigationRow = document.createElement("tr")
         let mid = mitigations[i].mid;
         let mitigation_name = mitigations[i].mitigation_name;
         let description = mitigations[i].description;
@@ -41,98 +61,88 @@ function displayMitigations(mitigations) {
         let confidenceScore = mitigations[i].confidenceScore
         let weighting = mitigations[i].weighting
 
-        var mitigationInformation = document.createElement("h2");
+        var mitigationInformation = document.createElement("td");
         mitigationInformation = "Mitigation: " + mitigation_name +" (" + mid + ")";
 
-        var mitigationStructure = document.createElement("div");
-        mitigationStructure.className = "mitigation"
+        var descriptionStructure = mitigationDetail(description);
 
-        var descriptionStructure = mitigationDetail("description", "Description", description);
+        var applicationStructure = mitigationDetail(application);
 
-        var applicationStructure = mitigationDetail("application", "Application", application);
-
-        var notesStructure = document.createElement("div");
+        var notesStructure = document.createElement("td");
         notesStructure.className = "notes";
-        let label = document.createElement("label");
-        label.innerHTML = "Notes";
         let userInput = document.createElement("textarea");
         userInput.className = "textarea";
-        userInput.cols = "50";
-        userInput.rows = "15";
+        userInput.cols = "30";
+        userInput.rows = "8";
         userInput.innerHTML = notes;
-        notesStructure.append(label, userInput);
+        notesStructure.append(userInput);
 
+        var scoreInputs = document.createElement("td");
 
-        var confidenceStructure = document.createElement("div");
-        var confidence = document.createElement("div");
-        var weightingStructure = document.createElement("div");
+        var confidence = document.createElement("select");
+        confidence.className = "form-select form-select-lg mb-3 confidenceScore"
+        confidence.onchange = updateScore;
 
-        confidenceStructure.className = "confidenceStructure";
-        confidenceLabel = document.createElement("label");
-        confidenceLabel.innerHTML = "Confidence Score";
-        confidenceForm = document.createElement("select");
-        confidenceForm.className = "confidence-score";
-        confidenceForm.onchange = updateScore;
-        confidenceForm.size = "1";
         for (let i = 0; i <= 10; i+=2){
             var option = document.createElement("option");
             option.value = i;
             option.innerHTML = i;
-            if (i==confidenceScore){
+            if (i==0){
                 option.selected = "selected";
             }
-            confidenceForm.appendChild(option);
+            confidence.appendChild(option);
         }
-        confidence.append(confidenceLabel,confidenceForm);
+
+        var implementedQuestion = document.createElement("div");
+        var input = document.createElement("input");
+        input.className = "form-check-input implemented";
+        input.type = "checkbox";
+        input.id = "flexSwitchCheckDefault";
+        input.onchange = updateScore;
+        var label = document.createElement("label");
+        label.className = "form-check-label";
+        label.for = "flexSwitchCheckDefault";
+        label.innerHTML = "Implemented"
+        implementedQuestion.append(input, label);
+
+        scoreInputs.append(confidence, implementedQuestion);
+     
+        mitigationRow.append(mitigationInformation, descriptionStructure, applicationStructure, notesStructure, scoreInputs);
+
+        document.getElementById("mitigations").append(mitigationRow);
         
-        weightingLabel = document.createElement("label");
-        weightingLabel.innerHTML = "Weighting Percentage";weightingForm = document.createElement("select");
-        weightingForm.className = "weighting";
-        weightingForm.onchange = updateScore;
-        weightingForm.size = "1";
-        for (let i = 0; i <= 100; i+=10){
-            var option = document.createElement("option");
-            option.value = i;
-            option.innerHTML = i;
-            if (i == weighting){
-                option.selected = "selected";
-            }
-            weightingForm.appendChild(option);
-        }
-        weightingStructure.append(weightingLabel, weightingForm);
-
-        confidenceStructure.append(confidence, weightingStructure);
-        
-
-        mitigationStructure.append(descriptionStructure, applicationStructure, notesStructure, confidenceStructure);
-
-        document.getElementById("mitigations").append(mitigationInformation, mitigationStructure);
 
     }
 }
 
-function mitigationDetail(classname, header, information){
-    var Structure = document.createElement("div");
-    Structure.className = classname;
-    let heading = document.createElement("h1");
-    heading.innerHTML = header;
-    let paragraph = document.createElement("p");
+function mitigationDetail(information){
+    let paragraph = document.createElement("td");
     paragraph.innerHTML = information;
-    Structure.append(heading,paragraph);
-    return Structure
+    return paragraph
 }
 
 function updateScore(){
     //When a Mitigation Confidence Score is added call this and update the global Technique Score
-    let scores = document.getElementsByClassName("confidence-score");
-    let weightings = document.getElementsByClassName("weighting");
+    let scoresList = document.getElementsByClassName("confidenceScore");
+    let implementedList = document.getElementsByClassName("implemented");
     let overallScore = 0;
-    for (let i = 0; i < scores.length; i++) {
-        let score = scores[i].value;
-        let weighting = weightings[i].value;
-        overallScore += (score*weighting);
+    let numberOfMitigations = scoresList.length;
+    let implementedMitigations = 0;
+    for (let i = 0; i < numberOfMitigations; i++) {
+        let score = scoresList[i].value;
+        let implemented = implementedList[i].checked;
+        if (implemented == false) {
+            overallScore -= 0.5;
+        }
+        else{
+            implementedMitigations+=1;
+            overallScore += score;
+        }
+        console.log(overallScore);
     }
-    document.getElementById("technique-score").innerHTML = (overallScore/100);
+    //Need to replace the innerhtnl as I am believe I am appending it which creates a constant incrementing score try with a string
+    document.getElementById("overallScore").innerHTML = overallScore > 0 ? overallScore/implementedMitigations : 0;
+    
 }
 
 
@@ -154,16 +164,16 @@ function nextTechnique(){
 }
 
 function updateStorage(currentTechnique){
-    let confidenceScores = document.getElementsByClassName("confidence-score");
-    let weightings = document.getElementsByClassName("weighting");
+    let confidenceScores = document.getElementsByClassName("confidenceScore");
+    let implemented = document.getElementsByClassName("implemented");
     let notes = document.getElementsByClassName("textarea");
-    let overallScore = document.getElementById("technique-score");
+    let overallScore = document.getElementById("overallScore");
     techniqueStorage = JSON.parse(localStorage.getItem(currentTechnique));
 
     techniqueStorage.score = parseFloat(overallScore.innerHTML);
     for (let i = 0; i < techniqueStorage.mitigations.length; i++) {
         techniqueStorage.mitigations[i].notes = notes[i].value;
-        techniqueStorage.mitigations[i].weighting = parseInt(weightings[i].value);
+        techniqueStorage.mitigations[i].weighting = implemented[i].checked;
         techniqueStorage.mitigations[i].confidenceScore = parseInt(confidenceScores[i].value);
     }
     localStorage.setItem(currentTechnique, JSON.stringify(techniqueStorage));

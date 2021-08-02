@@ -7,92 +7,110 @@
     <title>Mitigation Scoring</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- <link rel="stylesheet" text="text/css" href="../css/filters.css"> -->
+
 </head>
 
 
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light gap-3">
-        <div class="container-fluid">
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav nav me-auto me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" href="index.html">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="filters.html">Start TxA</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="https://attack.mitre.org/" target="_blank">MITRE ATT&CK</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="https://mitre-attack.github.io/attack-navigator/" target="_blank">MITRE ATT&CK Navigator</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
-    
-
     <div class="container">
-        <section>
-            <p>
-                Please select which filters you would like to apply by
-                selecting in the dropdown menu.
-            </p>
-
-            <label>Domain
-                <select id="domain" name="Domain" size="1">
-                    <option value="enterprise_attack" selected>Enterprise</option>
-                    <option value="mobile_attack">Mobile</option>
-                </select>
-            </label>
-            
-            <button id="submitDomain" onclick="addPost()">Submit</button>
-
-            <h2 hidden id="additionalFilterTitle">Additional Filters</h2>
-
-            <div hidden id="additionalFilters">
-                <div id="groupDiv">
-                    <label>Groups
-                        <select name="groupsList" id="groupsList" size="1">
-                            <option value="All">All</option>
-                        </select>
-                    </label>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary gap-3">
+            <header class="navbar-brand mb-0 h1">Mitre Risk Assessment</header>
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav nav me-auto me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="filters.html">Start TxA</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="https://attack.mitre.org/" target="_blank">MITRE ATT&CK</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="https://mitre-attack.github.io/attack-navigator/" target="_blank">MITRE ATT&CK Navigator</a>
+                        </li>
+                    </ul>
                 </div>
-                    
-                <div id="tacticDiv">
-                    <label>Tactics
-                        <select name="tacticsList" id="tacticsList" size="1">
-                            <option value="All">All</option>
-                        </select>
-                    </label>
-                </div>
-                <div id="platformDiv">
-                    <label>Platforms
-                        <select name="platformsList" id="platformsList" size="1">
-                            <option value="All">All</option>
-                        </select>
-                    </label>
-                </div>
-                <div id="subTechniques">
-                    <label>Include subTechniques?
-                        <select name="subTechList" id="subTechList" size="1">
-                            <option value="True" selected>Yes</option>
-                            <option value="False">No</option>
-                        </select>
-                    </label>
-                </div>
-                <button id="submitFilters" onclick="redirect()">Submit</button>
             </div>
+        </nav>
+        </div>
 
-            
-            
-        </section>
+    <div class="row text-center">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 text-center">
+            <div id="card text-center">
+                <h5 class="card-title">Domain</h5>
+                <div id="card-body">
+                    <p class="card-text">What domain of technqiues would you like to filter for? Enterprise or Mobile.</p>
+                    <select class="form-select form-select-lg mb-3" id="domainChoice" aria-label=".form-select-lg example">
+                        <option value="enterprise_attack" selected>Enterprise</option>
+                        <option value="mobile_attack">Mobile</option>
+                    </select>
+                    <button class="btn btn-primary" id="domainSubmit" onclick="addPost()" type="submit">Submit</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
     </div>
+
+    <div hidden class="container" id="additionalFilters">
+        <div class="row text-center">
+            <h2 id="additionalFilterTitle">Additional Filters</h2>
+            <div class="col-md-4">
+                <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Threat Groups</h5>
+                    <p class="card-text">What Threat Groups would you like to include?</p>
+                    <select class="form-select form-select-lg mb-3" id="groupsList" aria-label=".form-select-lg example">
+                        <option value="All" selected>All</option>
+                    </select>
+                </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Tactics</h5>
+                        <p class="card-text">What Mitre Tactics would you like to include? These are used to group related tactics.</p>
+                        <select class="form-select form-select-lg mb-3" id="tacticsList" aria-label=".form-select-lg example">
+                            <option value="All" selected>All</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Platforms</h5>
+                        <p class="card-text">What Platforms would you like to include?</p>
+                        <select class="form-select form-select-lg mb-3" id="platformsList" aria-label=".form-select-lg example">
+                            <option value="All" selected>All</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="text-center form-check form-switch">
+                    <input class="form-check-input" value="True" type="checkbox" id="includeSubTech">
+                    <label class="form-check-label" for="includeSubTech">Include Sub-Techniques?</label>
+                </div>
+            
+                <div class="text-center">
+                    <button class="btn btn-primary" id="submitALlFilters" type="submit" onclick="redirect()">Submit</button>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+
+    </div>
+    
     <script type="text/javascript" src="../JS/filters.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
-
 </html>
