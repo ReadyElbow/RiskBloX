@@ -40,7 +40,7 @@ function generateAttackLayerCall(){
                  "mobile_attack": "mobile"};
     urlDomain = domainMap[domain] + "/";
     
-    completeURL = url + urlDomain + "#layerURL=" + apiGetLayer;
+    completeURL = url + urlDomain + "#leave_site_dialog=false&header=false&legend=false&layerURL=" + apiGetLayer;
     
 
     navigator.setAttribute("src", completeURL);

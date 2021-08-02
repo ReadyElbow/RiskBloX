@@ -225,7 +225,7 @@ def do_mapping(data_source, relationship_type, type_filter, source_name, groups,
                                     "application" : escape_chars(relationship.description),
                                     "notes": "",
                                     "confidenceScore": 0,
-                                    "weighting": 0
+                                    "implemented": False
                                     })
             else:
                 if not foundDeprecatedMitigation:
@@ -246,7 +246,7 @@ def fetch_alternate_detection(attack_pattern, source_name, tactics, detection_id
             "application" : "N/A",
             "notes": "",
             "confidenceScore": 0,
-            "weighting": 0
+            "implemented": False
     }
 
 

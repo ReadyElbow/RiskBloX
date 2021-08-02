@@ -81,7 +81,7 @@ def create_attack_layer(domain, platforms, data):
             "##00ff00"
         ],
         "minValue": 0,
-        "maxValue": 100
+        "maxValue": 10
     }
 
     return  json.dumps(layer_json, indent=8)

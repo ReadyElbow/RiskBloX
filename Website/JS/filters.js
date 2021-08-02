@@ -14,7 +14,6 @@ function addPost(){
     })
     .then((res) => res.json())
     .then((data) => {
-        
         parse("tacticsList", data.tactics);
         parse("groupsList", data.groups);
         var platforms = get_platforms(domain);
@@ -28,6 +27,14 @@ function addPost(){
                 option.innerHTML = filterData[i];
                 document.getElementById(selectID).appendChild(option);
             }
+            $('#'+selectID).multiselect({
+                includeSelectAllOption: true,
+                enableFiltering: true,
+                enableCaseInsensitiveFiltering: true,
+                filterPlaceholder:'Search',
+                maxHeight: 350,
+                widthSynchronizationMode: 'ifPopupIsSmaller'
+            });
         }
 
         function get_platforms(domain){
@@ -50,6 +57,7 @@ function addPost(){
 }   
 
 function redirect(){
+    document.getElementById('loading').removeAttribute('hidden');
     let domain = document.getElementById('domainChoice').value;
     let tactics = document.getElementById('tacticsList').value;
     let groups = document.getElementById('groupsList').value;
