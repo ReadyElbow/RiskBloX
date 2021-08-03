@@ -32,15 +32,18 @@ def generate():
         if domain not in ['enterprise_attack', 'mobile_attack']:
             error = 'An incorrect Domain has been passed: %s' % domain
 
-        if tactics == ["All"]:
-            tactics = accepted_tactics
-        elif not all(map(lambda v: v in accepted_tactics, tactics)):
-            error = 'An incorrect Tactic has been submitted: %s' % tactics
+        # if tactics == ["All"]:
+        #     tactics = accepted_tactics
+        if not all(map(lambda v: v in accepted_tactics, tactics)):
+            error += 'An incorrect Tactic has been submitted: %s' % tactics
         
-        if platforms == ["All"]:
-            platforms = accepted_platforms
-        elif not all(map(lambda v: v in accepted_platforms, platforms)):
-            error = 'An incorrect Platform has been submitted: %s' % platforms
+        # if platforms == ["All"]:
+        #     platforms = accepted_platforms
+        if not all(map(lambda v: v in accepted_platforms, platforms)):
+            error += 'An incorrect Platform has been submitted: %s' % platforms
+
+        if groups == [""]:
+            error += "An incorrect Group has been submitted: %s" % groups
 
         if error is None:
                 data = technique_mitigation_mapping.main(domain, groups, tactics, platforms, sub_techniques)

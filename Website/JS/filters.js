@@ -59,9 +59,9 @@ function addPost(){
 function redirect(){
     document.getElementById('loading').removeAttribute('hidden');
     let domain = document.getElementById('domainChoice').value;
-    let tactics = document.getElementById('tacticsList').value;
-    let groups = document.getElementById('groupsList').value;
-    let platforms = document.getElementById('platformsList').value;
+    let tactics = $('#tacticsList').val();
+    let groups = $('#groupsList').val();
+    let platforms = $('#platformsList').val();
     let includeSub = document.getElementById('includeSubTech').checked;
 
     var dataReturned = false;
@@ -78,7 +78,7 @@ function redirect(){
             'Accept':'application/json, text/plain, */*',
             'Content-type':'application/json'
         },
-        body:JSON.stringify({domain:domain,groups:groups.split(','),platforms:platforms.split(','),tactics:tactics.split(','), include_sub_technique:includeSub})
+        body:JSON.stringify({domain:domain,groups:groups,platforms:platforms,tactics:tactics, include_sub_technique:includeSub})
     })
     .then((res) => res.json())
     .then((data) => {
