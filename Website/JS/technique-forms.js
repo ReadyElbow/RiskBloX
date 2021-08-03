@@ -212,6 +212,7 @@ function increDecreString(type) {
     }
 }
 
+
 function saveProgress(){
     updateStorage();
     var savedJSON = {};
@@ -220,7 +221,6 @@ function saveProgress(){
     for (let [key, stringValue] of Object.entries(localStorage)){
         techniques[key] = JSON.parse(stringValue);
     }
-    console.log(techniques);
     savedJSON['techniques'] = techniques;
     download = document.createElement('a');
 

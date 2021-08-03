@@ -54,8 +54,7 @@
     </div>
 
     <div class="row text-center">
-        <div class="col-md-4"></div>
-        <div class="col-md-4 text-center">
+        <div class="col-md-4 offset-md-4 text-center">
             <div id="card text-center">
                 <h5 class="card-title">Domain</h5>
                 <div id="card-body">
@@ -68,7 +67,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4"></div>
     </div>
 
     <div hidden class="container" id="additionalFilters">
@@ -107,8 +105,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
+            <div class="col-md-4 offset-md-4">
                 <div class="text-center form-check form-switch">
                     <input class="form-check-input" value="True" type="checkbox" id="includeSubTech">
                     <label class="form-check-label" for="includeSubTech">Include Sub-Techniques?</label>
@@ -118,14 +115,13 @@
                     <button class="btn btn-primary" id="submitALlFilters" type="submit" onclick="redirect()">Submit</button>
                 </div>
             </div>
-            <div class="col-md-4"></div>
         </div>
     </div>
     <div class="d-flex justify-content-center mt-4">
         <div hidden class="spinner-border" id="loading" role="status">
-          <span class="visually-hidden">Loading...</span>
+            <span class="visually-hidden">Loading...</span>
         </div>
-      </div>
+    </div>
     
     <script type="text/javascript" src="../js/filters.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

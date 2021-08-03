@@ -17,7 +17,6 @@ function generateAttackLayerCall(){
             
         }
 
-
         var technique = {};
         technique["tid"] = tid;
         technique["tactics"] = tactics;
@@ -34,6 +33,7 @@ function generateAttackLayerCall(){
 
 
     var navigator = document.createElement("iframe");
+    navigator.id = "navigatorIframe";
     url = "https://mitre-attack.github.io/attack-navigator/";
     var domain = getCookie("domain");
     domainMap = {"enterprise_attack":"enterprise",
@@ -42,16 +42,10 @@ function generateAttackLayerCall(){
     
     completeURL = url + urlDomain + "#leave_site_dialog=false&header=false&legend=false&layerURL=" + apiGetLayer;
     
-
     navigator.setAttribute("src", completeURL);
-    navigator.width = "1000";
-    navigator.height = "500";
-
-    //document.getElementById("navigator").append(navigator);
-
     navigator.width = "1500px";
     navigator.height = "900px";
-    document.body.appendChild(navigator);
+    document.getElementById("parentIframe").appendChild(navigator);
 }
 
 
@@ -62,3 +56,51 @@ function getCookie(name){
     return (value != null) ? unescape(value[1]) : null;
 }
 
+function back(){
+    window.location.replace("technique-forms.html");
+}
+
+function saveProgress(){;
+    var savedJSON = {};
+    savedJSON['cookies'] = document.cookie;
+    techniques = {}
+    for (let [key, stringValue] of Object.entries(localStorage)){
+        techniques[key] = JSON.parse(stringValue);
+    }
+    savedJSON['techniques'] = techniques;
+    download = document.createElement('a');
+
+    const str = JSON.stringify(savedJSON);
+    const bytes = new TextEncoder().encode(str);
+    const blob = new Blob([bytes], {
+        type: "application/json;charset=utf-8"
+    });
+    const url = URL.createObjectURL(blob);
+    download.href = url;
+    download.download = "MitreTxASave.json";
+    download.click();
+}
+
+function generateDocumentation(){
+    document.getElementById("parentIframe").contentWindow.print();
+    // window.frames["navIframe"].focus();
+    // window.frames["navIframe"].print();
+
+    // html2canvas(document.getElementById("navigator"), {
+    //     allowTaint: true,
+    //     useCORS: true,
+    //   })
+    //   .then(function (canvas) {
+    //     let image = canvas.toDataURL("image/png", 0.5);
+    //   })
+    //   .catch((e) => {
+    //     // Handle errors
+    //     console.log(e);
+    //   });
+    // const doc = new jsPDF();
+    // doc.addImage(document.getElementById("navigator"));
+    // doc.save("MitreTxA-Report.pdf");
+    
+    //Not implemented due to technical difficulties with iFrame
+      
+}
