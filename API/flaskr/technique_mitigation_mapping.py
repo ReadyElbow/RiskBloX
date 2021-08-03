@@ -238,7 +238,7 @@ def do_mapping(data_source, relationship_type, type_filter, source_name, groups,
 def fetch_alternate_detection(attack_pattern, detection_id):
     return  {
             "mid" : "D%d" % detection_id, 
-            "mitigation_name" : "This mitigation has been revoked or deprecated. Instead the technique detection is given if available.",
+            "mitigation_name" : "This mitigation has been deprecated/revoked or the type of attack technique cannot be easily mitigated with preventive controls since it is based on the abuse of system features.",
             "description" : escape_chars("Detection Suggestions: %s" % attack_pattern.x_mitre_detection) if 'x_mitre_detection' in attack_pattern else "No alternate detection mechanism exists.",
             "application" : "N/A",
             "notes": "",
