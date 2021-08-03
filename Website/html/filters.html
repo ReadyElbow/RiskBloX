@@ -12,7 +12,7 @@
 <body>
     <div id="container">
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
-            <header class="navbar-brand h1 ms-4">Mitre Risk Assessment</header>
+            <header class="navbar-brand h1 ms-4">Mitre Threat Assessment</header>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggleMenu" aria-controls="toggleMenu" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
             </button>
@@ -70,10 +70,10 @@
         </div>
     </div>
     <div hidden class="container" id="additionalFilters">
-        <div class="row text-center">
+        <div class="row mt-4 text-center">
             <h2 id="additionalFilterTitle">Additional Filters</h2>
             <div class="col-md-4">
-                <div class="card mb-5 h-100">
+                <div class="card h-100">
                 <div class="card-body">
                     <h5 class="card-title">Threat Groups</h5>
                     <p class="card-text">What Threat Groups would you like to include?</p>
@@ -83,7 +83,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card mb-2 h-100">
+                <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">Tactics</h5>
                         <p class="card-text">What Mitre Tactics would you like to include? These are used to group related tactics.</p>
@@ -93,7 +93,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card mb-2 h-100">
+                <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">Platforms</h5>
                         <p class="card-text">What Platforms would you like to include?</p>
@@ -103,7 +103,18 @@
                 </div>
             </div>
         </div>
-
+        <div class="row mt-4 text-center">
+            <div class="col-md-4 offset-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Malware</h5>
+                        <p class="card-text">What Malware/Software would you like to include?</p>
+                        <select class="form-select form-select-lg mb-3" id="malwareList" multiple="multiple" aria-label=".form-select-lg example">
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-4 offset-md-4">
                 <div class="text-center form-check form-switch">

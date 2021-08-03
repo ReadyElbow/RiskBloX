@@ -18,6 +18,7 @@ function addPost(){
         parse("groupsList", data.groups);
         var platforms = get_platforms(domain);
         parse("platformsList", platforms);
+        parse("malwareList", data.malware);
 
 
         function parse(selectID, filterData){
@@ -33,6 +34,7 @@ function addPost(){
                 enableCaseInsensitiveFiltering: true,
                 filterPlaceholder:'Search',
                 maxHeight: 350,
+                numberDisplayed: 2,
                 widthSynchronizationMode: 'ifPopupIsSmaller'
             });
         }
@@ -62,6 +64,7 @@ function redirect(){
     let tactics = $('#tacticsList').val();
     let groups = $('#groupsList').val();
     let platforms = $('#platformsList').val();
+    let malware = $('#malwareList').val();
     let includeSub = document.getElementById('includeSubTech').checked;
 
     var dataReturned = false;
@@ -70,6 +73,7 @@ function redirect(){
     document.cookie = "tactics=" + tactics;
     document.cookie = "groups=" + groups;
     document.cookie = "platforms=" + platforms;
+    document.cookie = "malware=" + malware;
     document.cookie = "subTechnique=" + includeSub;
 
     fetch('http://127.0.0.1:5000/stix_taxii/generate', {
@@ -78,7 +82,7 @@ function redirect(){
             'Accept':'application/json, text/plain, */*',
             'Content-type':'application/json'
         },
-        body:JSON.stringify({domain:domain,groups:groups,platforms:platforms,tactics:tactics, include_sub_technique:includeSub})
+        body:JSON.stringify({domain:domain,groups:groups,platforms:platforms,tactics:tactics,malware:malware, include_sub_technique:includeSub})
     })
     .then((res) => res.json())
     .then((data) => {

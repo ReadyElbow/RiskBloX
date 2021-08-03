@@ -45,8 +45,6 @@ function generateAttackLayerCall(){
     completeURL = url + urlDomain + "#leave_site_dialog=false&header=false&legend=false&layerURL=" + apiGetLayer;
     
     navigator.setAttribute("src", completeURL);
-    // navigator.width = "1500px";
-    // navigator.height = "900px";
 }
 
 
@@ -139,7 +137,7 @@ function generateDocumentation(){
             body: bodyRows(technique.mitigations)
           })
     } 
-    doc.save('table.pdf')
+    doc.save('Mitre_TxA_Report.pdf')
 }
 
 function bodyRows(mitigations) {

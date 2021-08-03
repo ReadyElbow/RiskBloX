@@ -17,6 +17,7 @@ def generate():
         domain = request_data['domain']
         groups = request_data['groups']
         tactics = request_data['tactics']
+        malware = request_data['malware']
         platforms = request_data['platforms']
         sub_techniques = request_data['include_sub_technique']
         accepted_tactics = ["Reconnaissance", "Resource Development", "Initial Access", "Execution", "Persistence",
@@ -42,11 +43,11 @@ def generate():
         if not all(map(lambda v: v in accepted_platforms, platforms)):
             error += 'An incorrect Platform has been submitted: %s' % platforms
 
-        if groups == [""]:
-            error += "An incorrect Group has been submitted: %s" % groups
+        if groups == [""] and malware == [""]:
+            error += "At least one Malware or Group option must be selected"
 
         if error is None:
-                data = technique_mitigation_mapping.main(domain, groups, tactics, platforms, sub_techniques)
+                data = technique_mitigation_mapping.main(domain, groups, malware, tactics, platforms, sub_techniques)
                 
                 return data
 

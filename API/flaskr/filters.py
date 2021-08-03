@@ -25,6 +25,7 @@ def groupTacticNames(collection_name):
     filter_objs = {
           "groups": Filter("type", "=", "intrusion-set"),
           "tactics": Filter("type", "=", "x-mitre-tactic"),
+          "malware": Filter("type", "=", "malware"),
     }
 
     jsonFilter = {}
