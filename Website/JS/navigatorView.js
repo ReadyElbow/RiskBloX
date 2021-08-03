@@ -1,3 +1,5 @@
+window.jsPDF = window.jspdf.jsPDF;
+
 function generateAttackLayerCall(){
     toPost = {}
     techniques = new Array(localStorage.length);
@@ -81,26 +83,78 @@ function saveProgress(){;
     download.click();
 }
 
-function generateDocumentation(){
-    document.getElementById("parentIframe").contentWindow.print();
-    // window.frames["navIframe"].focus();
-    // window.frames["navIframe"].print();
 
-    // html2canvas(document.getElementById("navigator"), {
-    //     allowTaint: true,
-    //     useCORS: true,
-    //   })
-    //   .then(function (canvas) {
-    //     let image = canvas.toDataURL("image/png", 0.5);
-    //   })
-    //   .catch((e) => {
-    //     // Handle errors
-    //     console.log(e);
-    //   });
-    // const doc = new jsPDF();
-    // doc.addImage(document.getElementById("navigator"));
-    // doc.save("MitreTxA-Report.pdf");
-    
-    //Not implemented due to technical difficulties with iFrame
-      
+function generateDocumentation(){
+    var doc = new jsPDF({
+        orientation: "landscape"
+    });
+    domain = getCookie("domains");
+    platforms = getCookie("platforms");
+    tactics = getCookie("tactics");
+    groups = getCookie("groups");
+
+    doc.setFontSize(30);
+    doc.text("Mitre TxA Report",110,100);
+
+    for (let [key, stringValue] of Object.entries(localStorage)){
+        technique = JSON.parse(stringValue);
+        description = technique.description;
+        techniqueName = technique.tid +": "+ technique.technique_name;
+        tactics = "Tactics: "+technique.tactic;
+        score = technique.score;
+        scoreString = "Risk Score: "+technique.score;
+        doc.addPage("landscape");
+        doc.setFontSize(20);
+        if (score <= 2){
+            doc.setTextColor("#E50000");
+        }
+        else if (score <= 5){
+            doc.setTextColor("#FFA500");
+        }
+        else if(score <= 8){
+            doc.setTextColor("#E5E500");
+        }
+        else if(score <= 10){
+            doc.setTextColor("#008000");
+        }
+        doc.text(techniqueName, 14, 22);
+        doc.setFontSize(18);
+        doc.text(scoreString, 250, 22);
+        doc.setFontSize(11);
+        doc.setTextColor(100);
+        doc.text(tactics, 14,30);
+
+        var pageSize = doc.internal.pageSize
+        var pageWidth = pageSize.getWidth()
+        var text = doc.splitTextToSize(description, pageWidth - 35, {})
+        doc.text(text, 14, 35)
+
+        doc.autoTable({
+            startY: 55,
+            columnStyles: {0: {cellWidth: 25}, 1: {cellWidth: 70}, 2: {cellWidth: 70}, 3: {cellWidth: 50}, 4: {cellWidth: 25}, 5: {cellWidth: 25}},
+            headStyles: {fillColor: '#0d6efd'},
+            theme: 'grid',
+            showHead : 'firstPage',
+            rowPageBreak: 'avoid',
+            head: [['Name', 'Description', 'Application', 'Notes', 'Confidence Score', 'Implemented']],
+            body: bodyRows(technique.mitigations)
+          })
+    } 
+    doc.save('table.pdf')
 }
+
+function bodyRows(mitigations) {
+    var body = []
+    for (var j = 0; j < mitigations.length; j++) {
+        mitgation = mitigations[j];
+        let row = []
+        row.push(mitgation.mid+": "+mitgation.mitigation_name,
+                mitgation.description,
+                mitgation.application,
+                mitgation.notes,
+                "Score: " + mitgation.confidenceScore,
+                mitgation.implemented);
+        body.push(row);
+    }
+    return body
+  }
