@@ -34,8 +34,8 @@ function generateAttackLayerCall(){
     apiGetLayer = 'http://127.0.0.1:5000/stix_taxii/attack_layer?layer=' + JSON.stringify(toPost)
 
 
-    var navigator = document.createElement("iframe");
-    navigator.id = "navigatorIframe";
+    var navigator = document.getElementById("navIframe");
+
     url = "https://mitre-attack.github.io/attack-navigator/";
     var domain = getCookie("domain");
     domainMap = {"enterprise_attack":"enterprise",
@@ -45,9 +45,8 @@ function generateAttackLayerCall(){
     completeURL = url + urlDomain + "#leave_site_dialog=false&header=false&legend=false&layerURL=" + apiGetLayer;
     
     navigator.setAttribute("src", completeURL);
-    navigator.width = "1500px";
-    navigator.height = "900px";
-    document.getElementById("parentIframe").appendChild(navigator);
+    // navigator.width = "1500px";
+    // navigator.height = "900px";
 }
 
 

@@ -52,23 +52,23 @@
             </div>
         </nav>
     </div>
-
-    <div class="row text-center">
-        <div class="col-md-4 offset-md-4 text-center">
-            <div id="card text-center">
-                <h5 class="card-title">Domain</h5>
-                <div id="card-body">
-                    <p class="card-text">What domain of technqiues would you like to filter for? Enterprise or Mobile.</p>
-                    <select class="form-select form-select-lg mb-3" id="domainChoice" aria-label=".form-select-lg example">
-                        <option value="enterprise_attack" selected>Enterprise</option>
-                        <option value="mobile_attack">Mobile</option>
-                    </select>
-                    <button class="btn btn-primary" id="domainSubmit" onclick="addPost()" type="submit">Submit</button>
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4 offset-md-4">
+                <div class="card mb-5 h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Domain</h5>
+                        <p class="card-text">What domain of technqiues would you like to filter for? Enterprise or Mobile.</p>
+                        <select class="form-select form-select-lg mb-3" id="domainChoice" aria-label=".form-select-lg example">
+                            <option value="enterprise_attack" selected>Enterprise</option>
+                            <option value="mobile_attack">Mobile</option>
+                        </select>
+                        <button class="btn btn-primary" id="domainSubmit" onclick="addPost()" type="submit">Submit</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
     <div hidden class="container" id="additionalFilters">
         <div class="row text-center">
             <h2 id="additionalFilterTitle">Additional Filters</h2>
