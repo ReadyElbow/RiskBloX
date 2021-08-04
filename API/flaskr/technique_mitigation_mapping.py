@@ -46,7 +46,7 @@ def get_techniques(data_source, source_name, groups, malware, tactics, platforms
     """Filters data source by attack-pattern which extracts all ATT&CK Techniques"""
     filters = [
         Filter("type", "=", "attack-pattern"),
-        Filter("external_references.source_name", "=", source_name),
+        Filter("external_references.source_name", "in", source_name),
         Filter("x_mitre_is_subtechnique", "in", [True, False] if include_sub_tech else [False]),
     ]
 
@@ -69,12 +69,12 @@ def get_techniques(data_source, source_name, groups, malware, tactics, platforms
     if groupMalwareIds:
         filters.append(Filter("id", "in", groupMalwareIds))
     results = data_source.query(filters)
-    return sorted(remove_deprecated(results), key=lambda x: techName(x))
+    return sorted(remove_deprecated(results), key=lambda x: techName(x, source_name))
 
-def techName(x):
+def techName(x, source_name):
     externalRef = x.external_references
     for source in externalRef:
-        if source["source_name"] == "mitre-attack":
+        if source["source_name"] == source_name:
             return source["external_id"]
         else:
             return "T1"
