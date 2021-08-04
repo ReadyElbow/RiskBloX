@@ -55,7 +55,6 @@ function fetchTechnique(){
 }
 
 function displayMitigations(mitigations) {
-    console.log(mitigations);
 
     for (let i =0; i < mitigations.length; i++) {
         let mitigationRow = document.createElement("tr")
@@ -180,13 +179,13 @@ function updateStorage(){
 
     let confidenceScores = document.getElementsByClassName("confidenceScore");
     let implemented = document.getElementsByClassName("implemented");
-    let notes = document.getElementsByClassName("textarea");
+    let notes = document.getElementsByClassName("textarea")
     let overallScore = document.getElementById("overallScore");
     techniqueStorage = JSON.parse(localStorage.getItem(currentTechnique));
 
     techniqueStorage.score = parseFloat(overallScore.innerHTML);
     for (let i = 0; i < techniqueStorage.mitigations.length; i++) {
-        techniqueStorage.mitigations[i].notes = notes[i].value;
+        techniqueStorage.mitigations[i].notes = notes[i].value.replace(/[%&#]/g,"");
         techniqueStorage.mitigations[i].implemented = implemented[i].checked;
         techniqueStorage.mitigations[i].confidenceScore = parseInt(confidenceScores[i].value);
     }

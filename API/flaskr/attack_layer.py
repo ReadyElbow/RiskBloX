@@ -55,13 +55,12 @@ def create_attack_layer(domain, platforms, data):
     }
     for row in data:
         for tactic in row["tactics"]:
-            escaped = row["comment"].translate(str.maketrans({"-":  r"\-",
-                                          "]":  r"\]",
-                                          "\\": r"\\",
-                                          "^":  r"\^",
-                                          "$":  r"\$",
-                                          "*":  r"\*",
-                                          ".":  r"\."}))
+            escaped = row["comment"].translate(str.maketrans({
+                                        "-":  r"\-",
+                                        "\\": r"\\",
+                                        "&":  r"",
+                                        "%":  ""}))
+            print(escaped)
             technique = {
                 "techniqueID": row["tid"],
                 "tactic": tactic,
