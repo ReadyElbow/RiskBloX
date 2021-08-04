@@ -124,10 +124,12 @@ function generateDocumentation(){
         var pageSize = doc.internal.pageSize
         var pageWidth = pageSize.getWidth()
         var text = doc.splitTextToSize(description, pageWidth - 35, {})
-        doc.text(text, 14, 35)
+        lengthText = doc.getTextDimensions(text).h;
+        heightText = 35
+        doc.text(text, 14, heightText)
 
         doc.autoTable({
-            startY: 55,
+            startY: lengthText+heightText,
             columnStyles: {0: {cellWidth: 25}, 1: {cellWidth: 70}, 2: {cellWidth: 70}, 3: {cellWidth: 50}, 4: {cellWidth: 25}, 5: {cellWidth: 25}},
             headStyles: {fillColor: '#0d6efd'},
             theme: 'grid',
