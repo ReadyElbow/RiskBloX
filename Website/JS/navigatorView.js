@@ -89,12 +89,13 @@ function generateDocumentation(){
     platforms = getCookie("platforms");
     tactics = getCookie("tactics");
     groups = getCookie("groups");
+    currentTechnique = fetchIntegers(getCookie("currentTechnique"));
 
     doc.setFontSize(30);
     doc.text("Mitre TxA Report",110,100);
 
-    for (let [key, stringValue] of Object.entries(localStorage)){
-        technique = JSON.parse(stringValue);
+    for (let i = 1; i <= currentTechnique; i++){
+        technique = JSON.parse(localStorage.getItem("T"+i));
         description = technique.description;
         techniqueName = technique.tid +": "+ technique.technique_name;
         tactics = "Tactics: "+technique.tactic;
@@ -157,3 +158,9 @@ function bodyRows(mitigations) {
     }
     return body
   }
+
+
+  function fetchIntegers(value) {
+    // Find the trailing number or it will match the empty strin
+    return value.match(/\d*$/)
+}
