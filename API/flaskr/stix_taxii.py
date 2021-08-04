@@ -20,26 +20,33 @@ def generate():
         malware = request_data['malware']
         platforms = request_data['platforms']
         sub_techniques = request_data['include_sub_technique']
-        accepted_tactics = ["Reconnaissance", "Resource Development", "Initial Access", "Execution", "Persistence",
+        enterprise_accepted_tactics = ["Reconnaissance", "Resource Development", "Initial Access", "Execution", "Persistence",
                             "Privilege Escalation", "Defense Evasion", "Credential Access", "Discovery",
                             "Lateral Movement", "Collection", "Command and Control", "Exfiltration", "Impact"]
-        accepted_platforms = ["Linux", "macOS", "Windows", "Azure AD", "Office 365", "SaaS", "IaaS",
+        enterprise_accepted_platforms = ["Linux", "macOS", "Windows", "Azure AD", "Office 365", "SaaS", "IaaS",
                                 "Google Workspace", "PRE", "Network", "Containers"]
+
+        mobile_accepted_tactics = ["Execution", "Command and Control", "Exfiltration", "Persistence", "Credential Access", "Impact", "Privilege Escalation", "Defense Evasion", "Initial Access", "Remote Service Effects", "Discovery", "Lateral Movement", "Collection", "Network Effects"]
+
+        mobile_accepted_platforms = ["Android","iOS"]
+
 
         error = None
 
         if not domain:
-                error = 'A domain is required'
+                error += 'A domain is required'
         if domain not in ['enterprise_attack', 'mobile_attack']:
-            error = 'An incorrect Domain has been passed: %s' % domain
+            error += 'An incorrect Domain has been passed: %s' % domain
 
-        # if tactics == ["All"]:
-        #     tactics = accepted_tactics
+        if domain == "enterprise_attack":
+            accepted_tactics = enterprise_accepted_tactics
+            accepted_platforms = enterprise_accepted_platforms
+        elif domain == "mobile_attack":
+            accepted_tactics = mobile_accepted_tactics
+            accepted_platforms = mobile_accepted_platforms
         if not all(map(lambda v: v in accepted_tactics, tactics)):
             error += 'An incorrect Tactic has been submitted: %s' % tactics
         
-        # if platforms == ["All"]:
-        #     platforms = accepted_platforms
         if not all(map(lambda v: v in accepted_platforms, platforms)):
             error += 'An incorrect Platform has been submitted: %s' % platforms
 

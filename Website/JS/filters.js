@@ -75,6 +75,7 @@ function redirect(){
     document.cookie = "platforms=" + platforms;
     document.cookie = "malware=" + malware;
     document.cookie = "subTechnique=" + includeSub;
+    document.cookie = "currentTechnique=T1;"
 
     fetch('http://127.0.0.1:5000/stix_taxii/generate', {
         method:'POST',
@@ -86,11 +87,11 @@ function redirect(){
     })
     .then((res) => res.json())
     .then((data) => {
+        console.log(data);
         for (let key in data) {
             let value = data[key];
             localStorage.setItem(key, JSON.stringify(value));
         }
-        document.cookie = "currentTechnique=T1;"
         window.location.replace("technique-forms.html");
         })
 }
