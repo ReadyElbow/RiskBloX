@@ -99,7 +99,7 @@ function generateDocumentation(){
         techniqueName = technique.tid +": "+ technique.technique_name;
         tactics = "Tactics: "+technique.tactic;
         score = technique.score;
-        scoreString = "Risk Score: "+technique.score;
+        scoreString = "Threat Score: "+technique.score;
         doc.addPage("landscape");
         doc.setFontSize(20);
         if (score <= 2){

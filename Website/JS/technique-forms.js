@@ -31,7 +31,7 @@ function fetchTechnique(){
     techniqueHeader.innerHTML = "Technique: " + techniqueName + " (" + tid +")";
     
     var techniqueScoreHeader = document.createElement("h2");
-    techniqueScoreHeader = "Risk Score: "
+    techniqueScoreHeader = "Threat Score: "
     var techniqueScore = document.createElement("h2");
     techniqueScore.id = "overallScore"
     techniqueScore.innerHTML = score;
@@ -150,8 +150,12 @@ function updateScore(){
         }
     }
     
+    function round(value, decimals) {
+        return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+      }
+
     overallScore = (calculatedScore/implementedMitigations) - penalty;
-    document.getElementById("overallScore").innerHTML = calculatedScore > 0 ? overallScore : 0;
+    document.getElementById("overallScore").innerHTML = calculatedScore > 0 ? round(overallScore, 1) : 0;
 };
 
 
