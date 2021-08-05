@@ -216,8 +216,6 @@ function equation(penalty, impactList, confidenceList, totalImpact){
             })).reduce((a, b) => a + b, 0)
             result = gradient * Math.sqrt(equationInput);
         }
-        console.log(tolerance);
-        console.log(gradient);
         return Math.round(result);
 }
 
