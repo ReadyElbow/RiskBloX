@@ -64,7 +64,8 @@ function displayMitigations(mitigations) {
         let application = mitigations[i].application;
         let notes = mitigations[i].notes
         let confidenceScore = mitigations[i].confidenceScore
-        let implemented = mitigations[i].implemented
+        let impactLevel = mitigations[i].impactLevel
+
 
         var mitigationInformation = document.createElement("td");
         mitigationInformation.innerHTML = "Mitigation: " + mitigation_name +" (" + mid + ")";
@@ -80,44 +81,43 @@ function displayMitigations(mitigations) {
         userInput.className = "textarea";
         userInput.cols = "30";
         userInput.rows = "8";
-        userInput.innerHTML = notes;
-        
-
-        var scoreInputs = document.createElement("td");
-
-
-        var implementedQuestion = document.createElement("div");
-        var input = document.createElement("input");
-        input.className = "form-check-input implemented";
-        input.type = "checkbox";
-        input.id = "flexSwitchCheckDefault";
-        input.checked = implemented;
-        input.onchange = updateScore;
-        var label = document.createElement("label");
-        label.className = "form-check-label";
-        label.for = "flexSwitchCheckDefault";
-        label.innerHTML = "Implemented"
-        
-
+        userInput.innerHTML = notes;        
 
         //Checking to see if that mitigation alreay exists
         //We are only going to look to prefill when we have encountered a new Technique otherwise we will begin to overwrite previous work. Hence we check to see if we are at the furthest point of progression before adjusting user inputs
         if (getCookie("currentTechnique") == getCookie("furthestReachedT")){
-            previousMitigation = localStorage.getItem(mid)
+            previousMitigation = localStorage.getItem(mid);
             if (previousMitigation != null){
                 previousMitigation = JSON.parse(previousMitigation);
                 userInput.innerHTML =previousMitigation.notes;
-                input.checked = previousMitigation.implemented;
+                impactLevel.checked = previousMitigation.impactLevel;
                 confidenceScore = previousMitigation.confidenceScore;
 
             }
         }
+        var impactStructure = document.createElement("td");
+        var impact = document.createElement("select");
+        impact.className = "form-select form-select-sm mb-3 impactLevel"
+        impact.onchange = updateScore;
+
+        for (let i = 0; i <= 10; i += 2){
+            var option = document.createElement("option");
+            option.value = i;
+            option.innerHTML = i;
+            if (i==impactLevel){
+                option.selected = "selected";
+            }
+            impact.appendChild(option);
+        }
+
+
+        confidenceStructure = document.createElement("td");
 
         var confidence = document.createElement("select");
-        confidence.className = "form-select form-select-lg mb-3 confidenceScore"
+        confidence.className = "form-select form-select-sm mb-3 confidenceScore"
         confidence.onchange = updateScore;
 
-        for (let i = 0; i <= 10; i+=2){
+        for (let i = 0; i <= 100; i += 10){
             var option = document.createElement("option");
             option.value = i;
             option.innerHTML = i;
@@ -127,13 +127,11 @@ function displayMitigations(mitigations) {
             confidence.appendChild(option);
         }
 
-
-
-        implementedQuestion.append(input, label);
+        impactStructure.append(impact);
+        confidenceStructure.append(confidence);
         notesStructure.append(userInput);
-        scoreInputs.append(confidence, implementedQuestion);
      
-        mitigationRow.append(mitigationInformation, descriptionStructure, applicationStructure, notesStructure, scoreInputs);
+        mitigationRow.append(mitigationInformation, descriptionStructure, applicationStructure, notesStructure, impactStructure, confidenceStructure);
 
         document.getElementById("mitigations").append(mitigationRow);
         
@@ -148,34 +146,45 @@ function mitigationDetail(information){
 }
 
 function updateScore(){
+    //var _ = require('lodash'); 
     //When a Mitigation Confidence Score is added call this and update the global Technique Score
-    let scoresList = document.getElementsByClassName("confidenceScore");
-    let implementedList = document.getElementsByClassName("implemented");
-    let calculatedScore = 0;
-    let penalty = 0;
-    let numberOfMitigations = scoresList.length;
+    let confidenceList = Array.from(document.getElementsByClassName("confidenceScore")).map(x => parseInt(x.value));
+    let impactList = Array.from(document.getElementsByClassName("impactLevel")).map(x => parseInt(x.value));
 
-    let implementedMitigations = 0;
-    for (let i = 0; i < numberOfMitigations; i++) {
-        let score = scoresList[i].value;
-        let implemented = implementedList[i].checked;
+    //Fetching a list of mitigations that have an impact to the Threat (impactLevel > 0)
+    //We reduce such that if an impact exists (>0) then we increase counter by 1 but if its ==0 then we ignore this
+    let impactfulMitigations = impactList.reduce((sum,current) => current == 0 ? sum : sum+1 ,0);
+    let totalImpact = impactList.reduce((a, b) => a + b, 0);
 
-        if (implemented == false) {
-            penalty += 1;
-        }
-        else{
-            implementedMitigations+=1;
-            calculatedScore += parseInt(score);
-        }
+    console.log(totalImpact);
+
+    if (totalImpact == 0){
+        overallThreatScore = 0;
     }
-    
-    function round(value, decimals) {
-        return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
-      }
+    else if (totalImpact/impactfulMitigations >= 5){
+        overallThreatScore = equation(100, impactList, confidenceList,totalImpact);
+    }
+    else if (totalImpact/impactfulMitigations < 5){
+        overallThreatScore = equation(50, impactList, confidenceList,totalImpact);
+    }
 
-    overallScore = (calculatedScore/implementedMitigations) - penalty;
-    document.getElementById("overallScore").innerHTML = calculatedScore > 0 ? round(overallScore, 1) : 0;
+    document.getElementById("overallScore").innerHTML = overallThreatScore;
 };
+
+function equation(penalty, impactList, confidenceList,totalImpact){
+        gradient = penalty/totalImpact;
+        result = gradient * (_.zipWith(impactList, confidenceList, function(x,y){
+            if (y==0){
+                return 0
+            }
+            else{
+                return x * (y/100)
+            }
+            
+        })).reduce((a, b) => a + b, 0);
+        return Math.round(result);
+}
+
 
 
 
@@ -203,7 +212,7 @@ function updateStorage(){
 
 
     let confidenceScores = document.getElementsByClassName("confidenceScore");
-    let implemented = document.getElementsByClassName("implemented");
+    let impactLevel = document.getElementsByClassName("impactLevel");
     let notes = document.getElementsByClassName("textarea");
     let overallScore = document.getElementById("overallScore");
     techniqueStorage = JSON.parse(localStorage.getItem(currentTechnique));
@@ -211,15 +220,15 @@ function updateStorage(){
     techniqueStorage.score = parseFloat(overallScore.innerHTML);
     for (let i = 0; i < techniqueStorage.mitigations.length; i++) {
         techniqueStorage.mitigations[i].notes = notes[i].value.replace(/[%&#]/g,"");
-        techniqueStorage.mitigations[i].implemented = implemented[i].checked;
+        techniqueStorage.mitigations[i].impactLevel = parseInt(impactLevel[i].value);
         techniqueStorage.mitigations[i].confidenceScore = parseInt(confidenceScores[i].value);
 
         //Prefill later mitigations --saving functionality
-        
+
         let saveMitigation = {};
         saveMitigation.notes = notes[i].value.replace(/[%&#]/g,"");
-        saveMitigation.confidenceScore = techniqueStorage.mitigations[i].confidenceScore = parseInt(confidenceScores[i].value);
-        saveMitigation.implemented = implemented[i].checked;
+        saveMitigation.confidenceScore = techniqueStorage.mitigations[i].confidenceScore
+        saveMitigation.impactLevel = parseInt(impactLevel[i].value);
         localStorage.setItem(techniqueStorage.mitigations[i].mid, JSON.stringify(saveMitigation));
     }
     localStorage.setItem(currentTechnique, JSON.stringify(techniqueStorage));

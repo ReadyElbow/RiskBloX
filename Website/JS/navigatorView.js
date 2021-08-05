@@ -2,30 +2,33 @@ window.jsPDF = window.jspdf.jsPDF;
 
 function generateAttackLayerCall(){
     toPost = {}
-    techniques = new Array(localStorage.length);
+    techniques = [];
     var positionCounter = 0;
     for (let [key, stringValue] of Object.entries(localStorage)) {
-        value = JSON.parse(stringValue);
-        let tid = value.tid;
-        let tactics = value.tactic;
-        let score = value.score;
-        var techniqueComment = "";
-        var mitigations = value.mitigations;
+        if (key.match(/^T/)){
+            value = JSON.parse(stringValue);
+            console.log(value);
+            let tid = value.tid;
+            let tactics = value.tactic;
+            let score = value.score;
+            var techniqueComment = "";
+            var mitigations = value.mitigations;
 
-        for (let [key, mitigation] of Object.entries(mitigations)){
-            if (mitigation.notes != ""){
-                techniqueComment += mitigation.mitigation_name + "(" +mitigation.mid + ") Notes: " + mitigation.notes + "\n\n";
+            for (let [key, mitigation] of Object.entries(mitigations)){
+                if (mitigation.notes != ""){
+                    techniqueComment += mitigation.mitigation_name + "(" +mitigation.mid + ") Notes: " + mitigation.notes + "\n\n";
+                }
+                
             }
-            
-        }
 
-        var technique = {};
-        technique["tid"] = tid;
-        technique["tactics"] = tactics;
-        technique["score"] = score;
-        technique["comment"] = techniqueComment;
-        techniques[positionCounter] = technique;
-        positionCounter++;
+            var technique = {};
+            technique["tid"] = tid;
+            technique["tactics"] = tactics;
+            technique["score"] = score;
+            technique["comment"] = techniqueComment;
+            techniques.push(technique);
+            //positionCounter++;
+        }    
     };
     toPost["domain"] = getCookie("domain");
     toPost["platforms"] = getCookie("platforms").split(',');
