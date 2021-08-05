@@ -76,6 +76,7 @@ function redirect(){
     document.cookie = "malware=" + malware;
     document.cookie = "subTechnique=" + includeSub;
     document.cookie = "currentTechnique=T1;"
+    document.cookie = "furthestReachedT=T1;"
 
     fetch('http://127.0.0.1:5000/stix_taxii/generate', {
         method:'POST',

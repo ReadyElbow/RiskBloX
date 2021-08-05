@@ -74,15 +74,44 @@ function displayMitigations(mitigations) {
         var applicationStructure = mitigationDetail(application);
 
         var notesStructure = document.createElement("td");
+        
         notesStructure.className = "notes";
         let userInput = document.createElement("textarea");
         userInput.className = "textarea";
         userInput.cols = "30";
         userInput.rows = "8";
         userInput.innerHTML = notes;
-        notesStructure.append(userInput);
+        
 
         var scoreInputs = document.createElement("td");
+
+
+        var implementedQuestion = document.createElement("div");
+        var input = document.createElement("input");
+        input.className = "form-check-input implemented";
+        input.type = "checkbox";
+        input.id = "flexSwitchCheckDefault";
+        input.checked = implemented;
+        input.onchange = updateScore;
+        var label = document.createElement("label");
+        label.className = "form-check-label";
+        label.for = "flexSwitchCheckDefault";
+        label.innerHTML = "Implemented"
+        
+
+
+        //Checking to see if that mitigation alreay exists
+        //We are only going to look to prefill when we have encountered a new Technique otherwise we will begin to overwrite previous work. Hence we check to see if we are at the furthest point of progression before adjusting user inputs
+        if (getCookie("currentTechnique") == getCookie("furthestReachedT")){
+            previousMitigation = localStorage.getItem(mid)
+            if (previousMitigation != null){
+                previousMitigation = JSON.parse(previousMitigation);
+                userInput.innerHTML =previousMitigation.notes;
+                input.checked = previousMitigation.implemented;
+                confidenceScore = previousMitigation.confidenceScore;
+
+            }
+        }
 
         var confidence = document.createElement("select");
         confidence.className = "form-select form-select-lg mb-3 confidenceScore"
@@ -98,19 +127,10 @@ function displayMitigations(mitigations) {
             confidence.appendChild(option);
         }
 
-        var implementedQuestion = document.createElement("div");
-        var input = document.createElement("input");
-        input.className = "form-check-input implemented";
-        input.type = "checkbox";
-        input.id = "flexSwitchCheckDefault";
-        input.checked = implemented;
-        input.onchange = updateScore;
-        var label = document.createElement("label");
-        label.className = "form-check-label";
-        label.for = "flexSwitchCheckDefault";
-        label.innerHTML = "Implemented"
-        implementedQuestion.append(input, label);
 
+
+        implementedQuestion.append(input, label);
+        notesStructure.append(userInput);
         scoreInputs.append(confidence, implementedQuestion);
      
         mitigationRow.append(mitigationInformation, descriptionStructure, applicationStructure, notesStructure, scoreInputs);
@@ -169,6 +189,10 @@ function nextTechnique(){
         window.location.replace("navigatorView.html");
     }
     else{
+        //Have we progressed onto a Fresh technique?
+        if (getCookie("currentTechnique") == getCookie("furthestReachedT")){
+            document.cookie = "furthestReachedT=" + increDecreString("increment");
+        }
         document.cookie = "currentTechnique=" + nextTechnique;
         window.location.reload();
     }
@@ -177,9 +201,10 @@ function nextTechnique(){
 function updateStorage(){
     var currentTechnique = getCookie("currentTechnique");
 
+
     let confidenceScores = document.getElementsByClassName("confidenceScore");
     let implemented = document.getElementsByClassName("implemented");
-    let notes = document.getElementsByClassName("textarea")
+    let notes = document.getElementsByClassName("textarea");
     let overallScore = document.getElementById("overallScore");
     techniqueStorage = JSON.parse(localStorage.getItem(currentTechnique));
 
@@ -188,6 +213,14 @@ function updateStorage(){
         techniqueStorage.mitigations[i].notes = notes[i].value.replace(/[%&#]/g,"");
         techniqueStorage.mitigations[i].implemented = implemented[i].checked;
         techniqueStorage.mitigations[i].confidenceScore = parseInt(confidenceScores[i].value);
+
+        //Prefill later mitigations --saving functionality
+        
+        let saveMitigation = {};
+        saveMitigation.notes = notes[i].value.replace(/[%&#]/g,"");
+        saveMitigation.confidenceScore = techniqueStorage.mitigations[i].confidenceScore = parseInt(confidenceScores[i].value);
+        saveMitigation.implemented = implemented[i].checked;
+        localStorage.setItem(techniqueStorage.mitigations[i].mid, JSON.stringify(saveMitigation));
     }
     localStorage.setItem(currentTechnique, JSON.stringify(techniqueStorage));
 }
@@ -195,9 +228,9 @@ function updateStorage(){
 function previousTechnique(){
     updateStorage();
     var previousTechnique = increDecreString("decrement");
+    document.cookie = "furthestReachedT=" + increDecreString("increment");
     document.cookie = "currentTechnique=" + previousTechnique;
     window.location.reload();
-
 }
 
 function increDecreString(type) {
