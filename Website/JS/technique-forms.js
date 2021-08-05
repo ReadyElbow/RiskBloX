@@ -170,17 +170,54 @@ function updateScore(){
     document.getElementById("overallScore").innerHTML = overallThreatScore;
 };
 
-function equation(penalty, impactList, confidenceList,totalImpact){
-        gradient = penalty/totalImpact;
-        result = gradient * (_.zipWith(impactList, confidenceList, function(x,y){
-            if (y==0){
-                return 0
-            }
-            else{
-                return x * (y/100)
-            }
-            
-        })).reduce((a, b) => a + b, 0);
+function equation(penalty, impactList, confidenceList, totalImpact){
+        tolerance = localStorage.getItem("tolerance");
+        //Cubic Equation -> y = m * x^2
+        if (tolerance == "Low"){
+            gradient = penalty/(Math.pow(totalImpact,2));
+            equationInput = (_.zipWith(impactList, confidenceList, function(x,y){
+                if (y==0){
+                    return 0
+                }
+                else{
+                    return x * (y/100)
+                }
+                
+            })).reduce((a, b) => a + b, 0)
+            result = gradient * (Math.pow(equationInput,2));
+        }
+        else if (tolerance == "Medium"){
+            //Linear Equation -> y = mx
+            gradient = penalty/totalImpact;
+
+            equationInput = (_.zipWith(impactList, confidenceList, function(x,y){
+                if (y==0){
+                    return 0
+                }
+                else{
+                    return x * (y/100)
+                }
+                
+            })).reduce((a, b) => a + b, 0)
+            result = gradient * equationInput;
+        }
+        else if (tolerance == "High"){
+            //Sqaure Root Function -> y = m * Sqrt(x)
+            gradient = penalty/Math.sqrt(totalImpact);
+
+            equationInput = (_.zipWith(impactList, confidenceList, function(x,y){
+                if (y==0){
+                    return 0
+                }
+                else{
+                    return x * (y/100)
+                }
+                
+            })).reduce((a, b) => a + b, 0)
+            result = gradient * Math.sqrt(equationInput);
+        }
+        console.log(tolerance);
+        console.log(gradient);
         return Math.round(result);
 }
 

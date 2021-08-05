@@ -52,7 +52,7 @@
             </div>
         </nav>
     </div>
-    <div class="container">
+    <div id="domainDiv" class="container">
         <div class="row text-center">
             <div class="col-md-4 offset-md-4">
                 <div class="card mb-5 h-100">
@@ -69,10 +69,10 @@
             </div>
         </div>
     </div>
-    <div hidden class="container" id="additionalFilters">
-        <div class="row mt-4 text-center">
+    <div hidden class="container-fluid" id="additionalFilters">
+        <div class="row mb-5 text-center">
             <h2 id="additionalFilterTitle">Additional Filters</h2>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="card h-100">
                 <div class="card-body">
                     <h5 class="card-title">Threat Groups</h5>
@@ -82,7 +82,7 @@
                 </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">Tactics</h5>
@@ -92,7 +92,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">Platforms</h5>
@@ -102,9 +102,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row mt-4 text-center">
-            <div class="col-md-4 offset-md-4">
+            <div class="col-md-3">
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">Malware</h5>
@@ -116,13 +114,20 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4 offset-md-4">
-                <div class="text-center form-check form-switch">
-                    <input class="form-check-input" value="True" type="checkbox" id="includeSubTech">
+            <div class="col-md-2 offset-md-5">
+                <div class="form-check form-switch mb-3">
                     <label class="form-check-label" for="includeSubTech">Include Sub-Techniques?</label>
+                    <input class="form-check-input text-center" value="True" type="checkbox" id="includeSubTech">
                 </div>
+                
             
                 <div class="text-center">
+                    <label class="form-check-label" for="tolerance">Define your Threat Tolerance</label>
+                    <select id="tolerance" class="form-select form-select-sm mb-5" aria-label=".form-select-sm example">
+                        <option value="Low">Low</option>
+                        <option selected value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
                     <button class="btn btn-primary" id="submitALlFilters" type="submit" onclick="redirect()">Submit</button>
                 </div>
             </div>

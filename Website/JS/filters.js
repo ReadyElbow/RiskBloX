@@ -2,6 +2,7 @@
 function addPost(){
     
     let domain = document.getElementById('domainChoice').value;
+    document.cookie = "domain=" + domain;
 
     fetch('http://'+apiHost+'/stix_taxii/tactic-groups', {
         method:'POST',
@@ -33,7 +34,7 @@ function addPost(){
                 enableCaseInsensitiveFiltering: true,
                 filterPlaceholder:'Search',
                 maxHeight: 350,
-                numberDisplayed: 2,
+                numberDisplayed: 1,
                 widthSynchronizationMode: 'ifPopupIsSmaller'
             });
         }
@@ -48,7 +49,7 @@ function addPost(){
                 return platforms
             }
         }
-        document.getElementById('domainSubmit').remove();
+        document.getElementById("domainDiv").remove();
         document.getElementById('additionalFilters').removeAttribute('hidden');
         document.querySelector(".box");
             
@@ -58,8 +59,10 @@ function addPost(){
 }   
 
 function redirect(){
+    localStorage.setItem("tolerance", document.getElementById("tolerance").value);
+
     document.getElementById('loading').removeAttribute('hidden');
-    let domain = document.getElementById('domainChoice').value;
+    let domain = getCookie("domain");
     let tactics = $('#tacticsList').val();
     let groups = $('#groupsList').val();
     let platforms = $('#platformsList').val();
@@ -68,7 +71,6 @@ function redirect(){
 
     var dataReturned = false;
 
-    document.cookie = "domain=" + domain;
     document.cookie = "tactics=" + tactics;
     document.cookie = "groups=" + groups;
     document.cookie = "platforms=" + platforms;
@@ -96,3 +98,8 @@ function redirect(){
         })
 }
 
+function getCookie(name){
+    var re = new RegExp(name += "=([^;]+)");
+    var value = re.exec(document.cookie);
+    return (value != null) ? unescape(value[1]) : null;
+}
