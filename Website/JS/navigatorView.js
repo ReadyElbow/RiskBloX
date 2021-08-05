@@ -106,16 +106,16 @@ function generateDocumentation(){
         scoreString = "Threat Score: "+technique.score;
         doc.addPage("landscape");
         doc.setFontSize(20);
-        if (score <= 2){
+        if (score <= 20){
             doc.setTextColor("#E50000");
         }
-        else if (score <= 5){
+        else if (score <= 50){
             doc.setTextColor("#FFA500");
         }
-        else if(score <= 8){
+        else if(score <= 80){
             doc.setTextColor("#E5E500");
         }
-        else if(score <= 10){
+        else if(score <= 100){
             doc.setTextColor("#008000");
         }
         doc.text(techniqueName, 14, 22);
