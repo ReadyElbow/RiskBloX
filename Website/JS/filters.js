@@ -1,10 +1,9 @@
-
 //Standard Post request using Fetch
 function addPost(){
     
     let domain = document.getElementById('domainChoice').value;
 
-    fetch('http://127.0.0.1:5000/stix_taxii/tactic-groups', {
+    fetch('http://'+apiHost+'/stix_taxii/tactic-groups', {
         method:'POST',
         headers:{
             'Accept':'application/json, text/plain, */*',
@@ -78,7 +77,7 @@ function redirect(){
     document.cookie = "currentTechnique=T1;"
     document.cookie = "furthestReachedT=T1;"
 
-    fetch('http://127.0.0.1:5000/stix_taxii/generate', {
+    fetch('http://' + apiHost + '/stix_taxii/generate', {
         method:'POST',
         headers:{
             'Accept':'application/json, text/plain, */*',

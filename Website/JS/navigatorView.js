@@ -7,7 +7,6 @@ function generateAttackLayerCall(){
     for (let [key, stringValue] of Object.entries(localStorage)) {
         if (key.match(/^T/)){
             value = JSON.parse(stringValue);
-            console.log(value);
             let tid = value.tid;
             let tactics = value.tactic;
             let score = value.score;
@@ -34,7 +33,7 @@ function generateAttackLayerCall(){
     toPost["platforms"] = getCookie("platforms").split(',');
     toPost["techniques"] = techniques;
 
-    apiGetLayer = 'http://127.0.0.1:5000/stix_taxii/attack_layer?layer=' + JSON.stringify(toPost)
+    apiGetLayer = 'http://'+apiHost+'/stix_taxii/attack_layer?layer=' + JSON.stringify(toPost)
 
 
     var navigator = document.getElementById("navIframe");

@@ -12,7 +12,6 @@ function restart(){
 function loadSession(){
     //This needs fixing
     var requiredCookies = ['currentTechnique', 'subTechnique', 'platforms', 'groups', 'tactics', 'domain'];
-    console.log(requiredCookies);
     requiredCookies.map(function(value){
         return getCookie(value);
     })
@@ -34,7 +33,6 @@ function loadJSON(){
 
     reader.onload = function(event) {
         let userFile = JSON.parse(event.target.result);
-        console.log(userFile);
         cookies = userFile["cookies"].split(";");
         techniques = userFile["techniques"];
         for (let i = 0; i < cookies.length; i++){

@@ -156,7 +156,6 @@ function updateScore(){
     let impactfulMitigations = impactList.reduce((sum,current) => current == 0 ? sum : sum+1 ,0);
     let totalImpact = impactList.reduce((a, b) => a + b, 0);
 
-    console.log(totalImpact);
 
     if (totalImpact == 0){
         overallThreatScore = 0;
