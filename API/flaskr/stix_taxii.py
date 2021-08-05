@@ -60,13 +60,13 @@ def generate():
 
     return error
 
-@bp.route('/attack_layer',methods=["GET"])
+@bp.route('/attack_layer',methods=["POST"])
 def generate_attack_layer():
     """
     Accepting a list of JSON Objects
     """
     error = None
-    if request.method == "GET":
+    if request.method == "POST":
         request_data = json.loads(request.args.get("layer"))
         scored_techniques = request_data['techniques'] #will contain tid, tactics, comment, score
         domain = request_data['domain'] #Must be a string
@@ -81,9 +81,9 @@ def generate_attack_layer():
 
 
 
-@bp.route('/tactic-groups', methods=["GET"])
+@bp.route('/tactic-groups', methods=["POST"])
 def groupsTacticList():
-    if request.method == 'GET':
+    if request.method == 'POST':
         request_data = request.get_json()
         domain = request_data['domain']
 
