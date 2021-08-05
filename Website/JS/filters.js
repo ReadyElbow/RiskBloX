@@ -5,7 +5,7 @@ function addPost(){
     let domain = document.getElementById('domainChoice').value;
 
     fetch('http://127.0.0.1:5000/stix_taxii/tactic-groups', {
-        method:'POST',
+        method:'GET',
         headers:{
             'Accept':'application/json, text/plain, */*',
             'Content-type':'application/json'
@@ -75,8 +75,12 @@ function redirect(){
     document.cookie = "platforms=" + platforms;
     document.cookie = "malware=" + malware;
     document.cookie = "subTechnique=" + includeSub;
+<<<<<<< HEAD
     document.cookie = "currentTechnique=T1;"
     document.cookie = "furthestReachedT=T1;"
+=======
+    document.cookie = "currentTechnique=T1";
+>>>>>>> 845d7d6b6b1e8491bf0aa32037df84ca10c309ad
 
     fetch('http://127.0.0.1:5000/stix_taxii/generate', {
         method:'POST',

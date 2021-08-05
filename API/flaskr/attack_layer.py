@@ -60,7 +60,6 @@ def create_attack_layer(domain, platforms, data):
                                         "\\": r"\\",
                                         "&":  r"",
                                         "%":  ""}))
-            print(escaped)
             technique = {
                 "techniqueID": row["tid"],
                 "tactic": tactic,

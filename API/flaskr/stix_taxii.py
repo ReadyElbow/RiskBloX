@@ -81,9 +81,9 @@ def generate_attack_layer():
 
 
 
-@bp.route('/tactic-groups', methods=["POST"])
+@bp.route('/tactic-groups', methods=["GET"])
 def groupsTacticList():
-    if request.method == 'POST':
+    if request.method == 'GET':
         request_data = request.get_json()
         domain = request_data['domain']
 

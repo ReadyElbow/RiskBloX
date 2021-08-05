@@ -117,7 +117,7 @@ function generateDocumentation(){
         }
         doc.text(techniqueName, 14, 22);
         doc.setFontSize(18);
-        doc.text(scoreString, 250, 22);
+        doc.text(scoreString, 240, 22);
         doc.setFontSize(11);
         doc.setTextColor(100);
         doc.text(tactics, 14,30);
