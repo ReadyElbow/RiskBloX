@@ -47,9 +47,14 @@ def get_techniques(data_source, source_name, groups, malware, tactics, platforms
     filters = [
         Filter("type", "=", "attack-pattern"),
         Filter("external_references.source_name", "in", source_name),
-        Filter("x_mitre_is_subtechnique", "in", [True, False] if include_sub_tech else [False]),
     ]
 
+    """
+    Mobile Technique data does not store Sub-Techniques at the moment.
+    If the data is analysed you can see that some of the Mobile Attack Patterns do include a x_mitre_is_subtechnique attribute whilst others do not. As all instances of x_mitre_is_subtechnique in Mobile are false it is simply excluded from initial filtering
+    """
+    if source_name == "mitre-attack":
+        filters.append(Filter("x_mitre_is_subtechnique", "in", [True, False] if include_sub_tech else [False]))
 
     filters.append(Filter("kill_chain_phases.phase_name", "in", [x.lower().replace(" ", "-") for x in tactics]))
 
@@ -71,7 +76,7 @@ def get_techniques(data_source, source_name, groups, malware, tactics, platforms
     '''
     filteredAttackPatterns = []
     allAttackPatterns = sorted(data_source.query(filters), key=lambda x: techName(x, source_name))
-
+    print(len(allAttackPatterns))
     for attackPattern in allAttackPatterns:
         filters = [
             Filter("type", "=", "relationship"),
