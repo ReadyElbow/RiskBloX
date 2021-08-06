@@ -20,6 +20,8 @@ def generate():
         malware = request_data['malware']
         platforms = request_data['platforms']
         sub_techniques = request_data['include_sub_technique']
+        includeNonMappedT = request_data['includeNonMappedT']
+
         enterprise_accepted_tactics = ["Reconnaissance", "Resource Development", "Initial Access", "Execution", "Persistence",
                             "Privilege Escalation", "Defense Evasion", "Credential Access", "Discovery",
                             "Lateral Movement", "Collection", "Command and Control", "Exfiltration", "Impact"]
@@ -54,7 +56,7 @@ def generate():
             error += "At least one Malware or Group option must be selected"
 
         if error is None:
-                data = technique_mitigation_mapping.main(domain, groups, malware, tactics, platforms, sub_techniques)
+                data = technique_mitigation_mapping.main(domain, groups, malware, tactics, platforms, sub_techniques,includeNonMappedT)
                 
                 return data
 

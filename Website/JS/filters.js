@@ -60,7 +60,7 @@ function addPost(){
 
 function redirect(){
     localStorage.setItem("tolerance", document.getElementById("tolerance").value);
-
+    
     document.getElementById('loading').removeAttribute('hidden');
     let domain = getCookie("domain");
     let tactics = $('#tacticsList').val();
@@ -68,6 +68,8 @@ function redirect(){
     let platforms = $('#platformsList').val();
     let malware = $('#malwareList').val();
     let includeSub = document.getElementById('includeSubTech').checked;
+    let includeNonMappedT = document.getElementById("includeNonMappedT").checked;
+    console.log(includeNonMappedT)
 
     var dataReturned = false;
 
@@ -85,7 +87,7 @@ function redirect(){
             'Accept':'application/json, text/plain, */*',
             'Content-type':'application/json'
         },
-        body:JSON.stringify({domain:domain,groups:groups,platforms:platforms,tactics:tactics,malware:malware, include_sub_technique:includeSub})
+        body:JSON.stringify({domain:domain,groups:groups,platforms:platforms,tactics:tactics,malware:malware, include_sub_technique:includeSub,includeNonMappedT:includeNonMappedT})
     })
     .then((res) => res.json())
     .then((data) => {
