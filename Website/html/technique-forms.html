@@ -48,12 +48,30 @@
         </nav>
     </div>
 
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Tolerance Explanation</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <ol id="examples"></ol>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     <div class="container-fluid">
         <div id="technique-information" class="mb-5">
               <div id=technique-header></div>
               <button id="back" type="button" class="btn btn-primary" onclick="previousTechnique()">Back</button>
               <button id="next" type="button" class="btn btn-primary" onclick="nextTechnique()">Next</button>
+              
               <button id="saveProgress" type="button" class="btn btn-primary" onclick="saveProgress()">Save Progress</button>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Real-World Examples</button>
               <div class="card mt-2" style="width: 100%;" id=technique-details></div>
         </div>
         <h2>Mitigations</h2>

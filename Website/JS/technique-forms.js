@@ -16,6 +16,8 @@ function fetchTechnique(){
     var tid = technique.tid;
     var score = technique.score;
 
+    var realWorld = technique.realWorld;
+
     var previousTechnique = increDecreString("decrement");
 
     if (localStorage.getItem(previousTechnique) == null){
@@ -26,9 +28,13 @@ function fetchTechnique(){
     var techniqueHeader = document.createElement("h1");
     techniqueLink = document.createElement('a');
     techniqueLink.setAttribute('href', "https://attack.mitre.org/techniques/" + tid);
+    techniqueLink.target = "_blank"
+    techniqueLinkIcon = document.createElement("i");
+    techniqueLinkIcon.className = "fas fa-question-circle";
+    techniqueLink.appendChild(techniqueLinkIcon);
 
-    techniqueHeader.appendChild(techniqueLink);
     techniqueHeader.innerHTML = "Technique: " + techniqueName + " (" + tid +")";
+    techniqueHeader.appendChild(techniqueLink);
     
     var techniqueScoreHeader = document.createElement("h2");
     techniqueScoreHeader = "Threat Score: "
@@ -50,6 +56,13 @@ function fetchTechnique(){
     description.innerHTML = techniqueDescription;
     techniqueCardBody.append(tacticsListinfo, description);
     document.getElementById("technique-details").append(techniqueCardBody);
+
+    realWorldList = document.getElementById("examples");
+    for (i=0;i<realWorld.length;i++){
+        listItem = document.createElement("li");
+        listItem.innerHTML = realWorld[i][0] + "; "+ realWorld[i][1];
+        realWorldList.appendChild(listItem);
+    }
 
     displayMitigations(mitigations);
 }
@@ -298,7 +311,9 @@ function saveProgress(){
     savedJSON['cookies'] = document.cookie;
     techniques = {}
     for (let [key, stringValue] of Object.entries(localStorage)){
-        techniques[key] = JSON.parse(stringValue);
+        if (key != "tolerance"){
+            techniques[key] = JSON.parse(stringValue);
+        }
     }
     savedJSON['techniques'] = techniques;
     download = document.createElement('a');

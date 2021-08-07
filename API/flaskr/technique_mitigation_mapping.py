@@ -1,6 +1,6 @@
 from taxii2client.common import _to_json
 import tqdm
-from stix2 import TAXIICollectionSource, MemorySource, Filter
+from stix2 import TAXIICollectionSource, MemorySource, Filter, parse
 from taxii2client.v20 import Collection
 import pandas as pd
 import json
@@ -76,7 +76,6 @@ def get_techniques(data_source, source_name, groups, malware, tactics, platforms
     '''
     filteredAttackPatterns = []
     allAttackPatterns = sorted(data_source.query(filters), key=lambda x: techName(x, source_name))
-    print(len(allAttackPatterns))
     for attackPattern in allAttackPatterns:
         filters = [
             Filter("type", "=", "relationship"),
@@ -127,6 +126,47 @@ def fetch_groups(data_source, user_input, threatType):
     IDs = [malwareGroup.get("id") for malwareGroup in results]
 
     return IDs
+
+
+def fetchRealWorld(data_source, attackPatternID):
+    '''
+    A function used in get_techniques() to reduce the amount of redundant code.
+    To map the Threat Group to Attack Patterns two queries must be made. One to
+    return all the STIX Objects that are related to the supplied Group Name(s)
+    which are then parsed to fetch the Group ID (intrusion-set--....). 
+    A second is required to fetch all the relationships associated with that
+    group which will map the Group ID to multiple attack pattern IDs.
+
+    @param data_source: The In-Memory Stix Data returned by build_taxii_source
+    @param user_input:  List of supplied Threat Groups given by the User
+    @return:            Returns a list containing the Attack Pattern IDs based 
+                        off the supplied Threat Group names
+    '''
+    realWorldExamples = []
+
+    filters = [
+        Filter("relationship_type", "=", "uses"),
+        Filter("target_ref", "=", attackPatternID),
+    ]
+    relationships = data_source.query(filters)
+
+    for relationship in relationships:
+        if relationship.source_ref.startswith("malware"):
+            evidence = []
+            description = relationship.description
+            if hasattr(relationship,"external_references"):
+                for source in relationship.external_references:
+                    if hasattr(source,"url"):
+                        realWorldExamples.append([description,source.url])
+            else:
+                realWorldExamples.append([description,""])
+            
+
+            # if not evidence:
+            #     realWorldExamples.append(["",description])
+            # else:
+            #     realWorldExamples.append([evidence,description])
+    return realWorldExamples
 
 
 def filter_for_term_relationships(src, relationship_type, object_id, target=True):
@@ -213,7 +253,9 @@ def do_mapping(data_source, relationship_type, type_filter, source_name, groups,
     json_data = {}
     id = 1
 
+
     for attack_pattern in tqdm.tqdm(filteredAttackPatterns, desc="parsing data for techniques"):
+
         technique = {}
         mitigations = []
         tactics = []
@@ -227,6 +269,7 @@ def do_mapping(data_source, relationship_type, type_filter, source_name, groups,
         technique["technique_name"] = attack_pattern.name
         technique["tactic"] = tactics
         technique["score"] = 0
+        technique["realWorld"] = fetchRealWorld(data_source,attack_pattern.id)
 
         relationships = filter_for_term_relationships(data_source, relationship_type, attack_pattern.id)
 
