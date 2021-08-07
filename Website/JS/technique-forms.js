@@ -92,7 +92,7 @@ function displayMitigations(mitigations) {
         notesStructure.className = "notes";
         let userInput = document.createElement("textarea");
         userInput.className = "textarea";
-        userInput.cols = "30";
+        userInput.cols = "40";
         userInput.rows = "8";
         userInput.innerHTML = notes;        
 
@@ -246,6 +246,7 @@ function nextTechnique(){
     }
     else{
         //Have we progressed onto a Fresh technique?
+        //We can modify this instead into a list and remove an integer when that is visited!
         if (getCookie("currentTechnique") == getCookie("furthestReachedT")){
             document.cookie = "furthestReachedT=" + increDecreString("increment");
         }

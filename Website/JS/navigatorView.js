@@ -138,7 +138,7 @@ function generateDocumentation(){
             theme: 'grid',
             showHead : 'firstPage',
             rowPageBreak: 'avoid',
-            head: [['Name', 'Description', 'Application', 'Notes', 'Confidence Score', 'Implemented']],
+            head: [['Name', 'Description', 'Application', 'Notes', 'Impact Level', 'Confidence Score']],
             body: bodyRows(technique.mitigations)
           })
     } 
@@ -154,8 +154,9 @@ function bodyRows(mitigations) {
                 mitgation.description,
                 mitgation.application,
                 mitgation.notes,
-                "Score: " + mitgation.confidenceScore,
-                mitgation.implemented);
+                mitgation.impactLevel,
+                mitgation.confidenceScore + "%"
+                );
         body.push(row);
     }
     return body
