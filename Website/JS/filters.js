@@ -1,3 +1,55 @@
+var high = []
+var medium = []
+var low = []
+
+for (i=0; i <= 30; i=i+0.5){
+            point = [i,(100/Math.sqrt(30))*Math.sqrt(i),(100/30)*i,(100/Math.pow(30,2))*(Math.pow(i,2))]
+            high.push({ser1: i, ser2: (100/Math.sqrt(30))*Math.sqrt(i)})
+            medium.push({ser1: i, ser2:(100/30)*i})
+            low.push({ser1: i, ser2:(100/Math.pow(30,2))*(Math.pow(i,2))})
+        }
+
+var margin = {top: 10, right: 30, bottom: 30, left: 50},
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select("#toleranceGraph")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+// Initialise a X axis:
+var x = d3.scaleLinear().range([0,width]);
+var xAxis = d3.axisBottom().scale(x);
+svg.append("g")
+  .attr("transform", "translate(0," + height + ")")
+  .attr("class","myXaxis")
+
+svg.append("text")
+.attr("class", "x label")
+.attr("text-anchor", "end")
+.attr("x", width)
+.attr("y", height - 6)
+.text("Sum (Impact * Confidence Level)");
+
+svg.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "end")
+    .attr("y", 6)
+    .attr("dy", ".75em")
+    .attr("transform", "rotate(-90)")
+    .text("Risk Score");
+
+// Initialize an Y axis
+var y = d3.scaleLinear().range([height, 0]);
+var yAxis = d3.axisLeft().scale(y);
+svg.append("g")
+  .attr("class","myYaxis")
+
 //Standard Post request using Fetch
 function addPost(){
     
@@ -58,7 +110,7 @@ function addPost(){
         document.getElementById("domainDiv").remove();
         document.getElementById('additionalFilters').removeAttribute('hidden');
         document.querySelector(".box");
-        toleranceGraph();
+        update(medium);
     });
         
                 
@@ -112,65 +164,37 @@ function getCookie(name){
     return (value != null) ? unescape(value[1]) : null;
 }
 
+function update(data) {
 
-function toleranceGraph(){
-    // set the dimensions and margins of the graph
-    var margin = {top: 10, right: 30, bottom: 30, left: 60},
-    width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
-
-    // append the svg object to the body of the page
-    var svg = d3.select("#my_dataviz")
-    .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform",
-        "translate(" + margin.left + "," + margin.top + ")");
-
-    //Read the data
-    d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/5_OneCatSevNumOrdered.csv", function(data) {
-
-    // group the data: I want to draw one line per group
-    var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
-    .key(function(d) { return d.name;})
-    .entries(data);
-
-    // Add X axis --> it is a date format
-    var x = d3.scaleLinear()
-    .domain(d3.extent(data, function(d) { return d.year; }))
-    .range([ 0, width ]);
-    svg.append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x).ticks(5));
-
-    // Add Y axis
-    var y = d3.scaleLinear()
-    .domain([0, d3.max(data, function(d) { return +d.n; })])
-    .range([ height, 0 ]);
-    svg.append("g")
-    .call(d3.axisLeft(y));
-
-    // color palette
-    var res = sumstat.map(function(d){ return d.key }) // list of group names
-    var color = d3.scaleOrdinal()
-    .domain(res)
-    .range(['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#ffff33','#a65628','#f781bf','#999999'])
-
-    // Draw the line
-    svg.selectAll(".line")
-    .data(sumstat)
-    .enter()
-    .append("path")
+    // Create the X axis:
+    x.domain([0, d3.max(data, function(d) { return d.ser1 }) ]);
+    svg.selectAll(".myXaxis").transition()
+      .duration(3000)
+      .call(xAxis);
+  
+    // create the Y axis
+    y.domain([0, d3.max(data, function(d) { return d.ser2  }) ]);
+    svg.selectAll(".myYaxis")
+      .transition()
+      .duration(3000)
+      .call(yAxis);
+  
+    // Create a update selection: bind to the new data
+    var u = svg.selectAll(".lineTest")
+      .data([data], function(d){ return d.ser1 });
+  
+    // Updata the line
+    u
+      .enter()
+      .append("path")
+      .attr("class","lineTest")
+      .merge(u)
+      .transition()
+      .duration(3000)
+      .attr("d", d3.line()
+        .x(function(d) { return x(d.ser1); })
+        .y(function(d) { return y(d.ser2); }))
         .attr("fill", "none")
-        .attr("stroke", function(d){ return color(d.key) })
-        .attr("stroke-width", 1.5)
-        .attr("d", function(d){
-        return d3.line()
-            .x(function(d) { return x(d.year); })
-            .y(function(d) { return y(+d.n); })
-            (d.values)
-        })
-
-    })
-}
+        .attr("stroke", "steelblue")
+        .attr("stroke-width", 2.5)
+  }
