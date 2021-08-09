@@ -167,37 +167,4 @@ function toleranceGraph(){
         })
 
     })
-
-    // google.charts.load('current', {'packages':['line']});
-    // google.charts.setOnLoadCallback(drawChart);
-
-    // function drawChart() {
-    //     var data = google.visualization.arrayToDataTable(createData());
-
-    //     var options = {
-    //         titleTextStyle: {fontSize: 30},
-    //         curveType: 'function',
-    //         legend: { position: 'bottom' },
-    //         width: 600,
-    //         height: 600,
-    //         annotations: {'column_id': {style: 'line'}},
-    //         vAxis: {title:"Risk Score"},
-    //         pointsVisible: false
-    //     };
-
-    //     var chart = new google.charts.Line(document.getElementById('toleranceGraph'));
-
-    //     chart.draw(data, google.charts.Line.convertOptions(options));
-    // }
-    // function createData(){
-    //     data = [['Overall Impact', 'High', 'Medium', 'Low']]
-    //     //26 is the Impact Level in this scenario
-    //     for (i=0; i <= 30; i++){
-    //         point = [i,(100/Math.sqrt(30))*Math.sqrt(i),(100/30)*i,(100/Math.pow(30,2))*(Math.pow(i,2))]
-    //         data.push(point);
-    //     }
-    //     return data;
-    // }
-  
-  
 }

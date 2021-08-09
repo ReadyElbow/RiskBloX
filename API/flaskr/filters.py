@@ -13,9 +13,11 @@ def groupTacticNames(collection_name):
     @return:                Returns an In-Memory Source Location to the downloaded JSON File
     '''
 
+    #https://attackcti.com/playground/ICS_ATTACK_Exploration.html
     collection_map = {
         "enterprise_attack": "95ecc380-afe9-11e4-9b6c-751b66dd541e",
-        "mobile_attack": "2f669986-b40b-4423-b720-4396ca6a462b"
+        "mobile_attack": "2f669986-b40b-4423-b720-4396ca6a462b",
+        "ics_attack": "02c3ef24-9cd4-48f3-a99f-b74ce24f1d34"
     }
     collection_url = "https://cti-taxii.mitre.org/stix/collections/" + collection_map[collection_name] + "/"
     collection = Collection(collection_url)

@@ -66,7 +66,9 @@ function saveProgress(){;
     savedJSON['cookies'] = document.cookie;
     techniques = {}
     for (let [key, stringValue] of Object.entries(localStorage)){
-        techniques[key] = JSON.parse(stringValue);
+        if (key != "tolerance"){
+            techniques[key] = JSON.parse(stringValue);
+        }
     }
     savedJSON['techniques'] = techniques;
     download = document.createElement('a');
@@ -83,6 +85,7 @@ function saveProgress(){;
 }
 
 
+
 function generateDocumentation(){
     var doc = new jsPDF({
         orientation: "landscape"
@@ -94,7 +97,7 @@ function generateDocumentation(){
     currentTechnique = fetchIntegers(getCookie("currentTechnique"));
 
     doc.setFontSize(30);
-    doc.text("Mitre TxA Report",110,100);
+    doc.text("RiskAssess Report",110,100);
 
     for (let i = 1; i <= currentTechnique; i++){
         technique = JSON.parse(localStorage.getItem("T"+i));
@@ -102,7 +105,7 @@ function generateDocumentation(){
         techniqueName = technique.tid +": "+ technique.technique_name;
         tactics = "Tactics: "+technique.tactic;
         score = technique.score;
-        scoreString = "Threat Score: "+technique.score;
+        scoreString = "Risk Score: "+technique.score;
         doc.addPage("landscape");
         doc.setFontSize(20);
         if (score <= 20){
