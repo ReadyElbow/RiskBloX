@@ -23,7 +23,7 @@
                         <a class="nav-link active" aria-current="page" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="reload.html">TxA</a>
+                        <a class="nav-link" href="reload.html">Assess</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="https://attack.mitre.org/" target="_blank">MITRE ATT&CK</a>
@@ -49,19 +49,18 @@
     </div>
 
     <section id="about">
-        <div class="container">
+        <div class="container mb-5">
             <p>
                 This tool uses MITRE's documented Attack Techniques and associated Mitigations
-                to provide an alternative Risk Assessment tool that can be conducted on Enterprise
-                or Mobile Infrastructures. In this process, you will be guided through 3 sections: Filtering of Techniques, 
-                the Mitigations associated with these filtered Techniques and finally view a Matrix overview of your
-                Domain's defensive coverage.
+                to provide an alternative Risk Assessment and Management tool that can be conducted on Enterprise,
+                Mobile or Industrial Control System Infrastructures. In this short explanation, the 4 stage process
+                is described. If not required, access the Assess Tab in the Navbar to begin.
             </p>
         </div>
     </section>
 
     <div class="container my-20">
-        <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+        <ul class="nav nav-tabs nav-fill mb-5" id="myTab" role="tablist">
             <li class="nav-item mb-1" role="presentation">
                 <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Stage 1: Start/Load</button>
             </li>
@@ -79,7 +78,9 @@
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <div class="row">
                     <div class="col-6">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate totam accusamus odit vel mollitia tempore quos nobis earum, quis laudantium asperiores obcaecati fugit ad et perspiciatis, numquam ea, dicta qui?
+                        When initially starting, you are presented with 3 choices. You can either begin a new assessment,
+                        in the case that you have accidentally exited an ongoing assessment you can reload from Storage or 
+                        you can load in a JSON file that can be generated at throughout the assessment.
                     </div>
                     <div class="col-6">
                         <img src="../images/stage-1-loading.png" class="rounded float-end img-thumbnail" alt="...">
@@ -89,7 +90,8 @@
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <div class="row mb-5">
                     <div class="col-6">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate totam accusamus odit vel mollitia tempore quos nobis earum, quis laudantium asperiores obcaecati fugit ad et perspiciatis, numquam ea, dicta qui?
+                        If in Stage 1 a new assessment is chosen, then you will be confronted with a page dedicated to filtering.
+                        This will initially present you with a choice of domain: Enterprise, Mobile or Industrial Control Systems.
                     </div>
                     <div class="col-6">
                         <img src="../images/stage-2-firstFilter.png" class="rounded float-end img-thumbnail">
@@ -100,12 +102,25 @@
                         <img src="../images/stage-2-firstFilter.png" class="rounded float-start img-thumbnail">
                     </div>
                     <div class="col-6">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate totam accusamus odit vel mollitia tempore quos nobis earum, quis laudantium asperiores obcaecati fugit ad et perspiciatis, numquam ea, dicta qui?
+                        Upon choosing the required domain, a number of additional filters will now be available. These include Threat Groups,
+                        where options may include APT-28, Tactics, MITRE ATT&CK's method to group related sets of Threats, Platforms, such as Azure
+                        Active Directory or Linux, and Malware/Software, for example WannaCry. Please note that if you do not wish to filter 
+                        by a specific area such as Tactics you must Select All in the dropdown list.
                     </div>
                 </div>
                 <div class="row mb-5">
                     <div class="col-6">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate totam accusamus odit vel mollitia tempore quos nobis earum, quis laudantium asperiores obcaecati fugit ad et perspiciatis, numquam ea, dicta qui?
+                        <p>Below the four key filters, a few additional options exist. In the Enterprise domain, MITRE ATT&CK
+                        have drilled down into Sub-Techniques of exisiting Technqiues. This can either be included or excluded from the 
+                        Assessment. In Enterprise Domain there exist; x sub-techniques.</p>
+                        
+                        <p> Some attack Technqiues do not belong to specific Malware/Threat Groups and are included by default in the 
+                        assessment. It is recommended that it is included to gain a wider perspective of your Defensive coverage.</p>
+                        <p>The Tolerance Level is critical to providing an assessment relavent to yourself. This defines how Risk
+                            Scores will be calculated. For more information and additional options regarding these calculations press 
+                            the Question button on the Filter page.
+                        </p>
+
                     </div>
                     <div class="col-6">
                         <img src="../images/stage-2-firstFilter.png" class="rounded float-start img-thumbnail">
@@ -114,8 +129,36 @@
             </div>
             <div class="tab-pane fade show" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                 <div class="row">
-                    <div class="col-12">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate totam accusamus odit vel mollitia tempore quos nobis earum, quis laudantium asperiores obcaecati fugit ad et perspiciatis, numquam ea, dicta qui?
+                    <div class="col-12 mb-5">
+                        <p>
+                            After filtering, the main assessment can now begin. You will encounter the similar style seen in the 
+                            image for every Threat Technique that has been found based on your applied filters. In the top portion,
+                            the Technique name and ID are displayed with a question mark linking to its dedicated page on MITRE ATT&CK.
+                        </p>
+                        <p>
+                            Below, the Risk Score is shown that will be updated live, relfecting inputted data into the Mitigations table.
+                            The Next and Back buttons are used to move onto differnet attack Techniques and the Real World Example highlights 
+                            any examples of that technique in the wild with URLs to webpages that have reported it.
+                            The paragraph below the `Found in tactics..` statement is a description of that attack technique.
+                        </p>
+                        <p>
+                            Each row in the Mitigation table represents a single Mitigation. For each mitigation, the 
+                            Risk Assessor or wider group participating in the assessment must first define an Impact Level.
+                            The Impact Level represents how well you believe that Mitigation will mitigate the attack technique.
+                            In the case that it flawlessly mitigates the technique a score of 10 can be assigned. The scores available
+                            are 0,2,4,6,8,10. In the case, that you believe a mitigation will have no impact a score of 0 can be 
+                            assigned.
+                        </p>
+                        <p>
+                            When an Impact Level is defined, the Confidence Level can now be assessed. THe confidence level is used
+                            to represent your implementation of that mitigation in your infrastructure; how well and confident are you 
+                            in that implementation?
+                        </p>
+                        <p>
+                            Once defined for every Mitigation, you can now progress onto the following Technique through the Next button
+                            If a mitigation already filled in is present as a mitigation for another ATT&CK Technique this will be auto-filled,
+                            with your previous scores and notes. If overwritten this will not overwrite your previous content of that mitgation.
+                        </p>
                     </div>
                     <div class="col-12">
                         <img src="../images/stage-3-mitigations.png" class="rounded float-end img-thumbnail ratio-16x9" width="1300">
@@ -125,7 +168,11 @@
             <div class="tab-pane fade show" id="review" role="tabpanel" aria-labelledby="review-tab">
                 <div class="row">
                     <div class="col-3">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate totam accusamus odit vel mollitia tempore quos nobis earum, quis laudantium asperiores obcaecati fugit ad et perspiciatis, numquam ea, dicta qui?
+                        <p>
+                            Upon analysing each Attack technqiue, a graphical matrix will be shown, through the use of MITRE ATT&CK 
+                            Navigator, and highlight potential areas of weakness in your infrastructure. It is possible to access
+                            all your comments and view your Risk Scores for each technique.
+                        </p>
                     </div>
                     <div class="col-9">
                         <img src="../images/stage-4-navigator.png" class="rounded float-end img-thumbnail ratio-16x9" width="1300">
@@ -133,7 +180,8 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate totam accusamus odit vel mollitia tempore quos nobis earum, quis laudantium asperiores obcaecati fugit ad et perspiciatis, numquam ea, dicta qui?
+                        The Generate Documentation button will compile all your inputted information into a single PDF that can be
+                        used to document and outline a plan going forwards as to how your defensive posture can be improved.
                     </div>
                 </div>
                 <div class="row">

@@ -37,7 +37,7 @@ function fetchTechnique(){
     techniqueHeader.appendChild(techniqueLink);
     
     var techniqueScoreHeader = document.createElement("h2");
-    techniqueScoreHeader = "Threat Score: "
+    techniqueScoreHeader = "Risk Score: "
     var techniqueScore = document.createElement("h2");
     techniqueScore.id = "overallScore"
     techniqueScore.innerHTML = score;
