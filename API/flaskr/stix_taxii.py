@@ -32,12 +32,16 @@ def generate():
 
         mobile_accepted_platforms = ["Android","iOS"]
 
+        ics_accepted_tactics = ['Privilege Escalation', 'Impact', 'Discovery', 'Inhibit Response Function', 'Evasion', 'Initial Access', 'Execution', 'Lateral Movement', 'Collection', 'Persistence', 'Command and Control', 'Impair Process Control']
+        ics_accepted_platforms = ["Field Controller/RTU/PLC/IED", "Safety Instrumented System/Protection Relay",
+                            "Control Server", "Input/Output Server", "Windows", "Human-Machine Interface",
+                            "Engineering Workstation", "Data Historian"]
 
         error = None
 
         if not domain:
                 error += 'A domain is required'
-        if domain not in ['enterprise_attack', 'mobile_attack']:
+        if domain not in ['enterprise_attack', 'mobile_attack', 'ics_attack']:
             error += 'An incorrect Domain has been passed: %s' % domain
 
         if domain == "enterprise_attack":
@@ -46,7 +50,14 @@ def generate():
         elif domain == "mobile_attack":
             accepted_tactics = mobile_accepted_tactics
             accepted_platforms = mobile_accepted_platforms
+        elif domain == "ics_attack":
+            accepted_tactics = ics_accepted_tactics
+            accepted_platforms = ics_accepted_platforms
+
+
         if not all(map(lambda v: v in accepted_tactics, tactics)):
+            print(accepted_tactics)
+            print(tactics)
             error += 'An incorrect Tactic has been submitted: %s' % tactics
         
         if not all(map(lambda v: v in accepted_platforms, platforms)):
@@ -93,7 +104,7 @@ def groupsTacticList():
 
         if not domain:
                 error = 'A domain is required'
-        if domain not in ['enterprise_attack', 'mobile_attack']:
+        if domain not in ['enterprise_attack', 'mobile_attack', 'ics_attack']:
             error = 'An incorrect Domain has been passed'
 
         if error is None:

@@ -16,7 +16,8 @@ def build_taxii_source(collection_name):
 
     collection_map = {
         "enterprise_attack": "95ecc380-afe9-11e4-9b6c-751b66dd541e",
-        "mobile_attack": "2f669986-b40b-4423-b720-4396ca6a462b"
+        "mobile_attack": "2f669986-b40b-4423-b720-4396ca6a462b",
+        "ics_attack": "02c3ef24-9cd4-48f3-a99f-b74ce24f1d34"
     }
     collection_url = "https://cti-taxii.mitre.org/stix/collections/" + collection_map[collection_name] + "/"
     collection = Collection(collection_url)
@@ -56,6 +57,15 @@ def get_techniques(data_source, source_name, groups, malwareTool, tactics, platf
     if source_name == "mitre-attack":
         filters.append(Filter("x_mitre_is_subtechnique", "in", [True, False] if include_sub_tech else [False]))
 
+    #Required because of poor structuring in Taxii DB
+    if source_name == "mitre-ics-attack":
+        icsTactics = []
+        for tactic in tactics:
+            icsTactics.append(tactic+'-ics')
+        tactics+=icsTactics
+    print(tactics)
+        
+    
     filters.append(Filter("kill_chain_phases.phase_name", "in", [x.lower().replace(" ", "-") for x in tactics]))
 
     filters.append(
@@ -76,6 +86,7 @@ def get_techniques(data_source, source_name, groups, malwareTool, tactics, platf
     '''
     filteredAttackPatterns = []
     allAttackPatterns = sorted(data_source.query(filters), key=lambda x: techName(x, source_name))
+    print(len(allAttackPatterns))
     for attackPattern in allAttackPatterns:
         filters = [
             Filter("type", "=", "relationship"),
@@ -321,6 +332,7 @@ def main(domain, groups, malwareTool, tactics, platforms, sub_techniques,include
     source_map = {
         "enterprise_attack": "mitre-attack",
         "mobile_attack": "mitre-mobile-attack",
+        "ics_attack": "mitre-ics-attack",
     }
 
     source_name = source_map[domain]

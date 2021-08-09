@@ -48,6 +48,12 @@ function addPost(){
                 platforms = ["Android", "iOS"]
                 return platforms
             }
+            if (domain=="ics_attack"){
+                platforms = ["Field Controller/RTU/PLC/IED", "Safety Instrumented System/Protection Relay",
+                            "Control Server", "Input/Output Server", "Windows", "Human-Machine Interface",
+                            "Engineering Workstation", "Data Historian"]
+                return platforms
+            }
         }
         document.getElementById("domainDiv").remove();
         document.getElementById('additionalFilters').removeAttribute('hidden');

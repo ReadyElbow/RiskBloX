@@ -39,12 +39,13 @@ function generateAttackLayerCall(){
     var navigator = document.getElementById("navIframe");
 
     url = "https://mitre-attack.github.io/attack-navigator/";
-    var domain = getCookie("domain");
-    domainMap = {"enterprise_attack":"enterprise",
-                 "mobile_attack": "mobile"};
-    urlDomain = domainMap[domain] + "/";
+    // var domain = getCookie("domain");
+    // domainMap = {"enterprise_attack":"enterprise",
+    //              "mobile_attack": "mobile",
+    //              "ics_attack": "ICS"};
+    // urlDomain = domainMap[domain] + "/";
     
-    completeURL = url + urlDomain + "#leave_site_dialog=false&header=false&legend=false&layerURL=" + apiGetLayer;
+    completeURL = url + "#leave_site_dialog=false&header=false&legend=false&layerURL=" + apiGetLayer;
     
     navigator.setAttribute("src", completeURL);
 }
