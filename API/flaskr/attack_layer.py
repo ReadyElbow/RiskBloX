@@ -75,9 +75,10 @@ def create_attack_layer(domain, platforms, data):
 
     layer_json["gradient"] = {
         "colors": [
-            "#ff6666",
-            "##00ff00"
-        ],
+			"#ff6666",
+			"#ffe766",
+			"#8ec843"
+		],
         "minValue": 0,
         "maxValue": 100
     }
