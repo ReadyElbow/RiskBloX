@@ -21,9 +21,7 @@
     .then(response => response.text())
     .then(result => {
         localStorage.setItem('userAuth', result);
-
+        window.location.replace('/html/index.html');
     })
     .catch(error => console.log('error', error));
-    setTimeout(function(){window.location.replace('/html/index.html')}, 5000);
-    
 </script>
