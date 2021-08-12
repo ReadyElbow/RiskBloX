@@ -9,8 +9,8 @@
         body: {
             'grant_type': 'authorization_code',
             'client_id': '1u6de2f6rfuri5c72tn6h2ogt1',
-            'redirect_uri': 'https://amplify.d2xc3gppd744xo.amplifyapp.com/html/authorise',
-            'code': urlParams.get('code')
+            'code': urlParams.get('code'),
+            'redirect_uri': 'https://amplify.d2xc3gppd744xo.amplifyapp.com/html/authorise'
         }
     })
     .then((res) => res.json())
