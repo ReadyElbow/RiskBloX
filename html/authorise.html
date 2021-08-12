@@ -19,6 +19,10 @@
 
     fetch("https://riskguard.auth.eu-west-1.amazoncognito.com/oauth2/token", requestOptions)
     .then(response => response.text())
-    .then(result => console.log(result))
+    .then(result => {
+        localStorage.setItem('userAuth', result);
+
+    })
     .catch(error => console.log('error', error));
+    window.location.replace('index.html');
 </script>
