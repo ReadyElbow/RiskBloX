@@ -1,7 +1,7 @@
 <script>
     var urlParams = new URLSearchParams(window.location.search);
-    var url = new URL("https://riskguardpool.auth.eu-west-1.amazoncognito.com/oauth2/token");
-    fetch(url, {
+
+    fetch('https://riskguardpool.auth.eu-west-1.amazoncognito.com/oauth2/token', {
         method:'POST',
         headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
