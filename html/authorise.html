@@ -1,4 +1,17 @@
 <script>
     var urlParams = new URLSearchParams(window.location.search);
-    console.log(urlParams.get('code'));
+    urlParams.get('code')
+    fetch('https://riskguardpool.auth.eu-west-1.amazoncognito.com/oauth2/token', {
+        method:'POST',
+        headers:{
+            'grant_type': 'authorization_code',
+            'code': urlParams.get('code'),
+            'client_id': '2lv6jvcicu1fs3dgdodi7sphib',
+            'redirect_uri':'https://amplify.d2xc3gppd744xo.amplifyapp.com/html'
+        }
+    })
+    .then((res) => res.json())
+    .then((data) => {
+        console.log(data);
+    });
 </script>
