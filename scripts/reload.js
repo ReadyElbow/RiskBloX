@@ -5,7 +5,9 @@ function getCookie(name){
 }
 
 function restart(){
+    var userAuth = localStorage.getItem("userAuth");
     localStorage.clear();
+    localStorage.setItem("userAuth", userAuth);
     window.location.replace("filters.html");
 }
 
@@ -17,10 +19,10 @@ function loadSession(){
     })
 
     if (requiredCookies.includes(null) == true){
-        alert("A valid Session does not exist. Please select the Restart option.")
+        alert("A valid Session does not exist. Please select the Restart option.");
     }
     else{
-        window.location.replace("technique-forms.html")
+        window.location.replace("technique-forms.html");
     }
 }
 
