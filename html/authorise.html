@@ -1,20 +1,24 @@
 <script>
     var urlParams = new URLSearchParams(window.location.search);
 
-    fetch('https://riskguard.auth.eu-west-1.amazoncognito.com/oauth2/token', {
-        method:'POST',
-        headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-        body: {
-            'grant_type': 'authorization_code',
-            'client_id': '1u6de2f6rfuri5c72tn6h2ogt1',
-            'code': urlParams.get('code'),
-            'redirect_uri': 'https://amplify.d2xc3gppd744xo.amplifyapp.com/html/authorise'
-        }
-    })
-    .then((res) => res.json())
-    .then((data) => {
-        console.log(data);
-    });
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+    var urlencoded = new URLSearchParams();
+    urlencoded.append("grant_type", "authorization_code");
+    urlencoded.append("client_id", "1u6de2f6rfuri5c72tn6h2ogt1");
+    urlencoded.append("code", urlParams.get('code'));
+    urlencoded.append("redirect_uri", "https://amplify.d2xc3gppd744xo.amplifyapp.com/html/authorise");
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: urlencoded,
+    redirect: 'follow'
+    };
+
+    fetch("https://riskguard.auth.eu-west-1.amazoncognito.com/oauth2/token", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
 </script>
