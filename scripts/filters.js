@@ -61,7 +61,7 @@ function addPost(){
         headers:{
             'Accept':'application/json, text/plain, */*',
             'Content-type':'application/json',
-            'Access-Control-Allow-Origin': 'no-cors'
+            'Access-Control-Allow-Origin': "*"
         },
         body:JSON.stringify({domain:domain})
     })
