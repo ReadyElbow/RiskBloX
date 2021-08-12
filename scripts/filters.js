@@ -56,7 +56,7 @@ function addPost(){
     let domain = document.getElementById('domainChoice').value;
     document.cookie = "domain=" + domain;
 
-    fetch('http://'+apiHost+'/stix_taxii/tactic-groups', {
+    fetch('https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/fetchfilters', {
         method:'POST',
         headers:{
             'Accept':'application/json, text/plain, */*',
