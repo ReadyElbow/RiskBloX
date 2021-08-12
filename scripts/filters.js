@@ -165,7 +165,7 @@ function redirect(){
             let value = data[key];
             localStorage.setItem(key, JSON.stringify(value));
         }
-        window.location.replace("technique-forms.html");
+        setTimeout(function() {window.location.replace("technique-forms.html");}, 5000);
         })
 }
 
