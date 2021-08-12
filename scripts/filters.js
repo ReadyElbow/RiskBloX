@@ -136,9 +136,6 @@ function redirect(){
     let includeSub = document.getElementById('includeSubTech').checked;
     let includeNonMappedT = document.getElementById("includeNonMappedT").checked;
 
-
-    var dataReturned = false;
-
     document.cookie = "tactics=" + tactics;
     document.cookie = "groups=" + groups;
     document.cookie = "platforms=" + platforms;
@@ -147,14 +144,20 @@ function redirect(){
     document.cookie = "currentTechnique=T1;"
     document.cookie = "furthestReachedT=T1;"
 
-    fetch('http://' + apiHost + '/stix_taxii/generate', {
-        method:'POST',
-        headers:{
-            'Accept':'application/json, text/plain, */*',
-            'Content-type':'application/json'
-        },
-        body:JSON.stringify({domain:domain,groups:groups,platforms:platforms,tactics:tactics,malware:malware, include_sub_technique:includeSub,includeNonMappedT:includeNonMappedT})
-    })
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", JSON.parse(localStorage.getItem("userAuth")).id_token);
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({domain:domain,groups:groups,platforms:platforms,tactics:tactics,malware:malware, include_sub_technique:includeSub,includeNonMappedT:includeNonMappedT});
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+    };
+
+    fetch("https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/fetchdata", requestOptions)
     .then((res) => res.json())
     .then((data) => {
         console.log(data);
