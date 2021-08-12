@@ -71,7 +71,7 @@ function addPost(){
 
     fetch("https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/fetchfilters", requestOptions)
     .then(response => response.json())
-    .then(result => {
+    .then(data => {
         parse("tacticsList", data.tactics);
         parse("groupsList", data.groups);
         var platforms = get_platforms(domain);
