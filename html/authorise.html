@@ -1,4 +1,4 @@
 <script>
-    location.search = "code";
-    console.log(window.location.search);
+    var urlParams = new URLSearchParams(window.location.search);
+    console.log(urlParams.get('code'));
 </script>
