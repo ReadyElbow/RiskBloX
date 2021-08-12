@@ -56,16 +56,22 @@ function addPost(){
     let domain = document.getElementById('domainChoice').value;
     document.cookie = "domain=" + domain;
 
-    fetch('https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/fetchfilters', {
-        method:'POST',
-        headers:{
-            'Accept':'application/json, text/plain, */*',
-            'Content-type':'application/json'
-        },
-        body:JSON.stringify({domain:domain})
-    })
-    .then((res) => res.json())
-    .then((data) => {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", JSON.parse(localStorage.getItem("userAuth")).id_token);
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({domain:domain});
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+    };
+
+    fetch("https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/fetchfilters", requestOptions)
+    .then(response => response.json())
+    .then(result => {
         parse("tacticsList", data.tactics);
         parse("groupsList", data.groups);
         var platforms = get_platforms(domain);
@@ -111,9 +117,10 @@ function addPost(){
         document.getElementById('additionalFilters').removeAttribute('hidden');
         document.querySelector(".box");
         update(medium);
-    });
+    })
+    .catch(error => console.log('error', error));
         
-                
+            
 }   
 
 function redirect(){
