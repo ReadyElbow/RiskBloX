@@ -1,13 +1,16 @@
 <script>
     var urlParams = new URLSearchParams(window.location.search);
-    urlParams.get('code')
-    fetch('https://riskguardpool.auth.eu-west-1.amazoncognito.com/oauth2/token', {
+    var url = new URL("https://riskguardpool.auth.eu-west-1.amazoncognito.com/oauth2/token");
+    url.searchParams.append('grant_type','authorization_code');
+    url.searchParams.append('code',urlParams.get('code'));
+    url.searchParams.append('client_id','2lv6jvcicu1fs3dgdodi7sphib');
+    url.searchParams.append('redirect_uri','https://amplify.d2xc3gppd744xo.amplifyapp.com/html/sign_in');
+    console.log(url)
+
+    fetch(url, {
         method:'POST',
         headers:{
-            'grant_type': 'authorization_code',
-            'code': urlParams.get('code'),
-            'client_id': '2lv6jvcicu1fs3dgdodi7sphib',
-            'redirect_uri':'https://amplify.d2xc3gppd744xo.amplifyapp.com/html'
+            'Content-type':'application/x-www-form-urlencoded'
         }
     })
     .then((res) => res.json())
