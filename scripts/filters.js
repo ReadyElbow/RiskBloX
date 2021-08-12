@@ -60,7 +60,8 @@ function addPost(){
         method:'POST',
         headers:{
             'Accept':'application/json, text/plain, */*',
-            'Content-type':'application/json'
+            'Content-type':'application/json',
+            'Access-Control-Allow-Origin': true
         },
         body:JSON.stringify({domain:domain})
     })
