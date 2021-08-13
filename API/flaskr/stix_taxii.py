@@ -56,8 +56,6 @@ def generate():
 
 
         if not all(map(lambda v: v in accepted_tactics, tactics)):
-            print(accepted_tactics)
-            print(tactics)
             error += 'An incorrect Tactic has been submitted: %s' % tactics
         
         if not all(map(lambda v: v in accepted_platforms, platforms)):

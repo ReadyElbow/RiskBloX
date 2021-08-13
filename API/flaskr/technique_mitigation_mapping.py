@@ -265,7 +265,7 @@ def do_mapping(data_source, relationship_type, type_filter, source_name, groups,
     id = 1
 
 
-    for attack_pattern in tqdm.tqdm(filteredAttackPatterns, desc="parsing data for techniques"):
+    for attack_pattern in filteredAttackPatterns:
 
         technique = {}
         mitigations = []

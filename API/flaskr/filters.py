@@ -1,9 +1,10 @@
 from taxii2client.common import _to_json
-import tqdm
 from stix2 import TAXIICollectionSource, MemorySource, Filter
 from taxii2client.v20 import Collection
 import json
+from multiprocessing import Process,Pipe
 
+jsonFilter = {}
 
 def groupTacticNames(collection_name):
     '''
@@ -23,18 +24,34 @@ def groupTacticNames(collection_name):
     collection = Collection(collection_url)
     taxii_ds = TAXIICollectionSource(collection)
 
-
     filter_objs = {
           "groups": Filter("type", "=", "intrusion-set"),
           "tactics": Filter("type", "=", "x-mitre-tactic"),
           "malware": Filter("type", "in", ["malware","tool"]),
     }
 
-    jsonFilter = {}
+    processes=[]
+    parentConnections = []
+
     for key in filter_objs:
-        names = []
-        overallData = taxii_ds.query(filter_objs[key])
-        for data in overallData:
-            names.append(data['name'])
-        jsonFilter[key] = names
+        parent_conn, child_conn = Pipe()
+        parentConnections.append(parent_conn)
+
+        childProcess = Process(target=fetchFilterInformation, args=(key, filter_objs[key], taxii_ds, child_conn,))
+        processes.append(childProcess)
+        childProcess.start()
+        
+    for process in processes:
+        process.join()
+
+    for parentConnection in parentConnections:
+        tupleFilter = parentConnection.recv()
+        jsonFilter[tupleFilter[0]] = tupleFilter[1]
+
     return jsonFilter
+
+def fetchFilterInformation(key, dbFilter, taxii_ds, child_conn):
+    names = []
+    overallData = taxii_ds.query(dbFilter)
+    child_conn.send((key, list(map(lambda x: x['name'], overallData))))
+    child_conn.close()

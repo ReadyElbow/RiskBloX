@@ -14,7 +14,7 @@
 <body>
     <div id="container">
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
-            <header class="navbar-brand h1 ms-4"><i class="fas fa-check-double"></i> RiskAssess</header>
+            <header class="navbar-brand h1 ms-4"><i class="fas fa-check-double"></i> RiskGuard</header>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggleMenu" aria-controls="toggleMenu" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
             </button>
@@ -136,7 +136,7 @@
                 
             
                 <div class="text-center">
-                    <label class="form-check-label" for="tolerance">Define your Threat Tolerance<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-question-circle"></i></a>
+                    <label class="form-check-label" for="tolerance">Define your Mitigation Tolerance<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-question-circle"></i></a>
                     </label>
                     <select id="tolerance" class="form-select form-select-sm mb-5" aria-label=".form-select-sm example">
                         <option value="Low">Low</option>
@@ -169,7 +169,7 @@
                         <button class="btn btn-primary" onclick="update(high)">High</button>
                         <button class="btn btn-primary" onclick="update(medium)">Medium</button>
                         <button class="btn btn-primary" onclick="update(low)">Low</button>
-                        <div id="toleranceGraph"></div>
+                        <div id="toleranceGraph" class="mb-4"></div>
                     </div>
                     <div class="col-md-6 align-items-center justify-content-center">
                         <p>

@@ -137,12 +137,12 @@ function generateDocumentation(){
 
         doc.autoTable({
             startY: lengthText+heightText,
-            columnStyles: {0: {cellWidth: 25}, 1: {cellWidth: 70}, 2: {cellWidth: 70}, 3: {cellWidth: 50}, 4: {cellWidth: 25}, 5: {cellWidth: 25}},
+            columnStyles: {0: {cellWidth: 25}, 1: {cellWidth: 70}, 2: {cellWidth: 70}, 3: {cellWidth: 45}, 4: {cellWidth: 25}, 5: {cellWidth: 30}},
             headStyles: {fillColor: '#0d6efd'},
             theme: 'grid',
             showHead : 'firstPage',
             rowPageBreak: 'avoid',
-            head: [['Name', 'Description', 'Application', 'Notes', 'Impact Level', 'Confidence Score']],
+            head: [['Name', 'Description', 'Application', 'Notes', 'Positive Impact', 'Implementation Confidence']],
             body: bodyRows(technique.mitigations)
           })
     } 

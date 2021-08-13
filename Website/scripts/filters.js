@@ -34,7 +34,7 @@ svg.append("text")
 .attr("text-anchor", "end")
 .attr("x", width)
 .attr("y", height - 6)
-.text("Sum (Impact * Confidence Level)");
+.text("ƒ (Positive Impact, Confidence Level)");
 
 svg.append("text")
     .attr("class", "y label")
@@ -42,7 +42,7 @@ svg.append("text")
     .attr("y", 6)
     .attr("dy", ".75em")
     .attr("transform", "rotate(-90)")
-    .text("Risk Score");
+    .text("Score");
 
 // Initialize an Y axis
 var y = d3.scaleLinear().range([height, 0]);
