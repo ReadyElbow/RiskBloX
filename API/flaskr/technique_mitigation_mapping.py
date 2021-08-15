@@ -1,8 +1,7 @@
 from taxii2client.common import _to_json
-import tqdm
+
 from stix2 import TAXIICollectionSource, MemorySource, Filter, parse
 from taxii2client.v20 import Collection
-import pandas as pd
 import json
 
 
@@ -140,19 +139,7 @@ def fetch_groups(data_source, user_input, threatType):
 
 
 def fetchRealWorld(data_source, attackPatternID):
-    '''
-    A function used in get_techniques() to reduce the amount of redundant code.
-    To map the Threat Group to Attack Patterns two queries must be made. One to
-    return all the STIX Objects that are related to the supplied Group Name(s)
-    which are then parsed to fetch the Group ID (intrusion-set--....). 
-    A second is required to fetch all the relationships associated with that
-    group which will map the Group ID to multiple attack pattern IDs.
-
-    @param data_source: The In-Memory Stix Data returned by build_taxii_source
-    @param user_input:  List of supplied Threat Groups given by the User
-    @return:            Returns a list containing the Attack Pattern IDs based 
-                        off the supplied Threat Group names
-    '''
+    
     realWorldExamples = []
 
     filters = [
@@ -171,12 +158,6 @@ def fetchRealWorld(data_source, attackPatternID):
                         realWorldExamples.append([description,source.url])
             else:
                 realWorldExamples.append([description,""])
-            
-
-            # if not evidence:
-            #     realWorldExamples.append(["",description])
-            # else:
-            #     realWorldExamples.append([evidence,description])
     return realWorldExamples
 
 
@@ -292,6 +273,7 @@ def do_mapping(data_source, relationship_type, type_filter, source_name, groups,
 
         for relationship in relationships:
             stix_results = filter_by_type_and_id(data_source, type_filter, relationship.source_ref, source_name)
+            #This is then fethcning the exact mitigation
             if stix_results:
                 mitigations.append({
                                     "mid" : grab_external_id(stix_results[0], source_name), 
