@@ -184,7 +184,8 @@ function redirect(){
   document.cookie = "furthestReachedT=T1;"
 
   fetchrelevantDB(domain).then((db) => {
-    window.taxiiDB = JSON.parse(db.taxiiDB);
+    console.log(db);
+    window.taxiiDB = JSON.parse(db);
     getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,malwareNames, threatNames,includeNonMappedT).then(([attackPatterns,malwareGroupIDs]) => {
         getFilteredAttackPatterns(domain,malwareGroupIDs.malwareGroupIDs,attackPatterns.attackPatterns, includeNonMappedT).then((objects) => {
             //Completely Filtered Attack Patterns
