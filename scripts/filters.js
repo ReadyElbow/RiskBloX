@@ -230,15 +230,21 @@ function numericAttackPattern(attackPatten, domain){
 }
 
 function fetchrelevantDB(domain) {
-  return fetch('https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/data/fetchdb', {
-      method:'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({domain:domain})
-      }).then((response) => response.json())
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", JSON.parse(localStorage.getItem("userAuth")).id_token);
+  myHeaders.append("Content-Type", "application/json");
+
+  var raw = JSON.stringify({domain:domain});
+
+  var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
   };
+return fetch("https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/data/fetchdb", requestOptions)
+.then((res) => res.json())
+};
 
 function getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,malwareNames, threatNames){
     return Promise.all([getRelevantAttackPatterns(domain,platforms,tactics,includeSub), getMalwareThreatID(domain,malwareNames,threatNames)]);
