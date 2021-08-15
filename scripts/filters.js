@@ -275,7 +275,8 @@ function getMalwareThreatID(domain,malwareNames,threatNames) {
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({domain:domain,malwareNames:malwareNames,threatNames:threatNames, taxiiDB:window.taxiiDB});
-
+    console.log(raw);
+    console.log(myHeaders);
     var requestOptions = {
     method: 'POST',
     headers: myHeaders,
