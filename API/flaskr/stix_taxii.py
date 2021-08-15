@@ -75,15 +75,12 @@ def generate():
 
     return error
 
-#One Lambda function, the result of which must be sorted client side
-@bp.route('/fetchAttackPatterns',methods=["POST"])
-def fetchAttackPatterns():
+#One Lambda functon to get relevant DB
+@bp.route('/fetchDB',methods=["POST"])
+def fetchDB():
     if request.method == "POST":
         requestData = request.get_json()
         domain = requestData["domain"]
-        includeSub = requestData["includeSub"]
-        platforms = requestData["platforms"]
-        tactics = requestData["tactics"]
         source_map = {
         "enterprise_attack": "mitre-attack",
         "mobile_attack": "mitre-mobile-attack",
@@ -99,8 +96,38 @@ def fetchAttackPatterns():
         }
         collection_url = "https://cti-taxii.mitre.org/stix/collections/" + collection_map[domain] + "/"
         collection = Collection(collection_url)
-        taxii_ds = TAXIICollectionSource(collection)
+        taxiiOnline = TAXIICollectionSource(collection)
+        taxii_ds = taxiiOnline.query()
+        return {"taxiiDB": serialization.serialize(taxii_ds)}
 
+#One Lambda function, the result of which must be sorted client side
+@bp.route('/fetchAttackPatterns',methods=["POST"])
+def fetchAttackPatterns():
+    if request.method == "POST":
+        requestData = request.get_json()
+        domain = requestData["domain"]
+        includeSub = requestData["includeSub"]
+        platforms = requestData["platforms"]
+        tactics = requestData["tactics"]
+        taxiiDB = requestData["taxiiDB"]
+        source_map = {
+        "enterprise_attack": "mitre-attack",
+        "mobile_attack": "mitre-mobile-attack",
+        "ics_attack": "mitre-ics-attack",
+        }
+
+        source_name = source_map[domain]
+
+        # collection_map = {
+        #     "enterprise_attack": "95ecc380-afe9-11e4-9b6c-751b66dd541e",
+        #     "mobile_attack": "2f669986-b40b-4423-b720-4396ca6a462b",
+        #     "ics_attack": "02c3ef24-9cd4-48f3-a99f-b74ce24f1d34"
+        # }
+        # collection_url = "https://cti-taxii.mitre.org/stix/collections/" + collection_map[domain] + "/"
+        # collection = Collection(collection_url)
+        # taxii_ds = TAXIICollectionSource(collection)
+        
+        taxii_ds = MemorySource(stix_data=(taxiiDB))
         if source_name == "mitre-ics-attack":
             icsTactics = []
             for tactic in tactics:
@@ -147,16 +174,10 @@ def filterAttackPatterns():
         groupMalwareID = requestData["malwareThreatIDs"]
         includeNonMappedT = requestData["includeNonMappedT"]
         domain = requestData["domain"]
+        taxiiDB = requestData["taxiiDB"]
 
-        collection_map = {
-            "enterprise_attack": "95ecc380-afe9-11e4-9b6c-751b66dd541e",
-            "mobile_attack": "2f669986-b40b-4423-b720-4396ca6a462b",
-            "ics_attack": "02c3ef24-9cd4-48f3-a99f-b74ce24f1d34"
-        }
-        collection_url = "https://cti-taxii.mitre.org/stix/collections/" + collection_map[domain] + "/"
-        collection = Collection(collection_url)
-        taxiiOnline = TAXIICollectionSource(collection)
-        taxii_ds = MemorySource(stix_data=taxiiOnline.query())
+        taxii_ds = MemorySource(stix_data=(taxiiDB))
+        
         #Lazy function so we force evaluation
         for attackPattern in allAttackPatterns:
             includedMalwareThreat(attackPattern)
@@ -173,22 +194,22 @@ def filterAttackPatterns():
 def fetchMalwareGroupIDS():
     if request.method == "POST":
         requestData = request.get_json()
-        threatGroupIDS = fetchMalwareGroup(requestData["domain"],requestData["threatNames"], "intrusion-set")
-        threatMalwareIDS = fetchMalwareGroup(requestData["domain"],requestData["malwareNames"], "malware")
+        threatGroupIDS = fetchMalwareGroup(requestData["domain"],requestData["threatNames"], "intrusion-set", requestData["taxiiDB"])
+        threatMalwareIDS = fetchMalwareGroup(requestData["domain"],requestData["malwareNames"], "malware", requestData["taxiiDB"])
         dataObject = {"malwareGroupIDs":threatMalwareIDS+threatGroupIDS}
         return dataObject
 
 
-def fetchMalwareGroup(domain, names, threatType):
-    collection_map = {
-            "enterprise_attack": "95ecc380-afe9-11e4-9b6c-751b66dd541e",
-            "mobile_attack": "2f669986-b40b-4423-b720-4396ca6a462b",
-            "ics_attack": "02c3ef24-9cd4-48f3-a99f-b74ce24f1d34"
-        }
-    collection_url = "https://cti-taxii.mitre.org/stix/collections/" + collection_map[domain] + "/"
-    collection = Collection(collection_url)
-    taxii_ds = TAXIICollectionSource(collection)
-
+def fetchMalwareGroup(domain, names, threatType, taxiiDB):
+    # collection_map = {
+    #         "enterprise_attack": "95ecc380-afe9-11e4-9b6c-751b66dd541e",
+    #         "mobile_attack": "2f669986-b40b-4423-b720-4396ca6a462b",
+    #         "ics_attack": "02c3ef24-9cd4-48f3-a99f-b74ce24f1d34"
+    #     }
+    # collection_url = "https://cti-taxii.mitre.org/stix/collections/" + collection_map[domain] + "/"
+    # collection = Collection(collection_url)
+    # taxii_ds = TAXIICollectionSource(collection)
+    taxii_ds = MemorySource(stix_data=(taxiiDB))
     filters = [
         Filter("type", "in", threatType),
         Filter("name", "in", names),
@@ -196,7 +217,6 @@ def fetchMalwareGroup(domain, names, threatType):
     
     results = taxii_ds.query(filters)
     IDs = [malwareGroup.get("id") for malwareGroup in results]
-
     return IDs
 
 
@@ -226,19 +246,11 @@ def generate_attack_layer():
 @bp.route('/returnCompelteObject',methods=["POST"])
 def returnCompelteObject():
     if request.method == "POST":
-        request_data = request.get_json()
-        attackPatterns = request_data["attackPatterns"]
-        domain = request_data["domain"]
-        
-        collection_map = {
-            "enterprise_attack": "95ecc380-afe9-11e4-9b6c-751b66dd541e",
-            "mobile_attack": "2f669986-b40b-4423-b720-4396ca6a462b",
-            "ics_attack": "02c3ef24-9cd4-48f3-a99f-b74ce24f1d34"
-        }
-        collection_url = "https://cti-taxii.mitre.org/stix/collections/" + collection_map[domain] + "/"
-        collection = Collection(collection_url)
-        taxiiOnline = TAXIICollectionSource(collection)
-        data_source = MemorySource(stix_data=taxiiOnline.query())
+        requestData = request.get_json()
+        attackPatterns = requestData["attackPatterns"]
+        domain = requestData["domain"]
+        taxiiDB = requestData["taxiiDB"]
+        taxii_ds = MemorySource(stix_data=(taxiiDB))
 
         relationship_type = "mitigates"
         type_filter = "course-of-action"
@@ -267,9 +279,9 @@ def returnCompelteObject():
             technique["technique_name"] = attack_pattern["name"]
             technique["tactic"] = tactics
             technique["score"] = 0
-            technique["realWorld"] = fetchRealWorld(data_source,attack_pattern["id"])
+            technique["realWorld"] = fetchRealWorld(taxii_ds,attack_pattern["id"])
 
-            relationships = filter_for_term_relationships(data_source, relationship_type, attack_pattern["id"])
+            relationships = filter_for_term_relationships(taxii_ds, relationship_type, attack_pattern["id"])
 
             if not relationships:
                 if not foundDeprecatedMitigation:
@@ -277,7 +289,7 @@ def returnCompelteObject():
                     mitigations.append(fetch_alternate_detection(attack_pattern, detection_id))
                     detection_id+=1
             for relationship in relationships:
-                stix_results = filter_by_type_and_id(data_source, type_filter, relationship["source_ref"], source_name)
+                stix_results = filter_by_type_and_id(taxii_ds, type_filter, relationship["source_ref"], source_name)
                 #This is then fethcning the exact mitigation
                 if stix_results:
                     mitigations.append({

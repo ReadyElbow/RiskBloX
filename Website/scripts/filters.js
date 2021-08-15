@@ -137,30 +137,33 @@ function redirect(){
     document.cookie = "currentTechnique=T1;"
     document.cookie = "furthestReachedT=T1;"
 
-    getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,malwareNames, threatNames,includeNonMappedT).then(([attackPatterns,malwareGroupIDs]) => {
-        getFilteredAttackPatterns(domain,malwareGroupIDs.malwareGroupIDs,attackPatterns.attackPatterns, includeNonMappedT).then((objects) => {
-            //Completely Filtered Attack Patterns
-            var filterAttacks = []
-            for (let i = 0; i < objects.length; i++){
-                filterAttacks = filterAttacks.concat(objects[i].filteredAttackPatterns);
-            }
-            filterAttacks.sort((a, b) => {
-                aParse = numericAttackPattern(a, domain);
-                bParse = numericAttackPattern(b, domain);
-                return (aParse - bParse)
-            });
-            fetchTechniqueMitigationObj(domain, filterAttacks).then((objects) => {
-                var completeTechniqueObject = []
+    fetchrelevantDB(domain).then((db) => {
+        window.taxiiDB = JSON.parse(db.taxiiDB);
+        getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,malwareNames, threatNames,includeNonMappedT).then(([attackPatterns,malwareGroupIDs]) => {
+            getFilteredAttackPatterns(domain,malwareGroupIDs.malwareGroupIDs,attackPatterns.attackPatterns, includeNonMappedT).then((objects) => {
+                //Completely Filtered Attack Patterns
+                var filterAttacks = []
                 for (let i = 0; i < objects.length; i++){
-                    completeTechniqueObject = completeTechniqueObject.concat(objects[i].filteredAttackPatterns);
+                    filterAttacks = filterAttacks.concat(objects[i].filteredAttackPatterns);
                 }
-                for (let i = 0; i < completeTechniqueObject.length; i++){
-                    localStorage.setItem("T" + (i+1),JSON.stringify(completeTechniqueObject[i]));
-                }
-                window.location.replace("technique-forms.html")
-            })
-          });
+                filterAttacks.sort((a, b) => {
+                    aParse = numericAttackPattern(a, domain);
+                    bParse = numericAttackPattern(b, domain);
+                    return (aParse - bParse)
+                });
+                fetchTechniqueMitigationObj(domain, filterAttacks).then((objects) => {
+                    var completeTechniqueObject = []
+                    for (let i = 0; i < objects.length; i++){
+                        completeTechniqueObject = completeTechniqueObject.concat(objects[i].filteredAttackPatterns);
+                    }
+                    for (let i = 0; i < completeTechniqueObject.length; i++){
+                        localStorage.setItem("T" + (i+1),JSON.stringify(completeTechniqueObject[i]));
+                    }
+                    window.location.replace("technique-forms.html")
+                })
+            });
 
+        });
     });   
 }
 
@@ -181,6 +184,17 @@ function numericAttackPattern(attackPatten, domain){
 }
 
 
+function fetchrelevantDB(domain) {
+    return fetch('http://' + apiHost + '/stix_taxii/fetchDB', {
+        method:'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({domain:domain})
+        }).then((response) => response.json())
+    };
+
 function getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,malwareNames, threatNames){
     return Promise.all([getRelevantAttackPatterns(domain,platforms,tactics,includeSub), getMalwareThreatID(domain,malwareNames,threatNames)]);
 }
@@ -192,7 +206,7 @@ function getRelevantAttackPatterns(domain,platforms,tactics,includeSub) {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify({domain:domain,platforms:platforms,tactics:tactics, includeSub:includeSub})
+        body: JSON.stringify({domain:domain,platforms:platforms,tactics:tactics, includeSub:includeSub, taxiiDB:window.taxiiDB})
         }).then((response) => response.json())
     };
 
@@ -203,7 +217,7 @@ function getMalwareThreatID(domain,malwareNames,threatNames) {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify({domain:domain,malwareNames:malwareNames,threatNames:threatNames})
+        body: JSON.stringify({domain:domain,malwareNames:malwareNames,threatNames:threatNames, taxiiDB:window.taxiiDB})
         }).then((response) => response.json())
     };
 
@@ -275,7 +289,7 @@ function chunkArray(arr,n){
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         },
-        body: JSON.stringify({domain:domain,malwareThreatIDs:malwareThreatIDs,attackPatterns:attackPatterns,includeNonMappedT:includeNonMappedT})
+        body: JSON.stringify({domain:domain,malwareThreatIDs:malwareThreatIDs,attackPatterns:attackPatterns,includeNonMappedT:includeNonMappedT,taxiiDB:window.taxiiDB})
         }).then((response) => response.json())
  }
 
@@ -287,7 +301,7 @@ function chunkArray(arr,n){
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         },
-        body: JSON.stringify({domain:domain,attackPatterns:attackPatterns})
+        body: JSON.stringify({domain:domain,attackPatterns:attackPatterns,taxiiDB:window.taxiiDB})
         }).then((response) => response.json())
  }
 
