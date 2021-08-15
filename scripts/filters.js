@@ -183,33 +183,34 @@ function redirect(){
   document.cookie = "currentTechnique=T1;"
   document.cookie = "furthestReachedT=T1;"
 
-  getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,malwareNames, threatNames,includeNonMappedT).then(([attackPatterns,malwareGroupIDs]) => {
-      console.log(attackPatterns);
-      console.log(malwareGroupIDs);
-      getFilteredAttackPatterns(domain,malwareGroupIDs.malwareGroupIDs,attackPatterns.attackPatterns, includeNonMappedT).then((objects) => {
-          //Completely Filtered Attack Patterns
-          var filterAttacks = []
-          for (let i = 0; i < objects.length; i++){
-              filterAttacks = filterAttacks.concat(objects[i].filteredAttackPatterns);
-          }
-          filterAttacks.sort((a, b) => {
-              aParse = numericAttackPattern(a, domain);
-              bParse = numericAttackPattern(b, domain);
-              return (aParse - bParse)
-          });
-          fetchTechniqueMitigationObj(domain, filterAttacks).then((objects) => {
-              var completeTechniqueObject = []
-              for (let i = 0; i < objects.length; i++){
-                  completeTechniqueObject = completeTechniqueObject.concat(objects[i].filteredAttackPatterns);
-              }
-              for (let i = 0; i < completeTechniqueObject.length; i++){
-                  localStorage.setItem("T" + (i+1),JSON.stringify(completeTechniqueObject[i]));
-              }
-              window.location.replace("technique-forms.html")
-          })
+  fetchrelevantDB(domain).then((db) => {
+    window.taxiiDB = JSON.parse(db.taxiiDB);
+    getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,malwareNames, threatNames,includeNonMappedT).then(([attackPatterns,malwareGroupIDs]) => {
+        getFilteredAttackPatterns(domain,malwareGroupIDs.malwareGroupIDs,attackPatterns.attackPatterns, includeNonMappedT).then((objects) => {
+            //Completely Filtered Attack Patterns
+            var filterAttacks = []
+            for (let i = 0; i < objects.length; i++){
+                filterAttacks = filterAttacks.concat(objects[i].filteredAttackPatterns);
+            }
+            filterAttacks.sort((a, b) => {
+                aParse = numericAttackPattern(a, domain);
+                bParse = numericAttackPattern(b, domain);
+                return (aParse - bParse)
+            });
+            fetchTechniqueMitigationObj(domain, filterAttacks).then((objects) => {
+                var completeTechniqueObject = []
+                for (let i = 0; i < objects.length; i++){
+                    completeTechniqueObject = completeTechniqueObject.concat(objects[i].filteredAttackPatterns);
+                }
+                for (let i = 0; i < completeTechniqueObject.length; i++){
+                    localStorage.setItem("T" + (i+1),JSON.stringify(completeTechniqueObject[i]));
+                }
+                window.location.replace("technique-forms.html")
+            })
         });
 
-  });   
+    });
+});   
 }
 
 function numericAttackPattern(attackPatten, domain){
@@ -228,8 +229,19 @@ function numericAttackPattern(attackPatten, domain){
   return 1
 }
 
+function fetchrelevantDB(domain) {
+  return fetch('https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/data/fetchdb', {
+      method:'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({domain:domain})
+      }).then((response) => response.json())
+  };
+
 function getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,malwareNames, threatNames){
-  return Promise.all([getRelevantAttackPatterns(domain,platforms,tactics,includeSub), getMalwareThreatID(domain,malwareNames,threatNames)]);
+    return Promise.all([getRelevantAttackPatterns(domain,platforms,tactics,includeSub), getMalwareThreatID(domain,malwareNames,threatNames)]);
 }
 
 function getRelevantAttackPatterns(domain,platforms,tactics,includeSub) {
@@ -237,7 +249,7 @@ function getRelevantAttackPatterns(domain,platforms,tactics,includeSub) {
     myHeaders.append("Authorization", JSON.parse(localStorage.getItem("userAuth")).id_token);
     myHeaders.append("Content-Type", "application/json");
 
-    var raw = JSON.stringify({domain:domain,platforms:platforms,tactics:tactics, includeSub:includeSub});
+    var raw = JSON.stringify({domain:domain,platforms:platforms,tactics:tactics, includeSub:includeSub, taxiiDB:window.taxiiDB});
 
     var requestOptions = {
     method: 'POST',
@@ -254,7 +266,7 @@ function getMalwareThreatID(domain,malwareNames,threatNames) {
     myHeaders.append("Authorization", JSON.parse(localStorage.getItem("userAuth")).id_token);
     myHeaders.append("Content-Type", "application/json");
 
-    var raw = JSON.stringify({domain:domain,malwareNames:malwareNames,threatNames:threatNames});
+    var raw = JSON.stringify({domain:domain,malwareNames:malwareNames,threatNames:threatNames, taxiiDB:window.taxiiDB});
 
     var requestOptions = {
     method: 'POST',
@@ -272,7 +284,7 @@ function filterAttackPatterns(domain,malwareThreatIDs,attackPatterns, includeNon
     myHeaders.append("Authorization", JSON.parse(localStorage.getItem("userAuth")).id_token);
     myHeaders.append("Content-Type", "application/json");
 
-    var raw = JSON.stringify({domain:domain,malwareThreatIDs:malwareThreatIDs,attackPatterns:attackPatterns,includeNonMappedT:includeNonMappedT});
+    var raw = JSON.stringify({domain:domain,malwareThreatIDs:malwareThreatIDs,attackPatterns:attackPatterns,includeNonMappedT:includeNonMappedT, taxiiDB:window.taxiiDB});
 
     var requestOptions = {
     method: 'POST',
@@ -288,7 +300,7 @@ function techniqueMitigationObjects(domain,attackPatterns) {
   myHeaders.append("Authorization", JSON.parse(localStorage.getItem("userAuth")).id_token);
   myHeaders.append("Content-Type", "application/json");
 
-  var raw = JSON.stringify({domain:domain,attackPatterns:attackPatterns});
+  var raw = JSON.stringify({domain:domain,attackPatterns:attackPatterns, taxiiDB:window.taxiiDB});
 
   var requestOptions = {
   method: 'POST',
