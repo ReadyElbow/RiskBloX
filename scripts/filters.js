@@ -230,21 +230,22 @@ function numericAttackPattern(attackPatten, domain){
 }
 
 function fetchrelevantDB(domain) {
-  var myHeaders = new Headers();
-  myHeaders.append("Authorization", JSON.parse(localStorage.getItem("userAuth")).id_token);
-  myHeaders.append("Content-Type", "application/json");
-
-  var raw = JSON.stringify({domain:domain});
-
   var requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  body: raw,
-  redirect: 'follow'
+    method: 'GET',
+    redirect: 'follow'
   };
-return fetch("https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/data/fetchdb", requestOptions)
-.then((res) => res.json())
-};
+  if (domain == "enterprise_attack"){
+    url = "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/enterprise-attack/enterprise-attack.json"
+  }
+  else if (domain == "mobile_attack") {
+    url = "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/mobile-attack/mobile-attack.json"
+  }
+  else if (domain == "ics_attack"){
+    url = "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/ics-attack/ics-attack.json"
+  }
+  return fetch(url, requestOptions)
+  .then((res) => res.json())
+}
 
 function getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,malwareNames, threatNames){
     return Promise.all([getRelevantAttackPatterns(domain,platforms,tactics,includeSub), getMalwareThreatID(domain,malwareNames,threatNames)]);
