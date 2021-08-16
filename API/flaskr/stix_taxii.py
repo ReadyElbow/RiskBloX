@@ -8,6 +8,8 @@ from flask import (
 )
 from taxii2client.common import _to_json
 
+import zlib
+
 from stix2 import TAXIICollectionSource, MemorySource, Filter, parse, serialization
 from taxii2client.v20 import Collection
 import json
@@ -104,7 +106,7 @@ def fetchDB():
 @bp.route('/fetchAttackPatterns',methods=["POST"])
 def fetchAttackPatterns():
     if request.method == "POST":
-        requestData = request.get_json()
+        requestData = json.loads(zlib.decompress(request.data, zlib.MAX_WBITS|16))
         domain = requestData["domain"]
         includeSub = requestData["includeSub"]
         platforms = requestData["platforms"]
@@ -182,12 +184,6 @@ def filterAttackPatterns():
         for attackPattern in allAttackPatterns:
             includedMalwareThreat(attackPattern)
         return {"filteredAttackPatterns":filteredAttackP}
-
-    
-
-
-
-
 
 #One lambda function - Fetch Malware Threat IDS
 @bp.route('/fetchMalwareGroupIDS',methods=["POST"])

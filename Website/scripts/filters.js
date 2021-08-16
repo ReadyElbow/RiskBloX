@@ -1,6 +1,7 @@
 var high = []
 var medium = []
 var low = []
+//const pako = require('pako');
 
 for (i=0; i <= 30; i=i+0.5){
             point = [i,(100/Math.sqrt(30))*Math.sqrt(i),(100/30)*i,(100/Math.pow(30,2))*(Math.pow(i,2))]
@@ -189,7 +190,7 @@ function fetchrelevantDB(domain) {
         method:'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          'Accept': 'application/json',
         },
         body: JSON.stringify({domain:domain})
         }).then((response) => response.json())
@@ -200,13 +201,16 @@ function getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,m
 }
 
 function getRelevantAttackPatterns(domain,platforms,tactics,includeSub) {
+    let payload = JSON.stringify({domain:domain,platforms:platforms,tactics:tactics, includeSub:includeSub, taxiiDB:window.taxiiDB})
+    console.log(pako.gzip(payload).byteLength);
     return fetch('http://' + apiHost + '/stix_taxii/fetchAttackPatterns', {
         method:'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          'Accept': 'application/json',
+          'Accept-Encoding': 'gzip',
         },
-        body: JSON.stringify({domain:domain,platforms:platforms,tactics:tactics, includeSub:includeSub, taxiiDB:window.taxiiDB})
+        body: pako.gzip(payload)
         }).then((response) => response.json())
     };
 
@@ -215,7 +219,7 @@ function getMalwareThreatID(domain,malwareNames,threatNames) {
         method:'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          'Accept': 'application/json',
         },
         body: JSON.stringify({domain:domain,malwareNames:malwareNames,threatNames:threatNames, taxiiDB:window.taxiiDB})
         }).then((response) => response.json())
