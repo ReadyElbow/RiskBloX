@@ -187,6 +187,8 @@ function redirect(){
     console.log(db);
     window.taxiiDB = (db.objects);
     getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,malwareNames, threatNames,includeNonMappedT).then(([attackPatterns,malwareGroupIDs]) => {
+        console.log(attackPatterns);
+        console.log(malwareGroupIDs);
         getFilteredAttackPatterns(domain,malwareGroupIDs.malwareGroupIDs,attackPatterns.attackPatterns, includeNonMappedT).then((objects) => {
             //Completely Filtered Attack Patterns
             var filterAttacks = []
@@ -256,13 +258,14 @@ function getRelevantAttackPatterns(domain,platforms,tactics,includeSub) {
     var myHeaders = new Headers();
     myHeaders.append("Authorization", JSON.parse(localStorage.getItem("userAuth")).id_token);
     myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Accept-Encoding", "gzip");
 
     var raw = JSON.stringify({domain:domain,platforms:platforms,tactics:tactics, includeSub:includeSub, taxiiDB:window.taxiiDB});
 
     var requestOptions = {
     method: 'POST',
     headers: myHeaders,
-    body: raw,
+    body: pako.gzip(raw),
     redirect: 'follow'
     };
   return fetch("https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/data/fetchrelevantattackpatterns", requestOptions)
@@ -273,14 +276,13 @@ function getMalwareThreatID(domain,malwareNames,threatNames) {
   var myHeaders = new Headers();
     myHeaders.append("Authorization", JSON.parse(localStorage.getItem("userAuth")).id_token);
     myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Accept-Encoding", "gzip");
 
     var raw = JSON.stringify({domain:domain,malwareNames:malwareNames,threatNames:threatNames, taxiiDB:window.taxiiDB});
-    console.log(raw);
-    console.log(myHeaders);
     var requestOptions = {
     method: 'POST',
     headers: myHeaders,
-    body: raw,
+    body: pako.gzip(raw),
     redirect: 'follow'
     };
   return fetch("https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/data/fetchmalwaregroupids", requestOptions)
