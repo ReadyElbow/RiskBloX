@@ -258,7 +258,7 @@ function getRelevantAttackPatterns(domain,platforms,tactics,includeSub) {
     var myHeaders = new Headers();
     myHeaders.append("Authorization", JSON.parse(localStorage.getItem("userAuth")).id_token);
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Accept-Encoding", "gzip");
+    myHeaders.append("Content-Encoding", "gzip");
 
     var raw = JSON.stringify({domain:domain,platforms:platforms,tactics:tactics, includeSub:includeSub, taxiiDB:window.taxiiDB});
 
