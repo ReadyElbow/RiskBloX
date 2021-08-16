@@ -257,7 +257,7 @@ function getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,m
 function getRelevantAttackPatterns(domain,platforms,tactics,includeSub) {
     var myHeaders = new Headers();
     myHeaders.append("Authorization", JSON.parse(localStorage.getItem("userAuth")).id_token);
-    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Content-Type", "application/text");
     myHeaders.append("Content-Encoding", "gzip");
 
     var raw = JSON.stringify({domain:domain,platforms:platforms,tactics:tactics, includeSub:includeSub, taxiiDB:window.taxiiDB});
@@ -275,7 +275,7 @@ function getRelevantAttackPatterns(domain,platforms,tactics,includeSub) {
 function getMalwareThreatID(domain,malwareNames,threatNames) {
   var myHeaders = new Headers();
     myHeaders.append("Authorization", JSON.parse(localStorage.getItem("userAuth")).id_token);
-    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Content-Type", "application/text");
     myHeaders.append("Content-Encoding", "gzip");
 
 
