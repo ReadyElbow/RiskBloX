@@ -265,7 +265,7 @@ function getRelevantAttackPatterns(domain,platforms,tactics,includeSub) {
     var requestOptions = {
     method: 'POST',
     headers: myHeaders,
-    body: pako.gzip(raw),
+    body: pako.gzip(raw, {to: 'string'}),
     redirect: 'follow'
     };
   return fetch("https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/data/fetchrelevantattackpatterns", requestOptions)
@@ -283,7 +283,7 @@ function getMalwareThreatID(domain,malwareNames,threatNames) {
     var requestOptions = {
     method: 'POST',
     headers: myHeaders,
-    body: pako.gzip(raw),
+    body: pako.gzip(raw, {to: 'string'}),
     redirect: 'follow'
     };
   return fetch("https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/data/fetchmalwaregroupids", requestOptions)
