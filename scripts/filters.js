@@ -276,7 +276,8 @@ function getMalwareThreatID(domain,malwareNames,threatNames) {
   var myHeaders = new Headers();
     myHeaders.append("Authorization", JSON.parse(localStorage.getItem("userAuth")).id_token);
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Accept-Encoding", "gzip");
+    myHeaders.append("Content-Encoding", "gzip");
+
 
     var raw = JSON.stringify({domain:domain,malwareNames:malwareNames,threatNames:threatNames, taxiiDB:window.taxiiDB});
     var requestOptions = {
@@ -294,6 +295,7 @@ function filterAttackPatterns(domain,malwareThreatIDs,attackPatterns, includeNon
   var myHeaders = new Headers();
     myHeaders.append("Authorization", JSON.parse(localStorage.getItem("userAuth")).id_token);
     myHeaders.append("Content-Type", "application/json");
+    
 
     var raw = JSON.stringify({domain:domain,malwareThreatIDs:malwareThreatIDs,attackPatterns:attackPatterns,includeNonMappedT:includeNonMappedT, taxiiDB:window.taxiiDB});
 
@@ -310,6 +312,7 @@ function techniqueMitigationObjects(domain,attackPatterns) {
   var myHeaders = new Headers();
   myHeaders.append("Authorization", JSON.parse(localStorage.getItem("userAuth")).id_token);
   myHeaders.append("Content-Type", "application/json");
+  myHeaders.append("Content-Encoding", "gzip");
 
   var raw = JSON.stringify({domain:domain,attackPatterns:attackPatterns, taxiiDB:window.taxiiDB});
 
