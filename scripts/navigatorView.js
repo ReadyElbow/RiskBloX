@@ -32,7 +32,7 @@ function generateAttackLayerCall(){
     toPost["domain"] = getCookie("domain");
     toPost["platforms"] = getCookie("platforms").split(',');
     toPost["techniques"] = techniques;
-
+    console.log(toPost);
     apiGetLayer = 'https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/attacklayer?layer=' + JSON.stringify(toPost)
 
 
