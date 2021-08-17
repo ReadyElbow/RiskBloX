@@ -187,6 +187,8 @@ function redirect(){
   //   console.log(db);
   //   window.taxiiDB = (db.objects);
 getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,malwareNames, threatNames,includeNonMappedT).then(([attackPatterns,malwareGroupIDs]) => {
+    console.log(attackPatterns);
+    console.log(malwareGroupIDs);
     getFilteredAttackPatterns(domain,malwareGroupIDs.malwareGroupIDs,attackPatterns.attackPatterns, includeNonMappedT).then((objects) => {
         //Completely Filtered Attack Patterns
         var filterAttacks = []
