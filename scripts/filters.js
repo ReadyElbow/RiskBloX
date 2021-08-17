@@ -255,15 +255,14 @@ function getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,m
 function getRelevantAttackPatterns(domain,platforms,tactics,includeSub) {
     var myHeaders = new Headers();
     myHeaders.append("Authorization", JSON.parse(localStorage.getItem("userAuth")).id_token);
-    //myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Content-Encoding", "gzip");
+    myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({domain:domain,platforms:platforms,tactics:tactics, includeSub:includeSub});
 
     var requestOptions = {
     method: 'POST',
     headers: myHeaders,
-    body: pako.gzip(raw, {to: 'string'}),
+    body: raw,
     redirect: 'follow'
     };
   return fetch("https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/data/fetchrelevantattackpatterns", requestOptions)
@@ -273,15 +272,14 @@ function getRelevantAttackPatterns(domain,platforms,tactics,includeSub) {
 function getMalwareThreatID(domain,malwareNames,threatNames) {
   var myHeaders = new Headers();
     myHeaders.append("Authorization", JSON.parse(localStorage.getItem("userAuth")).id_token);
-    //myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Content-Encoding", "gzip");
+    myHeaders.append("Content-Type", "application/json");
 
 
     var raw = JSON.stringify({domain:domain,malwareNames:malwareNames,threatNames:threatNames});
     var requestOptions = {
     method: 'POST',
     headers: myHeaders,
-    body: pako.gzip(raw, {to: 'string'}),
+    body: raw,
     redirect: 'follow'
     };
   return fetch("https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/data/fetchmalwaregroupids", requestOptions)
@@ -310,7 +308,6 @@ function techniqueMitigationObjects(domain,attackPatterns) {
   var myHeaders = new Headers();
   myHeaders.append("Authorization", JSON.parse(localStorage.getItem("userAuth")).id_token);
   myHeaders.append("Content-Type", "application/json");
-  myHeaders.append("Content-Encoding", "gzip");
 
   var raw = JSON.stringify({domain:domain,attackPatterns:attackPatterns});
 
