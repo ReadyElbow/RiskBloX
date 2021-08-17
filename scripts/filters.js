@@ -268,8 +268,7 @@ function getRelevantAttackPatterns(domain,platforms,tactics,includeSub) {
     redirect: 'follow'
     };
   return fetch("https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/data/fetchrelevantattackpatterns", requestOptions)
-  .then((res) => {
-      res.json()})
+  .then((res) => res.json())
   };
 
 function getMalwareThreatID(domain,malwareNames,threatNames) {
