@@ -183,38 +183,36 @@ function redirect(){
   document.cookie = "currentTechnique=T1;"
   document.cookie = "furthestReachedT=T1;"
 
-  fetchrelevantDB(domain).then((db) => {
-    console.log(db);
-    window.taxiiDB = (db.objects);
-    getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,malwareNames, threatNames,includeNonMappedT).then(([attackPatterns,malwareGroupIDs]) => {
-        console.log(attackPatterns);
-        console.log(malwareGroupIDs);
-        getFilteredAttackPatterns(domain,malwareGroupIDs.malwareGroupIDs,attackPatterns.attackPatterns, includeNonMappedT).then((objects) => {
-            //Completely Filtered Attack Patterns
-            var filterAttacks = []
-            for (let i = 0; i < objects.length; i++){
-                filterAttacks = filterAttacks.concat(objects[i].filteredAttackPatterns);
-            }
-            filterAttacks.sort((a, b) => {
-                aParse = numericAttackPattern(a, domain);
-                bParse = numericAttackPattern(b, domain);
-                return (aParse - bParse)
-            });
-            fetchTechniqueMitigationObj(domain, filterAttacks).then((objects) => {
-                var completeTechniqueObject = []
-                for (let i = 0; i < objects.length; i++){
-                    completeTechniqueObject = completeTechniqueObject.concat(objects[i].filteredAttackPatterns);
-                }
-                for (let i = 0; i < completeTechniqueObject.length; i++){
-                    localStorage.setItem("T" + (i+1),JSON.stringify(completeTechniqueObject[i]));
-                }
-                window.location.replace("technique-forms.html")
-            })
+  // fetchrelevantDB(domain).then((db) => {
+  //   console.log(db);
+  //   window.taxiiDB = (db.objects);
+getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,malwareNames, threatNames,includeNonMappedT).then(([attackPatterns,malwareGroupIDs]) => {
+    getFilteredAttackPatterns(domain,malwareGroupIDs.malwareGroupIDs,attackPatterns.attackPatterns, includeNonMappedT).then((objects) => {
+        //Completely Filtered Attack Patterns
+        var filterAttacks = []
+        for (let i = 0; i < objects.length; i++){
+            filterAttacks = filterAttacks.concat(objects[i].filteredAttackPatterns);
+        }
+        filterAttacks.sort((a, b) => {
+            aParse = numericAttackPattern(a, domain);
+            bParse = numericAttackPattern(b, domain);
+            return (aParse - bParse)
         });
-
+        fetchTechniqueMitigationObj(domain, filterAttacks).then((objects) => {
+            var completeTechniqueObject = []
+            for (let i = 0; i < objects.length; i++){
+                completeTechniqueObject = completeTechniqueObject.concat(objects[i].filteredAttackPatterns);
+            }
+            for (let i = 0; i < completeTechniqueObject.length; i++){
+                localStorage.setItem("T" + (i+1),JSON.stringify(completeTechniqueObject[i]));
+            }
+            window.location.replace("technique-forms.html")
+        })
     });
-});   
-}
+
+});
+};   
+
 
 function numericAttackPattern(attackPatten, domain){
   source_map = {
@@ -232,23 +230,23 @@ function numericAttackPattern(attackPatten, domain){
   return 1
 }
 
-function fetchrelevantDB(domain) {
-  var requestOptions = {
-    method: 'GET',
-    redirect: 'follow'
-  };
-  if (domain == "enterprise_attack"){
-    url = "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/enterprise-attack/enterprise-attack.json"
-  }
-  else if (domain == "mobile_attack") {
-    url = "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/mobile-attack/mobile-attack.json"
-  }
-  else if (domain == "ics_attack"){
-    url = "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/ics-attack/ics-attack.json"
-  }
-  return fetch(url, requestOptions)
-  .then((res) => res.json())
-}
+// function fetchrelevantDB(domain) {
+//   var requestOptions = {
+//     method: 'GET',
+//     redirect: 'follow'
+//   };
+//   if (domain == "enterprise_attack"){
+//     url = "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/enterprise-attack/enterprise-attack.json"
+//   }
+//   else if (domain == "mobile_attack") {
+//     url = "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/mobile-attack/mobile-attack.json"
+//   }
+//   else if (domain == "ics_attack"){
+//     url = "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/ics-attack/ics-attack.json"
+//   }
+//   return fetch(url, requestOptions)
+//   .then((res) => res.json())
+// }
 
 function getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,malwareNames, threatNames){
     return Promise.all([getRelevantAttackPatterns(domain,platforms,tactics,includeSub), getMalwareThreatID(domain,malwareNames,threatNames)]);
@@ -260,7 +258,7 @@ function getRelevantAttackPatterns(domain,platforms,tactics,includeSub) {
     //myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Content-Encoding", "gzip");
 
-    var raw = JSON.stringify({domain:domain,platforms:platforms,tactics:tactics, includeSub:includeSub, taxiiDB:window.taxiiDB});
+    var raw = JSON.stringify({domain:domain,platforms:platforms,tactics:tactics, includeSub:includeSub});
 
     var requestOptions = {
     method: 'POST',
@@ -279,7 +277,7 @@ function getMalwareThreatID(domain,malwareNames,threatNames) {
     myHeaders.append("Content-Encoding", "gzip");
 
 
-    var raw = JSON.stringify({domain:domain,malwareNames:malwareNames,threatNames:threatNames, taxiiDB:window.taxiiDB});
+    var raw = JSON.stringify({domain:domain,malwareNames:malwareNames,threatNames:threatNames});
     var requestOptions = {
     method: 'POST',
     headers: myHeaders,
@@ -297,7 +295,7 @@ function filterAttackPatterns(domain,malwareThreatIDs,attackPatterns, includeNon
     myHeaders.append("Content-Type", "application/json");
     
 
-    var raw = JSON.stringify({domain:domain,malwareThreatIDs:malwareThreatIDs,attackPatterns:attackPatterns,includeNonMappedT:includeNonMappedT, taxiiDB:window.taxiiDB});
+    var raw = JSON.stringify({domain:domain,malwareThreatIDs:malwareThreatIDs,attackPatterns:attackPatterns,includeNonMappedT:includeNonMappedT});
 
     var requestOptions = {
     method: 'POST',
@@ -314,7 +312,7 @@ function techniqueMitigationObjects(domain,attackPatterns) {
   myHeaders.append("Content-Type", "application/json");
   myHeaders.append("Content-Encoding", "gzip");
 
-  var raw = JSON.stringify({domain:domain,attackPatterns:attackPatterns, taxiiDB:window.taxiiDB});
+  var raw = JSON.stringify({domain:domain,attackPatterns:attackPatterns});
 
   var requestOptions = {
   method: 'POST',
