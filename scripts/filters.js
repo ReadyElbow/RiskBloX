@@ -267,7 +267,6 @@ function getRelevantAttackPatterns(domain,platforms,tactics,includeSub) {
     };
   return fetch("https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/data/fetchrelevantattackpatterns", requestOptions)
   .then((res) => {
-      console.log(res);
       res.json()})
   };
 
