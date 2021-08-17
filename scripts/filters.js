@@ -187,28 +187,31 @@ function redirect(){
   //   console.log(db);
   //   window.taxiiDB = (db.objects);
 getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,malwareNames, threatNames,includeNonMappedT).then(([attackPatterns,malwareGroupIDs]) => {
-    console.log(attackPatterns);
-    console.log(malwareGroupIDs);
     getFilteredAttackPatterns(domain,malwareGroupIDs.malwareGroupIDs,attackPatterns.attackPatterns, includeNonMappedT).then((objects) => {
         //Completely Filtered Attack Patterns
+        console.log(objects);
         var filterAttacks = []
         for (let i = 0; i < objects.length; i++){
             filterAttacks = filterAttacks.concat(objects[i].filteredAttackPatterns);
         }
+        console.log(filterAttacks);
         filterAttacks.sort((a, b) => {
             aParse = numericAttackPattern(a, domain);
             bParse = numericAttackPattern(b, domain);
             return (aParse - bParse)
         });
+        console.log(filterAttacks);
         fetchTechniqueMitigationObj(domain, filterAttacks).then((objects) => {
+            console.log(objects);
             var completeTechniqueObject = []
             for (let i = 0; i < objects.length; i++){
                 completeTechniqueObject = completeTechniqueObject.concat(objects[i].filteredAttackPatterns);
             }
+            console.log(completeTechniqueObject);
             for (let i = 0; i < completeTechniqueObject.length; i++){
                 localStorage.setItem("T" + (i+1),JSON.stringify(completeTechniqueObject[i]));
             }
-            window.location.replace("technique-forms.html")
+            //window.location.replace("technique-forms.html")
         })
     });
 
