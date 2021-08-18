@@ -207,7 +207,7 @@ getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,malwareNam
             for (let i = 0; i < completeTechniqueObject.length; i++){
                 localStorage.setItem("T" + (i+1),JSON.stringify(completeTechniqueObject[i]));
             }
-            window.location.replace("technique-forms.html")
+            //window.location.replace("technique-forms.html")
         })
     });
 
