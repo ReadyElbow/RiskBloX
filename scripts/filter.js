@@ -183,9 +183,6 @@ function redirect(){
   document.cookie = "currentTechnique=T1;"
   document.cookie = "furthestReachedT=T1;"
 
-  // fetchrelevantDB(domain).then((db) => {
-  //   console.log(db);
-  //   window.taxiiDB = (db.objects);
 getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,malwareNames, threatNames,includeNonMappedT).then(([attackPatterns,malwareGroupIDs]) => {
     getFilteredAttackPatterns(domain,malwareGroupIDs.malwareGroupIDs,attackPatterns.attackPatterns, includeNonMappedT).then((objects) => {
         //Completely Filtered Attack Patterns
@@ -207,7 +204,7 @@ getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,malwareNam
             for (let i = 0; i < completeTechniqueObject.length; i++){
                 localStorage.setItem("T" + (i+1),JSON.stringify(completeTechniqueObject[i]));
             }
-            //window.location.replace("technique-forms.html")
+            window.location.replace("technique-forms.html")
         })
     });
 
@@ -230,24 +227,6 @@ function numericAttackPattern(attackPatten, domain){
     }
   return 1
 }
-
-// function fetchrelevantDB(domain) {
-//   var requestOptions = {
-//     method: 'GET',
-//     redirect: 'follow'
-//   };
-//   if (domain == "enterprise_attack"){
-//     url = "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/enterprise-attack/enterprise-attack.json"
-//   }
-//   else if (domain == "mobile_attack") {
-//     url = "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/mobile-attack/mobile-attack.json"
-//   }
-//   else if (domain == "ics_attack"){
-//     url = "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/ics-attack/ics-attack.json"
-//   }
-//   return fetch(url, requestOptions)
-//   .then((res) => res.json())
-// }
 
 function getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,malwareNames, threatNames){
     return Promise.all([getRelevantAttackPatterns(domain,platforms,tactics,includeSub), getMalwareThreatID(domain,malwareNames,threatNames)]);

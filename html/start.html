@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RiskAssess</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/bootstrap-multiselect.css" type="text/css"/>
+    <link href="../css/reload.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 </head>
-
-<body onload="generateAttackLayerCall()">
+<body>
     <div id="container">
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
-            <header class="navbar-brand h1 ms-4"><i class="fas fa-check-double"></i> RiskAssess</header>
+            <header class="navbar-brand h1 ms-4"><img src="../images/riskblox-logo.png" width="45" height="40"></i> RiskBloX</header>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggleMenu" aria-controls="toggleMenu" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
             </button>
@@ -45,7 +46,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="https://github.com/CannedWater/MITRE-ATTACK-Navigator-Mitigation" target="_blank" class="badge badge-pill badge-light">
+                        <a href="https://github.com/ReadyElbow/RiskBloX" target="_blank" class="badge badge-pill badge-light">
                             <i class="fab fa-github fa-2x"></i> Website/API Repo
                         </a>
                     </li>
@@ -58,26 +59,22 @@
             </div>
         </nav>
     </div>
-    <div class="container">
-        <div class="card text-center">
-            <div class="card-body">
-            <button type="button" onclick="back()" class="btn btn-primary">Back</button>
-            <button type="button" onclick="saveProgress()" class="btn btn-primary">Save Progress</button>
-            <button type="button" onclick="generateDocumentation()" class="btn btn-primary">Generate Documentation</button>
+    <!--https://dev.to/mdbootstrap/bootstrap-5-popconfirm-167k do on anew to make sure-->
+    <div class="card text-center">
+        <div class="card-body">
+          <h5 class="card-title">Restart or Load TxA</h5>
+          <p class="card-text">Would you like to load an exisiting TxA or restart/start a new TxA?</p>
+          <button type="button" onclick="restart()" class="btn btn-primary">Start anew</button>
+          <button type="button" onclick="loadSession()" class="btn btn-primary">Load from Session</button>
+            <div class="col-md-4 offset-md-4 mt-3">
+                <div class="input-group">
+                    <input class="form-control" type="file" id="formFile">
+                    <button type="button" class="btn btn-primary" onclick="loadJSON()">Load from JSON</button>
+                </div>
             </div>
+          
         </div>
+      </div>
+    <script type="text/javascript" src="../scripts/reload.js"></script>
 
-        <div class="row">
-            <div class="ratio ratio-16x9">
-                <iframe allowfullscreen id="navIframe"></iframe>
-            </div>
-        </div>
-    </div>
-    
-    <script type="text/javascript" src="../scripts/globalVariables.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
-    <script src="https://unpkg.com/jspdf-autotable"></script>
-    <script type="text/javascript" src="../scripts/navigatorView.js"></script>
-    <script type="text/javascript" src="../scripts/pako.min.js"></script>
 </body>
