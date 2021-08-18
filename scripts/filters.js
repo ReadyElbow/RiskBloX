@@ -339,7 +339,7 @@ function fetchTechniqueMitigationObj(domain,attackPatterns) {
           )
   }
   else {
-      splitattackPatterns = chunkArray(attackPatterns,16);
+      splitattackPatterns = chunkArray(attackPatterns,20);
       return Promise.all([
           techniqueMitigationObjects(domain,splitattackPatterns[0]),techniqueMitigationObjects(domain,splitattackPatterns[1]),techniqueMitigationObjects(domain,splitattackPatterns[2]),
           techniqueMitigationObjects(domain,splitattackPatterns[3]),
@@ -354,7 +354,11 @@ function fetchTechniqueMitigationObj(domain,attackPatterns) {
           techniqueMitigationObjects(domain,splitattackPatterns[12]),
           techniqueMitigationObjects(domain,splitattackPatterns[13]),
           techniqueMitigationObjects(domain,splitattackPatterns[14]),
-          techniqueMitigationObjects(domain,splitattackPatterns[15]),])
+          techniqueMitigationObjects(domain,splitattackPatterns[15]),
+          techniqueMitigationObjects(domain,splitattackPatterns[16]),
+          techniqueMitigationObjects(domain,splitattackPatterns[17]),
+          techniqueMitigationObjects(domain,splitattackPatterns[18]),
+          techniqueMitigationObjects(domain,splitattackPatterns[19])])
   }
 }
 
