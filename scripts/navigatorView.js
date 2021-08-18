@@ -33,8 +33,7 @@ function generateAttackLayerCall(){
     toPost["platforms"] = getCookie("platforms").split(',');
     toPost["techniques"] = techniques;
     console.log(JSON.stringify(toPost));
-    console.log(btoa(pako.deflateRaw(JSON.stringify(toPost))));
-    console.log(btoa(pako.deflate(JSON.stringify(toPost))));
+    console.log(btoa(pako.gzip(JSON.stringify(toPost))));
     apiGetLayer = 'https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/attacklayer?layer=' + btoa(pako.gzip(JSON.stringify(toPost)));
 
     var navigator = document.getElementById("navIframe");
