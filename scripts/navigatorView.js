@@ -32,9 +32,9 @@ function generateAttackLayerCall(){
     toPost["domain"] = getCookie("domain");
     toPost["platforms"] = getCookie("platforms").split(',');
     toPost["techniques"] = techniques;
-    toPostLayer = JSON.stringify(toPost);
-    console.log(toPostLayer.replaceAll("{","%7B").replaceAll("}","%7D"));
-    apiGetLayer = 'https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/attacklayer?layer=' + toPostLayer.replaceAll("{","%7B").replaceAll("}","%7D")
+
+    console.log(encodeURI(JSON.stringify(toPost)));
+    apiGetLayer = 'https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/attacklayer?layer=' + encodeURI(JSON.stringify(toPost));
 
     var navigator = document.getElementById("navIframe");
 
