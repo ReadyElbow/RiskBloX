@@ -30,7 +30,7 @@ else {
                 myHeaders.append("Content-Type", "application/x-amz-json-1.1");
 
                 var raw = {
-                    ClientId: "1u6de2f6rfuri5c72tn6h2ogt1",
+                    ClientId: "3kr61qq6dpfs0c87t322m3ojth",
                     AuthFlow: "REFRESH_TOKEN_AUTH",
                     AuthParameters: {
                         "REFRESH_TOKEN":oldUserAuth.refresh_token
