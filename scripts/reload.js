@@ -27,12 +27,11 @@ function loadSession(){
 }
 
 function loadJSON(){
-    userAuth = localStorage.getItem("userAuth");
     localStorage.clear;
-    localStorage.setItem("userAuth",userAuth);
     userInput = document.getElementById("formFile").files[0];
 
     const reader = new FileReader();
+    var userFile = "";
 
     reader.onload = function(event) {
         let userFile = JSON.parse(event.target.result);
