@@ -1,5 +1,6 @@
 if (localStorage.getItem("userAuth") == null){
-    window.location.replace("../html/sign-in.html");
+    console.log("No Auth exists");
+    //window.location.replace("../html/sign-in.html");
 }
 else {
     //to include > <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/8.0.20/jsrsasign-all-min.js"></script>
@@ -8,19 +9,20 @@ else {
     redirect: 'follow'
     };
     
-    fetch("https://cognito-idp.eu-west-1.amazonaws.com/eu-west-1_RGndlDTXp/.well-known/jwks.json", requestOptions)
+    fetch("https://cognito-idp.eu-west-1.amazonaws.com/eu-west-1_wz6qqFen9/.well-known/jwks.json", requestOptions)
     .then(response => response.json())
     .then(result => {
         var kids = [];
         Object.entries(result.keys).forEach(([key, value]) => {
             kids.push(value.kid);
-            console.log(kids);
         })
         let userAuth = JSON.parse(localStorage.getItem("userAuth"));
         let idToken = (userAuth.id_token).split('.');
         let idTokenHeader = JSON.parse(atob(idToken[0]));
         let idTokenBody = JSON.parse(atob(idToken[1]));
 
+        console.log(kids);
+        console.log(idTokenHeader.kid);
         if (idTokenHeader.kid in kids) {
             expireTime = idTokenBody.exp;
             currentEpochTime = new Date().getTime();
@@ -53,9 +55,10 @@ else {
             }
         }
         else {
-            localStorage.removeItem("userAuth");
-            window.location.replace("../html/sign-in.html");
+            console.log("KID does not exist")
+            //localStorage.removeItem("userAuth");
+            //window.location.replace("../html/sign-in.html");
         }
     })
-    .catch(error => window.location.replace("../html/sign-in.html"))
+    //.catch(error => window.location.replace("../html/sign-in.html"))
 }
