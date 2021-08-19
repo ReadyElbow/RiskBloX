@@ -320,9 +320,12 @@ function saveProgress(){
     techniques = {}
     for (let [key, stringValue] of Object.entries(localStorage)){
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (key != "userAuth"){
             techniques[key] = stringValue;
 =======
+=======
+>>>>>>> parent of 5d75e10 (Updating JSON Loading function)
         if (key != "tolerance"){
             techniques[key] = JSON.parse(stringValue);
 >>>>>>> parent of 5d75e10 (Updating JSON Loading function)
