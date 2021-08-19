@@ -8,7 +8,7 @@
     urlencoded.append("grant_type", "authorization_code");
     urlencoded.append("client_id", "1u6de2f6rfuri5c72tn6h2ogt1");
     urlencoded.append("code", urlParams.get('code'));
-    urlencoded.append("redirect_uri", "https://amplify.d1kg8wmdxdskv3.amplifyapp.com/html/authorise");
+    urlencoded.append("redirect_uri", "https://riskblox.2t-security.co.uk/html/authorize");
 
     var requestOptions = {
     method: 'POST',
@@ -17,7 +17,7 @@
     redirect: 'follow'
     };
 
-    fetch("https://riskguard.auth.eu-west-1.amazoncognito.com/oauth2/token", requestOptions)
+    fetch("https://riskblox.auth.eu-west-1.amazoncognito.com/oauth2/token", requestOptions)
     .then(response => response.text())
     .then(result => {
         localStorage.setItem('userAuth', result);
