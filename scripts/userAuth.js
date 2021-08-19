@@ -57,5 +57,5 @@ else {
             window.location.replace("../html/sign-in.html");
         }
     })
-    .catch(error => window.location.replace("../html/sign-in.html"))
+    //.catch(error => window.location.replace("../html/sign-in.html"))
 }
