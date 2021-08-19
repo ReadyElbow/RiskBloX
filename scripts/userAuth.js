@@ -48,7 +48,7 @@ else {
                 .then(result => {
                     userAuth = result.AuthenticationResult
                     userAuth["refresh_token"] = oldUserAuth.refresh_token;
-                    localStorage.setItem("userAuth", userAuth);
+                    localStorage.setItem("userAuth", JSON.stringify(userAuth));
                 })
             }
         }
