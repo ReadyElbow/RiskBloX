@@ -16,8 +16,8 @@ else {
         Object.entries(result.keys).forEach(([key, value]) => {
             kids.push(value.kid);
         })
-        let userAuth = JSON.parse(localStorage.getItem("userAuth"));
-        let idToken = (userAuth.id_token).split('.');
+        let oldUserAuth = JSON.parse(localStorage.getItem("userAuth"));
+        let idToken = (oldUserAuth.id_token).split('.');
         let idTokenHeader = JSON.parse(atob(idToken[0]));
         let idTokenBody = JSON.parse(atob(idToken[1]));
 
@@ -33,7 +33,7 @@ else {
                     ClientId: "1u6de2f6rfuri5c72tn6h2ogt1",
                     AuthFlow: "REFRESH_TOKEN_AUTH",
                     AuthParameters: {
-                        "REFRESH_TOKEN":userAuth.refresh_token
+                        "REFRESH_TOKEN":oldUserAuth.refresh_token
                 }}
 
                 var requestOptions = {
@@ -47,7 +47,7 @@ else {
                 .then(response => response.json())
                 .then(result => {
                     userAuth = result.AuthenticationResult
-                    userAuth["refresh_token"] = userAuth.refresh_token;
+                    userAuth["refresh_token"] = oldUserAuth.refresh_token;
                     localStorage.setItem("userAuth", userAuth);
                 })
             }
