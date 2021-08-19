@@ -47,7 +47,8 @@ else {
                 fetch("https://cognito-idp.eu-west-1.amazonaws.com/", requestOptions)
                 .then(response => response.json())
                 .then(result => {
-                    userAuth = result.AuthenticationResult
+                    userAuth.id_token = result.AuthenticationResult.IdToken
+                    userAuth.access_token = result.AuthenticationResult.AccessToken
                     userAuth["refresh_token"] = oldUserAuth.refresh_token;
                     localStorage.setItem("userAuth", JSON.stringify(userAuth));
                 })
