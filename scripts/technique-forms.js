@@ -313,7 +313,7 @@ function saveProgress(){
     techniques = {}
     for (let [key, stringValue] of Object.entries(localStorage)){
         if (key != "userAuth"){
-            techniques[key] = JSON.parse(stringValue);
+            techniques[key] = stringValue;
         }
     }
     savedJSON['techniques'] = techniques;
