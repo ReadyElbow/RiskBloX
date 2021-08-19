@@ -58,11 +58,18 @@ function fetchTechnique(){
     document.getElementById("technique-details").append(techniqueCardBody);
 
     realWorldList = document.getElementById("examples");
-    for (i=0;i<realWorld.length;i++){
+    if (realWorld.length > 0){
+        for (i=0;i<realWorld.length;i++){
+            listItem = document.createElement("li");
+            listItem.innerHTML = realWorld[i][0] + "; "+ realWorld[i][1];
+            realWorldList.appendChild(listItem);
+        }}
+    else {
         listItem = document.createElement("li");
-        listItem.innerHTML = realWorld[i][0] + "; "+ realWorld[i][1];
+        listItem.innerHTML = "No Real-World examples exist";
         realWorldList.appendChild(listItem);
     }
+    
 
     displayMitigations(mitigations);
 }
