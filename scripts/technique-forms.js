@@ -242,7 +242,7 @@ function nextTechnique(){
     var nextTechnique = increDecreString("increment");
 
     if (localStorage.getItem(nextTechnique) == null){
-        window.location.replace("navigatorView.html");
+        window.location.replace("defensive-coverage.html");
     }
     else{
         //Have we progressed onto a Fresh technique?
