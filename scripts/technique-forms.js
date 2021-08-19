@@ -319,8 +319,13 @@ function saveProgress(){
     savedJSON['cookies'] = document.cookie;
     techniques = {}
     for (let [key, stringValue] of Object.entries(localStorage)){
+<<<<<<< HEAD
         if (key != "userAuth"){
             techniques[key] = stringValue;
+=======
+        if (key != "tolerance"){
+            techniques[key] = JSON.parse(stringValue);
+>>>>>>> parent of 5d75e10 (Updating JSON Loading function)
         }
     }
     savedJSON['techniques'] = techniques;
