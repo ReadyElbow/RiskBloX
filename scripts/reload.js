@@ -8,7 +8,7 @@ function restart(){
     var userAuth = localStorage.getItem("userAuth");
     localStorage.clear();
     localStorage.setItem("userAuth", userAuth);
-    window.location.replace("filters.html");
+    window.location.replace("filter.html");
 }
 
 function loadSession(){
