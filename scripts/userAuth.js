@@ -16,8 +16,9 @@ else {
         Object.entries(result.keys).forEach(([key, value]) => {
             kids.push(value.kid);
         })
+        //When refreshed there is an issue that the names change! In the case of id_token it becomes IDToken
         let oldUserAuth = JSON.parse(localStorage.getItem("userAuth"));
-        let idToken = (oldUserAuth.id_token).split('.');
+        let idToken = oldUserAuth.id_token != undefined ? (oldUserAuth.id_token).split('.') : (oldUserAuth.IdToken).split('.');
         let idTokenHeader = JSON.parse(atob(idToken[0]));
         let idTokenBody = JSON.parse(atob(idToken[1]));
 
