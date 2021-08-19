@@ -105,7 +105,7 @@ function addPost(){
     redirect: 'follow'
     };
 
-    fetch("https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/fetchfilters", requestOptions)
+    fetch("https://sdf10urdoe.execute-api.eu-west-1.amazonaws.com/RiskBloXProd/fetchfilters", requestOptions)
     .then(response => response.json())
     .then(statusBody => {
         var data = JSON.parse(statusBody.body)
@@ -245,7 +245,7 @@ function getRelevantAttackPatterns(domain,platforms,tactics,includeSub) {
     body: raw,
     redirect: 'follow'
     };
-  return fetch("https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/data/fetchrelevantattackpatterns", requestOptions)
+  return fetch("https://sdf10urdoe.execute-api.eu-west-1.amazonaws.com/RiskBloXProd/data/fetchrelevantattackpatterns", requestOptions)
   .then((res) => res.json())
   };
 
@@ -262,7 +262,7 @@ function getMalwareThreatID(domain,malwareNames,threatNames) {
     body: raw,
     redirect: 'follow'
     };
-  return fetch("https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/data/fetchmalwaregroupids", requestOptions)
+  return fetch("https://sdf10urdoe.execute-api.eu-west-1.amazonaws.com/RiskBloXProd/data/fetchmalwaregroupids", requestOptions)
   .then((res) => res.json())
   };
 
@@ -281,7 +281,7 @@ function filterAttackPatterns(domain,malwareThreatIDs,attackPatterns, includeNon
     body: raw,
     redirect: 'follow'
     };
-  return fetch("https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/data/filterbymalwaregroupids", requestOptions)
+  return fetch("https://sdf10urdoe.execute-api.eu-west-1.amazonaws.com/RiskBloXProd/data/filterbymalwaregroupids", requestOptions)
   .then((res) => res.json())
 }
 function techniqueMitigationObjects(domain,attackPatterns) {
@@ -297,7 +297,7 @@ function techniqueMitigationObjects(domain,attackPatterns) {
   body: raw,
   redirect: 'follow'
   };
-  return fetch("https://mz2vaziwya.execute-api.eu-west-1.amazonaws.com/prod/data/createtechniquemitigationobjects", requestOptions)
+  return fetch("https://sdf10urdoe.execute-api.eu-west-1.amazonaws.com/RiskBloXProd/data/createtechniquemitigationobjects", requestOptions)
   .then((res) => res.json())
 }
 
