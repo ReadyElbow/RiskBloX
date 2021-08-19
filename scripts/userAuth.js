@@ -1,6 +1,6 @@
 if (localStorage.getItem("userAuth") == null){
     console.log("No Auth exists");
-    //window.location.replace("../html/sign-in.html");
+    window.location.replace("../html/sign-in.html");
 }
 else {
     //to include > <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/8.0.20/jsrsasign-all-min.js"></script>
@@ -21,9 +21,7 @@ else {
         let idTokenHeader = JSON.parse(atob(idToken[0]));
         let idTokenBody = JSON.parse(atob(idToken[1]));
 
-        console.log(kids);
-        console.log(idTokenHeader.kid);
-        if (idTokenHeader.kid in kids) {
+        if (kids.includes(idTokenHeader.kid)) {
             expireTime = idTokenBody.exp;
             currentEpochTime = new Date().getTime();
             if ((expireTime - (currentEpochTime + 300)) < 0){
@@ -55,10 +53,9 @@ else {
             }
         }
         else {
-            console.log("KID does not exist")
-            //localStorage.removeItem("userAuth");
-            //window.location.replace("../html/sign-in.html");
+            localStorage.removeItem("userAuth");
+            window.location.replace("../html/sign-in.html");
         }
     })
-    //.catch(error => window.location.replace("../html/sign-in.html"))
+    .catch(error => window.location.replace("../html/sign-in.html"))
 }
