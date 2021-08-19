@@ -319,7 +319,7 @@ function saveProgress(){
     savedJSON['cookies'] = document.cookie;
     techniques = {}
     for (let [key, stringValue] of Object.entries(localStorage)){
-        if (key != "tolerance"){
+        if (key != "userAuth"){
             techniques[key] = JSON.parse(stringValue);
         }
     }
