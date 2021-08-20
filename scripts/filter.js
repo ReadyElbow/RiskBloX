@@ -189,8 +189,11 @@ function redirect(){
   document.cookie = "currentTechnique=T1;"
   document.cookie = "furthestReachedT=T1;"
 
-getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,malwareNames, threatNames,includeNonMappedT).then(([attackPatterns,malwareGroupIDs]) => {
-    getFilteredAttackPatterns(domain,malwareGroupIDs.malwareGroupIDs,attackPatterns.attackPatterns, includeNonMappedT).then((objects) => {
+getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,malwareNames, threatNames,includeNonMappedT).then(([attackPatterns,threatGroupIDs, malwareIDs]) => {
+  console.log(threatGroupIDs);
+  console.log(malwareIDs);
+    malwareGroupIDs = (threatGroupIDs.malwareGroupIDs).concat(malwareIDs.malwareGroupIDs);
+    getFilteredAttackPatterns(domain,malwareGroupIDs,attackPatterns.attackPatterns, includeNonMappedT).then((objects) => {
         //Completely Filtered Attack Patterns
         var filterAttacks = []
         for (let i = 0; i < objects.length; i++){
@@ -235,7 +238,7 @@ function numericAttackPattern(attackPatten, domain){
 }
 
 function getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,malwareNames, threatNames){
-    return Promise.all([getRelevantAttackPatterns(domain,platforms,tactics,includeSub), getMalwareThreatID(domain,malwareNames,threatNames)]);
+    return Promise.all([getRelevantAttackPatterns(domain,platforms,tactics,includeSub), getMalwareThreatID(domain,malwareNames,threatNames, "threatGroup"), getMalwareThreatID(domain,malwareNames,malwareNames, "malware")]);
 }
 
 function getRelevantAttackPatterns(domain,platforms,tactics,includeSub) {
@@ -255,13 +258,13 @@ function getRelevantAttackPatterns(domain,platforms,tactics,includeSub) {
   .then((res) => res.json())
   };
 
-function getMalwareThreatID(domain,malwareNames,threatNames) {
+function getMalwareThreatID(domain,malwareThreatGNames,malwareOrThreatG) {
   var myHeaders = new Headers();
     myHeaders.append("Authorization", JSON.parse(localStorage.getItem("userAuth")).id_token);
     myHeaders.append("Content-Type", "application/json");
 
 
-    var raw = JSON.stringify({domain:domain,malwareNames:malwareNames,threatNames:threatNames});
+    var raw = JSON.stringify({domain:domain,malwareThreatGNames:malwareThreatGNames,malwareOrThreatG:malwareOrThreatG});
     var requestOptions = {
     method: 'POST',
     headers: myHeaders,
