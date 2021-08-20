@@ -68,7 +68,7 @@ function saveProgress(){;
     for (let [key, stringValue] of Object.entries(localStorage)){
         
         if (key != "userAuth"){
-            if (key != "tolerance"){
+            if (! ["tolerance","impactThreshold","scoreCap"].includes(key)){
                 techniques[key] = JSON.parse(stringValue);
             }
             else{

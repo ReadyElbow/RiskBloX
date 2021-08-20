@@ -1,3 +1,7 @@
+window.scoreCap = parseInt(localStorage.getItem("scoreCap"));
+window.impactThreshold = parseInt(localStorage.getItem("impactThreshold"));
+
+
 function getCookie(name){
     var re = new RegExp(name += "=([^;]+)");
     var value = re.exec(document.cookie);
@@ -180,11 +184,11 @@ function updateScore(){
     if (totalImpact == 0){
         overallThreatScore = 0;
     }
-    else if (totalImpact/impactfulMitigations >= 5){
+    else if (totalImpact/impactfulMitigations >= impactThreshold){
         overallThreatScore = equation(100, impactList, confidenceList,totalImpact);
     }
-    else if (totalImpact/impactfulMitigations < 5){
-        overallThreatScore = equation(50, impactList, confidenceList,totalImpact);
+    else if (totalImpact/impactfulMitigations < impactThreshold){
+        overallThreatScore = equation(scoreCap, impactList, confidenceList,totalImpact);
     }
 
     document.getElementById("overallScore").innerHTML = overallThreatScore;
@@ -321,7 +325,7 @@ function saveProgress(){
     for (let [key, stringValue] of Object.entries(localStorage)){
         
         if (key != "userAuth"){
-            if (key != "tolerance"){
+            if (! ["tolerance","impactThreshold","scoreCap"].includes(key)){
                 techniques[key] = JSON.parse(stringValue);
             }
             else{
