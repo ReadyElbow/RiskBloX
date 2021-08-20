@@ -24,7 +24,7 @@ else {
 
         if (kids.includes(idTokenHeader.kid)) {
             expireTime = idTokenBody.exp;
-            currentEpochTime = new Date().getTime();
+            currentEpochTime = Math.floor(new Date().getTime() / 1000);
             if ((expireTime - (currentEpochTime + 300)) < 0){
                 var myHeaders = new Headers();
                 myHeaders.append("X-Amz-Target", "AWSCognitoIdentityProviderService.InitiateAuth");
@@ -47,9 +47,10 @@ else {
                 fetch("https://cognito-idp.eu-west-1.amazonaws.com/", requestOptions)
                 .then(response => response.json())
                 .then(result => {
+                    let userAuth = {}
                     userAuth.id_token = result.AuthenticationResult.IdToken
                     userAuth.access_token = result.AuthenticationResult.AccessToken
-                    userAuth["refresh_token"] = oldUserAuth.refresh_token;
+                    userAuth.refresh_token = oldUserAuth.refresh_token;
                     localStorage.setItem("userAuth", JSON.stringify(userAuth));
                 })
             }
