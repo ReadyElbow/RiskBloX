@@ -238,7 +238,7 @@ function numericAttackPattern(attackPatten, domain){
 }
 
 function getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub,malwareNames, threatNames){
-    return Promise.all([getRelevantAttackPatterns(domain,platforms,tactics,includeSub), getMalwareThreatID(domain,malwareNames,threatNames, "threatGroup"), getMalwareThreatID(domain,malwareNames,malwareNames, "malware")]);
+    return Promise.all([getRelevantAttackPatterns(domain,platforms,tactics,includeSub), getMalwareThreatID(domain,threatNames, "threatGroup"), getMalwareThreatID(domain,malwareNames, "malware")]);
 }
 
 function getRelevantAttackPatterns(domain,platforms,tactics,includeSub) {
