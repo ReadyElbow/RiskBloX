@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RiskAssess</title>
+    <title>RiskBloX</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="../css/global.css" rel="stylesheet" text="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
@@ -33,12 +33,6 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav nav ms-auto text-center">
-                    <!-- <li class="nav-tem">
-                        <a href="https://riskblox.auth.eu-west-1.amazoncognito.com/login?client_id=3kr61qq6dpfs0c87t322m3ojth&response_type=code&scope=email+openid+profile+aws.cognito.signin.user.admin&redirect_uri=https://riskblox.2t-security.co.uk/html/authorize" class="badge badge-pill badge-light">
-                            <i class="fas fa-sign-in-alt fa-2x"></i>
-                            Sign In
-                        </a>
-                    </li> -->
                     <li class="nav-tem">
                         <a href="
                         https://riskblox.auth.eu-west-1.amazoncognito.com/logout?client_id=3kr61qq6dpfs0c87t322m3ojth&logout_uri=https://riskblox.2t-security.co.uk/html/sign-out" class="badge badge-pill badge-light">
@@ -65,9 +59,9 @@
         <div class="container mb-5">
             <p>
                 This tool uses MITRE's documented Attack Techniques and associated Mitigations
-                to provide an alternative Risk Assessment and Management tool that can be conducted on Enterprise,
-                Mobile or Industrial Control System Infrastructures. In this short explanation, the 4 stage process
-                is described. If not required, access the Assess Tab in the Navbar to begin.
+                to provide an alternative Risk Management tool that can be conducted on Enterprise,
+                Mobile or Industrial Control System Infrastructures. In this short explanation, the 4-stage process
+                is described. If not required, access the Mitigate page in the navigation bar to begin.
             </p>
         </div>
     </section>
@@ -91,9 +85,7 @@
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <div class="row">
                     <div class="col-6">
-                        When initially starting, you are presented with 3 choices. You can either begin a new assessment,
-                        in the case that you have accidentally exited an ongoing assessment you can reload from Storage or 
-                        you can load in a JSON file that can be generated at throughout the assessment.
+                        When starting an analysis, you are presented with 3 choices. You can either start a new assessment, reload from Local Storage or load in a JSON file that you may have generated during a previous assessment.
                     </div>
                     <div class="col-6">
                         <img src="../images/stage-1-loading.png" class="rounded float-end img-thumbnail" alt="...">
@@ -103,8 +95,7 @@
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <div class="row mb-5">
                     <div class="col-6">
-                        If in Stage 1 a new assessment is chosen, then you will be confronted with a page dedicated to filtering.
-                        This will initially present you with a choice of domain: Enterprise, Mobile or Industrial Control Systems.
+                        If in Stage 1 a new analysis is chosen, then a set of filters will be shown. This will initially present you with a choice of domain: Enterprise, Mobile or Industrial Control Systems. Once selected and submitted, an additional set of relevant filters are displayed.
                     </div>
                     <div class="col-6">
                         <img src="../images/stage-2-firstFilter.png" class="rounded float-end img-thumbnail">
@@ -115,23 +106,16 @@
                         <img src="../images/stage-2-firstFilter.png" class="rounded float-start img-thumbnail">
                     </div>
                     <div class="col-6">
-                        Upon choosing the required domain, a number of additional filters will now be available. These include Threat Groups,
-                        where options may include APT-28, Tactics, MITRE ATT&CK's method to group related sets of Threats, Platforms, such as Azure
-                        Active Directory or Linux, and Malware/Software, for example WannaCry. Please note that if you do not wish to filter 
-                        by a specific area such as Tactics you must Select All in the dropdown list.
+                        These include Threat Groups (e.g. APT-28), Mitre Tactics (MITRE ATT&CK's method to group related sets of Threats e.g. Initial Access), Platforms (e.g. Azure Active Directory, Linux), and Malware/Software (e.g. WannaCry). Please note that if you do not wish to filter by a specific area such as Tactics you must Select All the options in the dropdown list.
                     </div>
                 </div>
                 <div class="row mb-5">
                     <div class="col-6">
-                        <p>Below the four key filters, a few additional options exist. In the Enterprise domain, MITRE ATT&CK
-                        have drilled down into Sub-Techniques of exisiting Technqiues. This can either be included or excluded from the 
-                        Assessment. In Enterprise Domain there exist; x sub-techniques.</p>
+                        <p>Below the four key filters, a few additional options can be interacted with. In the Enterprise domain, MITRE ATT&CK have offered a more granular view of a parent attack technique through sub-techniques. This can either be included or excluded from the Assessment.</p>
                         
-                        <p> Some attack Technqiues do not belong to specific Malware/Threat Groups and are included by default in the 
-                        assessment. It is recommended that it is included to gain a wider perspective of your Defensive coverage.</p>
-                        <p>The Tolerance Level is critical to providing an assessment relavent to yourself. This defines how Risk
-                            Scores will be calculated. For more information and additional options regarding these calculations press 
-                            the Question button on the Filter page.
+                        <p>Some attack technqiues do not belong to specific Malware/Threat Groups and are included by default in the assessment. It is recommended that it is included to gain a wider and complete perspective of your Defensive Coverage.</p>
+
+                        <p>The Mitigation Tolerance Level is critical to providing an analysis relavent to yourself. This defines how the overall score per technique will be calculated. For more in-depth information and additional options regarding this press the Question button.
                         </p>
 
                     </div>
@@ -144,33 +128,24 @@
                 <div class="row">
                     <div class="col-12 mb-5">
                         <p>
-                            After filtering, the main assessment can now begin. You will encounter the similar style seen in the 
-                            image for every Threat Technique that has been found based on your applied filters. In the top portion,
-                            the Technique name and ID are displayed with a question mark linking to its dedicated page on MITRE ATT&CK.
+                            After filtering, the main assessment will now begin. You will encounter the similar style seen in the image for every Technique that has been found based on your applied filters. In the top portion,the Technique name and ID are displayed with a question mark linking to its dedicated page on MITRE ATT&CK.
                         </p>
                         <p>
-                            Below, the Risk Score is shown that will be updated live, relfecting inputted data into the Mitigations table.
-                            The Next and Back buttons are used to move onto differnet attack Techniques and the Real World Example highlights 
-                            any examples of that technique in the wild with URLs to webpages that have reported it.
-                            The paragraph below the `Found in tactics..` statement is a description of that attack technique.
+                            Below, the Score is shown that will be updated live, relfecting inputted data into the Mitigations table.
+                            The Next and Back buttons are used to move onto differnet attack techniques and the Real-World Example highlights any articles that document its use in the wild.
+                            The paragraph below the `Found in tactics...` statement is a description of that attack technique.
                         </p>
                         <p>
-                            Each row in the Mitigation table represents a single Mitigation. For each mitigation, the 
-                            Risk Assessor or wider group participating in the assessment must first define an Impact Level.
-                            The Impact Level represents how well you believe that Mitigation will mitigate the attack technique.
-                            In the case that it flawlessly mitigates the technique a score of 10 can be assigned. The scores available
-                            are 0,2,4,6,8,10. In the case, that you believe a mitigation will have no impact a score of 0 can be 
-                            assigned.
+                            Each row in the Mitigation table represents a single Mitigation. For each mitigation, the Risk Assessor or wider group participating in the assessment must first define a Positive Impact level.
+                            The Impact Level represents how well you believe that Mitigation will mitigate that attack technique.
+                            In the case that it flawlessly mitigates the technique a score of 10 can be assigned. The scores available are 0,2,4,6,8,10. In the case, that you believe a mitigation will have no impact a score of 0 can be assigned.
                         </p>
                         <p>
-                            When an Impact Level is defined, the Confidence Level can now be assessed. THe confidence level is used
-                            to represent your implementation of that mitigation in your infrastructure; how well and confident are you 
-                            in that implementation?
+                            When the positive impact level is defined, the Implementation Confidence Level can now be assessed. The confidence level is used to represent your implementation of that mitigation in your infrastructure and processes; how confident are you in your implementation or are their further improvements you could make thus lowering your Confidence percentage? It is recommended to make notes throughout this process to document your reasoning.
                         </p>
                         <p>
-                            Once defined for every Mitigation, you can now progress onto the following Technique through the Next button
-                            If a mitigation already filled in is present as a mitigation for another ATT&CK Technique this will be auto-filled,
-                            with your previous scores and notes. If overwritten this will not overwrite your previous content of that mitgation.
+                            Once defined for every Mitigation, you can now progress onto the following Technique through the Next button.
+                            If a mitigation filled in in a previous technique is present as a mitigation for another ATT&CK Technique this will be auto filled, with your previous scores and notes. If overwritten this will not overwrite your previous content of that mitgation.
                         </p>
                     </div>
                     <div class="col-12">
@@ -182,9 +157,7 @@
                 <div class="row">
                     <div class="col-3">
                         <p>
-                            Upon analysing each Attack technqiue, a graphical matrix will be shown, through the use of MITRE ATT&CK 
-                            Navigator, and highlight potential areas of weakness in your infrastructure. It is possible to access
-                            all your comments and view your Risk Scores for each technique.
+                            Upon analysing each Attack technqiue, a graphical matrix will be shown, through use of MITRE ATT&CK Navigator, and highlight potential areas of weakness in your domain. It is possible to access all your comments and view your Scores for each technique.
                         </p>
                     </div>
                     <div class="col-9">
@@ -193,8 +166,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        The Generate Documentation button will compile all your inputted information into a single PDF that can be
-                        used to document and outline a plan going forwards as to how your defensive posture can be improved.
+                        The Generate Documentation button will compile all your inputted information into a single PDF that can be used to document and outline a plan going forwards as to how your defensive posture can be improved.
                     </div>
                 </div>
                 <div class="row">

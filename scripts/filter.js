@@ -2,6 +2,7 @@ var high = []
 var medium = []
 var low = []
 
+
 for (i=0; i <= 30; i=i+0.5){
             point = [i,(100/Math.sqrt(30))*Math.sqrt(i),(100/30)*i,(100/Math.pow(30,2))*(Math.pow(i,2))]
             high.push({ser1: i, ser2: (100/Math.sqrt(30))*Math.sqrt(i)})
@@ -34,7 +35,7 @@ svg.append("text")
 .attr("text-anchor", "end")
 .attr("x", width)
 .attr("y", height - 6)
-.text("Sum (Impact * Confidence Level)");
+.text("ƒ (Positive Impact, Confidence Level)");
 
 svg.append("text")
     .attr("class", "y label")
@@ -42,13 +43,16 @@ svg.append("text")
     .attr("y", 6)
     .attr("dy", ".75em")
     .attr("transform", "rotate(-90)")
-    .text("Risk Score");
+    .text("Score");
 
 // Initialize an Y axis
 var y = d3.scaleLinear().range([height, 0]);
 var yAxis = d3.axisLeft().scale(y);
 svg.append("g")
   .attr("class","myYaxis")
+
+
+
 function update(data) {
 
     // Create the X axis:

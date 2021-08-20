@@ -339,6 +339,6 @@ function saveProgress(){
     });
     const url = URL.createObjectURL(blob);
     download.href = url;
-    download.download = "MitreTxASave.json";
+    download.download = "RiskBloX-Save.json";
     download.click();
 }

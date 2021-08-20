@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RiskAssess</title>
+    <title>RiskBloX</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/bootstrap-multiselect.css" type="text/css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
@@ -34,12 +34,6 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav nav ms-auto text-center">
-                    <!-- <li class="nav-tem">
-                        <a href="https://riskblox.auth.eu-west-1.amazoncognito.com/login?client_id=3kr61qq6dpfs0c87t322m3ojth&response_type=code&scope=email+openid+profile+aws.cognito.signin.user.admin&redirect_uri=https://riskblox.2t-security.co.uk/html/authorize" class="badge badge-pill badge-light">
-                            <i class="fas fa-sign-in-alt fa-2x"></i>
-                            Sign In
-                        </a>
-                    </li> -->
                     <li class="nav-tem">
                         <a href="https://riskblox.auth.eu-west-1.amazoncognito.com/logout?client_id=3kr61qq6dpfs0c87t322m3ojth&logout_uri=https://riskblox.2t-security.co.uk/html/sign-out" class="badge badge-pill badge-light">
                             <i class="fas fa-sign-out-alt fa-2x"></i>
@@ -126,12 +120,12 @@
             <div class="col-md-2 offset-md-5">
                 <div class="form-check mb-3">
                     <label class="form-check-label" for="includeSubTech">Include Sub-Techniques? (Disbabled temporarily)</label>
-                    <input class="form-check-input" value="" type="checkbox" id="includeSubTech">
+                    <input class="form-check-input" value="" type="checkbox" id="includeSubTech" disabled>
                 </div>
 
                 <div class="form-check mb-3">
                     <label class="form-check-label" for="includeNonMappedT">Include Techniques not associated with Threat Groups/Malware?</label>
-                    <input class="form-check-input" value="" type="checkbox" id="includeNonMappedT">
+                    <input class="form-check-input" value="" type="checkbox" id="includeNonMappedT" checked>
                 </div>
                 
             
@@ -159,7 +153,7 @@
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Tolerance Explanation</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Mitigation Tolerance Explanation</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -173,7 +167,14 @@
                     </div>
                     <div class="col-md-6 align-items-center justify-content-center">
                         <p>
-                        Tolerance Level is used to define your Risk Appetite that will affect how the Risk Score for a technique is calculated. The default selection is Medium but if you are Risk Averse it is recommended to select a Low Tolerance Level. In the case of being open to Risk, you are able to represent this by selecting a High Tolerance Level.
+                            Mitigation Tolerance Level is used to adjust how the Technique Score is calculated and is (currently) based off Positive Impact and Implementation Confidence Level.
+                        </p>
+                        <p>
+                            The equation will be defined by taking the ⅀ (Positive Impact levels) and the equation input will be the ⅀(Positive Impact * Implementation Confidence). If all mitigations are implemented with 100%, confidence then the output score will be 100.
+                        </p>
+                        <p>
+                             Two additional customization options are available because of how the calculation is achieved. In the case where the average Positive Impact level is too low (signifying that the suggested mitigations won't mitigate that attack technique sufficently), the total score of 100 should not be achievable otherwise you will have a defensive coverage that will provide a false image.
+                             To overcome this, you can define a threshold level (average Positive Impact) and a score limit that will be applied when the threshold level is breached.
                         </p>
                     </div>
                 </div>

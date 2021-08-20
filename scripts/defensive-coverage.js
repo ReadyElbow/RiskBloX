@@ -86,7 +86,7 @@ function saveProgress(){;
     });
     const url = URL.createObjectURL(blob);
     download.href = url;
-    download.download = "MitreTxASave.json";
+    download.download = "RiskBloX-Save.json";
     download.click();
 }
 
@@ -103,7 +103,7 @@ function generateDocumentation(){
     currentTechnique = fetchIntegers(getCookie("currentTechnique"));
 
     doc.setFontSize(30);
-    doc.text("RiskAssess Report",110,100);
+    doc.text("RiskBloX Report",110,100);
 
     for (let i = 1; i <= currentTechnique; i++){
         technique = JSON.parse(localStorage.getItem("T"+i));
@@ -111,7 +111,7 @@ function generateDocumentation(){
         techniqueName = technique.tid +": "+ technique.technique_name;
         tactics = "Tactics: "+technique.tactic;
         score = technique.score;
-        scoreString = "Risk Score: "+technique.score;
+        scoreString = "Score: "+technique.score;
         doc.addPage("landscape");
         doc.setFontSize(20);
         if (score <= 20){
@@ -142,16 +142,16 @@ function generateDocumentation(){
 
         doc.autoTable({
             startY: lengthText+heightText,
-            columnStyles: {0: {cellWidth: 25}, 1: {cellWidth: 70}, 2: {cellWidth: 70}, 3: {cellWidth: 50}, 4: {cellWidth: 25}, 5: {cellWidth: 25}},
+            columnStyles: {0: {cellWidth: 25}, 1: {cellWidth: 70}, 2: {cellWidth: 70}, 3: {cellWidth: 45}, 4: {cellWidth: 25}, 5: {cellWidth: 30}},
             headStyles: {fillColor: '#0d6efd'},
             theme: 'grid',
             showHead : 'firstPage',
             rowPageBreak: 'avoid',
-            head: [['Name', 'Description', 'Application', 'Notes', 'Impact Level', 'Confidence Score']],
+            head: [['Name', 'Description', 'Application', 'Notes', 'Positive Impact', 'Implementation Confidence']],
             body: bodyRows(technique.mitigations)
           })
     } 
-    doc.save('Mitre_TxA_Report.pdf')
+    doc.save('RiskBloX-Report.pdf')
 }
 
 function bodyRows(mitigations) {
