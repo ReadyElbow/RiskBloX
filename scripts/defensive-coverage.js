@@ -152,6 +152,7 @@ function generateDocumentation(){
             })
         }
     doc.save('RiskBloX-Report.pdf')
+    }
 }
 
 function bodyRows(mitigations) {
