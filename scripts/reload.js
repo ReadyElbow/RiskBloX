@@ -35,16 +35,21 @@ function loadJSON(){
     const reader = new FileReader();
 
     reader.onload = function(event) {
-        let userFile = JSON.parse(event.target.result);
-        cookies = userFile["cookies"].split(";");
-        techniques = userFile["techniques"];
-        for (let i = 0; i < cookies.length; i++){
-            document.cookie = cookies[i];
-        }
-        for (let [key, stringValue] of Object.entries(techniques)){
+    let userFile = JSON.parse(event.target.result);
+    cookies = userFile["cookies"].split(";");
+    techniques = userFile["techniques"];
+    for (let i = 0; i < cookies.length; i++){
+        document.cookie = cookies[i];
+    }
+    for (let [key, stringValue] of Object.entries(techniques)){
+        if (key != "tolerance"){
             localStorage.setItem(key, JSON.stringify(stringValue));
         }
-        window.location.replace("technique-forms.html");
+        else {
+            localStorage.setItem(key, stringValue);
+        }
+    }
+    window.location.replace("technique-forms.html");
     }
     reader.readAsText(userInput);
     

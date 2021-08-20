@@ -66,9 +66,15 @@ function saveProgress(){;
     savedJSON['cookies'] = document.cookie;
     techniques = {}
     for (let [key, stringValue] of Object.entries(localStorage)){
-        if (key != "tolerance"){
-            techniques[key] = JSON.parse(stringValue);
-        }
+        
+        if (key != "userAuth"){
+            if (key != "tolerance"){
+                techniques[key] = JSON.parse(stringValue);
+            }
+            else{
+                techniques[key] = stringValue;
+            }
+        }    
     }
     savedJSON['techniques'] = techniques;
     download = document.createElement('a');
