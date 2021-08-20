@@ -100,57 +100,57 @@ function generateDocumentation(){
     platforms = getCookie("platforms");
     tactics = getCookie("tactics");
     groups = getCookie("groups");
-    currentTechnique = fetchIntegers(getCookie("currentTechnique"));
 
     doc.setFontSize(30);
     doc.text("RiskBloX Report",110,100);
 
-    for (let i = 1; i <= currentTechnique; i++){
-        technique = JSON.parse(localStorage.getItem("T"+i));
-        description = technique.description;
-        techniqueName = technique.tid +": "+ technique.technique_name;
-        tactics = "Tactics: "+technique.tactic;
-        score = technique.score;
-        scoreString = "Score: "+technique.score;
-        doc.addPage("landscape");
-        doc.setFontSize(20);
-        if (score <= 20){
-            doc.setTextColor("#E50000");
-        }
-        else if (score <= 50){
-            doc.setTextColor("#FFA500");
-        }
-        else if(score <= 80){
-            doc.setTextColor("#E5E500");
-        }
-        else if(score <= 100){
-            doc.setTextColor("#008000");
-        }
-        doc.text(techniqueName, 14, 22);
-        doc.setFontSize(18);
-        doc.text(scoreString, 240, 22);
-        doc.setFontSize(11);
-        doc.setTextColor(100);
-        doc.text(tactics, 14,30);
+    for (let [key, stringValue] of Object.entries(localStorage)){
+        if (key.startsWith("T")) {
+            technique = JSON.parse(stringValue);
+            description = technique.description;
+            techniqueName = technique.tid +": "+ technique.technique_name;
+            tactics = "Tactics: "+technique.tactic;
+            score = technique.score;
+            scoreString = "Score: "+technique.score;
+            doc.addPage("landscape");
+            doc.setFontSize(20);
+            if (score <= 20){
+                doc.setTextColor("#E50000");
+            }
+            else if (score <= 50){
+                doc.setTextColor("#FFA500");
+            }
+            else if(score <= 80){
+                doc.setTextColor("#E5E500");
+            }
+            else if(score <= 100){
+                doc.setTextColor("#008000");
+            }
+            doc.text(techniqueName, 14, 22);
+            doc.setFontSize(18);
+            doc.text(scoreString, 240, 22);
+            doc.setFontSize(11);
+            doc.setTextColor(100);
+            doc.text(tactics, 14,30);
 
-        var pageSize = doc.internal.pageSize
-        var pageWidth = pageSize.getWidth()
-        var text = doc.splitTextToSize(description, pageWidth - 35, {})
-        lengthText = doc.getTextDimensions(text).h;
-        heightText = 35
-        doc.text(text, 14, heightText)
+            var pageSize = doc.internal.pageSize
+            var pageWidth = pageSize.getWidth()
+            var text = doc.splitTextToSize(description, pageWidth - 35, {})
+            lengthText = doc.getTextDimensions(text).h;
+            heightText = 35
+            doc.text(text, 14, heightText)
 
-        doc.autoTable({
-            startY: lengthText+heightText,
-            columnStyles: {0: {cellWidth: 25}, 1: {cellWidth: 70}, 2: {cellWidth: 70}, 3: {cellWidth: 45}, 4: {cellWidth: 25}, 5: {cellWidth: 30}},
-            headStyles: {fillColor: '#0d6efd'},
-            theme: 'grid',
-            showHead : 'firstPage',
-            rowPageBreak: 'avoid',
-            head: [['Name', 'Description', 'Application', 'Notes', 'Positive Impact', 'Implementation Confidence']],
-            body: bodyRows(technique.mitigations)
-          })
-    } 
+            doc.autoTable({
+                startY: lengthText+heightText,
+                columnStyles: {0: {cellWidth: 25}, 1: {cellWidth: 70}, 2: {cellWidth: 70}, 3: {cellWidth: 45}, 4: {cellWidth: 25}, 5: {cellWidth: 30}},
+                headStyles: {fillColor: '#0d6efd'},
+                theme: 'grid',
+                showHead : 'firstPage',
+                rowPageBreak: 'avoid',
+                head: [['Name', 'Description', 'Application', 'Notes', 'Positive Impact', 'Implementation Confidence']],
+                body: bodyRows(technique.mitigations)
+            })
+        }
     doc.save('RiskBloX-Report.pdf')
 }
 
