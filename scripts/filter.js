@@ -167,9 +167,9 @@ function addPost(){
 
 //Fetching TechniqueMitigation data
 function redirect(){
-  localStorage.setItem("scoreCap", document.getElementById("scoreCap").value);
+  localStorage.setItem("scoreCap", document.getElementById("scoreCap").selected);
   localStorage.setItem("tolerance", document.getElementById("tolerance").value);
-  localStorage.setItem("impactThreshold", document.getElementById("impactThreshold").value);
+  localStorage.setItem("impactThreshold", document.getElementById("impactThreshold").selected);
   
   document.getElementById('loading').removeAttribute('hidden');
   let domain = getCookie("domain");
