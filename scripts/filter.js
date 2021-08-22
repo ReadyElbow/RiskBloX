@@ -114,10 +114,10 @@ function addPost(){
     .then(statusBody => {
         var data = JSON.parse(statusBody.body)
         parse("tacticsList", data.tactics);
-        parse("groupsList", data.groups);
+        parse("groupsList", (data.groups).sort());
         var platforms = get_platforms(domain);
-        parse("platformsList", platforms);
-        parse("malwareList", data.malware);
+        parse("platformsList", platforms.sort());
+        parse("malwareList", (data.malware).sort());
 
 
         function parse(selectID, filterData){
