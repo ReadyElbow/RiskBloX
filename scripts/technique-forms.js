@@ -117,7 +117,7 @@ function displayMitigations(mitigations) {
     var mitigationInformation = document.createElement("td");
     mitigationInformation.innerHTML =
       "Mitigation: " + mitigation_name + " (" + mid + ") ";
-    if (mid.startsWith("D")) {
+    if (mid.startsWith("M")) {
       mitigationInformation.appendChild(mitigationLink);
     }
 
