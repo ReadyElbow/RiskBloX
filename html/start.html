@@ -10,6 +10,7 @@
     <link href="../css/reload.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 </head>
+
 <body>
     <div id="container">
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
@@ -54,23 +55,26 @@
             </div>
         </nav>
     </div>
-    <!--https://dev.to/mdbootstrap/bootstrap-5-popconfirm-167k do on anew to make sure-->
+
     <div class="card text-center">
         <div class="card-body">
-          <h5 class="card-title">Restart or Load analysis</h5>
-          <p class="card-text">Would you like to load an exisiting or restart/start a new analysis?</p>
-          <button type="button" onclick="restart()" class="btn btn-primary">Start anew</button>
-          <button type="button" onclick="loadSession()" class="btn btn-primary">Load from Session</button>
+            <h5 class="card-title">Restart or Load analysis</h5>
+            <p class="card-text">
+                Would you like to load an exisiting or restart/start a new analysis?
+            </p>
+            <button type="button" onclick="restart()" class="btn btn-primary">Start anew</button>
+            <button type="button" onclick="loadSession()" class="btn btn-primary">Load from Session</button>
             <div class="col-md-4 offset-md-4 mt-3">
                 <div class="input-group">
                     <input class="form-control" type="file" id="formFile">
                     <button type="button" class="btn btn-primary" onclick="loadJSON()">Load from JSON</button>
                 </div>
             </div>
-          
         </div>
-      </div>
+    </div>
+    
     <script type="text/javascript" src="../scripts/userAuth.js"></script>
     <script type="text/javascript" src="../scripts/reload.js"></script>
 
 </body>
+</html>
