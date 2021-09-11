@@ -84,8 +84,8 @@ function displayMitigations(mitigations) {
     let mitigationRow = document.createElement("tr");
     let mid = mitigations[i].mid;
     let mitigation_name = mitigations[i].mitigation_name;
-    let description = mitigations[i].description;
-    let application = mitigations[i].application;
+    let description = mitigations[i].description.replace("\\", "-");
+    let application = mitigations[i].application.replace("\\", "-");
     let notes = mitigations[i].notes;
     let confidenceScore = mitigations[i].confidenceScore;
     let impactLevel = mitigations[i].impactLevel;
@@ -103,8 +103,6 @@ function displayMitigations(mitigations) {
     notesStructure.className = "notes";
     let userInput = document.createElement("textarea");
     userInput.className = "textarea";
-    // userInput.cols = "40";
-    // userInput.rows = "8";
     userInput.innerHTML = notes;
 
     //Checking to see if that mitigation alreay exists
