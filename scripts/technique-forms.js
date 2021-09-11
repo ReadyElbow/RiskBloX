@@ -104,9 +104,20 @@ function displayMitigations(mitigations) {
     let confidenceScore = mitigations[i].confidenceScore;
     let impactLevel = mitigations[i].impactLevel;
 
+    mitigationLink = document.createElement("a");
+    mitigationLink.setAttribute(
+      "href",
+      "https://attack.mitre.org/mitigations/" + mid
+    );
+    mitigationLink.target = "_blank";
+    mitigationLinkIcon = document.createElement("i");
+    mitigationLinkIcon.className = "fas fa-question-circle";
+    mitigationLink.appendChild(mitigationLinkIcon);
+
     var mitigationInformation = document.createElement("td");
     mitigationInformation.innerHTML =
       "Mitigation: " + mitigation_name + " (" + mid + ")";
+    mitigationInformation.appendChild(mitigationLink);
 
     var descriptionStructure = mitigationDetail(description);
 
