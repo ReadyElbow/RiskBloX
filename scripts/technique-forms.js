@@ -91,7 +91,7 @@ function displayMitigations(mitigations) {
           return "Link";
         },
       }
-    );
+    ).replace(/\).Monitor/g, "");
     let application = linkifyHtml(
       mitigations[i].application.replace(/\\/g, "-"),
       {
@@ -99,7 +99,7 @@ function displayMitigations(mitigations) {
           return "Link";
         },
       }
-    );
+    ).replace(/\).Monitor/g, "");
     let notes = mitigations[i].notes;
     let confidenceScore = mitigations[i].confidenceScore;
     let impactLevel = mitigations[i].impactLevel;
