@@ -84,14 +84,8 @@ function displayMitigations(mitigations) {
     let mitigationRow = document.createElement("tr");
     let mid = mitigations[i].mid;
     let mitigation_name = mitigations[i].mitigation_name;
-    let description = mitigations[i].description.replace(
-      String.fromCharCode(92),
-      "-"
-    );
-    let application = mitigations[i].application.replace(
-      String.fromCharCode(92),
-      "-"
-    );
+    let description = mitigations[i].description.replace(/\\/g, "-");
+    let application = mitigations[i].application.replace(/\\/g, "-");
     let notes = mitigations[i].notes;
     let confidenceScore = mitigations[i].confidenceScore;
     let impactLevel = mitigations[i].impactLevel;
