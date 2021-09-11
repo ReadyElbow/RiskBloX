@@ -103,8 +103,8 @@ function displayMitigations(mitigations) {
     notesStructure.className = "notes";
     let userInput = document.createElement("textarea");
     userInput.className = "textarea";
-    userInput.cols = "40";
-    userInput.rows = "8";
+    // userInput.cols = "40";
+    // userInput.rows = "8";
     userInput.innerHTML = notes;
 
     //Checking to see if that mitigation alreay exists
