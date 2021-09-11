@@ -236,8 +236,6 @@ function redirect() {
     threatNames,
     includeNonMappedT
   ).then(([attackPatterns, threatGroupIDs, malwareIDs]) => {
-    console.log(threatGroupIDs);
-    console.log(malwareIDs);
     malwareGroupIDs = threatGroupIDs.malwareGroupIDs.concat(
       malwareIDs.malwareGroupIDs
     );
@@ -264,7 +262,6 @@ function redirect() {
             objects[i].filteredAttackPatterns
           );
         }
-        console.log(completeTechniqueObject);
         for (let i = 0; i < completeTechniqueObject.length; i++) {
           localStorage.setItem(
             "T" + (i + 1),
