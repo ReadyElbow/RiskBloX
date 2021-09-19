@@ -256,7 +256,7 @@ function redirect() {
             });
             fetchTechniqueMitigationObj(domain, filterAttacks).then(
                 (objects) => {
-                    let completeTechniqueObject = [];
+                    var completeTechniqueObject = [];
                     for (let i = 0; i < objects.length; i++) {
                         completeTechniqueObject =
                             completeTechniqueObject.concat(
@@ -270,7 +270,7 @@ function redirect() {
                         );
                     }
                     document.cookie =
-                        "lastTechnique=" + completeTechniqueObject.length;
+                        "lastTechnique=" + (completeTechniqueObject.length + 1);
                     window.location.replace("technique-forms.html");
                 }
             );
