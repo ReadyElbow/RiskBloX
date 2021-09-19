@@ -25,8 +25,10 @@ function fetchTechnique() {
     if (localStorage.getItem(previousTechnique) == null) {
         backBtn = document.getElementById("back");
         backBtn.disabled = true;
+        backBtn.hidden = true;
         firstBtn = document.getElementById("first");
         firstBtn.disabled = true;
+        firstBtn.hidden = true;
     }
     //Technique Information
     let techniqueHeader = document.createElement("h1");
@@ -70,7 +72,7 @@ function fetchTechnique() {
 
     progress.innerHTML =
         "Technique " +
-        currentTechnique +
+        currentTechnique.replace(/T/g, "") +
         " out of " +
         getCookie("lastTechnique").replace(/T/g, "");
 
