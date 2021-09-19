@@ -124,7 +124,7 @@ function addPost() {
             let data = JSON.parse(statusBody.body);
             parse("tacticsList", data.tactics);
             parse("groupsList", data.groups.sort());
-            let platforms = get_platforms(domain);
+            var platforms = get_platforms(domain);
             parse("platformsList", platforms.sort());
             parse("malwareList", data.malware.sort());
 
