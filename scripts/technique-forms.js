@@ -291,8 +291,7 @@ function nextTechnique() {
         //Have we progressed onto a Fresh technique?
         //We can modify this instead into a list and remove an integer when that is visited!
         if (getCookie("currentTechnique") == getCookie("furthestReachedT")) {
-            document.cookie =
-                "furthestReachedT=" + increDecreString("increment");
+            document.cookie = "furthestReachedT=" + nextTechnique;
         }
         document.cookie = "currentTechnique=" + nextTechnique;
         window.location.reload();
@@ -339,7 +338,7 @@ function updateStorage() {
 function previousTechnique() {
     updateStorage();
     let previousTechnique = increDecreString("decrement");
-    document.cookie = "furthestReachedT=" + increDecreString("increment");
+    //document.cookie = "furthestReachedT=" + increDecreString("increment");
     document.cookie = "currentTechnique=" + previousTechnique;
     window.location.reload();
 }
