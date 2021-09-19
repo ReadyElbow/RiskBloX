@@ -269,6 +269,8 @@ function redirect() {
                             JSON.stringify(completeTechniqueObject[i])
                         );
                     }
+                    document.cookie =
+                        "lastTechnique=" + completeTechniqueObject.length;
                     window.location.replace("technique-forms.html");
                 }
             );

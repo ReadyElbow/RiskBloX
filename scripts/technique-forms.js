@@ -24,7 +24,9 @@ function fetchTechnique() {
 
     if (localStorage.getItem(previousTechnique) == null) {
         backBtn = document.getElementById("back");
-        backBtn.hidden = true;
+        backBtn.disabled = true;
+        firstBtn = document.getElementById("first");
+        firstBtn.disabled = true;
     }
     //Technique Information
     let techniqueHeader = document.createElement("h1");
@@ -64,7 +66,15 @@ function fetchTechnique() {
     techniqueCardBody.append(tacticsListinfo, description);
     document.getElementById("technique-details").append(techniqueCardBody);
 
-    realWorldList = document.getElementById("examples");
+    let progress = document.getElementById("progress");
+
+    progress.innerHTML =
+        "Technique " +
+        currentTechnique +
+        " out of " +
+        getCookie("lastTechnique").replace(/T/g, "");
+
+    var realWorldList = document.getElementById("examples");
     if (realWorld.length > 0) {
         for (i = 0; i < realWorld.length; i++) {
             let article = linkifyHtml(realWorld[i][1], {
@@ -343,8 +353,13 @@ function updateStorage() {
 function previousTechnique() {
     updateStorage();
     let previousTechnique = increDecreString("decrement");
-    //document.cookie = "furthestReachedT=" + increDecreString("increment");
     document.cookie = "currentTechnique=" + previousTechnique;
+    window.location.reload();
+}
+
+function firstTechnique() {
+    updateStorage();
+    document.cookie = "currentTechnique=T1";
     window.location.reload();
 }
 

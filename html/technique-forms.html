@@ -73,12 +73,32 @@
 
     <div class="container-fluid">
         <div id="technique-information" class="mb-5">
-              <div id=technique-header></div>
-              <button id="back" type="button" class="btn btn-primary" onclick="previousTechnique()">Back</button>
-              <button id="next" type="button" class="btn btn-primary" onclick="nextTechnique()">Next</button>     
-              <button id="saveProgress" type="button" class="btn btn-primary" onclick="saveProgress()">Save Progress</button>
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#realExamplesModal">Real-World Examples</button>
-              <div class="card mt-2" style="width: 100%;" id=technique-details></div>
+                <div id=technique-header></div>
+                <!-- <button id="back" type="button" class="btn btn-primary" onclick="previousTechnique()">Back</button>
+                <button id="next" type="button" class="btn btn-primary" onclick="nextTechnique()">Next</button>     
+                <button id="saveProgress" type="button" class="btn btn-primary" onclick="saveProgress()">Save Progress</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#realExamplesModal">Real-World Examples</button> -->
+                <nav aria-label="Technique Navigation">
+                    <ul class="pagination">
+                        <li class="page-item" aria-current="page">
+                            <span class="page-link" id="first" onclick="firstTechnique()">First</span>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" id="back" onclick="previousTechnique()">Back</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" id="next" onclick="nextTechnique()">Next</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" id="saveProgress" onclick="saveProgress()">Save Progress</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" data-bs-toggle="modal" data-bs-target="#realExamplesModal">Real-World Examples</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div style="width: 100%;"><p id="progress"></p></div>
+                <div class="card mt-2" style="width: 100%;" id=technique-details></div>
         </div>
         <h2>Mitigations</h2>
         <div class="table-responsive">
