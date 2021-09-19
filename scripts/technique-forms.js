@@ -67,8 +67,13 @@ function fetchTechnique() {
     realWorldList = document.getElementById("examples");
     if (realWorld.length > 0) {
         for (i = 0; i < realWorld.length; i++) {
+            let article = linkifyHtml(realWorld[i][1], {
+                format: function (value, type) {
+                    return "Reference";
+                },
+            });
             listItem = document.createElement("li");
-            listItem.innerHTML = realWorld[i][0] + "; " + realWorld[i][1];
+            listItem.innerHTML = realWorld[i][0] + ":" + article;
             realWorldList.appendChild(listItem);
         }
     } else {
