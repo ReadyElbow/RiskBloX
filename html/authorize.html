@@ -1,33 +1,27 @@
 <script>
-  var urlParams = new URLSearchParams(window.location.search);
+    var urlParams = new URLSearchParams(window.location.search);
 
-  var myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
-  var urlencoded = new URLSearchParams();
-  urlencoded.append("grant_type", "authorization_code");
-  urlencoded.append("client_id", "3kr61qq6dpfs0c87t322m3ojth");
-  urlencoded.append("code", urlParams.get("code"));
-  urlencoded.append(
-    "redirect_uri",
-    "https://riskblox.2t-security.co.uk/html/authorize"
-  );
+    var urlencoded = new URLSearchParams();
+    urlencoded.append("grant_type", "authorization_code");
+    urlencoded.append("client_id", "3kr61qq6dpfs0c87t322m3ojth");
+    urlencoded.append("code", urlParams.get("code"));
+    urlencoded.append("redirect_uri", "https://riskblox.2t-security.co.uk/authorize");
 
-  var requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body: urlencoded,
-    redirect: "follow",
-  };
+    var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: urlencoded,
+        redirect: "follow",
+    };
 
-  fetch(
-    "https://riskblox.auth.eu-west-1.amazoncognito.com/oauth2/token",
-    requestOptions
-  )
-    .then((response) => response.text())
-    .then((result) => {
-      localStorage.setItem("userAuth", result);
-      window.location.replace("/html/index.html");
-    })
-    .catch((error) => console.log("error", error));
+    fetch("https://riskblox.auth.eu-west-1.amazoncognito.com/oauth2/token", requestOptions)
+        .then((response) => response.text())
+        .then((result) => {
+            localStorage.setItem("userAuth", result);
+            window.location.replace("/");
+        })
+        .catch((error) => console.log("error", error));
 </script>

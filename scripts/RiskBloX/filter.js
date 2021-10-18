@@ -100,10 +100,7 @@ function addPost() {
     document.cookie = "domain=" + domain;
 
     var myHeaders = new Headers();
-    myHeaders.append(
-        "Authorization",
-        JSON.parse(localStorage.getItem("userAuth")).id_token
-    );
+    myHeaders.append("Authorization", JSON.parse(localStorage.getItem("userAuth")).id_token);
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({ domain: domain });
@@ -115,10 +112,7 @@ function addPost() {
         redirect: "follow",
     };
 
-    fetch(
-        "https://sdf10urdoe.execute-api.eu-west-1.amazonaws.com/RiskBloXProd/fetchfilters",
-        requestOptions
-    )
+    fetch("https://sdf10urdoe.execute-api.eu-west-1.amazonaws.com/RiskBloXProd/fetchfilters", requestOptions)
         .then((response) => response.json())
         .then((statusBody) => {
             let data = JSON.parse(statusBody.body);
@@ -182,9 +176,7 @@ function addPost() {
                 }
             }
             document.getElementById("domainDiv").remove();
-            document
-                .getElementById("additionalFilters")
-                .removeAttribute("hidden");
+            document.getElementById("additionalFilters").removeAttribute("hidden");
             document.querySelector(".box");
             update(medium);
         })
@@ -193,18 +185,9 @@ function addPost() {
 
 //Fetching TechniqueMitigation data
 function redirect() {
-    localStorage.setItem(
-        "scoreLimit",
-        document.getElementById("scoreLimit").value
-    );
-    localStorage.setItem(
-        "tolerance",
-        document.getElementById("tolerance").value
-    );
-    localStorage.setItem(
-        "impactThreshold",
-        document.getElementById("impactThreshold").value
-    );
+    localStorage.setItem("scoreLimit", document.getElementById("scoreLimit").value);
+    localStorage.setItem("tolerance", document.getElementById("tolerance").value);
+    localStorage.setItem("impactThreshold", document.getElementById("impactThreshold").value);
 
     document.getElementById("loading").removeAttribute("hidden");
     let domain = getCookie("domain");
@@ -213,8 +196,7 @@ function redirect() {
     let platforms = $("#platformsList").val();
     let malwareNames = $("#malwareList").val();
     let includeSub = false; //document.getElementById('includeSubTech').checked;
-    let includeNonMappedT =
-        document.getElementById("includeNonMappedT").checked;
+    let includeNonMappedT = document.getElementById("includeNonMappedT").checked;
 
     document.cookie = "tactics=" + tactics;
     document.cookie = "groups=" + threatNames;
@@ -224,58 +206,34 @@ function redirect() {
     document.cookie = "currentTechnique=T1;";
     document.cookie = "furthestReachedT=T1;";
 
-    getMalwareThreatAttackPatterns(
-        domain,
-        platforms,
-        tactics,
-        includeSub,
-        malwareNames,
-        threatNames,
-        includeNonMappedT
-    ).then(([attackPatterns, threatGroupIDs, malwareIDs]) => {
-        malwareGroupIDs = threatGroupIDs.malwareGroupIDs.concat(
-            malwareIDs.malwareGroupIDs
-        );
-        getFilteredAttackPatterns(
-            domain,
-            malwareGroupIDs,
-            attackPatterns.attackPatterns,
-            includeNonMappedT
-        ).then((objects) => {
-            //Completely Filtered Attack Patterns
-            let filterAttacks = [];
-            for (let i = 0; i < objects.length; i++) {
-                filterAttacks = filterAttacks.concat(
-                    objects[i].filteredAttackPatterns
-                );
-            }
-            filterAttacks.sort((a, b) => {
-                let aParse = numericAttackPattern(a, domain);
-                let bParse = numericAttackPattern(b, domain);
-                return aParse - bParse;
-            });
-            fetchTechniqueMitigationObj(domain, filterAttacks).then(
-                (objects) => {
+    getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub, malwareNames, threatNames, includeNonMappedT).then(
+        ([attackPatterns, threatGroupIDs, malwareIDs]) => {
+            malwareGroupIDs = threatGroupIDs.malwareGroupIDs.concat(malwareIDs.malwareGroupIDs);
+            getFilteredAttackPatterns(domain, malwareGroupIDs, attackPatterns.attackPatterns, includeNonMappedT).then((objects) => {
+                //Completely Filtered Attack Patterns
+                let filterAttacks = [];
+                for (let i = 0; i < objects.length; i++) {
+                    filterAttacks = filterAttacks.concat(objects[i].filteredAttackPatterns);
+                }
+                filterAttacks.sort((a, b) => {
+                    let aParse = numericAttackPattern(a, domain);
+                    let bParse = numericAttackPattern(b, domain);
+                    return aParse - bParse;
+                });
+                fetchTechniqueMitigationObj(domain, filterAttacks).then((objects) => {
                     var completeTechniqueObject = [];
                     for (let i = 0; i < objects.length; i++) {
-                        completeTechniqueObject =
-                            completeTechniqueObject.concat(
-                                objects[i].filteredAttackPatterns
-                            );
+                        completeTechniqueObject = completeTechniqueObject.concat(objects[i].filteredAttackPatterns);
                     }
                     for (let i = 0; i < completeTechniqueObject.length; i++) {
-                        localStorage.setItem(
-                            "T" + (i + 1),
-                            JSON.stringify(completeTechniqueObject[i])
-                        );
+                        localStorage.setItem("T" + (i + 1), JSON.stringify(completeTechniqueObject[i]));
                     }
-                    document.cookie =
-                        "lastTechnique=" + (completeTechniqueObject.length + 1);
-                    window.location.replace("technique-forms.html");
-                }
-            );
-        });
-    });
+                    document.cookie = "lastTechnique=" + (completeTechniqueObject.length + 1);
+                    window.location.href = "/RiskBloX/technique-form";
+                });
+            });
+        }
+    );
 }
 
 function numericAttackPattern(attackPatten, domain) {
@@ -294,14 +252,7 @@ function numericAttackPattern(attackPatten, domain) {
     return 1;
 }
 
-function getMalwareThreatAttackPatterns(
-    domain,
-    platforms,
-    tactics,
-    includeSub,
-    malwareNames,
-    threatNames
-) {
+function getMalwareThreatAttackPatterns(domain, platforms, tactics, includeSub, malwareNames, threatNames) {
     return Promise.all([
         getRelevantAttackPatterns(domain, platforms, tactics, includeSub),
         getMalwareThreatID(domain, threatNames, "threatGroup"),
@@ -311,10 +262,7 @@ function getMalwareThreatAttackPatterns(
 
 function getRelevantAttackPatterns(domain, platforms, tactics, includeSub) {
     var myHeaders = new Headers();
-    myHeaders.append(
-        "Authorization",
-        JSON.parse(localStorage.getItem("userAuth")).id_token
-    );
+    myHeaders.append("Authorization", JSON.parse(localStorage.getItem("userAuth")).id_token);
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
@@ -330,18 +278,14 @@ function getRelevantAttackPatterns(domain, platforms, tactics, includeSub) {
         body: raw,
         redirect: "follow",
     };
-    return fetch(
-        "https://sdf10urdoe.execute-api.eu-west-1.amazonaws.com/RiskBloXProd/data/fetchrelevantattackpatterns",
-        requestOptions
-    ).then((res) => res.json());
+    return fetch("https://sdf10urdoe.execute-api.eu-west-1.amazonaws.com/RiskBloXProd/data/fetchrelevantattackpatterns", requestOptions).then((res) =>
+        res.json()
+    );
 }
 
 function getMalwareThreatID(domain, malwareThreatGNames, malwareOrThreatG) {
     var myHeaders = new Headers();
-    myHeaders.append(
-        "Authorization",
-        JSON.parse(localStorage.getItem("userAuth")).id_token
-    );
+    myHeaders.append("Authorization", JSON.parse(localStorage.getItem("userAuth")).id_token);
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
@@ -355,23 +299,14 @@ function getMalwareThreatID(domain, malwareThreatGNames, malwareOrThreatG) {
         body: raw,
         redirect: "follow",
     };
-    return fetch(
-        "https://sdf10urdoe.execute-api.eu-west-1.amazonaws.com/RiskBloXProd/data/fetchmalwaregroupids",
-        requestOptions
-    ).then((res) => res.json());
+    return fetch("https://sdf10urdoe.execute-api.eu-west-1.amazonaws.com/RiskBloXProd/data/fetchmalwaregroupids", requestOptions).then((res) =>
+        res.json()
+    );
 }
 
-function filterAttackPatterns(
-    domain,
-    malwareThreatIDs,
-    attackPatterns,
-    includeNonMappedT
-) {
+function filterAttackPatterns(domain, malwareThreatIDs, attackPatterns, includeNonMappedT) {
     var myHeaders = new Headers();
-    myHeaders.append(
-        "Authorization",
-        JSON.parse(localStorage.getItem("userAuth")).id_token
-    );
+    myHeaders.append("Authorization", JSON.parse(localStorage.getItem("userAuth")).id_token);
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
@@ -387,17 +322,13 @@ function filterAttackPatterns(
         body: raw,
         redirect: "follow",
     };
-    return fetch(
-        "https://sdf10urdoe.execute-api.eu-west-1.amazonaws.com/RiskBloXProd/data/filterbymalwaregroupids",
-        requestOptions
-    ).then((res) => res.json());
+    return fetch("https://sdf10urdoe.execute-api.eu-west-1.amazonaws.com/RiskBloXProd/data/filterbymalwaregroupids", requestOptions).then((res) =>
+        res.json()
+    );
 }
 function techniqueMitigationObjects(domain, attackPatterns) {
     var myHeaders = new Headers();
-    myHeaders.append(
-        "Authorization",
-        JSON.parse(localStorage.getItem("userAuth")).id_token
-    );
+    myHeaders.append("Authorization", JSON.parse(localStorage.getItem("userAuth")).id_token);
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
@@ -411,10 +342,9 @@ function techniqueMitigationObjects(domain, attackPatterns) {
         body: raw,
         redirect: "follow",
     };
-    return fetch(
-        "https://sdf10urdoe.execute-api.eu-west-1.amazonaws.com/RiskBloXProd/data/createtechniquemitigationobjects",
-        requestOptions
-    ).then((res) => res.json());
+    return fetch("https://sdf10urdoe.execute-api.eu-west-1.amazonaws.com/RiskBloXProd/data/createtechniquemitigationobjects", requestOptions).then(
+        (res) => res.json()
+    );
 }
 
 function fetchTechniqueMitigationObj(domain, attackPatterns) {
@@ -461,107 +391,32 @@ function fetchTechniqueMitigationObj(domain, attackPatterns) {
     }
 }
 
-function getFilteredAttackPatterns(
-    domain,
-    malwareThreatIDs,
-    attackPatterns,
-    includeNonMappedT
-) {
+function getFilteredAttackPatterns(domain, malwareThreatIDs, attackPatterns, includeNonMappedT) {
     if (attackPatterns.length < 100) {
         splitattackPatterns = chunkArray(attackPatterns, 2);
         return Promise.all([
-            filterAttackPatterns(
-                domain,
-                malwareThreatIDs,
-                splitattackPatterns[0],
-                includeNonMappedT
-            ),
-            filterAttackPatterns(
-                domain,
-                malwareThreatIDs,
-                splitattackPatterns[1],
-                includeNonMappedT
-            ),
+            filterAttackPatterns(domain, malwareThreatIDs, splitattackPatterns[0], includeNonMappedT),
+            filterAttackPatterns(domain, malwareThreatIDs, splitattackPatterns[1], includeNonMappedT),
         ]);
     } else if (attackPatterns.length < 200) {
         splitattackPatterns = chunkArray(attackPatterns, 5);
         return Promise.all([
-            filterAttackPatterns(
-                domain,
-                malwareThreatIDs,
-                splitattackPatterns[0],
-                includeNonMappedT
-            ),
-            filterAttackPatterns(
-                domain,
-                malwareThreatIDs,
-                splitattackPatterns[1],
-                includeNonMappedT
-            ),
-            filterAttackPatterns(
-                domain,
-                malwareThreatIDs,
-                splitattackPatterns[2],
-                includeNonMappedT
-            ),
-            filterAttackPatterns(
-                domain,
-                malwareThreatIDs,
-                splitattackPatterns[3],
-                includeNonMappedT
-            ),
-            filterAttackPatterns(
-                domain,
-                malwareThreatIDs,
-                splitattackPatterns[4],
-                includeNonMappedT
-            ),
+            filterAttackPatterns(domain, malwareThreatIDs, splitattackPatterns[0], includeNonMappedT),
+            filterAttackPatterns(domain, malwareThreatIDs, splitattackPatterns[1], includeNonMappedT),
+            filterAttackPatterns(domain, malwareThreatIDs, splitattackPatterns[2], includeNonMappedT),
+            filterAttackPatterns(domain, malwareThreatIDs, splitattackPatterns[3], includeNonMappedT),
+            filterAttackPatterns(domain, malwareThreatIDs, splitattackPatterns[4], includeNonMappedT),
         ]);
     } else {
         splitattackPatterns = chunkArray(attackPatterns, 7);
         return Promise.all([
-            filterAttackPatterns(
-                domain,
-                malwareThreatIDs,
-                splitattackPatterns[0],
-                includeNonMappedT
-            ),
-            filterAttackPatterns(
-                domain,
-                malwareThreatIDs,
-                splitattackPatterns[1],
-                includeNonMappedT
-            ),
-            filterAttackPatterns(
-                domain,
-                malwareThreatIDs,
-                splitattackPatterns[2],
-                includeNonMappedT
-            ),
-            filterAttackPatterns(
-                domain,
-                malwareThreatIDs,
-                splitattackPatterns[3],
-                includeNonMappedT
-            ),
-            filterAttackPatterns(
-                domain,
-                malwareThreatIDs,
-                splitattackPatterns[4],
-                includeNonMappedT
-            ),
-            filterAttackPatterns(
-                domain,
-                malwareThreatIDs,
-                splitattackPatterns[5],
-                includeNonMappedT
-            ),
-            filterAttackPatterns(
-                domain,
-                malwareThreatIDs,
-                splitattackPatterns[6],
-                includeNonMappedT
-            ),
+            filterAttackPatterns(domain, malwareThreatIDs, splitattackPatterns[0], includeNonMappedT),
+            filterAttackPatterns(domain, malwareThreatIDs, splitattackPatterns[1], includeNonMappedT),
+            filterAttackPatterns(domain, malwareThreatIDs, splitattackPatterns[2], includeNonMappedT),
+            filterAttackPatterns(domain, malwareThreatIDs, splitattackPatterns[3], includeNonMappedT),
+            filterAttackPatterns(domain, malwareThreatIDs, splitattackPatterns[4], includeNonMappedT),
+            filterAttackPatterns(domain, malwareThreatIDs, splitattackPatterns[5], includeNonMappedT),
+            filterAttackPatterns(domain, malwareThreatIDs, splitattackPatterns[6], includeNonMappedT),
         ]);
     }
 }

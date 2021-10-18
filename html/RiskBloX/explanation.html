@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+            integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+            crossorigin="anonymous"
+        />
+        <link href="/css/global.css" rel="stylesheet" text="text/css" />
+    </head>
+
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+                <div class="container-fluid">
+                    <img src="/images/riskblox-logo.png" width="45" height="40" />
+                    <a class="navbar-brand" href="#">RiskBloX</a>
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#toggleMenu"
+                        aria-controls="toggleMenu"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="toggleMenu">
+                        <ul class="navbar-nav nav me-auto text-center">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    RiskBloX Analysis
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="/RiskBloX/explanation">Introduction</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider" />
+                                    </li>
+                                    <li><a class="dropdown-item" href="/RiskBloX/start">Mitigate</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    BIRA
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="#">Introduction</a></li>
+                                    <li><a class="dropdown-item" href="#">Create BIRA Template</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider" />
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">BIRA</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://attack.mitre.org/" target="_blank">MITRE ATT&CK</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://mitre-attack.github.io/attack-navigator/" target="_blank">MITRE ATT&CK Navigator</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav nav ms-auto text-center">
+                            <li class="nav-item">
+                                <a
+                                    href="
+                                                https://riskblox.auth.eu-west-1.amazoncognito.com/logout?client_id=3kr61qq6dpfs0c87t322m3ojth&logout_uri=https://riskblox.2t-security.co.uk/sign-out"
+                                    class="badge badge-pill badge-light"
+                                >
+                                    <i class="fas fa-sign-out-alt fa-2x"></i>
+                                    Sign Out
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/ReadyElbow/RiskBloX" target="_blank" class="badge badge-pill badge-light">
+                                    <i class="fab fa-github fa-2x"></i> Website/API Repo
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/mitre-attack/attack-navigator" target="_blank" class="badge badge-pill badge-light">
+                                    <i class="fab fa-github fa-2x"></i> Navigator Repo
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <div class="container-fluid">
+                <section id="about">
+                    <div class="container mb-5">
+                        <p>
+                            This tool uses MITRE's documented Attack Techniques and associated Mitigations to provide an alternative Risk Management
+                            tool that can be conducted on Enterprise, Mobile or Industrial Control System Infrastructures. In this short explanation,
+                            the 4-stage process is described. If not required, access the Mitigate page in the navigation bar to begin.
+                        </p>
+                    </div>
+                </section>
+
+                <div class="container my-20">
+                    <ul class="nav nav-tabs nav-fill mb-5" id="myTab" role="tablist">
+                        <li class="nav-item mb-1" role="presentation">
+                            <button
+                                class="nav-link active"
+                                id="stage1-tab"
+                                data-bs-toggle="tab"
+                                data-bs-target="#stage1"
+                                type="button"
+                                role="tab"
+                                aria-controls="#stage1"
+                                aria-selected="true"
+                            >
+                                Stage 1: Start/Load
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button
+                                class="nav-link"
+                                id="stage2-tab"
+                                data-bs-toggle="tab"
+                                data-bs-target="#stage2"
+                                type="button"
+                                role="tab"
+                                aria-controls="stage2"
+                                aria-selected="false"
+                            >
+                                Stage 2: Filtering
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button
+                                class="nav-link"
+                                id="stage3-tab"
+                                data-bs-toggle="tab"
+                                data-bs-target="#stage3"
+                                type="button"
+                                role="tab"
+                                aria-controls="stage3"
+                                aria-selected="false"
+                            >
+                                Stage 3: Mitigation Information
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button
+                                class="nav-link"
+                                id="stage4-tab"
+                                data-bs-toggle="tab"
+                                data-bs-target="#stage4"
+                                type="button"
+                                role="tab"
+                                aria-controls="stage4"
+                                aria-selected="false"
+                            >
+                                Stage 4: Defensive Coverage/Report
+                            </button>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="#stage1" role="tabpanel" aria-labelledby="stage1-tab">
+                            <div class="row">
+                                <div class="col-6">
+                                    When starting an analysis, you are presented with 3 choices. You can either start a new assessment, reload from
+                                    Local Storage or load in a JSON file that you may have generated during a previous assessment.
+                                </div>
+                                <div class="col-6">
+                                    <img src="/images/RiskBloX/stage-1-loading.png" class="rounded float-end img-thumbnail" alt="..." />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="stage2" role="tabpanel" aria-labelledby="stage2-tab">
+                            <div class="row mb-5">
+                                <div class="col-6">
+                                    <p>
+                                        If in Stage 1 a new analysis is chosen, then a set of filters will be shown. This will initially present you
+                                        with a choice of domain: Enterprise, Mobile or Industrial Control Systems. Once selected and submitted, an
+                                        additional set of relevant filters are displayed.
+                                    </p>
+                                </div>
+                                <div class="col-6">
+                                    <img src="/images/RiskBloX/stage-2-domainChoice.png" class="rounded float-end img-thumbnail" />
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <div class="col-6">
+                                    <img src="/images/RiskBloX/stage-2-additionalFilters.png" class="rounded float-start img-thumbnail" />
+                                </div>
+                                <div class="col-6">
+                                    <p>
+                                        These include Threat Groups (e.g. APT-28), Mitre Tactics (MITRE ATT&CK's method to group related sets of
+                                        Threats e.g. Initial Access), Platforms (e.g. Azure Active Directory, Linux), and Malware/Software (e.g.
+                                        WannaCry). Please note that if you do not wish to filter by a specific area such as Tactics you must Select
+                                        All the options in the dropdown list.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <div class="col-6">
+                                    <p>
+                                        Below the four key filters, a few additional options can be interacted with. In the Enterprise domain, MITRE
+                                        ATT&CK have offered a more granular view of a parent attack technique through sub-techniques. This can either
+                                        be included or excluded from the Assessment.
+                                    </p>
+                                    <p>
+                                        Some attack technqiues do not belong to specific Malware/Threat Groups and are included by default in the
+                                        assessment. It is recommended that it is included to gain a wider and complete perspective of your Defensive
+                                        Coverage.
+                                    </p>
+                                    <p>
+                                        The Mitigation Tolerance Level is critical to providing an analysis relavent to yourself. This defines how the
+                                        overall score per technique will be calculated. For more in-depth information and additional options regarding
+                                        this press the Question button.
+                                    </p>
+                                </div>
+                                <div class="col-6">
+                                    <img src="/images/RiskBloX/stage-2-additionalOptions.png" class="rounded float-start img-thumbnail" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade show" id="stage3" role="tabpanel" aria-labelledby="stage3-tab">
+                            <div class="row">
+                                <div class="col-12 mb-5">
+                                    <p>
+                                        After filtering, the main assessment will now begin. You will encounter the similar style seen in the image
+                                        for every Technique that has been found based on your applied filters. In the top portion,the Technique name
+                                        and ID are displayed with a question mark linking to its dedicated page on MITRE ATT&CK.
+                                    </p>
+                                    <p>
+                                        Below, the Score is shown that will be updated live, relfecting inputted data into the Mitigations table. The
+                                        Next and Back buttons are used to move onto differnet attack techniques and the Real-World Example highlights
+                                        any articles that document its use in the wild. The paragraph below the `Found in tactics...` statement is a
+                                        description of that attack technique.
+                                    </p>
+                                    <p>
+                                        Each row in the Mitigation table represents a single Mitigation. For each mitigation, the Risk Assessor or
+                                        wider group participating in the assessment must first define a Positive Impact level. The Impact Level
+                                        represents how well you believe that Mitigation will mitigate that attack technique. In the case that it
+                                        flawlessly mitigates the technique a score of 10 can be assigned. The scores available are 0,2,4,6,8,10. In
+                                        the case, that you believe a mitigation will have no impact a score of 0 can be assigned.
+                                    </p>
+                                    <p>
+                                        When the positive impact level is defined, the Implementation Confidence Level can now be assessed. The
+                                        confidence level is used to represent your implementation of that mitigation in your infrastructure and
+                                        processes; how confident are you in your implementation or are their further improvements you could make thus
+                                        lowering your Confidence percentage? It is recommended to make notes throughout this process to document your
+                                        reasoning.
+                                    </p>
+                                    <p>
+                                        Once defined for every Mitigation, you can now progress onto the following Technique through the Next button.
+                                        If a mitigation filled in in a previous technique is present as a mitigation for another ATT&CK Technique this
+                                        will be auto filled, with your previous scores and notes. If overwritten this will not overwrite your previous
+                                        content of that mitgation.
+                                    </p>
+                                </div>
+                                <div class="col-12">
+                                    <img
+                                        src="/images/RiskBloX/stage-3-mitigations.png"
+                                        class="rounded float-end img-thumbnail ratio-16x9"
+                                        width="1300"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade show" id="stage4" role="tabpanel" aria-labelledby="stage4-tab">
+                            <div class="row">
+                                <div class="col-3">
+                                    <p>
+                                        Upon analysing each Attack technqiue, a graphical matrix will be shown, through use of MITRE ATT&CK Navigator,
+                                        and highlight potential areas of weakness in your domain. It is possible to access all your comments and view
+                                        your Scores for each technique.
+                                    </p>
+                                </div>
+                                <div class="col-9">
+                                    <img
+                                        src="/images/RiskBloX/stage-4-navigator.png"
+                                        class="rounded float-end img-thumbnail ratio-16x9"
+                                        width="1300"
+                                    />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <p>
+                                        The Generate Documentation button will compile all your inputted information into a single PDF that can be
+                                        used to document and outline a plan going forwards as to how your defensive posture can be improved.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <img src="/images/RiskBloX/stage-4-report.png" class="rounded float-end img-thumbnail ratio-16x9" width="1300" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="container">
+                <p>
+                    &copy;2021 The MITRE Corporation. This work is reproduced and distributed with the permission of The MITRE Corporation.&copy;
+                    2017–2021 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
+                </p>
+            </footer>
+        </main>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"
+        ></script>
+        <script type="text/javascript" src="/scripts/userAuth.js"></script>
+        <script type="text/javascript" src="/scripts/BIRA/loadBIRA.js"></script>
+    </body>
+</html>

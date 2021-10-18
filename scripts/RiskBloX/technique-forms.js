@@ -33,17 +33,13 @@ function fetchTechnique() {
     //Technique Information
     let techniqueHeader = document.createElement("h1");
     techniqueLink = document.createElement("a");
-    techniqueLink.setAttribute(
-        "href",
-        "https://attack.mitre.org/techniques/" + tid
-    );
+    techniqueLink.setAttribute("href", "https://attack.mitre.org/techniques/" + tid);
     techniqueLink.target = "_blank";
     techniqueLinkIcon = document.createElement("i");
     techniqueLinkIcon.className = "fas fa-question-circle";
     techniqueLink.appendChild(techniqueLinkIcon);
 
-    techniqueHeader.innerHTML =
-        "Technique: " + techniqueName + " (" + tid + ")";
+    techniqueHeader.innerHTML = "Technique: " + techniqueName + " (" + tid + ")";
     techniqueHeader.appendChild(techniqueLink);
 
     let techniqueScoreHeader = document.createElement("h2");
@@ -52,9 +48,7 @@ function fetchTechnique() {
     techniqueScore.id = "overallScore";
     techniqueScore.innerHTML = score;
 
-    document
-        .getElementById("technique-header")
-        .append(techniqueHeader, techniqueScoreHeader, techniqueScore);
+    document.getElementById("technique-header").append(techniqueHeader, techniqueScoreHeader, techniqueScore);
 
     let techniqueCardBody = document.createElement("card-body");
 
@@ -70,11 +64,7 @@ function fetchTechnique() {
 
     let progress = document.getElementById("progress");
 
-    progress.innerHTML =
-        "Technique " +
-        currentTechnique.replace(/T/g, "") +
-        " out of " +
-        getCookie("lastTechnique").replace(/T/g, "");
+    progress.innerHTML = "Technique " + currentTechnique.replace(/T/g, "") + " out of " + getCookie("lastTechnique").replace(/T/g, "");
 
     var realWorldList = document.getElementById("examples");
     if (realWorld.length > 0) {
@@ -102,39 +92,29 @@ function displayMitigations(mitigations) {
         let mitigationRow = document.createElement("tr");
         let mid = mitigations[i].mid;
         let mitigation_name = mitigations[i].mitigation_name;
-        let description = linkifyHtml(
-            mitigations[i].description.replace(/\\/g, "-"),
-            {
-                format: function (value, type) {
-                    return "Link";
-                },
-            }
-        ).replace(/\).Monitor/g, "");
-        let application = linkifyHtml(
-            mitigations[i].application.replace(/\\/g, "-"),
-            {
-                format: function (value, type) {
-                    return "Link";
-                },
-            }
-        ).replace(/\).Monitor/g, "");
+        let description = linkifyHtml(mitigations[i].description.replace(/\\/g, "-"), {
+            format: function (value, type) {
+                return "Link";
+            },
+        }).replace(/\).Monitor/g, "");
+        let application = linkifyHtml(mitigations[i].application.replace(/\\/g, "-"), {
+            format: function (value, type) {
+                return "Link";
+            },
+        }).replace(/\).Monitor/g, "");
         let notes = mitigations[i].notes;
         var confidenceScore = mitigations[i].confidenceScore;
         var impactLevel = mitigations[i].impactLevel;
 
         mitigationLink = document.createElement("a");
-        mitigationLink.setAttribute(
-            "href",
-            "https://attack.mitre.org/mitigations/" + mid
-        );
+        mitigationLink.setAttribute("href", "https://attack.mitre.org/mitigations/" + mid);
         mitigationLink.target = "_blank";
         mitigationLinkIcon = document.createElement("i");
         mitigationLinkIcon.className = "fas fa-question-circle";
         mitigationLink.appendChild(mitigationLinkIcon);
 
         let mitigationInformation = document.createElement("td");
-        mitigationInformation.innerHTML =
-            "Mitigation: " + mitigation_name + " (" + mid + ") ";
+        mitigationInformation.innerHTML = "Mitigation: " + mitigation_name + " (" + mid + ") ";
         if (mid.startsWith("M")) {
             mitigationInformation.appendChild(mitigationLink);
         }
@@ -179,8 +159,7 @@ function displayMitigations(mitigations) {
         confidenceStructure = document.createElement("td");
 
         var confidence = document.createElement("select");
-        confidence.className =
-            "form-select form-select-sm mb-3 confidenceScore";
+        confidence.className = "form-select form-select-sm mb-3 confidenceScore";
         confidence.onchange = updateScore;
 
         for (let i = 0; i <= 100; i += 10) {
@@ -197,14 +176,7 @@ function displayMitigations(mitigations) {
         confidenceStructure.append(confidence);
         notesStructure.append(userInput);
 
-        mitigationRow.append(
-            mitigationInformation,
-            descriptionStructure,
-            applicationStructure,
-            notesStructure,
-            impactStructure,
-            confidenceStructure
-        );
+        mitigationRow.append(mitigationInformation, descriptionStructure, applicationStructure, notesStructure, impactStructure, confidenceStructure);
 
         document.getElementById("mitigations").append(mitigationRow);
     }
@@ -219,37 +191,20 @@ function mitigationDetail(information) {
 function updateScore() {
     //var _ = require('lodash');
     //When a Mitigation Confidence Score is added call this and update the global Technique Score
-    let confidenceList = Array.from(
-        document.getElementsByClassName("confidenceScore")
-    ).map((x) => parseInt(x.value));
-    let impactList = Array.from(
-        document.getElementsByClassName("impactLevel")
-    ).map((x) => parseInt(x.value));
+    let confidenceList = Array.from(document.getElementsByClassName("confidenceScore")).map((x) => parseInt(x.value));
+    let impactList = Array.from(document.getElementsByClassName("impactLevel")).map((x) => parseInt(x.value));
 
     //Fetching a list of mitigations that have an impact to the Threat (impactLevel > 0)
     //We reduce such that if an impact exists (>0) then we increase counter by 1 but if its ==0 then we ignore this
-    let impactfulMitigations = impactList.reduce(
-        (sum, current) => (current == 0 ? sum : sum + 1),
-        0
-    );
+    let impactfulMitigations = impactList.reduce((sum, current) => (current == 0 ? sum : sum + 1), 0);
     let totalImpact = impactList.reduce((a, b) => a + b, 0);
 
     if (totalImpact == 0) {
         overallThreatScore = 0;
     } else if (totalImpact / impactfulMitigations >= impactThreshold) {
-        overallThreatScore = equation(
-            100,
-            impactList,
-            confidenceList,
-            totalImpact
-        );
+        overallThreatScore = equation(100, impactList, confidenceList, totalImpact);
     } else if (totalImpact / impactfulMitigations < impactThreshold) {
-        overallThreatScore = equation(
-            scoreCap,
-            impactList,
-            confidenceList,
-            totalImpact
-        );
+        overallThreatScore = equation(scoreCap, impactList, confidenceList, totalImpact);
     }
 
     document.getElementById("overallScore").innerHTML = overallThreatScore;
@@ -303,7 +258,7 @@ function nextTechnique() {
     var nextTechnique = increDecreString("increment");
 
     if (localStorage.getItem(nextTechnique) == null) {
-        window.location.replace("defensive-coverage.html");
+        window.location.href = "/RiskBloX/defensive-coverage";
     } else {
         //Have we progressed onto a Fresh technique?
         //We can modify this instead into a list and remove an integer when that is visited!
@@ -326,28 +281,17 @@ function updateStorage() {
 
     techniqueStorage.score = parseFloat(overallScore.innerHTML);
     for (let i = 0; i < techniqueStorage.mitigations.length; i++) {
-        techniqueStorage.mitigations[i].notes = notes[i].value.replace(
-            /[%&#]/g,
-            ""
-        );
-        techniqueStorage.mitigations[i].impactLevel = parseInt(
-            impactLevel[i].value
-        );
-        techniqueStorage.mitigations[i].confidenceScore = parseInt(
-            confidenceScores[i].value
-        );
+        techniqueStorage.mitigations[i].notes = notes[i].value.replace(/[%&#]/g, "");
+        techniqueStorage.mitigations[i].impactLevel = parseInt(impactLevel[i].value);
+        techniqueStorage.mitigations[i].confidenceScore = parseInt(confidenceScores[i].value);
 
         //Prefill later mitigations --saving functionality
 
         let saveMitigation = {};
         saveMitigation.notes = notes[i].value.replace(/[%&#]/g, "");
-        saveMitigation.confidenceScore =
-            techniqueStorage.mitigations[i].confidenceScore;
+        saveMitigation.confidenceScore = techniqueStorage.mitigations[i].confidenceScore;
         saveMitigation.impactLevel = parseInt(impactLevel[i].value);
-        localStorage.setItem(
-            techniqueStorage.mitigations[i].mid,
-            JSON.stringify(saveMitigation)
-        );
+        localStorage.setItem(techniqueStorage.mitigations[i].mid, JSON.stringify(saveMitigation));
     }
     localStorage.setItem(currentTechnique, JSON.stringify(techniqueStorage));
 }

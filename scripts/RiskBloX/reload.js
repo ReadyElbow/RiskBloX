@@ -8,28 +8,19 @@ function restart() {
     let userAuth = localStorage.getItem("userAuth");
     localStorage.clear();
     localStorage.setItem("userAuth", userAuth);
-    window.location.replace("filter.html");
+    window.location.href = "/RiskBloX/filter";
 }
 
 function loadSession() {
-    var requiredCookies = [
-        "currentTechnique",
-        "subTechnique",
-        "platforms",
-        "groups",
-        "tactics",
-        "domain",
-    ];
+    var requiredCookies = ["currentTechnique", "subTechnique", "platforms", "groups", "tactics", "domain"];
     requiredCookies.map(function (value) {
         return getCookie(value);
     });
 
     if (requiredCookies.includes(null) == true) {
-        alert(
-            "A valid Session does not exist. Please select the Restart option."
-        );
+        alert("A valid Session does not exist. Please select the Restart option.");
     } else {
-        window.location.replace("technique-forms.html");
+        window.location.href = "/RiskBloX/technique-forms";
     }
 }
 
@@ -55,7 +46,7 @@ function loadJSON() {
                 localStorage.setItem(key, stringValue);
             }
         }
-        window.location.replace("technique-forms.html");
+        window.location.replace("/html/RiskBloX/technique-forms.html");
     };
     reader.readAsText(userInput);
 }

@@ -11,17 +11,18 @@
             integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
             crossorigin="anonymous"
         />
+
         <link
             rel="stylesheet"
             href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
             integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
             crossorigin="anonymous"
         />
-
         <link href="/css/global.css" rel="stylesheet" text="text/css" />
+        <link href="/css/defensiveCoverage.css" rel="stylesheet" />
     </head>
 
-    <body>
+    <body onload="generateAttackLayerCall()">
         <header>
             <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
                 <div class="container-fluid">
@@ -102,73 +103,23 @@
             </nav>
         </header>
         <main>
-            <div class="container marketing">
+            <div class="container-fluid">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <button type="button" onclick="back()" class="btn btn-primary">Back</button>
+                        <button type="button" onclick="saveProgress()" class="btn btn-primary">Save Progress</button>
+                        <button type="button" onclick="generateDocumentation()" class="btn btn-primary">Generate Documentation</button>
+                    </div>
+                </div>
+
                 <div class="row">
-                    <div class="col-lg-4">
-                        <h2>RiskBloX</h2>
-                        <p>
-                            RiskBloX is a Risk Management tool that leverages MITRE ATT&CK® Open Source data to concisely display Attack Techniques,
-                            their associated Mitigations, real-world examples of the technique and descriptions.
-                        </p>
-                        <p>
-                            MITRE ATT&CK® Navigator is used to give a graphical overview of your defensive coverage and a PDF report can be generated
-                            containing all the assessed Attack Techniques and Mitigations.
-                        </p>
-                    </div>
-                    <div class="col-lg-4">
-                        <h2>Projects used</h2>
-                        <ol>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                    <div class="fw-bold">Mitre ATT&CK Navigator</div>
-                                    utilized to give a graphical overview of your defensive coverage
-                                </div>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                    <div class="fw-bold">Mitre ATT&CK STIX Data</div>
-                                    used as a source of Mitre ATT&CK data in the website
-                                </div>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                    <div class="fw-bold">Mitre STIX2 Python API</div>
-                                    used to interact with the Mitre's TAXII database in the localhost version of RiskBloX
-                                </div>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                    <div class="fw-bold">Pako</div>
-                                    used to compress the API call that generates a compatible Mitre ATT&CK Navigator Layer
-                                </div>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                    <div class="fw-bold">JSPDF with JSPDF Autotable</div>
-                                    used to generate PDF reports and convert to display HTML tables
-                                </div>
-                            </li>
-                        </ol>
-                    </div>
-                    <div class="col-lg-4">
-                        <h2>BIRA</h2>
-                        <p class="text-center">Coming Soon</p>
-                        <p>
-                            BIRA is a Risk Managemen tool that allows you to jointly define an overarching Risk Appetite Level with stakeholders.
-                            Choose from a selection of pre-built BIRAs applicable to your industry or create a more relevant template with customized
-                            scoring options.
-                        </p>
-                        <p>
-                            Identify Security Properties that could arise from your Project and analyse their impact on identified key Risk Area. For
-                            example, what Business Impact to External Suppliers (Risk Area) could occur if the project suffered from Unavailability
-                            (Security Property). What Risk Appetite can we accept in this regard?
-                        </p>
+                    <div class="ratio ratio-16x9">
+                        <iframe allowfullscreen id="navIframe"></iframe>
                     </div>
                 </div>
             </div>
-
             <footer class="container">
-                <p></p>
+                <p>&copy;2021 The MITRE Corporation. This work is reproduced and distributed with the permission of The MITRE Corporation.</p>
             </footer>
         </main>
         <script type="text/javascript" src="/scripts/userAuth.js"></script>
@@ -177,5 +128,9 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"
         ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+        <script src="https://unpkg.com/jspdf-autotable"></script>
+        <script type="text/javascript" src="/scripts/defensive-coverage.js"></script>
+        <script type="text/javascript" src="/scripts/pako.min.js"></script>
     </body>
 </html>

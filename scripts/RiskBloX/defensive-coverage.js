@@ -14,13 +14,7 @@ function generateAttackLayerCall() {
 
             for (let [key, mitigation] of Object.entries(mitigations)) {
                 if (mitigation.notes != "") {
-                    techniqueComment +=
-                        mitigation.mitigation_name +
-                        "(" +
-                        mitigation.mid +
-                        ") Notes: " +
-                        mitigation.notes +
-                        "\n\n";
+                    techniqueComment += mitigation.mitigation_name + "(" + mitigation.mid + ") Notes: " + mitigation.notes + "\n\n";
                 }
             }
 
@@ -37,8 +31,7 @@ function generateAttackLayerCall() {
     toPost["techniques"] = techniques;
 
     apiGetLayer =
-        "https://sdf10urdoe.execute-api.eu-west-1.amazonaws.com/RiskBloXProd/attacklayer?layer=" +
-        btoa(pako.deflate(JSON.stringify(toPost)));
+        "https://sdf10urdoe.execute-api.eu-west-1.amazonaws.com/RiskBloXProd/attacklayer?layer=" + btoa(pako.deflate(JSON.stringify(toPost)));
 
     var navigator = document.getElementById("navIframe");
 
@@ -49,10 +42,7 @@ function generateAttackLayerCall() {
     //              "ics_attack": "ICS"};
     // urlDomain = domainMap[domain] + "/";
 
-    completeURL =
-        url +
-        "#leave_site_dialog=false&header=false&legend=false&layerURL=" +
-        apiGetLayer;
+    completeURL = url + "#leave_site_dialog=false&header=false&legend=false&layerURL=" + apiGetLayer;
 
     navigator.setAttribute("src", completeURL);
 }
@@ -64,7 +54,7 @@ function getCookie(name) {
 }
 
 function back() {
-    window.location.replace("technique-forms.html");
+    window.location.href = "/RiskBloX/technique-forms";
 }
 
 function saveProgress() {
@@ -153,16 +143,7 @@ function generateDocumentation() {
             theme: "grid",
             showHead: "firstPage",
             rowPageBreak: "avoid",
-            head: [
-                [
-                    "Name",
-                    "Description",
-                    "Application",
-                    "Notes",
-                    "Positive Impact",
-                    "Implementation Confidence",
-                ],
-            ],
+            head: [["Name", "Description", "Application", "Notes", "Positive Impact", "Implementation Confidence"]],
             body: bodyRows(technique.mitigations),
         });
     }
