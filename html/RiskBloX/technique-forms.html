@@ -1,187 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>RiskBloX</title>
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-            crossorigin="anonymous"
-        />
-        <link
-            rel="stylesheet"
-            href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-            integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
-            crossorigin="anonymous"
-        />
 
-        <link href="/css/global.css" rel="stylesheet" text="text/css" />
-        <link href="/css/techniqueForms.css" rel="stylesheet" />
-    </head>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RiskBloX</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+        crossorigin="anonymous" />
 
-    <body onload="fetchTechnique()">
-        <header>
-            <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
-                <div class="container-fluid">
-                    <img src="/images/riskblox-logo.png" width="45" height="40" />
-                    <a class="navbar-brand" href="#">RiskBloX</a>
-                    <button
-                        class="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#toggleMenu"
-                        aria-controls="toggleMenu"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="toggleMenu">
-                        <ul class="navbar-nav nav me-auto text-center">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/">Home</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    RiskBloX Analysis
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="/RiskBloX/explanation">Introduction</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider" />
-                                    </li>
-                                    <li><a class="dropdown-item" href="/RiskBloX/start">Mitigate</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    BIRA
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#">Introduction</a></li>
-                                    <li><a class="dropdown-item" href="#">Create BIRA Template</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider" />
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">BIRA</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="https://attack.mitre.org/" target="_blank">MITRE ATT&CK</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="https://mitre-attack.github.io/attack-navigator/" target="_blank">MITRE ATT&CK Navigator</a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav nav ms-auto text-center">
-                            <li class="nav-item">
-                                <a
-                                    href="
-                                                https://riskblox.auth.eu-west-1.amazoncognito.com/logout?client_id=3kr61qq6dpfs0c87t322m3ojth&logout_uri=https://riskblox.2t-security.co.uk/sign-out"
-                                    class="badge badge-pill badge-light"
-                                >
-                                    <i class="fas fa-sign-out-alt fa-2x"></i>
-                                    Sign Out
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://github.com/ReadyElbow/RiskBloX" target="_blank" class="badge badge-pill badge-light">
-                                    <i class="fab fa-github fa-2x"></i> Website/API Repo
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://github.com/mitre-attack/attack-navigator" target="_blank" class="badge badge-pill badge-light">
-                                    <i class="fab fa-github fa-2x"></i> Navigator Repo
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
-        <main>
-            <div class="modal fade" id="realExamplesModal" tabindex="-1" aria-labelledby="realExamplesModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="realExamplesModalLabel">Examples</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container-fluid">
-                                <ol id="examples"></ol>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <link href="/css/global.css" rel="stylesheet" text="text/css" />
+    <link href="/css/techniqueForms.css" rel="stylesheet" />
+</head>
 
+<body onload="fetchTechnique()">
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
             <div class="container-fluid">
-                <div id="technique-information" class="mb-5">
-                    <div id="technique-header"></div>
-                    <nav aria-label="Technique Navigation">
-                        <ul class="pagination">
-                            <li class="page-item" aria-current="page">
-                                <button id="first" type="button" class="btn btn-outline-primary" onclick="firstTechnique()">First</button>
-                            </li>
-                            <li class="page-item">
-                                <button id="back" type="button" class="btn btn-outline-primary" onclick="previousTechnique()">Back</button>
-                            </li>
-                            <li class="page-item">
-                                <button id="next" type="button" class="btn btn-outline-primary" onclick="nextTechnique()">Next</button>
-                            </li>
-                            <li class="page-item">
-                                <button id="saveProgress" type="button" class="btn btn-outline-primary" onclick="saveProgress()">
-                                    Save Progress
-                                </button>
-                            </li>
-                            <li class="page-item">
-                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#realExamplesModal">
-                                    Real-World Examples
-                                </button>
-                            </li>
-                        </ul>
-                    </nav>
-                    <div style="width: 100%">
-                        <p id="progress"></p>
-                    </div>
-                    <div class="card mt-2" style="width: 100%" id="technique-details"></div>
-                </div>
-                <h2>Mitigations</h2>
-                <div class="table-responsive">
-                    <table class="table table-hover table-bordered">
-                        <thead class="table-dark">
-                            <tr>
-                                <th scope="col" class="col-1">Name</th>
-                                <th scope="col" class="col-3">Description</th>
-                                <th scope="col" class="col-3">Application</th>
-                                <th scope="col" class="col-2">Notes</th>
-                                <th scope="col" class="col-1">Positive Impact</th>
-                                <th scope="col" class="col-1">Implementation Confidence</th>
-                            </tr>
-                        </thead>
-                        <tbody id="mitigations"></tbody>
-                    </table>
+                <img src="/images/riskblox-logo.png" width="45" height="40" />
+                <a class="navbar-brand" href="#">RiskBloX</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggleMenu" aria-controls="toggleMenu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="toggleMenu">
+                    <ul class="navbar-nav nav me-auto text-center">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                RiskBloX Analysis
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/RiskBloX/explanation">Introduction</a></li>
+                                <li>
+                                    <hr class="dropdown-divider" />
+                                </li>
+                                <li><a class="dropdown-item" href="/RiskBloX/start">Mitigate</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://attack.mitre.org/" target="_blank">MITRE ATT&CK</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://mitre-attack.github.io/attack-navigator/" target="_blank">MITRE ATT&CK Navigator</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav nav ms-auto text-center">
+                        <li class="nav-item">
+                            <a href="
+                                                https://riskblox.auth.eu-west-1.amazoncognito.com/logout?client_id=3kr61qq6dpfs0c87t322m3ojth&logout_uri=https://riskblox.2t-security.co.uk/sign-out"
+                                class="badge badge-pill badge-light">
+                                <i class="fas fa-sign-out-alt fa-2x"></i>
+                                Sign Out
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="https://github.com/ReadyElbow/RiskBloX" target="_blank" class="badge badge-pill badge-light">
+                                <i class="fab fa-github fa-2x"></i> Website/API Repo
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="https://github.com/mitre-attack/attack-navigator" target="_blank" class="badge badge-pill badge-light">
+                                <i class="fab fa-github fa-2x"></i> Navigator Repo
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <footer class="container">
-                <p>&copy;2021 The MITRE Corporation. This work is reproduced and distributed with the permission of The MITRE Corporation.</p>
-            </footer>
-        </main>
+        </nav>
+    </header>
+    <main>
+        <div class="modal fade" id="realExamplesModal" tabindex="-1" aria-labelledby="realExamplesModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="realExamplesModalLabel">Examples</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <ol id="examples"></ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <script type="text/javascript" src="/scripts/userAuth.js"></script>
-        <script type="text/javascript" src="/scripts/technique-forms.js"></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"
-        ></script>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
-        <script type="text/javascript" src="/scripts/linkify.min.js"></script>
-        <script type="text/javascript" src="/scripts/linkify-html.min.js"></script>
-    </body>
+        <div class="container-fluid">
+            <div id="technique-information" class="mb-5">
+                <div id="technique-header"></div>
+                <nav aria-label="Technique Navigation">
+                    <ul class="pagination">
+                        <li class="page-item" aria-current="page">
+                            <button id="first" type="button" class="btn btn-outline-primary" onclick="firstTechnique()">First</button>
+                        </li>
+                        <li class="page-item">
+                            <button id="back" type="button" class="btn btn-outline-primary" onclick="previousTechnique()">Back</button>
+                        </li>
+                        <li class="page-item">
+                            <button id="next" type="button" class="btn btn-outline-primary" onclick="nextTechnique()">Next</button>
+                        </li>
+                        <li class="page-item">
+                            <button id="saveProgress" type="button" class="btn btn-outline-primary" onclick="saveProgress()">
+                                Save Progress
+                            </button>
+                        </li>
+                        <li class="page-item">
+                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#realExamplesModal">
+                                Real-World Examples
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+                <div style="width: 100%">
+                    <p id="progress"></p>
+                </div>
+                <div class="card mt-2" style="width: 100%" id="technique-details"></div>
+            </div>
+            <h2>Mitigations</h2>
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col" class="col-1">Name</th>
+                            <th scope="col" class="col-3">Description</th>
+                            <th scope="col" class="col-3">Application</th>
+                            <th scope="col" class="col-2">Notes</th>
+                            <th scope="col" class="col-1">Positive Impact</th>
+                            <th scope="col" class="col-1">Implementation Confidence</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mitigations"></tbody>
+                </table>
+            </div>
+        </div>
+        <footer class="container">
+            <p>&copy;2021 The MITRE Corporation. This work is reproduced and distributed with the permission of The MITRE Corporation.</p>
+        </footer>
+    </main>
+
+    <script type="text/javascript" src="/scripts/userAuth.js"></script>
+    <script type="text/javascript" src="/scripts/RiskBloX/technique-forms.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <script type="text/javascript" src="/scripts/linkify.min.js"></script>
+    <script type="text/javascript" src="/scripts/linkify-html.min.js"></script>
+</body>
+
 </html>
