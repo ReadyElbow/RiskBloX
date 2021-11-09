@@ -1,4 +1,5 @@
 $("button").click(function () {
+    clearStorage();
     var name = $(this).attr("id");
     if (name == "JSONLoad") {
         loadJSON();
@@ -10,6 +11,12 @@ $("button").click(function () {
 
 function loadPreBuilt() {
     userInput = $.getJSON("/prebuilt/....");
+}
+
+function clearStorage() {
+    userAuth = localStorage.getItem("userAuth");
+    localStorage.clear;
+    localStorage.setItem("userAuth", userAuth);
 }
 
 function loadSession() {
@@ -25,9 +32,6 @@ function loadSession() {
 }
 
 function loadJSON() {
-    userAuth = localStorage.getItem("userAuth");
-    localStorage.clear;
-    localStorage.setItem("userAuth", userAuth);
     userInput = $("#formFile").prop("files")[0];
 
     const reader = new FileReader();
