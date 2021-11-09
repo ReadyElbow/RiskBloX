@@ -5,17 +5,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RiskBloX</title>
+    <title>Load BIRA</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
         crossorigin="anonymous" />
-
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
         crossorigin="anonymous" />
     <link href="/css/global.css" rel="stylesheet" text="text/css" />
-    <link href="/css/defensiveCoverage.css" rel="stylesheet" />
 </head>
 
-<body onload="generateAttackLayerCall()">
+<body>
     <header>
         <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
             <div class="container-fluid">
@@ -88,29 +86,53 @@
         <div class="container-fluid">
             <div class="card text-center">
                 <div class="card-body">
-                    <button type="button" onclick="back()" class="btn btn-primary">Back</button>
-                    <button type="button" onclick="saveProgress()" class="btn btn-primary">Save Progress</button>
-                    <button type="button" onclick="generateDocumentation()" class="btn btn-primary">Generate Documentation</button>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="ratio ratio-16x9">
-                    <iframe allowfullscreen id="navIframe"></iframe>
+                    <h5 class="card-title">Restart or Load BIRA</h5>
+                    <p class="card-text">Would you like to load a saved/custom BIRA, use a fresh example or load a current session?</p>
+                    <button type="button" id="sessionLoad" class="btn btn-primary">Load from Session</button>
+                    <div class="col-md-4 offset-md-4 mt-3">
+                        <div class="input-group">
+                            <input class="form-control" type="file" id="formFile" />
+                            <button type="button" class="btn btn-primary" id="JSONLoad">Load from Saved JSON</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4 offset-md-4 mt-3">
+                        <div class="input-group">
+                            <select class="form-select">
+                                <option value="SpaceIndustry.json">Space Industry</option>
+                                <option value="Healthcare.json">Healthcare</option>
+                                <option value="Technology.json">Technology</option>
+                            </select>
+                            <button type="button" class="btn btn-primary" id="prebuiltLoad">Select a prebuilt BIRA</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <footer class="container">
-            <p>&copy;2021 The MITRE Corporation. This work is reproduced and distributed with the permission of The MITRE Corporation.</p>
-        </footer>
+
+
     </main>
-    <script type="text/javascript" src="/scripts/userAuth.js"></script>
+    <footer class="fixed-bottom text-center" style="background-color: #d3d3d3;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6 mb-2 mb-md-0">
+                    <h4 class="mb-3" style="color: #7030A0;">2T Security</h4>
+                    <p>
+                        <a href="https://www.2t-security.com/" target="_blank">About us</a>
+                        <a href="https://risktree.2t-security.co.uk/" target="_blank">Risk Tree</a>
+                    </p>
+                </div>
+                <div class="col-6 mb-2 mb-md-0">
+                    <h5>MITRE ATT&CK®</h5>
+                    <p>&copy;2021 The MITRE Corporation. This work is reproduced and distributed with the permission of The MITRE Corporation.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
-    <script src="https://unpkg.com/jspdf-autotable"></script>
-    <script type="text/javascript" src="/scripts/RiskBloX/defensive-coverage.js"></script>
-    <script type="text/javascript" src="/scripts/pako.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/scripts/BIRA/loadBIRA.js"></script>
+    <script type="text/javascript" src="/scripts/userAuth.js"></script>
 </body>
 
 </html>

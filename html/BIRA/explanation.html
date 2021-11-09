@@ -5,9 +5,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>What is a BIRA?</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
         crossorigin="anonymous" />
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
         crossorigin="anonymous" />
     <link href="/css/global.css" rel="stylesheet" text="text/css" />
@@ -84,36 +85,26 @@
     </header>
     <main>
         <div class="container-fluid">
-            <section id="about">
-                <div class="container mb-5">
-                    <p>
-                        This tool uses MITRE's documented Attack Techniques and associated Mitigations to provide an alternative Risk Management
-                        tool that can be conducted on Enterprise, Mobile or Industrial Control System Infrastructures. In this short explanation,
-                        the 4-stage process is described. If not required, access the Mitigate page in the navigation bar to begin.
-                    </p>
-                </div>
-            </section>
-
             <div class="container my-20">
                 <ul class="nav nav-tabs nav-fill mb-5" id="myTab" role="tablist">
                     <li class="nav-item mb-1" role="presentation">
                         <button class="nav-link active" id="stage1-tab" data-bs-toggle="tab" data-bs-target="#stage1" type="button" role="tab" aria-controls="#stage1" aria-selected="true">
-                            Stage 1: Start/Load
+                            Business Impact Assessment
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="stage2-tab" data-bs-toggle="tab" data-bs-target="#stage2" type="button" role="tab" aria-controls="stage2" aria-selected="false">
-                            Stage 2: Filtering
+                            Risk Appetite Assessment
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="stage3-tab" data-bs-toggle="tab" data-bs-target="#stage3" type="button" role="tab" aria-controls="stage3" aria-selected="false">
-                            Stage 3: Mitigation Information
+                            BIRA
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="stage4-tab" data-bs-toggle="tab" data-bs-target="#stage4" type="button" role="tab" aria-controls="stage4" aria-selected="false">
-                            Stage 4: Defensive Coverage/Report
+                            The Process
                         </button>
                     </li>
                 </ul>
@@ -121,11 +112,24 @@
                     <div class="tab-pane fade show active" id="#stage1" role="tabpanel" aria-labelledby="stage1-tab">
                         <div class="row">
                             <div class="col-6">
-                                When starting an analysis, you are presented with 3 choices. You can either start a new assessment, reload from
-                                Local Storage or load in a JSON file that you may have generated during a previous assessment.
+                                <p>
+                                    Business Impact Analysis (BIA) is the process of determining the impact to the business if a risk is realised,
+                                    including consideration of worst-case scenarios. 
+                                </p>
+                                <p>
+                                    They are used to set the highest level of impact / damage that should be used when assessing risk at Micro
+                                    level. Business impacts should be set without considering countermeasures (as countermeasures
+                                    considered/assessed in the risk assessment). Whilst a business impact considers worst case scenario, a balance
+                                    needs to be struck between plausibility, likelihood and hindsight so that realistic and importantly,
+                                    manageable Business Impacts are agreed.
+                                </p>
+                                <p>
+                                    The default Business Impact (that can be altered) uses 5-scoring to allow for a blending of standard HMG with
+                                    CNI impact levels and NIST 800-30.
+                                </p>
                             </div>
                             <div class="col-6">
-                                <img src="/images/RiskBloX/stage-1-loading.png" class="rounded float-end img-thumbnail" alt="..." />
+                                <img src="/images/BIRA/BI-Blended-Impacts.png" class="rounded float-end img-thumbnail" alt="..." />
                             </div>
                         </div>
                     </div>
@@ -133,48 +137,24 @@
                         <div class="row mb-5">
                             <div class="col-6">
                                 <p>
-                                    If in Stage 1 a new analysis is chosen, then a set of filters will be shown. This will initially present you
-                                    with a choice of domain: Enterprise, Mobile or Industrial Control Systems. Once selected and submitted, an
-                                    additional set of relevant filters are displayed.
-                                </p>
-                            </div>
-                            <div class="col-6">
-                                <img src="/images/RiskBloX/stage-2-domainChoice.png" class="rounded float-end img-thumbnail" />
-                            </div>
-                        </div>
-                        <div class="row mb-5">
-                            <div class="col-6">
-                                <img src="/images/RiskBloX/stage-2-additionalFilters.png" class="rounded float-start img-thumbnail" />
-                            </div>
-                            <div class="col-6">
-                                <p>
-                                    These include Threat Groups (e.g. APT-28), Mitre Tactics (MITRE ATT&CK's method to group related sets of
-                                    Threats e.g. Initial Access), Platforms (e.g. Azure Active Directory, Linux), and Malware/Software (e.g.
-                                    WannaCry). Please note that if you do not wish to filter by a specific area such as Tactics you must Select
-                                    All the options in the dropdown list.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row mb-5">
-                            <div class="col-6">
-                                <p>
-                                    Below the four key filters, a few additional options can be interacted with. In the Enterprise domain, MITRE
-                                    ATT&CK have offered a more granular view of a parent attack technique through sub-techniques. This can either
-                                    be included or excluded from the Assessment.
+                                    Risk Appetite is the level and type of risk that you are prepared to accept (and not accept) in achieving your
+                                    mission / objectives.
                                 </p>
                                 <p>
-                                    Some attack technqiues do not belong to specific Malware/Threat Groups and are included by default in the
-                                    assessment. It is recommended that it is included to gain a wider and complete perspective of your Defensive
-                                    Coverage.
-                                </p>
-                                <p>
-                                    The Mitigation Tolerance Level is critical to providing an analysis relavent to yourself. This defines how the
-                                    overall score per technique will be calculated. For more in-depth information and additional options regarding
-                                    this press the Question button.
+                                    Good governance requires organisations identify and manage the risks to their business; this involves risk
+                                    stakeholders determining the levels of risk that they are prepared to tolerate in pursuit of their
+                                    business/mission objectives. This determination or risk appetite, will influence an organisation’s strategy,
+                                    plans and policies, which in turn determines risk tolerance levels for individual business activities and
+                                    enable the delegation of risk management responsibilities with clear thresholds. HM Treasury publish
+                                    <a href="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/929385/Risk_Appetite_Guidance_Note_v1.0_FINAL.pdf">
+                                        five levels
+                                    </a>
+                                    of risk appetite that other organisations may wish to use in support of the production of their own
+                                    information risk.
                                 </p>
                             </div>
                             <div class="col-6">
-                                <img src="/images/RiskBloX/stage-2-additionalOptions.png" class="rounded float-start img-thumbnail" />
+                                <img src="/images/BIRA/RA-Default-Scores.png" class="rounded float-end img-thumbnail" />
                             </div>
                         </div>
                     </div>
@@ -182,39 +162,18 @@
                         <div class="row">
                             <div class="col-12 mb-5">
                                 <p>
-                                    After filtering, the main assessment will now begin. You will encounter the similar style seen in the image
-                                    for every Technique that has been found based on your applied filters. In the top portion,the Technique name
-                                    and ID are displayed with a question mark linking to its dedicated page on MITRE ATT&CK.
+                                    Business Impact Analysis (BIA) is the process of determining the impact to the business if a risk is realised,
+                                    including consideration of worst-case scenarios. 
                                 </p>
                                 <p>
-                                    Below, the Score is shown that will be updated live, relfecting inputted data into the Mitigations table. The
-                                    Next and Back buttons are used to move onto differnet attack techniques and the Real-World Example highlights
-                                    any articles that document its use in the wild. The paragraph below the `Found in tactics...` statement is a
-                                    description of that attack technique.
+                                    Risk Appetite is the level and type of risk that you are prepared to accept (and not accept) in achieving your
+                                    mission / objectives.
                                 </p>
                                 <p>
-                                    Each row in the Mitigation table represents a single Mitigation. For each mitigation, the Risk Assessor or
-                                    wider group participating in the assessment must first define a Positive Impact level. The Impact Level
-                                    represents how well you believe that Mitigation will mitigate that attack technique. In the case that it
-                                    flawlessly mitigates the technique a score of 10 can be assigned. The scores available are 0,2,4,6,8,10. In
-                                    the case, that you believe a mitigation will have no impact a score of 0 can be assigned.
+                                    These both combine to create a BIRA. Why have a BIRA? To understand the Impact to the business and the Risks
+                                    the business will accept! Have an agreed risk appetite for the mission and its supporting services, people and
+                                    technology
                                 </p>
-                                <p>
-                                    When the positive impact level is defined, the Implementation Confidence Level can now be assessed. The
-                                    confidence level is used to represent your implementation of that mitigation in your infrastructure and
-                                    processes; how confident are you in your implementation or are their further improvements you could make thus
-                                    lowering your Confidence percentage? It is recommended to make notes throughout this process to document your
-                                    reasoning.
-                                </p>
-                                <p>
-                                    Once defined for every Mitigation, you can now progress onto the following Technique through the Next button.
-                                    If a mitigation filled in in a previous technique is present as a mitigation for another ATT&CK Technique this
-                                    will be auto filled, with your previous scores and notes. If overwritten this will not overwrite your previous
-                                    content of that mitgation.
-                                </p>
-                            </div>
-                            <div class="col-12">
-                                <img src="/images/RiskBloX/stage-3-mitigations.png" class="rounded float-end img-thumbnail ratio-16x9" width="1300" />
                             </div>
                         </div>
                     </div>
@@ -222,38 +181,78 @@
                         <div class="row">
                             <div class="col-3">
                                 <p>
-                                    Upon analysing each Attack technqiue, a graphical matrix will be shown, through use of MITRE ATT&CK Navigator,
-                                    and highlight potential areas of weakness in your domain. It is possible to access all your comments and view
-                                    your Scores for each technique.
+                                    Read each of the risk areas to see which apply for your focus of the scope – by default they are set to not
+                                    applicable
                                 </p>
                             </div>
                             <div class="col-9">
-                                <img src="/images/RiskBloX/stage-4-navigator.png" class="rounded float-end img-thumbnail ratio-16x9" width="1300" />
+                                <img src="/images/BIRA/Process-RiskAreas.png" class="rounded float-end img-thumbnail ratio-16x9" width="1300" />
                             </div>
                         </div>
+                        <br />
+                        <br />
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-8">
+                                <img src="/images/BIRA/Process-SecurityProperties.png" class="rounded float-end img-thumbnail ratio-16x9" width="1300" />
+                            </div>
+                            <div class="col-4">
                                 <p>
-                                    The Generate Documentation button will compile all your inputted information into a single PDF that can be
-                                    used to document and outline a plan going forwards as to how your defensive posture can be improved.
+                                    Review the recommended Security Properties and see if they fit your use case. These will be used in default
+                                    BIRAs that can be loaded when starting a BIRA Assessment.
+                                </p>
+                                <p>
+                                    In the event of a custom BIRA, you will have to define the Security Properties yourself with score values to
+                                    assess on. You can refer to the Busienss Impact and Risk Appetite sections for inspiration.
                                 </p>
                             </div>
                         </div>
+                        <br />
                         <div class="row">
                             <div class="col-12">
-                                <img src="/images/RiskBloX/stage-4-report.png" class="rounded float-end img-thumbnail ratio-16x9" width="1300" />
+                                <p class="text-center">
+                                    When a custom BIRA has been created and/or loaded we recommend working through the Business Impact and then
+                                    the Risk Appetite for one Risk Area at a time, within the BIRA Tool – this will allow for an easier logic flow
+                                    completing the impact for each of the security properties (bad outcomes) and adding any notes that might be
+                                    useful) before then applying the risk appetite.
+                                </p>
+                                <p>
+                                    Once all risk areas have been considered the tool notes completion of a worst case (Suggested impact) for you
+                                    to consider and then to select the actual impact level agreed for each applicable security properties. Once
+                                    the overall impact has been selected, repeat the same logic for the overall risks appetite, again for each
+                                    applicable security properties.
+                                </p>
+                                <p>
+                                    Select an overall appetite for the whole analysis and add text to back up the decision. Whilst the BIRA is now
+                                    complete, agree the frequency of update e.g. Annual, Half yearly, Quarterly – This will be dependant upon the
+                                    service and/or mission , its criticality or frequency of change. As a minimum a review is recommended at least
+                                    annually.
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <footer class="container">
-            <p>
-                &copy;2021 The MITRE Corporation. This work is reproduced and distributed with the permission of The MITRE Corporation.&copy;
-            </p>
-        </footer>
+
+
     </main>
+    <footer class="fixed-bottom text-center" style="background-color: #d3d3d3;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6 mb-2 mb-md-0">
+                    <h4 class="mb-3" style="color: #7030A0;">2T Security</h4>
+                    <p>
+                        <a href="https://www.2t-security.com/" target="_blank">About us</a>
+                        <a href="https://risktree.2t-security.co.uk/" target="_blank">Risk Tree</a>
+                    </p>
+                </div>
+                <div class="col-6 mb-2 mb-md-0">
+                    <h5>MITRE ATT&CK®</h5>
+                    <p>&copy;2021 The MITRE Corporation. This work is reproduced and distributed with the permission of The MITRE Corporation.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
