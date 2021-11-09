@@ -102,6 +102,7 @@ $(document).ready(function () {
         }
     }
     for (let i = 0; i < securityPropertyNames.length; i++) {
+        var name = securityPropertyNames[i];
         var worstRA = "";
         var worstBI = "";
         var averageRAValue = "";
