@@ -15,13 +15,11 @@ function loadPreBuilt() {
 
 function clearStorage() {
     userAuth = localStorage.getItem("userAuth");
-    localStorage.clear;
+    localStorage.clear();
     localStorage.setItem("userAuth", userAuth);
 }
 
 function loadSession() {
-    userAuth = localStorage.getItem("userAuth");
-    localStorage.clear;
     if (localStorage.length > 1) {
         localStorage.setItem("userAuth", userAuth);
         window.location.href = "/BIRA/BIRAInput";

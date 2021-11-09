@@ -12,13 +12,22 @@ function restart() {
 }
 
 function loadSession() {
-    var requiredCookies = ["currentTechnique", "subTechnique", "platforms", "groups", "tactics", "domain"];
+    var requiredCookies = [
+        "currentTechnique",
+        "subTechnique",
+        "platforms",
+        "groups",
+        "tactics",
+        "domain",
+    ];
     requiredCookies.map(function (value) {
         return getCookie(value);
     });
 
     if (requiredCookies.includes(null) == true) {
-        alert("A valid Session does not exist. Please select the Restart option.");
+        alert(
+            "A valid Session does not exist. Please select the Restart option."
+        );
     } else {
         window.location.href = "/RiskBloX/technique-forms";
     }
@@ -26,7 +35,7 @@ function loadSession() {
 
 function loadJSON() {
     userAuth = localStorage.getItem("userAuth");
-    localStorage.clear;
+    localStorage.clear();
     localStorage.setItem("userAuth", userAuth);
     userInput = document.getElementById("formFile").files[0];
 
