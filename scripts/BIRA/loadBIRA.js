@@ -1,5 +1,4 @@
 $("button").click(function () {
-    clearStorage();
     var name = $(this).attr("id");
     if (name == "JSONLoad") {
         loadJSON();
@@ -21,15 +20,14 @@ function clearStorage() {
 
 function loadSession() {
     if (localStorage.length > 1) {
-        localStorage.setItem("userAuth", userAuth);
         window.location.href = "/BIRA/BIRAInput";
     } else {
-        localStorage.setItem("userAuth", userAuth);
         console.log("No session exists");
     }
 }
 
 function loadJSON() {
+    clearStorage();
     userInput = $("#formFile").prop("files")[0];
 
     const reader = new FileReader();
