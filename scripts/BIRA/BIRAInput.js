@@ -118,6 +118,8 @@ function saveInputs() {
     var riskAreaObject = JSON.parse(localStorage.getItem(currentRiskArea));
 
     $("#securityProperties > tr").each(function (index, tr) {
+        //to fix the issue of not up to date textareas being fetched you need to add a classname to each cell
+        //and search on that instead
         let updatedProperty = {};
         let name = $(tr).find("td:eq(0)").text();
         updatedProperty.businessImpact = $(tr)
@@ -182,7 +184,16 @@ function generateJSONSave() {
         lastRiskArea: getCookie("lastRiskArea"),
     };
     for (let [key, stringValue] of Object.entries(localStorage)) {
-        if (key != "userAuth") {
+        if (
+            [
+                "projectLogo",
+                "projectTitle",
+                "projectSensitivity",
+                "logo360Defence",
+            ].includes(key)
+        ) {
+            savedJSON[key] = stringValue;
+        } else if (key != "userAuth") {
             savedJSON[key] = JSON.parse(stringValue);
         }
     }
@@ -194,6 +205,7 @@ function generateJSONSave() {
     });
     const url = URL.createObjectURL(blob);
     download.href = url;
-    download.download = "RiskBloX-BIRA-Save.json";
+    download.download =
+        "BIRA-" + localStorage.getItem("projectTitle") + "-Save.json";
     download.click();
 }

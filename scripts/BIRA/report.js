@@ -36,6 +36,8 @@ $(document).ready(function () {
     var integerToBIScore = {};
     var RAToIntegerScore = {};
     var integerToRAScore = {};
+
+    //Defined required overall information - mappings for scores and an Overall Average calculater
     for (item in overallInformation.scoreNamesBI) {
         BIToIntegerScore[overallInformation.scoreNamesBI[item]] =
             parseInt(item) + 1;
@@ -60,6 +62,9 @@ $(document).ready(function () {
             BIWorstScore: 0,
         };
     }
+
+    //Fetch information needed for averages per Security Property in the JSON Object overallScores
+    //by iterating over each risk area and finding what was selected
     for (let i = 1; i <= lastRiskArea; i++) {
         let riskArea = JSON.parse(localStorage.getItem("RA" + i));
         for (const [key, value] of Object.entries(
@@ -102,11 +107,12 @@ $(document).ready(function () {
         }
     }
     for (let i = 0; i < securityPropertyNames.length; i++) {
-        var name = securityPropertyNames[i];
+        var name = securityPropertyNames[i]; //Security Property Name
         var worstRA = "";
         var worstBI = "";
         var averageRAValue = "";
         var averageBIValue = "";
+        //We now work out the average for this, and input into two separate tables
         if (overallScores[name].BISelected > 0) {
             averageBIValue =
                 integerToBIScore[
@@ -168,6 +174,7 @@ $(document).ready(function () {
 
     document.getElementById("overallJustification").append(finalJustification);
 });
+//For each object in overallScores add to the two separate rows in the table
 
 function addToAverageTable(
     securityPropertyName,
@@ -256,7 +263,6 @@ function saveInputs() {
             .find("option:selected")
             .val();
         propertyOverall.RAJustification = $(tr).find(".RAJustification").val();
-        console.log(propertyOverall);
         overall[propertyName] = propertyOverall;
     });
     $("#overallJustification > tr").each(function (index, tr) {
@@ -278,7 +284,16 @@ function generateJSONSave() {
         lastRiskArea: getCookie("lastRiskArea"),
     };
     for (let [key, stringValue] of Object.entries(localStorage)) {
-        if (key != "userAuth") {
+        if (
+            [
+                "projectLogo",
+                "projectTitle",
+                "projectSensitivity",
+                "logo360Defence",
+            ].includes(key)
+        ) {
+            savedJSON[key] = stringValue;
+        } else if (key != "userAuth") {
             savedJSON[key] = JSON.parse(stringValue);
         }
     }
@@ -290,7 +305,8 @@ function generateJSONSave() {
     });
     const url = URL.createObjectURL(blob);
     download.href = url;
-    download.download = "RiskBloX-BIRA-Save.json";
+    download.download =
+        "BIRA-" + localStorage.getItem("projectTitle") + "-Save.json";
     download.click();
 }
 
@@ -311,17 +327,54 @@ function firstRiskArea() {
 function generateDocumentation() {
     var doc = new jsPDF({
         orientation: "landscape",
+        unit: "px",
+        hotfixes: ["px_scaling"],
     });
-    var projectName = $("#projectName").val();
+    var projectName = localStorage.getItem("projectTitle");
     doc.setFontSize(30);
     doc.text(
-        "BIRA Report for " + projectName,
+        projectName,
+        doc.internal.pageSize.getWidth() / 2,
+        doc.internal.pageSize.getHeight() / 2 - 75,
+        "center"
+    );
+    doc.text(
+        "BIRA Report",
         doc.internal.pageSize.getWidth() / 2,
         doc.internal.pageSize.getHeight() / 2,
         "center"
     );
-    doc.addPage("landscape");
+    var logo360 = new Image();
+    var anjbLogo = new Image();
+    let logo360Version = localStorage.getItem("logo360Defence");
+    if (logo360Version == null) {
+        logo360.src = "/images/BIRA/360D-UK-Logo.png";
+    } else {
+        logo360.src = "/images/BIRA/360D-" + logo360Version + "-Logo.png";
+    }
+    anjbLogo.src = "/images/BIRA/ANJB-Logo.png";
+    doc.addImage(logo360, 28, 35, 64, 64);
+    doc.addImage(anjbLogo, 100, 27, 80, 80);
+    let projectLogo = localStorage.getItem("projectLogo");
+    if (projectLogo != "null") {
+        doc.addImage(
+            localStorage.getItem("projectLogo"),
+            doc.internal.pageSize.getWidth() / 2 - 150,
+            doc.internal.pageSize.getHeight() / 2 + 50
+        );
+    }
+    var sensitivityMarking = localStorage.getItem("projectSensitivity");
+    if (sensitivityMarking != "") {
+        doc.setFontSize(12);
+        doc.text(
+            "[" + sensitivityMarking + "]",
+            doc.internal.pageSize.getWidth() / 2,
+            18,
+            "center"
+        );
+    }
 
+    doc.addPage("landscape");
     let agreedRiskAppetite = "";
     let agreedRiskAppetiteJustification = "Justification: ";
     $("#overallJustification > tr").each(function (index, tr) {
@@ -334,18 +387,18 @@ function generateDocumentation() {
             .val();
     });
     doc.setFontSize(25);
-    doc.text("Agreed Risk Appetite: " + agreedRiskAppetite, 14, 20);
+    doc.text("Agreed Risk Appetite: " + agreedRiskAppetite, 56, 80);
     doc.setFontSize(11);
     let pageSize = doc.internal.pageSize;
     let pageWidth = pageSize.getWidth();
     let text = doc.splitTextToSize(
         agreedRiskAppetiteJustification,
-        pageWidth - 35,
+        pageWidth - 140,
         {}
     );
     let lengthText = doc.getTextDimensions(text).h;
-    let heightText = 35;
-    doc.text(text, 14, heightText);
+    let heightText = 140;
+    doc.text(text, 56, heightText);
     doc.setFontSize(14);
 
     var headers = [
@@ -356,6 +409,10 @@ function generateDocumentation() {
         "Appetite Justififcation",
     ];
     var body = [];
+
+    // $("#overwriteAveragesTable thead tr th").each(function () {
+    //     headers.push($(this).text());
+    // });
     $("#overwriteAverages > tr").each(function (index, tr) {
         let row = [];
         row.push($(tr).find("td:eq(0)").text());
@@ -366,6 +423,30 @@ function generateDocumentation() {
         body.push(row);
     });
     doc.autoTable({
+        didParseCell: function (data) {
+            if (data.column.index == 1 && data.cell.section == "body") {
+                data.cell.styles.fillColor = fetchScoreColour(
+                    "BI",
+                    data.cell.raw
+                );
+            } else if (data.column.index == 3 && data.cell.section == "body") {
+                data.cell.styles.fillColor = fetchScoreColour(
+                    "RA",
+                    data.cell.raw
+                );
+            }
+        },
+        didDrawPage: function (data) {
+            if (sensitivityMarking != "") {
+                doc.setFontSize(12);
+                doc.text(
+                    "[" + sensitivityMarking + "]",
+                    doc.internal.pageSize.getWidth() / 2,
+                    18,
+                    "center"
+                );
+            }
+        },
         head: [headers],
         body: body,
         startY: lengthText + heightText,
@@ -375,23 +456,23 @@ function generateDocumentation() {
         rowPageBreak: "avoid",
         columnStyles: {
             0: {
-                cellWidth: 50,
+                cellWidth: 200,
             },
             1: {
-                cellWidth: 35,
+                cellWidth: 140,
             },
             2: {
-                cellWidth: 70,
+                cellWidth: 280,
             },
             3: {
-                cellWidth: 35,
+                cellWidth: 140,
             },
             4: {
-                cellWidth: 70,
+                cellWidth: 280,
             },
         },
         styles: {
-            minCellHeight: 30,
+            minCellHeight: 80,
         },
     });
 
@@ -400,18 +481,18 @@ function generateDocumentation() {
         var riskArea = JSON.parse(localStorage.getItem("RA" + i));
         doc.addPage();
         doc.setFontSize(25);
-        doc.text("Risk Area: " + riskArea.name, 14, 20);
+        doc.text("Risk Area: " + riskArea.name, 56, 80);
         doc.setFontSize(11);
         let pageSize = doc.internal.pageSize;
         let pageWidth = pageSize.getWidth();
         let text = doc.splitTextToSize(
             riskArea.description,
-            pageWidth - 35,
+            pageWidth - 140,
             {}
         );
         let lengthText = doc.getTextDimensions(text).h;
-        let heightText = 35;
-        doc.text(text, 14, heightText);
+        let heightText = 140;
+        doc.text(text, 56, heightText);
         doc.setFontSize(14);
 
         var headers = [
@@ -431,13 +512,40 @@ function generateDocumentation() {
         }
 
         doc.autoTable({
+            didParseCell: function (data) {
+                if (data.column.index == 1 && data.cell.section == "body") {
+                    data.cell.styles.fillColor = fetchScoreColour(
+                        "BI",
+                        data.cell.raw
+                    );
+                } else if (
+                    data.column.index == 3 &&
+                    data.cell.section == "body"
+                ) {
+                    data.cell.styles.fillColor = fetchScoreColour(
+                        "RA",
+                        data.cell.raw
+                    );
+                }
+            },
+            didDrawPage: function (data) {
+                if (sensitivityMarking != "") {
+                    doc.setFontSize(12);
+                    doc.text(
+                        "[" + sensitivityMarking + "]",
+                        doc.internal.pageSize.getWidth() / 2,
+                        18,
+                        "center"
+                    );
+                }
+            },
             startY: lengthText + heightText,
             columnStyles: {
-                0: { cellWidth: 40 },
-                1: { cellWidth: 40 },
-                2: { cellWidth: 70 },
-                3: { cellWidth: 40 },
-                4: { cellWidth: 70 },
+                0: { cellWidth: 160 },
+                1: { cellWidth: 160 },
+                2: { cellWidth: 280 },
+                3: { cellWidth: 160 },
+                4: { cellWidth: 280 },
             },
             headStyles: { fillColor: "#0d6efd" },
             theme: "grid",
@@ -445,9 +553,12 @@ function generateDocumentation() {
             rowPageBreak: "avoid",
             head: headers,
             body: body,
+            styles: {
+                minCellHeight: 80,
+            },
         });
     }
-    doc.save("BIRA-Report.pdf");
+    doc.save("BIRA-" + localStorage.getItem("projectTitle") + "-Report.pdf");
 }
 
 function fetchTable(object, name) {
@@ -464,4 +575,13 @@ function fetchTable(object, name) {
 
 function fetchIntegers(value) {
     return value.match(/\d*$/);
+}
+
+function fetchScoreColour(scoreType, value) {
+    var colours = JSON.parse(localStorage.getItem("colours"));
+    if (scoreType == "BI") {
+        return colours["BI" + value];
+    } else if (scoreType == "RA") {
+        return colours["RA" + value];
+    }
 }
