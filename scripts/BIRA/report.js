@@ -480,19 +480,29 @@ function generateDocumentation() {
     for (let i = 1; i <= lastRiskArea; i++) {
         var riskArea = JSON.parse(localStorage.getItem("RA" + i));
         doc.addPage();
-        doc.setFontSize(25);
-        doc.text("Risk Area: " + riskArea.name, 56, 80);
-        doc.setFontSize(11);
         let pageSize = doc.internal.pageSize;
         let pageWidth = pageSize.getWidth();
+        doc.setFontSize(25);
+        let title = doc.splitTextToSize(
+            "Risk Area: " + riskArea.name,
+            pageWidth - 140,
+            {}
+        );
+        doc.text(title, 56, 80);
+        doc.setFontSize(11);
         let text = doc.splitTextToSize(
             riskArea.description,
             pageWidth - 140,
             {}
         );
         let lengthText = doc.getTextDimensions(text).h;
-        let heightText = 140;
-        doc.text(text, 56, heightText);
+        if (doc.getTextDimensions(title).h > 30) {
+            var heightSummary = doc.getTextDimensions(title).h + 120;
+        } else {
+            var heightSummary = 120;
+        }
+
+        doc.text(text, 56, heightSummary);
         doc.setFontSize(14);
 
         var headers = [
@@ -539,7 +549,7 @@ function generateDocumentation() {
                     );
                 }
             },
-            startY: lengthText + heightText,
+            startY: lengthText + heightSummary,
             columnStyles: {
                 0: { cellWidth: 160 },
                 1: { cellWidth: 160 },
