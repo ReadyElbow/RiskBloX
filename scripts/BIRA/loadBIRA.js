@@ -38,6 +38,7 @@ function loadJSON() {
                 if (key == "cookies") {
                     document.cookie =
                         "currentRiskArea=" + value.currentRiskArea;
+                    riskArea = value.currentRiskArea;
                     document.cookie = "lastRiskArea=" + value.lastRiskArea;
                 } else if (
                     [
