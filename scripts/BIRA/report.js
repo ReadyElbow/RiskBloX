@@ -254,12 +254,12 @@ function saveInputs() {
         let propertyOverall = {};
         let propertyName = $(tr).find("td:eq(0)").text();
         propertyOverall.BIOverwrite = $(tr)
-            .find("td:eq(2)")
+            .find("td:eq(3)")
             .find("option:selected")
             .val();
         propertyOverall.BIJustification = $(tr).find(".BIJustification").val();
         propertyOverall.RAOverwrite = $(tr)
-            .find("td:eq(5)")
+            .find("td:eq(7)")
             .find("option:selected")
             .val();
         propertyOverall.RAJustification = $(tr).find(".RAJustification").val();
