@@ -36,6 +36,24 @@ $(document).ready(function () {
     var integerToBIScore = {};
     var RAToIntegerScore = {};
     var integerToRAScore = {};
+    let riskAreaNav = getCookie("lastRiskArea").match(/\d*$/);
+    var navObject = JSON.parse(sessionStorage.getItem("navigation"));
+    for (let i = 1; i <= riskAreaNav; i++) {
+        $(".riskAreaNavigation").append(
+            `<li><a class="dropdown-item redirectRiskArea" value="RA` +
+                i +
+                `">` +
+                navObject["RA" + i] +
+                `</a></li>`
+        );
+    }
+    $("a").click(function () {
+        if ($(this).hasClass("redirectRiskArea")) {
+            saveInputs();
+            document.cookie = "currentRiskArea=" + $(this).attr("value");
+            window.location.reload();
+        }
+    });
 
     //Defined required overall information - mappings for scores and an Overall Average calculater
     for (item in overallInformation.scoreNamesBI) {
@@ -173,6 +191,17 @@ $(document).ready(function () {
     );
 
     document.getElementById("overallJustification").append(finalJustification);
+    $("textarea")
+        .each(function () {
+            this.setAttribute(
+                "style",
+                "height:" + this.scrollHeight + "px;overflow-y:hidden;"
+            );
+        })
+        .on("input", function () {
+            this.style.height = "auto";
+            this.style.height = this.scrollHeight + "px";
+        });
 });
 //For each object in overallScores add to the two separate rows in the table
 

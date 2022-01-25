@@ -31,6 +31,7 @@ function loadJSON() {
     userInput = $("#formFile").prop("files")[0];
     const reader = new FileReader();
     var riskArea = "";
+    var dropdownNavigation = {};
     reader.onload = function (event) {
         try {
             var parsedJSON = $.parseJSON(event.target.result);
@@ -50,9 +51,14 @@ function loadJSON() {
                 ) {
                     localStorage.setItem(key, value);
                 } else {
+                    dropdownNavigation[key] = value.name;
                     localStorage.setItem(key, JSON.stringify(value));
                 }
             }
+            sessionStorage.setItem(
+                "navigation",
+                JSON.stringify(dropdownNavigation)
+            );
             let reportTitle = document.getElementById("projectName").value;
             if (reportTitle != null) {
                 projectTitle();

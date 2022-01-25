@@ -14,6 +14,18 @@ $(document).ready(function () {
     var BISelectValues = ["Not Applicable"];
     var RASelectValues = ["Not Applicable"];
 
+    let riskAreaNav = getCookie("lastRiskArea").match(/\d*$/);
+    var navObject = JSON.parse(sessionStorage.getItem("navigation"));
+    for (let i = 1; i <= riskAreaNav; i++) {
+        $(".riskAreaNavigation").append(
+            `<li><a class="dropdown-item redirectRiskArea" value="RA` +
+                i +
+                `">` +
+                navObject["RA" + i] +
+                `</a></li>`
+        );
+    }
+
     for (
         let i = 0;
         i < riskAreaObject.scoringDescriptions.businessImpact.length;
@@ -29,6 +41,13 @@ $(document).ready(function () {
             `<tr><td>${name}</td><td>${otherNotation}</td><td>${description}</td></tr>`
         );
     }
+    $("a").click(function () {
+        if ($(this).hasClass("redirectRiskArea")) {
+            saveInputs();
+            document.cookie = "currentRiskArea=" + $(this).attr("value");
+            window.location.reload();
+        }
+    });
     for (
         let i = 0;
         i < riskAreaObject.scoringDescriptions.riskAppetite.length;
@@ -63,6 +82,17 @@ $(document).ready(function () {
         );
         document.getElementById("securityProperties").append(tableRow);
     }
+    $("textarea")
+        .each(function () {
+            this.setAttribute(
+                "style",
+                "height:" + this.scrollHeight + "px;overflow-y:hidden;"
+            );
+        })
+        .on("input", function () {
+            this.style.height = "auto";
+            this.style.height = this.scrollHeight + "px";
+        });
 });
 
 $("button").click(function () {
