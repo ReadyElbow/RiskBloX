@@ -88,38 +88,40 @@ $(document).ready(function () {
         for (const [key, value] of Object.entries(
             riskArea.securityProperties
         )) {
-            if (value.businessImpact != "Not Applicable") {
+            let regexBIParsedScore = value.businessImpact.replace(/\s+$/, "");
+            let regexRAParsedScore = value.businessImpact.replace(/\s+$/, "");
+            if (regexBIParsedScore != "Not Applicable") {
                 overallScores[key].BISelected += 1;
                 overallScores[key].BISumScore +=
-                    BIToIntegerScore[value.businessImpact];
+                    BIToIntegerScore[regexBIParsedScore];
                 if (overallScores[key].BIWorstScore > 0) {
                     if (
-                        BIToIntegerScore[value.businessImpact] <
+                        BIToIntegerScore[regexBIParsedScore] <
                         overallScores[key].BIWorstScore
                     ) {
                         overallScores[key].BIWorstScore =
-                            BIToIntegerScore[value.businessImpact];
+                            BIToIntegerScore[regexBIParsedScore];
                     }
                 } else {
                     overallScores[key].BIWorstScore =
-                        BIToIntegerScore[value.businessImpact];
+                        BIToIntegerScore[regexBIParsedScore];
                 }
             }
-            if (value.riskAppetite != "Not Applicable") {
+            if (regexRAParsedScore != "Not Applicable") {
                 overallScores[key].RASelected += 1;
                 overallScores[key].RASumScore +=
-                    RAToIntegerScore[value.riskAppetite];
+                    RAToIntegerScore[regexRAParsedScore];
                 if (overallScores[key].RAWorstScore > 0) {
                     if (
-                        RAToIntegerScore[value.riskAppetite] <
+                        RAToIntegerScore[regexRAParsedScore] <
                         overallScores[key].RAWorstScore
                     ) {
                         overallScores[key].RAWorstScore =
-                            RAToIntegerScore[value.riskAppetite];
+                            RAToIntegerScore[regexRAParsedScore];
                     }
                 } else {
                     overallScores[key].RAWorstScore =
-                        RAToIntegerScore[value.riskAppetite];
+                        RAToIntegerScore[regexRAParsedScore];
                 }
             }
         }
