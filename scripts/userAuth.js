@@ -67,17 +67,25 @@ if (localStorage.getItem("userAuth") == null) {
                         )
                             .then((response) => response.json())
                             .then((result) => {
-                                let userAuth = {};
-                                userAuth.id_token =
-                                    result.AuthenticationResult.IdToken;
-                                userAuth.access_token =
-                                    result.AuthenticationResult.AccessToken;
-                                userAuth.refresh_token =
-                                    oldUserAuth.refresh_token;
-                                localStorage.setItem(
-                                    "userAuth",
-                                    JSON.stringify(userAuth)
-                                );
+                                if (
+                                    result.message ==
+                                    "Refresh Token has expired"
+                                ) {
+                                    localStorage.removeItem("userAuth");
+                                    window.location.replace("/sign-in");
+                                } else {
+                                    let userAuth = {};
+                                    userAuth.id_token =
+                                        result.AuthenticationResult.IdToken;
+                                    userAuth.access_token =
+                                        result.AuthenticationResult.AccessToken;
+                                    userAuth.refresh_token =
+                                        oldUserAuth.refresh_token;
+                                    localStorage.setItem(
+                                        "userAuth",
+                                        JSON.stringify(userAuth)
+                                    );
+                                }
                             });
                     } catch (error) {
                         //Authentication token expired
