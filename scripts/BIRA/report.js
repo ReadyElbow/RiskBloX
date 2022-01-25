@@ -89,7 +89,7 @@ $(document).ready(function () {
             riskArea.securityProperties
         )) {
             let regexBIParsedScore = value.businessImpact.replace(/\s+$/, "");
-            let regexRAParsedScore = value.businessImpact.replace(/\s+$/, "");
+            let regexRAParsedScore = value.riskAppetite.replace(/\s+$/, "");
             if (regexBIParsedScore != "Not Applicable") {
                 overallScores[key].BISelected += 1;
                 overallScores[key].BISumScore +=
