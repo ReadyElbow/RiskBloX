@@ -51,7 +51,7 @@ $(document).ready(function () {
         if ($(this).hasClass("redirectRiskArea")) {
             saveInputs();
             document.cookie = "currentRiskArea=" + $(this).attr("value");
-            window.location.reload();
+            window.location.href = "/BIRA/BIRAInput";
         }
     });
 
