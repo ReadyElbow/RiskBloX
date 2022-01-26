@@ -382,16 +382,21 @@ function generateDocumentation() {
         "center"
     );
     var logo360 = new Image();
-    var anjbLogo = new Image();
     let logo360Version = localStorage.getItem("logo360Defence");
-    if (logo360Version == null) {
-        logo360.src = "/images/BIRA/360D-UK-Logo.png";
+    if (logo360Version == "2T") {
+        logo360.src = "/images/2T-Security-Logo.png";
+        doc.addImage(logo360, 28, 35);
     } else {
-        logo360.src = "/images/BIRA/360D-" + logo360Version + "-Logo.png";
+        var anjbLogo = new Image();
+        if (logo360Version == null) {
+            logo360.src = "/images/BIRA/360D-UK-Logo.png";
+        } else {
+            logo360.src = "/images/BIRA/360D-" + logo360Version + "-Logo.png";
+        }
+        anjbLogo.src = "/images/BIRA/ANJB-Logo.png";
+        doc.addImage(logo360, 28, 35, 64, 64);
+        doc.addImage(anjbLogo, 100, 27, 80, 80);
     }
-    anjbLogo.src = "/images/BIRA/ANJB-Logo.png";
-    doc.addImage(logo360, 28, 35, 64, 64);
-    doc.addImage(anjbLogo, 100, 27, 80, 80);
     let projectLogo = localStorage.getItem("projectLogo");
     if (projectLogo != "null") {
         doc.addImage(
