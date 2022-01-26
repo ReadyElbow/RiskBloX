@@ -1,0 +1,625 @@
+{
+    "RA1": {
+        "name": "Impact on public finances",
+        "description": "",
+        "impactJustification": "",
+        "appetiteJustification": "",
+        "securityProperties": {
+            "Disclosure": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Tamper ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Unavailability": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Financial Loss": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Reputational Damage ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            }
+        },
+        "scoringDescriptions": {
+            "businessImpact": [
+                {
+                    "name": "Very High",
+                    "otherNotation": "",
+                    "description": "Major long-term damage to the UK economy (to an estimated total in excess of £10billion)"
+                },
+                {
+                    "name": "High",
+                    "otherNotation": "",
+                    "description": "Short term material damage to national finances or economic interests (to an estimated total of £100s of millions to £10billion)"
+                },
+                {
+                    "name": "Medium",
+                    "otherNotation": "",
+                    "description": "Loss to government / public sector of £millions [e.g., October 2020 attack on Hackney Council which cost >£10m and continues to impact services almost 2 years later]"
+                },
+                {
+                    "name": "Low",
+                    "otherNotation": "",
+                    "description": "Loss to government / public sector of £millions [e.g Copeland Council which is facing ‘bankruptcy’ as a result of ongoing problems compounded by a major cyber attack in October 2018]"
+                },
+                {
+                    "name": "Very Low",
+                    "otherNotation": "",
+                    "description": "An activity leading to a loss to the Public Sector of up to £1million"
+                }
+            ],
+            "riskAppetite": [
+                {
+                    "name": "Eager",
+                    "otherNotation": "",
+                    "description": "Eagerness, focus  or requirement to be innovative, designed to maximise opportunity.  Approach in pursuit of very high reward but may carry very high residual risk."
+                },
+                {
+                    "name": "Open",
+                    "otherNotation": "",
+                    "description": "Aim to undertake activities that have a high degree of purpose  value, where the likeliness of success being a determining factor. Activity may carry a large amount of residual risk."
+                },
+                {
+                    "name": "Cautious",
+                    "otherNotation": "",
+                    "description": "Willingness to accept a degree of risk in order to achieve key purpose e.g.  Inherent risk is deemed controllable or acceptable to a large extent. "
+                },
+                {
+                    "name": "Minimalist",
+                    "otherNotation": "",
+                    "description": "Tendency to undertake activities that are considered safe in achieving objects.\nPursuit of opportunity is not a key driver where inherent risk is above low. "
+                },
+                {
+                    "name": "Averse",
+                    "otherNotation": "",
+                    "description": "Avoidance of risk in achievement of key objectives is paramount.  Activities only considered when carrying little low or very low (rare) Residual risk. "
+                }
+            ]
+        }
+    },
+    "RA2": {
+        "name": "Impact on UK trade and commerce",
+        "description": "",
+        "impactJustification": "",
+        "appetiteJustification": "",
+        "securityProperties": {
+            "Disclosure": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Tamper ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Unavailability": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Financial Loss": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Reputational Damage ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            }
+        },
+        "scoringDescriptions": {
+            "businessImpact": [
+                {
+                    "name": "Very High",
+                    "otherNotation": "",
+                    "description": "An activity resulting in major long-term damage to global trade or commerce which leads to a prolonged recession or hyperinflation in the UK."
+                },
+                {
+                    "name": "High",
+                    "otherNotation": "",
+                    "description": "A threat or action that causes material damage to international trade or commerce and directly results in a noticeable reduction of economic growth in the UK."
+                },
+                {
+                    "name": "Medium",
+                    "otherNotation": "",
+                    "description": "Undermines the financial viability of a major UK-based or UK-owned organisation.\n[Ransomware attacks on UK institutions more than doubled last year (2021) at a cost of hundreds of millions of pounds,]\n"
+                },
+                {
+                    "name": "Low",
+                    "otherNotation": "",
+                    "description": "Undermine the financial viability of a minor UK-based or UK-owned organisation.\n[Attacks on charities alone rose by over 26% in the 12 months to March 2021 costing thousands].\n"
+                },
+                {
+                    "name": "Very Low",
+                    "otherNotation": "",
+                    "description": "A threat our action that undermines the financial viability of a number of UK small businesses. [FYI >39% of businesses suffered a security breach in 12 months March 2021]"
+                }
+            ],
+            "riskAppetite": [
+                {
+                    "name": "Eager",
+                    "otherNotation": "",
+                    "description": "Eagerness, focus  or requirement to be innovative, designed to maximise opportunity.  Approach in pursuit of very high reward but may carry very high residual risk."
+                },
+                {
+                    "name": "Open",
+                    "otherNotation": "",
+                    "description": "Aim to undertake activities that have a high degree of purpose  value, where the likeliness of success being a determining factor. Activity may carry a large amount of residual risk."
+                },
+                {
+                    "name": "Cautious",
+                    "otherNotation": "",
+                    "description": "Willingness to accept a degree of risk in order to achieve key purpose e.g.  Inherent risk is deemed controllable or acceptable to a large extent. "
+                },
+                {
+                    "name": "Minimalist",
+                    "otherNotation": "",
+                    "description": "Tendency to undertake activities that are considered safe in achieving objects.\nPursuit of opportunity is not a key driver where inherent risk is above low. "
+                },
+                {
+                    "name": "Averse",
+                    "otherNotation": "",
+                    "description": "Avoidance of risk in achievement of key objectives is paramount.  Activities only considered when carrying little low or very low (rare) Residual risk. "
+                }
+            ]
+        }
+    },
+    "RA3": {
+        "name": "Inconvenience and impact on public confidence in public services",
+        "description": "",
+        "impactJustification": "",
+        "appetiteJustification": "",
+        "securityProperties": {
+            "Disclosure": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Tamper ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Unavailability": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Financial Loss": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Reputational Damage ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            }
+        },
+        "scoringDescriptions": {
+            "businessImpact": [
+                {
+                    "name": "Very High",
+                    "otherNotation": "",
+                    "description": "An event that leads to a complete breakdown in public trust, resulting in harm or loss of life to members of the public, compounded by a rise in black market opportunism and/ or unregulated alternative services. "
+                },
+                {
+                    "name": "High",
+                    "otherNotation": "",
+                    "description": "Any action that leads to a loss of public trust, resulting in a noticeable drop in consumer usage and leading to potential harm and even a risk to life."
+                },
+                {
+                    "name": "Medium",
+                    "otherNotation": "",
+                    "description": "An activity likely to undermine confidence in the ability of an organisation to deliver its core responsibilities at a national level [e.g., disruption or interference of the national patient information databases leading to a failure in patient care."
+                },
+                {
+                    "name": "Low",
+                    "otherNotation": "",
+                    "description": "An event likely to likely to undermine public confidence in a public body, service, or capability to deliver its core function at a local or regional level."
+                },
+                {
+                    "name": "Very Low",
+                    "otherNotation": "",
+                    "description": "Anything that creates a widespread negative perception of a service among a large group of people [e.g., an event causing closure of a facility or service for a day resulting in appointment cancellations] including action or threat likely to reduce an individual’s confidence in a public service [e.g., an attack that compromises IT systems e.g., leading to the cancellation of a hospital appointment]"
+                }
+            ],
+            "riskAppetite": [
+                {
+                    "name": "Eager",
+                    "otherNotation": "",
+                    "description": "Eagerness, focus  or requirement to be innovative, designed to maximise opportunity.  Approach in pursuit of very high reward but may carry very high residual risk."
+                },
+                {
+                    "name": "Open",
+                    "otherNotation": "",
+                    "description": "Aim to undertake activities that have a high degree of purpose  value, where the likeliness of success being a determining factor. Activity may carry a large amount of residual risk."
+                },
+                {
+                    "name": "Cautious",
+                    "otherNotation": "",
+                    "description": "Willingness to accept a degree of risk in order to achieve key purpose e.g.  Inherent risk is deemed controllable or acceptable to a large extent. "
+                },
+                {
+                    "name": "Minimalist",
+                    "otherNotation": "",
+                    "description": "Tendency to undertake activities that are considered safe in achieving objects.\nPursuit of opportunity is not a key driver where inherent risk is above low. "
+                },
+                {
+                    "name": "Averse",
+                    "otherNotation": "",
+                    "description": "Avoidance of risk in achievement of key objectives is paramount.  Activities only considered when carrying little low or very low (rare) Residual risk. "
+                }
+            ]
+        }
+    },
+    "RA4": {
+        "name": "Impact on public finances ",
+        "description": "",
+        "impactJustification": "",
+        "appetiteJustification": "",
+        "securityProperties": {
+            "Disclosure": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Tamper ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Unavailability": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Financial Loss": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Reputational Damage ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            }
+        },
+        "scoringDescriptions": {
+            "businessImpact": [
+                {
+                    "name": "Very High",
+                    "otherNotation": "",
+                    "description": "An event that could cause long term material damage to the UK economy leading to a financial loss in excess of £10billion."
+                },
+                {
+                    "name": "High",
+                    "otherNotation": "",
+                    "description": "An incident that could cause short term material damage to national finances or economic interests of between an estimated total of £100s of millions up to £10billion."
+                },
+                {
+                    "name": "Medium",
+                    "otherNotation": "",
+                    "description": "Any threat or action that is likely to cause a loss to government and/or the public sector in the region of £10s of millions up to £100 million."
+                },
+                {
+                    "name": "Low",
+                    "otherNotation": "",
+                    "description": "An activity likely to cause a loss to government and/or the public sector in the region of £millions."
+                },
+                {
+                    "name": "Very Low",
+                    "otherNotation": "",
+                    "description": "A more serious event resulting in a loss to the public sector purse of up to £1million\n"
+                }
+            ],
+            "riskAppetite": [
+                {
+                    "name": "Eager",
+                    "otherNotation": "",
+                    "description": "Eagerness, focus  or requirement to be innovative, designed to maximise opportunity.  Approach in pursuit of very high reward but may carry very high residual risk."
+                },
+                {
+                    "name": "Open",
+                    "otherNotation": "",
+                    "description": "Aim to undertake activities that have a high degree of purpose  value, where the likeliness of success being a determining factor. Activity may carry a large amount of residual risk."
+                },
+                {
+                    "name": "Cautious",
+                    "otherNotation": "",
+                    "description": "Willingness to accept a degree of risk in order to achieve key purpose e.g.  Inherent risk is deemed controllable or acceptable to a large extent. "
+                },
+                {
+                    "name": "Minimalist",
+                    "otherNotation": "",
+                    "description": "Tendency to undertake activities that are considered safe in achieving objects.\nPursuit of opportunity is not a key driver where inherent risk is above low. "
+                },
+                {
+                    "name": "Averse",
+                    "otherNotation": "",
+                    "description": "Avoidance of risk in achievement of key objectives is paramount.  Activities only considered when carrying little low or very low (rare) Residual risk. "
+                }
+            ]
+        }
+    },
+    "RA5": {
+        "name": "Impact on non-public finances",
+        "description": "",
+        "impactJustification": "",
+        "appetiteJustification": "",
+        "securityProperties": {
+            "Disclosure": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Tamper ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Unavailability": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Financial Loss": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Reputational Damage ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            }
+        },
+        "scoringDescriptions": {
+            "businessImpact": [
+                {
+                    "name": "Very High",
+                    "otherNotation": "",
+                    "description": "An activity resulting in extensive financial losses across the economy, leading to significant long-term damage to the country such as widespread unemployment and a recession."
+                },
+                {
+                    "name": "High",
+                    "otherNotation": "",
+                    "description": "An event resulting in a material financial loss to the national economy, leading to loss of a number of large organisations or sever damage to entire market sectors."
+                },
+                {
+                    "name": "Medium",
+                    "otherNotation": "",
+                    "description": "An action leading to a devastating financial loss for an individual or sever economic loss leading to the loss of a large company, employer, or a number of small businesses."
+                },
+                {
+                    "name": "Low",
+                    "otherNotation": "",
+                    "description": "An incident that causes severe financial loss to any individual, such as unemployment or loss of a small UK business. e.g., 2021 figures suggest 34% of UK companies are forced to close after falling victim to ransomware attacks."
+                },
+                {
+                    "name": "Very Low",
+                    "otherNotation": "",
+                    "description": "An activity resulting in a significant financial loss to an individual or business. e.g., 2021 estimates put the average loss per victim is over £4,500 while the cost to small businesses range from around £8k to almost £14k for each data breach."
+                }
+            ],
+            "riskAppetite": [
+                {
+                    "name": "Eager",
+                    "otherNotation": "",
+                    "description": "Eagerness, focus  or requirement to be innovative, designed to maximise opportunity.  Approach in pursuit of very high reward but may carry very high residual risk."
+                },
+                {
+                    "name": "Open",
+                    "otherNotation": "",
+                    "description": "Aim to undertake activities that have a high degree of purpose  value, where the likeliness of success being a determining factor. Activity may carry a large amount of residual risk."
+                },
+                {
+                    "name": "Cautious",
+                    "otherNotation": "",
+                    "description": "Willingness to accept a degree of risk in order to achieve key purpose e.g.  Inherent risk is deemed controllable or acceptable to a large extent. "
+                },
+                {
+                    "name": "Minimalist",
+                    "otherNotation": "",
+                    "description": "Tendency to undertake activities that are considered safe in achieving objects.\nPursuit of opportunity is not a key driver where inherent risk is above low. "
+                },
+                {
+                    "name": "Averse",
+                    "otherNotation": "",
+                    "description": "Avoidance of risk in achievement of key objectives is paramount.  Activities only considered when carrying little low or very low (rare) Residual risk. "
+                }
+            ]
+        }
+    },
+    "RA6": {
+        "name": "Locally provisioned services with an impact on the personal safety of citizens (e.g., sheltered accommodation)",
+        "description": "",
+        "impactJustification": "",
+        "appetiteJustification": "",
+        "securityProperties": {
+            "Disclosure": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Tamper ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Unavailability": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Financial Loss": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Reputational Damage ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            }
+        },
+        "scoringDescriptions": {
+            "businessImpact": [
+                {
+                    "name": "Very High",
+                    "otherNotation": "",
+                    "description": "An event that leads directly to an increased risk of widespread harm or loss of life to a number of individuals e.g., personal information relating to vulnerable persons, people in witness protection, people on the sex offenders register etc., "
+                },
+                {
+                    "name": "High",
+                    "otherNotation": "",
+                    "description": "Any event that leads to a possible direct threat to life (e.g., the compromise of witness protection information, where there is a real risk of attempted murder if the information became known)."
+                },
+                {
+                    "name": "Medium",
+                    "otherNotation": "",
+                    "description": "Any action that poses a serious risk to any individual’s personal safety (e.g., the compromise of the address of a victim of abuse or vulnerable person, where serious further abuse is likely if such information became known)."
+                },
+                {
+                    "name": "Low",
+                    "otherNotation": "",
+                    "description": "An event that directly leads to an increased risk to an individual’s personal safety (e.g., the compromise of the address of a victim of abuse, where there is a reasonable risk of further abuse if such information became known). "
+                },
+                {
+                    "name": "Very Low",
+                    "otherNotation": "",
+                    "description": "An activity that results in a low risk to an individual’s personal safety (e.g., the compromise of the address of a victim of abuse, where there is a low risk of further abuse if such information became known)."
+                }
+            ],
+            "riskAppetite": [
+                {
+                    "name": "Eager",
+                    "otherNotation": "",
+                    "description": "Eagerness, focus  or requirement to be innovative, designed to maximise opportunity.  Approach in pursuit of very high reward but may carry very high residual risk."
+                },
+                {
+                    "name": "Open",
+                    "otherNotation": "",
+                    "description": "Aim to undertake activities that have a high degree of purpose  value, where the likeliness of success being a determining factor. Activity may carry a large amount of residual risk."
+                },
+                {
+                    "name": "Cautious",
+                    "otherNotation": "",
+                    "description": "Willingness to accept a degree of risk in order to achieve key purpose e.g.  Inherent risk is deemed controllable or acceptable to a large extent. "
+                },
+                {
+                    "name": "Minimalist",
+                    "otherNotation": "",
+                    "description": "Tendency to undertake activities that are considered safe in achieving objects.\nPursuit of opportunity is not a key driver where inherent risk is above low. "
+                },
+                {
+                    "name": "Averse",
+                    "otherNotation": "",
+                    "description": "Avoidance of risk in achievement of key objectives is paramount.  Activities only considered when carrying little low or very low (rare) Residual risk. "
+                }
+            ]
+        }
+    },
+    "cookies": { "currentRiskArea": "RA1", "lastRiskArea": "RA6" },
+    "overall": {
+        "Disclosure": {
+            "RAOverwrite": "Not Applicable",
+            "BIOverwrite": "Not Applicable",
+            "RAJustification": "",
+            "BIJustification": ""
+        },
+        "Tamper ": {
+            "RAOverwrite": "Not Applicable",
+            "BIOverwrite": "Not Applicable",
+            "RAJustification": "",
+            "BIJustification": ""
+        },
+        "Unavailability": {
+            "RAOverwrite": "Not Applicable",
+            "BIOverwrite": "Not Applicable",
+            "RAJustification": "",
+            "BIJustification": ""
+        },
+        "Financial Loss": {
+            "RAOverwrite": "Not Applicable",
+            "BIOverwrite": "Not Applicable",
+            "RAJustification": "",
+            "BIJustification": ""
+        },
+        "Reputational Damage ": {
+            "RAOverwrite": "Not Applicable",
+            "BIOverwrite": "Not Applicable",
+            "RAJustification": "",
+            "BIJustification": ""
+        },
+        "scoreNamesBI": ["Very High", "High", "Medium", "Low", "Very Low"],
+        "scoreNamesRA": ["Eager", "Open", "Cautious", "Minimalist", "Averse"],
+        "uniqueSecurityPropertyNames": [
+            "Disclosure",
+            "Tamper ",
+            "Unavailability",
+            "Financial Loss",
+            "Reputational Damage "
+        ],
+        "agreedRiskAppetite": "",
+        "justification": ""
+    },
+    "logo360Defence": "UK",
+    "colours": {
+        "BIVery High": "#FF9E98",
+        "BIHigh": "#D4D101",
+        "BIMedium": "#FFE699",
+        "BILow": "#BDDF6D",
+        "BIVery Low": "#DDEBF7",
+        "BINot Applicable": "#eeeeee",
+        "RAEager": "#8EA9DB",
+        "RAOpen": "#00B050",
+        "RACautious": "#FFFF00",
+        "RAMinimalist": "#808000",
+        "RAAverse": "#FF0000",
+        "RANot Applicable": "#eeeeee"
+    }
+}

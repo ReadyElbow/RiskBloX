@@ -1,0 +1,625 @@
+{
+    "RA1": {
+        "name": "Impact on life and Society",
+        "description": "",
+        "impactJustification": "",
+        "appetiteJustification": "",
+        "securityProperties": {
+            "Disclosure": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Tamper ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Unavailability": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Financial Loss": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Reputational Damage ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            }
+        },
+        "scoringDescriptions": {
+            "businessImpact": [
+                {
+                    "name": "Very High",
+                    "otherNotation": "",
+                    "description": "An action which leads directly to widespread loss of life."
+                },
+                {
+                    "name": "High",
+                    "otherNotation": "",
+                    "description": "A serious threat which poses a real and direct danger resulting in the loss of life to number of people within an area, community, or group."
+                },
+                {
+                    "name": "Medium",
+                    "otherNotation": "",
+                    "description": "An action resulting in a real or perceived risk serious enough to jeopardise the safety, security, or liberty of a group of people."
+                },
+                {
+                    "name": "Low",
+                    "otherNotation": "",
+                    "description": "Any activity that poses a real or theoretical risk to the safety, wellbeing, or liberty of an individual person."
+                },
+                {
+                    "name": "Very Low",
+                    "otherNotation": "",
+                    "description": "Any action or threat that causes minor Inconvenience or discomfort to an individual person or organisation"
+                }
+            ],
+            "riskAppetite": [
+                {
+                    "name": "Eager",
+                    "otherNotation": "",
+                    "description": "Eagerness, focus  or requirement to be innovative, designed to maximise opportunity.  Approach in pursuit of very high reward but may carry very high residual risk."
+                },
+                {
+                    "name": "Open",
+                    "otherNotation": "",
+                    "description": "Aim to undertake activities that have a high degree of purpose  value, where the likeliness of success being a determining factor. Activity may carry a large amount of residual risk."
+                },
+                {
+                    "name": "Cautious",
+                    "otherNotation": "",
+                    "description": "Willingness to accept a degree of risk in order to achieve key purpose e.g.  Inherent risk is deemed controllable or acceptable to a large extent. "
+                },
+                {
+                    "name": "Minimalist",
+                    "otherNotation": "",
+                    "description": "Tendency to undertake activities that are considered safe in achieving objects.\nPursuit of opportunity is not a key driver where inherent risk is above low. "
+                },
+                {
+                    "name": "Averse",
+                    "otherNotation": "",
+                    "description": "Avoidance of risk in achievement of key objectives is paramount.  Activities only considered when carrying little low or very low (rare) Residual risk. "
+                }
+            ]
+        }
+    },
+    "RA2": {
+        "name": "Impact on political stability",
+        "description": "",
+        "impactJustification": "",
+        "appetiteJustification": "",
+        "securityProperties": {
+            "Disclosure": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Tamper ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Unavailability": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Financial Loss": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Reputational Damage ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            }
+        },
+        "scoringDescriptions": {
+            "businessImpact": [
+                {
+                    "name": "Very High",
+                    "otherNotation": "",
+                    "description": "Threats or actions intended to destabilise government, economy and / or rule of law to bring about a collapse of the internal political stability of the UK or friendly countries."
+                },
+                {
+                    "name": "High",
+                    "otherNotation": "",
+                    "description": "A threat or action that directly threatens the internal political stability of the UK or friendly countries. Possible symptoms could include increased vocal and public protest, disobedience and unrest as seen in the Poll Tax riots of 1990 and Battle of George Square in 1919 when tanks were deployed to the streets of Glasgow."
+                },
+                {
+                    "name": "Medium",
+                    "otherNotation": "",
+                    "description": "An event that causes the public to suffer a major loss in confidence of the government, perhaps leading to growing public antipathy, disobedience, and unrest."
+                },
+                {
+                    "name": "Low",
+                    "otherNotation": "",
+                    "description": "Any action that results in a minor loss of confidence in government perhaps involving negative media coverage, adverse polling predictions and growing public dissatisfaction."
+                },
+                {
+                    "name": "Very Low",
+                    "otherNotation": "",
+                    "description": "None - other than some potential local media coverage resulting in some minor political and professional embarrassment."
+                }
+            ],
+            "riskAppetite": [
+                {
+                    "name": "Eager",
+                    "otherNotation": "",
+                    "description": "Eagerness, focus  or requirement to be innovative, designed to maximise opportunity.  Approach in pursuit of very high reward but may carry very high residual risk."
+                },
+                {
+                    "name": "Open",
+                    "otherNotation": "",
+                    "description": "Aim to undertake activities that have a high degree of purpose  value, where the likeliness of success being a determining factor. Activity may carry a large amount of residual risk."
+                },
+                {
+                    "name": "Cautious",
+                    "otherNotation": "",
+                    "description": "Willingness to accept a degree of risk in order to achieve key purpose e.g.,  Inherent risk is deemed controllable or acceptable to a large extent. "
+                },
+                {
+                    "name": "Minimalist",
+                    "otherNotation": "",
+                    "description": "Tendency to undertake activities that are considered safe in achieving objects.\nPursuit of opportunity is not a key driver where inherent risk is above low. "
+                },
+                {
+                    "name": "Averse",
+                    "otherNotation": "",
+                    "description": "Avoidance of risk in achievement of key objectives is paramount.  Activities only considered when carrying little low or very low (rare) Residual risk. "
+                }
+            ]
+        }
+    },
+    "RA3": {
+        "name": "Impact on military operations",
+        "description": "",
+        "impactJustification": "",
+        "appetiteJustification": "",
+        "securityProperties": {
+            "Disclosure": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Tamper ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Unavailability": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Financial Loss": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Reputational Damage ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            }
+        },
+        "scoringDescriptions": {
+            "businessImpact": [
+                {
+                    "name": "Very High",
+                    "otherNotation": "",
+                    "description": "An activity that results in exceptionally grave damage to the operational effectiveness or security of UK or allied forces. This could be the compromised of operational plans relating to units of battalion size or above in a theatre of military operations, or even a total collapse of the delivery system preventing resupply of vital materials."
+                },
+                {
+                    "name": "High",
+                    "otherNotation": "",
+                    "description": "A threat or event that causes severe damage to the operational effectiveness or security of UK or allied forces. This could range from the operational plans of units (of company size or below) being compromised while involved in a theatre of military operations."
+                },
+                {
+                    "name": "Medium",
+                    "otherNotation": "",
+                    "description": "An event or threat that results in damage to the operational effectiveness or security of UK or allied forces. This could be something that compromises the logistics system enough to interfere with re-supply problems without causing risk to life."
+                },
+                {
+                    "name": "Low",
+                    "otherNotation": "",
+                    "description": "Any risk, threat or event that is likely to cause damage to the operational effectiveness or the security of the UK or allied forces (e.g., something that compromises supply procedures or interrupts training materials for UK forces)"
+                },
+                {
+                    "name": "Very Low",
+                    "otherNotation": "",
+                    "description": "Any action or perceived threat which results in the loss of a minor supply service or causes a mild delay to the effective operation of such a supply service."
+                }
+            ],
+            "riskAppetite": [
+                {
+                    "name": "Eager",
+                    "otherNotation": "",
+                    "description": "Eagerness, focus  or requirement to be innovative, designed to maximise opportunity.  Approach in pursuit of very high reward but may carry very high residual risk."
+                },
+                {
+                    "name": "Open",
+                    "otherNotation": "",
+                    "description": "Aim to undertake activities that have a high degree of purpose  value, where the likeliness of success being a determining factor. Activity may carry a large amount of residual risk."
+                },
+                {
+                    "name": "Cautious",
+                    "otherNotation": "",
+                    "description": "Willingness to accept a degree of risk in order to achieve key purpose e.g.  Inherent risk is deemed controllable or acceptable to a large extent. "
+                },
+                {
+                    "name": "Minimalist",
+                    "otherNotation": "",
+                    "description": "Tendency to undertake activities that are considered safe in achieving objects.\nPursuit of opportunity is not a key driver where inherent risk is above low. "
+                },
+                {
+                    "name": "Averse",
+                    "otherNotation": "",
+                    "description": "Avoidance of risk in achievement of key objectives is paramount.  Activities only considered when carrying little low or very low (rare) Residual risk. "
+                }
+            ]
+        }
+    },
+    "RA4": {
+        "name": "Impact on foreign relations",
+        "description": "",
+        "impactJustification": "",
+        "appetiteJustification": "",
+        "securityProperties": {
+            "Disclosure": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Tamper ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Unavailability": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Financial Loss": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Reputational Damage ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            }
+        },
+        "scoringDescriptions": {
+            "businessImpact": [
+                {
+                    "name": "Very High",
+                    "otherNotation": "",
+                    "description": "Directly provoke international conflict or cause exceptionally grave damage to relations with friendly governments (e.g., Ukraine (2022), Kuwait (1991) etc. where military and/or political actions result in armed conflict, economic damage, and tensions among allied states.)"
+                },
+                {
+                    "name": "High",
+                    "otherNotation": "",
+                    "description": "Raise international tension, or seriously damage relations with friendly governments (e.g., breakdown in discussions leading to financial sanctions, withdrawal of diplomatic staff etc.)"
+                },
+                {
+                    "name": "Medium",
+                    "otherNotation": "",
+                    "description": "Events that materially damage diplomatic relations (e.g., causing formal protest or other sanctions - such as trade barriers, official protest)"
+                },
+                {
+                    "name": "Low",
+                    "otherNotation": "",
+                    "description": "A threat or action that intentionally or inadvertently causes embarrassment to diplomatic relations. Examples include French President Sarkozy and US President Obama at the 2011 G20 summit calling Israeli leader Netanyahu a liar without realising their comments were being broadcast to the media."
+                },
+                {
+                    "name": "Very Low",
+                    "otherNotation": "",
+                    "description": "None "
+                }
+            ],
+            "riskAppetite": [
+                {
+                    "name": "Eager",
+                    "otherNotation": "",
+                    "description": "Eagerness, focus  or requirement to be innovative, designed to maximise opportunity.  Approach in pursuit of very high reward but may carry very high residual risk."
+                },
+                {
+                    "name": "Open",
+                    "otherNotation": "",
+                    "description": "Aim to undertake activities that have a high degree of purpose  value, where the likeliness of success being a determining factor. Activity may carry a large amount of residual risk."
+                },
+                {
+                    "name": "Cautious",
+                    "otherNotation": "",
+                    "description": "Willingness to accept a degree of risk in order to achieve key purpose e.g.  Inherent risk is deemed controllable or acceptable to a large extent. "
+                },
+                {
+                    "name": "Minimalist",
+                    "otherNotation": "",
+                    "description": "Tendency to undertake activities that are considered safe in achieving objects.\nPursuit of opportunity is not a key driver where inherent risk is above low. "
+                },
+                {
+                    "name": "Averse",
+                    "otherNotation": "",
+                    "description": "Avoidance of risk in achievement of key objectives is paramount.  Activities only considered when carrying little low or very low (rare) Residual risk. "
+                }
+            ]
+        }
+    },
+    "RA5": {
+        "name": "Impact on trade negotiations",
+        "description": "",
+        "impactJustification": "",
+        "appetiteJustification": "",
+        "securityProperties": {
+            "Disclosure": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Tamper ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Unavailability": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Financial Loss": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Reputational Damage ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            }
+        },
+        "scoringDescriptions": {
+            "businessImpact": [
+                {
+                    "name": "Very High",
+                    "otherNotation": "",
+                    "description": "Severely disadvantage the UK in international negotiations (e.g., advance compromise of UK negotiation strategy or acceptable outcomes, in the context of a major EU or WTO negotiating round)."
+                },
+                {
+                    "name": "High",
+                    "otherNotation": "",
+                    "description": "Disadvantage the UK in international negotiations (e.g., advance compromise of UK negotiation strategy or acceptable outcomes, in the context of a bilateral trade dispute)."
+                },
+                {
+                    "name": "Medium",
+                    "otherNotation": "",
+                    "description": "Disadvantage a number of major UK companies (e.g., a large data breach or attack that compromises the ability of a number of companies to trade, negotiate or compete for business)."
+                },
+                {
+                    "name": "Low",
+                    "otherNotation": "",
+                    "description": "Disadvantage a major UK company or sector resulting from a leak of data that reveals a company’s industrial secrets, plans and strategies."
+                },
+                {
+                    "name": "Very Low",
+                    "otherNotation": "",
+                    "description": "None"
+                }
+            ],
+            "riskAppetite": [
+                {
+                    "name": "Eager",
+                    "otherNotation": "",
+                    "description": "Eagerness, focus  or requirement to be innovative, designed to maximise opportunity.  Approach in pursuit of very high reward but may carry very high residual risk."
+                },
+                {
+                    "name": "Open",
+                    "otherNotation": "",
+                    "description": "Aim to undertake activities that have a high degree of purpose  value, where the likeliness of success being a determining factor. Activity may carry a large amount of residual risk."
+                },
+                {
+                    "name": "Cautious",
+                    "otherNotation": "",
+                    "description": "Willingness to accept a degree of risk in order to achieve key purpose e.g.  Inherent risk is deemed controllable or acceptable to a large extent. "
+                },
+                {
+                    "name": "Minimalist",
+                    "otherNotation": "",
+                    "description": "Tendency to undertake activities that are considered safe in achieving objects.\nPursuit of opportunity is not a key driver where inherent risk is above low. "
+                },
+                {
+                    "name": "Averse",
+                    "otherNotation": "",
+                    "description": "Avoidance of risk in achievement of key objectives is paramount.  Activities only considered when carrying little low or very low (rare) Residual risk. "
+                }
+            ]
+        }
+    },
+    "RA6": {
+        "name": "Impact on intelligence operations",
+        "description": "",
+        "impactJustification": "",
+        "appetiteJustification": "",
+        "securityProperties": {
+            "Disclosure": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Tamper ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Unavailability": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Financial Loss": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Reputational Damage ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            }
+        },
+        "scoringDescriptions": {
+            "businessImpact": [
+                {
+                    "name": "Very High",
+                    "otherNotation": "",
+                    "description": "A loss of classified TOP SECRET data could result in halting unique intelligence operations supporting requirements identified within the JIC. \nIt could also result in severe damage to UK or allied intelligence capabilities e.g., the 2013 leak of almost 60k UK security documents by Edward Snowden called the “most catastrophic loss to British intelligence ever\"\nOther concerns include the JIC being used, or perceived to being used, for political purposes, e.g., The 2002 “sexing up” of the WMD dossier to justify military action in Iraq."
+                },
+                {
+                    "name": "High",
+                    "otherNotation": "",
+                    "description": "A loss of classified SECRET information could halt unique intelligence operations in support of the requirements handled within the JIC. Also, such a loss could impair unique operations causing damage to UK or allied intelligence capability.\n\nOther issues can arise when the role of JIC is used, or perceived as being used, for political purposes - e.g., the alleged 2002 “sexing up” of the Weapons of Mass Destruction (WMD) intelligence dossier to justify military action in Iraq."
+                },
+                {
+                    "name": "Medium",
+                    "otherNotation": "",
+                    "description": "A loss of Information or data could halt unique operations that provide valuable support in meeting the country’s security needs as set out within the Joint Intelligence Committee."
+                },
+                {
+                    "name": "Low",
+                    "otherNotation": "",
+                    "description": "Any loss, theft or leak of information could halt, or result in damage to, unique intelligence operations which provide valuable support to fulfilling security requirements as set out by the Joint Intelligence Committee "
+                },
+                {
+                    "name": "Very Low",
+                    "otherNotation": "",
+                    "description": "None - other than some increasingly awkward political and professional embarrassment should it become publicly known that information has been lost, stolen, or compromised."
+                }
+            ],
+            "riskAppetite": [
+                {
+                    "name": "Eager",
+                    "otherNotation": "",
+                    "description": "Eagerness, focus  or requirement to be innovative, designed to maximise opportunity.  Approach in pursuit of very high reward but may carry very high residual risk."
+                },
+                {
+                    "name": "Open",
+                    "otherNotation": "",
+                    "description": "Aim to undertake activities that have a high degree of purpose  value, where the likeliness of success being a determining factor. Activity may carry a large amount of residual risk."
+                },
+                {
+                    "name": "Cautious",
+                    "otherNotation": "",
+                    "description": "Willingness to accept a degree of risk in order to achieve key purpose e.g.  Inherent risk is deemed controllable or acceptable to a large extent. "
+                },
+                {
+                    "name": "Minimalist",
+                    "otherNotation": "",
+                    "description": "Tendency to undertake activities that are considered safe in achieving objects.\nPursuit of opportunity is not a key driver where inherent risk is above low. "
+                },
+                {
+                    "name": "Averse",
+                    "otherNotation": "",
+                    "description": "Avoidance of risk in achievement of key objectives is paramount.  Activities only considered when carrying little low or very low (rare) Residual risk. "
+                }
+            ]
+        }
+    },
+    "cookies": { "currentRiskArea": "RA1", "lastRiskArea": "RA6" },
+    "overall": {
+        "Disclosure": {
+            "RAOverwrite": "Not Applicable",
+            "BIOverwrite": "Not Applicable",
+            "RAJustification": "",
+            "BIJustification": ""
+        },
+        "Tamper ": {
+            "RAOverwrite": "Not Applicable",
+            "BIOverwrite": "Not Applicable",
+            "RAJustification": "",
+            "BIJustification": ""
+        },
+        "Unavailability": {
+            "RAOverwrite": "Not Applicable",
+            "BIOverwrite": "Not Applicable",
+            "RAJustification": "",
+            "BIJustification": ""
+        },
+        "Financial Loss": {
+            "RAOverwrite": "Not Applicable",
+            "BIOverwrite": "Not Applicable",
+            "RAJustification": "",
+            "BIJustification": ""
+        },
+        "Reputational Damage ": {
+            "RAOverwrite": "Not Applicable",
+            "BIOverwrite": "Not Applicable",
+            "RAJustification": "",
+            "BIJustification": ""
+        },
+        "scoreNamesBI": ["Very High", "High", "Medium", "Low", "Very Low"],
+        "scoreNamesRA": ["Eager", "Open", "Cautious", "Minimalist", "Averse"],
+        "uniqueSecurityPropertyNames": [
+            "Disclosure",
+            "Tamper ",
+            "Unavailability",
+            "Financial Loss",
+            "Reputational Damage "
+        ],
+        "agreedRiskAppetite": "",
+        "justification": ""
+    },
+    "logo360Defence": "UK",
+    "colours": {
+        "BIVery High": "#FF9E98",
+        "BIHigh": "#D4D101",
+        "BIMedium": "#FFE699",
+        "BILow": "#BDDF6D",
+        "BIVery Low": "#DDEBF7",
+        "BINot Applicable": "#eeeeee",
+        "RAEager": "#8EA9DB",
+        "RAOpen": "#00B050",
+        "RACautious": "#FFFF00",
+        "RAMinimalist": "#808000",
+        "RAAverse": "#FF0000",
+        "RANot Applicable": "#eeeeee"
+    }
+}

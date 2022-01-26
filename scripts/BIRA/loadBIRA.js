@@ -2,17 +2,20 @@ $("button").click(function () {
     var name = $(this).attr("id");
     if (name == "JSONLoad") {
         clearStorage();
-        loadJSON();
+        uploadJSON();
     } else if (name == "prebuiltLoad") {
+        loadPreBuilt();
     } else if (name == "sessionLoad") {
         loadSession();
     }
 });
 
 function loadPreBuilt() {
-    //userInput = $.getJSON("/prebuilt/....");
+    let choice = $("#prebuilt").find("option:selected").val();
+    $.getJSON("/public-templates/" + choice, function (parsedJSON) {
+        loadJSON(parsedJSON);
+    });
 }
-
 function clearStorage() {
     userAuth = localStorage.getItem("userAuth");
     localStorage.clear();
@@ -27,58 +30,60 @@ function loadSession() {
     }
 }
 
-function loadJSON() {
+function uploadJSON() {
     userInput = $("#formFile").prop("files")[0];
     const reader = new FileReader();
-    var riskArea = "";
-    var dropdownNavigation = {};
     reader.onload = function (event) {
-        try {
-            var parsedJSON = $.parseJSON(event.target.result);
-            for (const [key, value] of Object.entries(parsedJSON)) {
-                if (key == "cookies") {
-                    document.cookie =
-                        "currentRiskArea=" + value.currentRiskArea;
-                    riskArea = value.currentRiskArea;
-                    document.cookie = "lastRiskArea=" + value.lastRiskArea;
-                } else if (
-                    [
-                        "projectLogo",
-                        "projectTitle",
-                        "projectSensitivity",
-                        "logo360Defence",
-                    ].includes(key)
-                ) {
-                    localStorage.setItem(key, value);
-                } else {
-                    dropdownNavigation[key] = value.name;
-                    localStorage.setItem(key, JSON.stringify(value));
-                }
-            }
-            sessionStorage.setItem(
-                "navigation",
-                JSON.stringify(dropdownNavigation)
-            );
-            let reportTitle = document.getElementById("projectName").value;
-            if (reportTitle != null) {
-                projectTitle();
-            }
-            let reportSensitivity =
-                document.getElementById("projectSensitivity").value;
-            if (reportSensitivity != null) {
-                projectSensitivity();
-            }
-            projectLogo();
-            if (riskArea == "overview") {
-                window.location.href = "/BIRA/report";
-            } else {
-                window.location.href = "/BIRA/BIRAInput";
-            }
-        } catch (err) {
-            console.log("This JSON file is not valid.");
-        }
+        loadJSON($.parseJSON(event.target.result));
     };
     reader.readAsText(userInput);
+}
+
+function loadJSON(parsedJSON) {
+    var riskArea = "";
+    var dropdownNavigation = {};
+    try {
+        for (const [key, value] of Object.entries(parsedJSON)) {
+            if (key == "cookies") {
+                document.cookie = "currentRiskArea=" + value.currentRiskArea;
+                riskArea = value.currentRiskArea;
+                document.cookie = "lastRiskArea=" + value.lastRiskArea;
+            } else if (
+                [
+                    "projectLogo",
+                    "projectTitle",
+                    "projectSensitivity",
+                    "logo360Defence",
+                ].includes(key)
+            ) {
+                localStorage.setItem(key, value);
+            } else {
+                dropdownNavigation[key] = value.name;
+                localStorage.setItem(key, JSON.stringify(value));
+            }
+        }
+        sessionStorage.setItem(
+            "navigation",
+            JSON.stringify(dropdownNavigation)
+        );
+        let reportTitle = document.getElementById("projectName").value;
+        if (reportTitle != null) {
+            projectTitle();
+        }
+        let reportSensitivity =
+            document.getElementById("projectSensitivity").value;
+        if (reportSensitivity != null) {
+            projectSensitivity();
+        }
+        projectLogo();
+        if (riskArea == "overview") {
+            window.location.href = "/BIRA/report";
+        } else {
+            window.location.href = "/BIRA/BIRAInput";
+        }
+    } catch (error) {
+        console.log("This JSON file is not valid.");
+    }
 }
 
 function projectTitle() {

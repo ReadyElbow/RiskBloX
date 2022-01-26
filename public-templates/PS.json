@@ -1,0 +1,343 @@
+{
+    "RA1": {
+        "name": "Locally provisioned services with an impact on the health of citizens (e.g., waste disposal)",
+        "description": "",
+        "impactJustification": "",
+        "appetiteJustification": "",
+        "securityProperties": {
+            "Disclosure": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Tamper ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Unavailability": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Financial Loss": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Reputational Damage ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            }
+        },
+        "scoringDescriptions": {
+            "businessImpact": [
+                {
+                    "name": "Very High",
+                    "otherNotation": "",
+                    "description": "Catastrophic disruption or compromise of a number of Local Authority services, or catastrophic faults within these services which could lead to severe health risks and widespread loss of life [e.g., cyber-attacks on power and water supplies, vaccine distribution and transport links]"
+                },
+                {
+                    "name": "High",
+                    "otherNotation": "",
+                    "description": "An event leading to major disruption or compromise of local authority services, or critical faults within these services, which could result in severe health risks and limited loss of life. [e.g., the 1998 Camelford incident when 20k tonnes of aluminium sulphate was dumped in the water supply]."
+                },
+                {
+                    "name": "Medium",
+                    "otherNotation": "",
+                    "description": "A more serious action causing significant authority-wide disruption, compromise or flawed working of services which could lead to major health risks to numerous people in the region of 10s, 100s or even 1,000s."
+                },
+                {
+                    "name": "Low",
+                    "otherNotation": "",
+                    "description": "An event impacting a larger community such as an authority-wide disruption, compromise or flawed working of services which could impose an increased risk to health and wellbeing."
+                },
+                {
+                    "name": "Very Low",
+                    "otherNotation": "",
+                    "description": "An event that leads to disruption, compromise or flawed working of local services which could pose a risk to community health [ e.g., spread of disease caused by a breakdown in refuse collection, sewage disposal, water treatment or vaccination programme]"
+                }
+            ],
+            "riskAppetite": [
+                {
+                    "name": "Eager",
+                    "otherNotation": "",
+                    "description": "Eagerness, focus  or requirement to be innovative, designed to maximise opportunity.  Approach in pursuit of very high reward but may carry very high residual risk."
+                },
+                {
+                    "name": "Open",
+                    "otherNotation": "",
+                    "description": "Aim to undertake activities that have a high degree of purpose  value, where the likeliness of success being a determining factor. Activity may carry a large amount of residual risk."
+                },
+                {
+                    "name": "Cautious",
+                    "otherNotation": "",
+                    "description": "Willingness to accept a degree of risk in order to achieve key purpose e.g.  Inherent risk is deemed controllable or acceptable to a large extent. "
+                },
+                {
+                    "name": "Minimalist",
+                    "otherNotation": "",
+                    "description": "Tendency to undertake activities that are considered safe in achieving objects.\nPursuit of opportunity is not a key driver where inherent risk is above low. "
+                },
+                {
+                    "name": "Averse",
+                    "otherNotation": "",
+                    "description": "Avoidance of risk in achievement of key objectives is paramount.  Activities only considered when carrying little low or very low (rare) Residual risk. "
+                }
+            ]
+        }
+    },
+    "RA2": {
+        "name": "Locally provisioned services with no impact on health or safety of citizens (e.g., library services, land use and planning services).",
+        "description": "",
+        "impactJustification": "",
+        "appetiteJustification": "",
+        "securityProperties": {
+            "Disclosure": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Tamper ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Unavailability": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Financial Loss": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Reputational Damage ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            }
+        },
+        "scoringDescriptions": {
+            "businessImpact": [
+                {
+                    "name": "Very High",
+                    "otherNotation": "",
+                    "description": "A widespread action resulting in a total loss of major services provided by a number of local authorities throughout a region or country leading to severe financial losses and major lasting economic damage across the country."
+                },
+                {
+                    "name": "High",
+                    "otherNotation": "",
+                    "description": "A serious event culminating in a total loss of major services provided by a local authority, leading to severe financial losses to the authority and/or devastating losses to numerous members of the public [e.g., the recent cyberattack that closed down Gloucestershire Council’s online revenue and benefits sections, planning and customer services.]"
+                },
+                {
+                    "name": "Medium",
+                    "otherNotation": "",
+                    "description": "An activity resulting a loss of major services provided by local authorities leading to major financial problems for the authority and/or citizens [e.g., the shutdown of financial services causing an inability to collect or pay monies; a close of schools and nurseries leading to widespread childcare problems etc]"
+                },
+                {
+                    "name": "Low",
+                    "otherNotation": "",
+                    "description": "An event leading to the cancellation of multiple services to a number (up to 1,000) of citizens resulting in significant and individual financial losses. [e.g., an attack on payroll services, disruption to finance departments so they can’t pay invoices and/or transport links leading to route closures etc."
+                },
+                {
+                    "name": "Very Low",
+                    "otherNotation": "",
+                    "description": "Any activity resulting in the cancellation of services to up to 100 people [e.g., closure of a local library, sporting centre, community hall or other facility."
+                }
+            ],
+            "riskAppetite": [
+                {
+                    "name": "Eager",
+                    "otherNotation": "",
+                    "description": "Eagerness, focus  or requirement to be innovative, designed to maximise opportunity.  Approach in pursuit of very high reward but may carry very high residual risk."
+                },
+                {
+                    "name": "Open",
+                    "otherNotation": "",
+                    "description": "Aim to undertake activities that have a high degree of purpose  value, where the likeliness of success being a determining factor. Activity may carry a large amount of residual risk."
+                },
+                {
+                    "name": "Cautious",
+                    "otherNotation": "",
+                    "description": "Willingness to accept a degree of risk in order to achieve key purpose e.g.,  Inherent risk is deemed controllable or acceptable to a large extent. "
+                },
+                {
+                    "name": "Minimalist",
+                    "otherNotation": "",
+                    "description": "Tendency to undertake activities that are considered safe in achieving objects.\nPursuit of opportunity is not a key driver where inherent risk is above low. "
+                },
+                {
+                    "name": "Averse",
+                    "otherNotation": "",
+                    "description": "Avoidance of risk in achievement of key objectives is paramount.  Activities only considered when carrying little low or very low (rare) Residual risk. "
+                }
+            ]
+        }
+    },
+    "RA3": {
+        "name": "Locally provisioned services in support of the Civil Contingencies Act",
+        "description": "",
+        "impactJustification": "",
+        "appetiteJustification": "",
+        "securityProperties": {
+            "Disclosure": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Tamper ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Unavailability": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Financial Loss": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Reputational Damage ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            }
+        },
+        "scoringDescriptions": {
+            "businessImpact": [
+                {
+                    "name": "Very High",
+                    "otherNotation": "",
+                    "description": "An action that prevents several local or national authorities from responding to a major incident within 12 although it affects a large number of citizens / local businesses [ e.g., major flooding, fire, contamination, explosion or CNI failure.]"
+                },
+                {
+                    "name": "High",
+                    "otherNotation": "",
+                    "description": "An event which causes a major incident to which a local authority cannot react within 12 hours, but which affects a large number of citizens / local businesses - e.g., major flooding, fire, contamination, explosion or CNI failure"
+                },
+                {
+                    "name": "Medium",
+                    "otherNotation": "",
+                    "description": "A large major incident to which a local authority is unable to react within 24 hours even though it affects a large number of citizens / local businesses [e.g., major flooding, fire, contamination, explosion or CNI failure]."
+                },
+                {
+                    "name": "Low",
+                    "otherNotation": "",
+                    "description": "An incident classed as significant, meaning a local authority is unable to react within 24 despite it impacting a large number of people / local businesses [e.g., flooding, fire, chemical incident leading to contamination or an explosion of some kind]"
+                },
+                {
+                    "name": "Very Low",
+                    "otherNotation": "",
+                    "description": "An action resulting in a minor isolated incident to which a local authority is unable to react within a few days but that has an impact on a number of citizens / local businesses. [e.g., short-term interruption of power or mains water supplies"
+                }
+            ],
+            "riskAppetite": [
+                {
+                    "name": "Eager",
+                    "otherNotation": "",
+                    "description": "Eagerness, focus  or requirement to be innovative, designed to maximise opportunity.  Approach in pursuit of very high reward but may carry very high residual risk."
+                },
+                {
+                    "name": "Open",
+                    "otherNotation": "",
+                    "description": "Aim to undertake activities that have a high degree of purpose  value, where the likeliness of success being a determining factor. Activity may carry a large amount of residual risk."
+                },
+                {
+                    "name": "Cautious",
+                    "otherNotation": "",
+                    "description": "Willingness to accept a degree of risk in order to achieve key purpose e.g.  Inherent risk is deemed controllable or acceptable to a large extent. "
+                },
+                {
+                    "name": "Minimalist",
+                    "otherNotation": "",
+                    "description": "Tendency to undertake activities that are considered safe in achieving objects.\nPursuit of opportunity is not a key driver where inherent risk is above low. "
+                },
+                {
+                    "name": "Averse",
+                    "otherNotation": "",
+                    "description": "Avoidance of risk in achievement of key objectives is paramount.  Activities only considered when carrying little low or very low (rare) Residual risk. "
+                }
+            ]
+        }
+    },
+    "cookies": { "currentRiskArea": "RA1", "lastRiskArea": "RA3" },
+    "overall": {
+        "Disclosure": {
+            "RAOverwrite": "Not Applicable",
+            "BIOverwrite": "Not Applicable",
+            "RAJustification": "",
+            "BIJustification": ""
+        },
+        "Tamper ": {
+            "RAOverwrite": "Not Applicable",
+            "BIOverwrite": "Not Applicable",
+            "RAJustification": "",
+            "BIJustification": ""
+        },
+        "Unavailability": {
+            "RAOverwrite": "Not Applicable",
+            "BIOverwrite": "Not Applicable",
+            "RAJustification": "",
+            "BIJustification": ""
+        },
+        "Financial Loss": {
+            "RAOverwrite": "Not Applicable",
+            "BIOverwrite": "Not Applicable",
+            "RAJustification": "",
+            "BIJustification": ""
+        },
+        "Reputational Damage ": {
+            "RAOverwrite": "Not Applicable",
+            "BIOverwrite": "Not Applicable",
+            "RAJustification": "",
+            "BIJustification": ""
+        },
+        "scoreNamesBI": ["Very High", "High", "Medium", "Low", "Very Low"],
+        "scoreNamesRA": ["Eager", "Open", "Cautious", "Minimalist", "Averse"],
+        "uniqueSecurityPropertyNames": [
+            "Disclosure",
+            "Tamper ",
+            "Unavailability",
+            "Financial Loss",
+            "Reputational Damage "
+        ],
+        "agreedRiskAppetite": "",
+        "justification": ""
+    },
+    "logo360Defence": "UK",
+    "colours": {
+        "BIVery High": "#FF9E98",
+        "BIHigh": "#D4D101",
+        "BIMedium": "#FFE699",
+        "BILow": "#BDDF6D",
+        "BIVery Low": "#DDEBF7",
+        "BINot Applicable": "#eeeeee",
+        "RAEager": "#8EA9DB",
+        "RAOpen": "#00B050",
+        "RACautious": "#FFFF00",
+        "RAMinimalist": "#808000",
+        "RAAverse": "#FF0000",
+        "RANot Applicable": "#eeeeee"
+    }
+}

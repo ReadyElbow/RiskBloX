@@ -1,0 +1,437 @@
+{
+    "RA1": {
+        "name": "Impact on Life and Safety ",
+        "description": "",
+        "impactJustification": "",
+        "appetiteJustification": "",
+        "securityProperties": {
+            "Disclosure": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Tamper ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Unavailability": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Financial Loss": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Reputational Damage ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            }
+        },
+        "scoringDescriptions": {
+            "businessImpact": [
+                {
+                    "name": "Very High",
+                    "otherNotation": "",
+                    "description": "Lead directly to widespread loss of life. [e.g., a cyberattack on power supplies, health services etc. which cause casualties and/or increase mortality rates."
+                },
+                {
+                    "name": "High",
+                    "otherNotation": "",
+                    "description": "Threaten life directly leading to limited loss of life. [e.g., the death of a critically ill patient caused by a hack of a hospital computer system as in Germany (November 2020) and Alabama, USA when a baby died in July 2019) "
+                },
+                {
+                    "name": "Medium",
+                    "otherNotation": "",
+                    "description": "Any action that poses a risk to the safety, wellbeing, or liberty of a group of individuals [e.g., targeted attacks on health care organisations, energy suppliers or government departments etc which result in a breakdown of services."
+                },
+                {
+                    "name": "Low",
+                    "otherNotation": "",
+                    "description": "Any threat or event that causes a risk to an individual’s personal safety or liberty. [e.g., an unauthorised release of personal information such as that of a witness, whistle-blower or accused involved in a civil or criminal legal case."
+                },
+                {
+                    "name": "Very Low",
+                    "otherNotation": "",
+                    "description": "Actions or threats that cause limited inconvenience / physical, emotional, or mental discomfort to an individual. [e.g., leak of private medical or criminal records. Or, in the corporate world, e.g., the Ashley Madison (2015 data breach)."
+                }
+            ],
+            "riskAppetite": [
+                {
+                    "name": "Eager",
+                    "otherNotation": "",
+                    "description": "Eagerness, focus  or requirement to be innovative, designed to maximise opportunity.  Approach in pursuit of very high reward but may carry very high residual risk."
+                },
+                {
+                    "name": "Open",
+                    "otherNotation": "",
+                    "description": "Aim to undertake activities that have a high degree of purpose  value, where the likeliness of success being a determining factor. Activity may carry a large amount of residual risk."
+                },
+                {
+                    "name": "Cautious",
+                    "otherNotation": "",
+                    "description": "Willingness to accept a degree of risk in order to achieve key purpose e.g.  Inherent risk is deemed controllable or acceptable to a large extent. "
+                },
+                {
+                    "name": "Minimalist",
+                    "otherNotation": "",
+                    "description": "Tendency to undertake activities that are considered safe in achieving objects.\nPursuit of opportunity is not a key driver where inherent risk is above low. "
+                },
+                {
+                    "name": "Averse",
+                    "otherNotation": "",
+                    "description": "Avoidance of risk in achievement of key objectives is paramount.  Activities only considered when carrying little low or very low (rare) Residual risk. "
+                }
+            ]
+        }
+    },
+    "RA2": {
+        "name": "Impact on provision of emergency services",
+        "description": "",
+        "impactJustification": "",
+        "appetiteJustification": "",
+        "securityProperties": {
+            "Disclosure": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Tamper ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Unavailability": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Financial Loss": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Reputational Damage ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            }
+        },
+        "scoringDescriptions": {
+            "businessImpact": [
+                {
+                    "name": "Very High",
+                    "otherNotation": "",
+                    "description": "An action that directly impacts the internal stability of the UK or friendly countries leading to widespread instability. [e.g., an event that causes panic or widespread migration that threatens to overwhelm services and/or locations."
+                },
+                {
+                    "name": "High",
+                    "otherNotation": "",
+                    "description": "Disruption to emergency service activities that requires emergency powers to be invoked [e.g., military assistance to the emergency services to meet expected levels of service."
+                },
+                {
+                    "name": "Medium",
+                    "otherNotation": "",
+                    "description": "An event leading to disruption to emergency activities that requires reprioritisation at the national level [e.g., one police or ambulance service requesting help from another to meet expected levels of service."
+                },
+                {
+                    "name": "Low",
+                    "otherNotation": "",
+                    "description": "Any action or threat that disrupts emergency service activities requiring reprioritisation at the county or divisional level to meet expected levels of service [e.g., a cyber hack that causes ambulance delays or diversions, restrict access to treatment or impede test results etc.,"
+                },
+                {
+                    "name": "Very Low",
+                    "otherNotation": "",
+                    "description": "Minor disruption to service activities requiring reprioritisation at local level to meet expected levels of service [e.g., a lesser cyberattack on a single hospital or emergency service provider."
+                }
+            ],
+            "riskAppetite": [
+                {
+                    "name": "Eager",
+                    "otherNotation": "",
+                    "description": "Eagerness, focus  or requirement to be innovative, designed to maximise opportunity.  Approach in pursuit of very high reward but may carry very high residual risk."
+                },
+                {
+                    "name": "Open",
+                    "otherNotation": "",
+                    "description": "Aim to undertake activities that have a high degree of purpose  value, where the likeliness of success being a determining factor. Activity may carry a large amount of residual risk."
+                },
+                {
+                    "name": "Cautious",
+                    "otherNotation": "",
+                    "description": "Willingness to accept a degree of risk in order to achieve key purpose e.g.,  Inherent risk is deemed controllable or acceptable to a large extent. "
+                },
+                {
+                    "name": "Minimalist",
+                    "otherNotation": "",
+                    "description": "Tendency to undertake activities that are considered safe in achieving objects.\nPursuit of opportunity is not a key driver where inherent risk is above low. "
+                },
+                {
+                    "name": "Averse",
+                    "otherNotation": "",
+                    "description": "Avoidance of risk in achievement of key objectives is paramount.  Activities only considered when carrying little low or very low (rare) Residual risk. "
+                }
+            ]
+        }
+    },
+    "RA3": {
+        "name": "Impact on crime fighting",
+        "description": "",
+        "impactJustification": "",
+        "appetiteJustification": "",
+        "securityProperties": {
+            "Disclosure": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Tamper ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Unavailability": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Financial Loss": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Reputational Damage ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            }
+        },
+        "scoringDescriptions": {
+            "businessImpact": [
+                {
+                    "name": "Very High",
+                    "otherNotation": "",
+                    "description": "Cause major, long-term impairment to the ability to investigate serious organised crime as defined in legislation) e.g., theft of evidence, victim’s statements, informants identify personal details of investigators etc., [In 2021 Russian hackers stole 13million data records from UK police and released them to the dark web]"
+                },
+                {
+                    "name": "High",
+                    "otherNotation": "",
+                    "description": "Cause major, long-term impairment to the ability to investigate serious crime (as defined in legislation) e.g., release of an informant’s details, identification of undercover operatives or theft of strategic plans."
+                },
+                {
+                    "name": "Medium",
+                    "otherNotation": "",
+                    "description": "Impede the investigation of or facilitate the commission of serious crime (as defined in legislation) e.g., theft of personal information that identifies witnesses, investigators or leads to the contamination or destruction of evidence."
+                },
+                {
+                    "name": "Low",
+                    "otherNotation": "",
+                    "description": "A threat or event that hinder detection, impedes the investigation, or facilitates the commission of low-level crime (i.e., crime not defined in legislation as ‘serious crime’), or hinder the detection of serious crime."
+                },
+                {
+                    "name": "Very Low",
+                    "otherNotation": "",
+                    "description": "None - other some embarrassment or negative publicity / comment as a result of falling victim to a threat or event - particularly if it could have been predicted or avoided."
+                }
+            ],
+            "riskAppetite": [
+                {
+                    "name": "Eager",
+                    "otherNotation": "",
+                    "description": "Eagerness, focus  or requirement to be innovative, designed to maximise opportunity.  Approach in pursuit of very high reward but may carry very high residual risk."
+                },
+                {
+                    "name": "Open",
+                    "otherNotation": "",
+                    "description": "Aim to undertake activities that have a high degree of purpose  value, where the likeliness of success being a determining factor. Activity may carry a large amount of residual risk."
+                },
+                {
+                    "name": "Cautious",
+                    "otherNotation": "",
+                    "description": "Willingness to accept a degree of risk in order to achieve key purpose e.g.  Inherent risk is deemed controllable or acceptable to a large extent. "
+                },
+                {
+                    "name": "Minimalist",
+                    "otherNotation": "",
+                    "description": "Tendency to undertake activities that are considered safe in achieving objects.\nPursuit of opportunity is not a key driver where inherent risk is above low. "
+                },
+                {
+                    "name": "Averse",
+                    "otherNotation": "",
+                    "description": "Avoidance of risk in achievement of key objectives is paramount.  Activities only considered when carrying little low or very low (rare) Residual risk. "
+                }
+            ]
+        }
+    },
+    "RA4": {
+        "name": "Impact on judicial proceedings",
+        "description": "",
+        "impactJustification": "",
+        "appetiteJustification": "",
+        "securityProperties": {
+            "Disclosure": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Tamper ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Unavailability": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Financial Loss": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Reputational Damage ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            }
+        },
+        "scoringDescriptions": {
+            "businessImpact": [
+                {
+                    "name": "Very High",
+                    "otherNotation": "",
+                    "description": "Any threat or action that is serious enough to cause major long-term damage to UK judicial system. (incorporating the three distinct legal jurisdictions within the UK of England and Wales, Northern Ireland and Scotland)  "
+                },
+                {
+                    "name": "High",
+                    "otherNotation": "",
+                    "description": "Cause a number of criminal convictions to be declared unsafe or referred to appeal [e.g., through persistent and undetected compromise of an evidence-handling system."
+                },
+                {
+                    "name": "Medium",
+                    "otherNotation": "",
+                    "description": "A threat or action that could result in the collapse of a serious crime prosecution or cause a conviction for a serious criminal offence to be declared unsafe or referred for appeal [e.g., release of information that compromises witnesses court officials, jury members etc, and casts doubt over the credibility of evidence."
+                },
+                {
+                    "name": "Low",
+                    "otherNotation": "",
+                    "description": "An action that causes a low-level criminal prosecution to collapse, a conviction for a low-level criminal offence to be declared unsafe or referred for appeal. [e.g., a leak of information that prejudices a case or the contamination / destruction or evidence."
+                },
+                {
+                    "name": "Very Low",
+                    "otherNotation": "",
+                    "description": "Minor failure in local Magistrates courts. [e.g., any action that causes disruption to delivering evidence, defendants or supplies to courts. \nProfessional and public embarrassment / damage to reputation.\n[FYI Cyber-attacks on UK law firms rose 60% between 2020-2021, with almost 75% of the top 100 UK firms targeted"
+                }
+            ],
+            "riskAppetite": [
+                {
+                    "name": "Eager",
+                    "otherNotation": "",
+                    "description": "Eagerness, focus  or requirement to be innovative, designed to maximise opportunity.  Approach in pursuit of very high reward but may carry very high residual risk."
+                },
+                {
+                    "name": "Open",
+                    "otherNotation": "",
+                    "description": "Aim to undertake activities that have a high degree of purpose  value, where the likeliness of success being a determining factor. Activity may carry a large amount of residual risk."
+                },
+                {
+                    "name": "Cautious",
+                    "otherNotation": "",
+                    "description": "Willingness to accept a degree of risk in order to achieve key purpose e.g.  Inherent risk is deemed controllable or acceptable to a large extent. "
+                },
+                {
+                    "name": "Minimalist",
+                    "otherNotation": "",
+                    "description": "Tendency to undertake activities that are considered safe in achieving objects.\nPursuit of opportunity is not a key driver where inherent risk is above low. "
+                },
+                {
+                    "name": "Averse",
+                    "otherNotation": "",
+                    "description": "Avoidance of risk in achievement of key objectives is paramount.  Activities only considered when carrying little low or very low (rare) Residual risk. "
+                }
+            ]
+        }
+    },
+    "cookies": { "currentRiskArea": "RA1", "lastRiskArea": "RA4" },
+    "overall": {
+        "Disclosure": {
+            "RAOverwrite": "Not Applicable",
+            "BIOverwrite": "Not Applicable",
+            "RAJustification": "",
+            "BIJustification": ""
+        },
+        "Tamper ": {
+            "RAOverwrite": "Not Applicable",
+            "BIOverwrite": "Not Applicable",
+            "RAJustification": "",
+            "BIJustification": ""
+        },
+        "Unavailability": {
+            "RAOverwrite": "Not Applicable",
+            "BIOverwrite": "Not Applicable",
+            "RAJustification": "",
+            "BIJustification": ""
+        },
+        "Financial Loss": {
+            "RAOverwrite": "Not Applicable",
+            "BIOverwrite": "Not Applicable",
+            "RAJustification": "",
+            "BIJustification": ""
+        },
+        "Reputational Damage ": {
+            "RAOverwrite": "Not Applicable",
+            "BIOverwrite": "Not Applicable",
+            "RAJustification": "",
+            "BIJustification": ""
+        },
+        "scoreNamesBI": ["Very High", "High", "Medium", "Low", "Very Low"],
+        "scoreNamesRA": ["Eager", "Open", "Cautious", "Minimalist", "Averse"],
+        "uniqueSecurityPropertyNames": [
+            "Disclosure",
+            "Tamper ",
+            "Unavailability",
+            "Financial Loss",
+            "Reputational Damage "
+        ],
+        "agreedRiskAppetite": "",
+        "justification": ""
+    },
+    "logo360Defence": "UK",
+    "colours": {
+        "BIVery High": "#FF9E98",
+        "BIHigh": "#D4D101",
+        "BIMedium": "#FFE699",
+        "BILow": "#BDDF6D",
+        "BIVery Low": "#DDEBF7",
+        "BINot Applicable": "#eeeeee",
+        "RAEager": "#8EA9DB",
+        "RAOpen": "#00B050",
+        "RACautious": "#FFFF00",
+        "RAMinimalist": "#808000",
+        "RAAverse": "#FF0000",
+        "RANot Applicable": "#eeeeee"
+    }
+}

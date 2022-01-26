@@ -1,0 +1,625 @@
+{
+    "RA1": {
+        "name": "Communications e.g., Telecoms (traditional backbone), Mobile Networks and Broadband",
+        "description": "",
+        "impactJustification": "",
+        "appetiteJustification": "",
+        "securityProperties": {
+            "Disclosure": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Tamper ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Unavailability": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Financial Loss": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Reputational Damage ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            }
+        },
+        "scoringDescriptions": {
+            "businessImpact": [
+                {
+                    "name": "Very High",
+                    "otherNotation": "",
+                    "description": "An event leading to a total loss of UK wide communications nationally for more than 1 week. "
+                },
+                {
+                    "name": "High",
+                    "otherNotation": "",
+                    "description": "An incident leading to loss across the country for up to a week"
+                },
+                {
+                    "name": "Medium",
+                    "otherNotation": "",
+                    "description": "Anything which causes a loss across several localities and/or region for up to 24 hours."
+                },
+                {
+                    "name": "Low",
+                    "otherNotation": "",
+                    "description": "A threat or action resulting in a loss for up to 24 hours"
+                },
+                {
+                    "name": "Very Low",
+                    "otherNotation": "",
+                    "description": "An activity which causes a loss for up to 12 hours"
+                }
+            ],
+            "riskAppetite": [
+                {
+                    "name": "Eager",
+                    "otherNotation": "",
+                    "description": "Eagerness, focus  or requirement to be innovative, designed to maximise opportunity.  Approach in pursuit of very high reward but may carry very high residual risk."
+                },
+                {
+                    "name": "Open",
+                    "otherNotation": "",
+                    "description": "Aim to undertake activities that have a high degree of purpose  value, where the likeliness of success being a determining factor. Activity may carry a large amount of residual risk."
+                },
+                {
+                    "name": "Cautious",
+                    "otherNotation": "",
+                    "description": "Willingness to accept a degree of risk in order to achieve key purpose e.g.  Inherent risk is deemed controllable or acceptable to a large extent. "
+                },
+                {
+                    "name": "Minimalist",
+                    "otherNotation": "",
+                    "description": "Tendency to undertake activities that are considered safe in achieving objects.\nPursuit of opportunity is not a key driver where inherent risk is above low. "
+                },
+                {
+                    "name": "Averse",
+                    "otherNotation": "",
+                    "description": "Avoidance of risk in achievement of key objectives is paramount.  Activities only considered when carrying little low or very low (rare) Residual risk. "
+                }
+            ]
+        }
+    },
+    "RA2": {
+        "name": "Power ",
+        "description": "",
+        "impactJustification": "",
+        "appetiteJustification": "",
+        "securityProperties": {
+            "Disclosure": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Tamper ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Unavailability": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Financial Loss": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Reputational Damage ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            }
+        },
+        "scoringDescriptions": {
+            "businessImpact": [
+                {
+                    "name": "Very High",
+                    "otherNotation": "",
+                    "description": "A major event which causes a massive loss of power across the country for more than 1 week."
+                },
+                {
+                    "name": "High",
+                    "otherNotation": "",
+                    "description": "An incident resulting in disruption from a major loss of power across a region and lasting for more than 1 week\n(e.g., Storm Arwen which left thousands of homes and businesses without power for in excess of a week in November 2021]\n"
+                },
+                {
+                    "name": "Medium",
+                    "otherNotation": "",
+                    "description": "A reasonably sized incident causing disruption and loss of power across a region for up to a week"
+                },
+                {
+                    "name": "Low",
+                    "otherNotation": "",
+                    "description": "An event resulting in a disruption to supplies across several localities or region causing loss of power for up to 24 hours"
+                },
+                {
+                    "name": "Very Low",
+                    "otherNotation": "",
+                    "description": "An activity resulting in a local power supply outage causing disruption for up to 12 hours"
+                }
+            ],
+            "riskAppetite": [
+                {
+                    "name": "Eager",
+                    "otherNotation": "",
+                    "description": "Eagerness, focus  or requirement to be innovative, designed to maximise opportunity.  Approach in pursuit of very high reward but may carry very high residual risk."
+                },
+                {
+                    "name": "Open",
+                    "otherNotation": "",
+                    "description": "Aim to undertake activities that have a high degree of purpose  value, where the likeliness of success being a determining factor. Activity may carry a large amount of residual risk."
+                },
+                {
+                    "name": "Cautious",
+                    "otherNotation": "",
+                    "description": "Willingness to accept a degree of risk in order to achieve key purpose e.g.,  Inherent risk is deemed controllable or acceptable to a large extent. "
+                },
+                {
+                    "name": "Minimalist",
+                    "otherNotation": "",
+                    "description": "Tendency to undertake activities that are considered safe in achieving objects.\nPursuit of opportunity is not a key driver where inherent risk is above low. "
+                },
+                {
+                    "name": "Averse",
+                    "otherNotation": "",
+                    "description": "Avoidance of risk in achievement of key objectives is paramount.  Activities only considered when carrying little low or very low (rare) Residual risk. "
+                }
+            ]
+        }
+    },
+    "RA3": {
+        "name": "Finance ",
+        "description": "",
+        "impactJustification": "",
+        "appetiteJustification": "",
+        "securityProperties": {
+            "Disclosure": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Tamper ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Unavailability": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Financial Loss": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Reputational Damage ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            }
+        },
+        "scoringDescriptions": {
+            "businessImpact": [
+                {
+                    "name": "Very High",
+                    "otherNotation": "",
+                    "description": "A very serious event resulting in financial losses to businesses of £10s billions resulting in damage to the national economy."
+                },
+                {
+                    "name": "High",
+                    "otherNotation": "",
+                    "description": "A more widespread event that causes several large business / organisations to lose up to £100s of millions."
+                },
+                {
+                    "name": "Medium",
+                    "otherNotation": "",
+                    "description": "A large even resulting in a major loss of 10s of millions of pounds from a leading financial company."
+                },
+                {
+                    "name": "Low",
+                    "otherNotation": "",
+                    "description": "A serious event leading to the loss of several millions of pounds to a top leading financial company."
+                },
+                {
+                    "name": "Very Low",
+                    "otherNotation": "",
+                    "description": "An action resulting in a loss of less than £1million to a large Financial Company"
+                }
+            ],
+            "riskAppetite": [
+                {
+                    "name": "Eager",
+                    "otherNotation": "",
+                    "description": "Eagerness, focus  or requirement to be innovative, designed to maximise opportunity.  Approach in pursuit of very high reward but may carry very high residual risk."
+                },
+                {
+                    "name": "Open",
+                    "otherNotation": "",
+                    "description": "Aim to undertake activities that have a high degree of purpose  value, where the likeliness of success being a determining factor. Activity may carry a large amount of residual risk."
+                },
+                {
+                    "name": "Cautious",
+                    "otherNotation": "",
+                    "description": "Willingness to accept a degree of risk in order to achieve key purpose e.g.  Inherent risk is deemed controllable or acceptable to a large extent. "
+                },
+                {
+                    "name": "Minimalist",
+                    "otherNotation": "",
+                    "description": "Tendency to undertake activities that are considered safe in achieving objects.\nPursuit of opportunity is not a key driver where inherent risk is above low. "
+                },
+                {
+                    "name": "Averse",
+                    "otherNotation": "",
+                    "description": "Avoidance of risk in achievement of key objectives is paramount.  Activities only considered when carrying little low or very low (rare) Residual risk. "
+                }
+            ]
+        }
+    },
+    "RA4": {
+        "name": "Transport (Note: Data based on the National Risk Assessment Impact Scale)",
+        "description": "",
+        "impactJustification": "",
+        "appetiteJustification": "",
+        "securityProperties": {
+            "Disclosure": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Tamper ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Unavailability": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Financial Loss": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Reputational Damage ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            }
+        },
+        "scoringDescriptions": {
+            "businessImpact": [
+                {
+                    "name": "Very High",
+                    "otherNotation": "",
+                    "description": "A major event resulting in severe disruption across the country of key transport systems / links for over a month."
+                },
+                {
+                    "name": "High",
+                    "otherNotation": "",
+                    "description": "An event causing severe country wide disruption of key transport systems / links for up to a month"
+                },
+                {
+                    "name": "Medium",
+                    "otherNotation": "",
+                    "description": "A more serious activity leading to major disruption of key regional transport links / systems for up to a week"
+                },
+                {
+                    "name": "Low",
+                    "otherNotation": "",
+                    "description": "An incident resulting in disruption of a number of key local transport links / systems for up to 24 hours."
+                },
+                {
+                    "name": "Very Low",
+                    "otherNotation": "",
+                    "description": "An activity which leads to minor disruption of a few local transport links /systems for up to 24 hours."
+                }
+            ],
+            "riskAppetite": [
+                {
+                    "name": "Eager",
+                    "otherNotation": "",
+                    "description": "Eagerness, focus  or requirement to be innovative, designed to maximise opportunity.  Approach in pursuit of very high reward but may carry very high residual risk."
+                },
+                {
+                    "name": "Open",
+                    "otherNotation": "",
+                    "description": "Aim to undertake activities that have a high degree of purpose  value, where the likeliness of success being a determining factor. Activity may carry a large amount of residual risk."
+                },
+                {
+                    "name": "Cautious",
+                    "otherNotation": "",
+                    "description": "Willingness to accept a degree of risk in order to achieve key purpose e.g.  Inherent risk is deemed controllable or acceptable to a large extent. "
+                },
+                {
+                    "name": "Minimalist",
+                    "otherNotation": "",
+                    "description": "Tendency to undertake activities that are considered safe in achieving objects.\nPursuit of opportunity is not a key driver where inherent risk is above low. "
+                },
+                {
+                    "name": "Averse",
+                    "otherNotation": "",
+                    "description": "Avoidance of risk in achievement of key objectives is paramount.  Activities only considered when carrying little low or very low (rare) Residual risk. "
+                }
+            ]
+        }
+    },
+    "RA5": {
+        "name": "Water and sewage ",
+        "description": "",
+        "impactJustification": "",
+        "appetiteJustification": "",
+        "securityProperties": {
+            "Disclosure": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Tamper ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Unavailability": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Financial Loss": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Reputational Damage ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            }
+        },
+        "scoringDescriptions": {
+            "businessImpact": [
+                {
+                    "name": "Very High",
+                    "otherNotation": "",
+                    "description": "A major drought or systems failure leading to a total breakdown of national water supplies and / or sewage services lasting three months or more. \n[FYI longest drought in UK history was in London 1893 for 73 days while the impact of 1988 Camelford Water pollution accidents continues to rumble on 34 years later]\n"
+                },
+                {
+                    "name": "High",
+                    "otherNotation": "",
+                    "description": "A water shortage of systems failure leading to a breakdown of regional water supplies and/or sewage services impacting more than 100 people for up to 3 months"
+                },
+                {
+                    "name": "Medium",
+                    "otherNotation": "",
+                    "description": "A shortage of water caused by drought to an incident leading to a breakdown of local water supplies and / or sewage services for over 100 people which lasts up to 1 month."
+                },
+                {
+                    "name": "Low",
+                    "otherNotation": "",
+                    "description": "A prolonged drought or serious incident resulting in a breakdown of local water supplies and/or sewage services for up to about 100 people for up to 1 month"
+                },
+                {
+                    "name": "Very Low",
+                    "otherNotation": "",
+                    "description": "An event which causes a breakdown of local water supplies and / or sewage services for a small number (<50) of people for more than a week."
+                }
+            ],
+            "riskAppetite": [
+                {
+                    "name": "Eager",
+                    "otherNotation": "",
+                    "description": "Eagerness, focus  or requirement to be innovative, designed to maximise opportunity.  Approach in pursuit of very high reward but may carry very high residual risk."
+                },
+                {
+                    "name": "Open",
+                    "otherNotation": "",
+                    "description": "Aim to undertake activities that have a high degree of purpose  value, where the likeliness of success being a determining factor. Activity may carry a large amount of residual risk."
+                },
+                {
+                    "name": "Cautious",
+                    "otherNotation": "",
+                    "description": "Willingness to accept a degree of risk in order to achieve key purpose e.g.  Inherent risk is deemed controllable or acceptable to a large extent. "
+                },
+                {
+                    "name": "Minimalist",
+                    "otherNotation": "",
+                    "description": "Tendency to undertake activities that are considered safe in achieving objects.\nPursuit of opportunity is not a key driver where inherent risk is above low. "
+                },
+                {
+                    "name": "Averse",
+                    "otherNotation": "",
+                    "description": "Avoidance of risk in achievement of key objectives is paramount.  Activities only considered when carrying little low or very low (rare) Residual risk. "
+                }
+            ]
+        }
+    },
+    "RA6": {
+        "name": "Food and consumables ",
+        "description": "",
+        "impactJustification": "",
+        "appetiteJustification": "",
+        "securityProperties": {
+            "Disclosure": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Tamper ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Unavailability": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Financial Loss": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            },
+            "Reputational Damage ": {
+                "businessImpact": "",
+                "businessImpactJustification": "",
+                "riskAppetite": "",
+                "riskAppetiteJustification": ""
+            }
+        },
+        "scoringDescriptions": {
+            "businessImpact": [
+                {
+                    "name": "Very High",
+                    "otherNotation": "",
+                    "description": "A threat or action which results in country wide disruption of essential goods, fuel, raw materials, medicines, and food stuffs for over a month."
+                },
+                {
+                    "name": "High",
+                    "otherNotation": "",
+                    "description": "An event resulting in national disruption to the distribution of essential goods, fuel, raw materials, medicines, and food to communities across the country for up to a month."
+                },
+                {
+                    "name": "Medium",
+                    "otherNotation": "",
+                    "description": "An event leading to widespread disruption across one or more regions causing problems with delivery of some essential goods, fuel, raw material, medicines, and food for up to a month"
+                },
+                {
+                    "name": "Low",
+                    "otherNotation": "",
+                    "description": "A larger incident resulting in disruption to regional deliveries of some essential goods, fuel, raw materials and medicines and food for a week."
+                },
+                {
+                    "name": "Very Low",
+                    "otherNotation": "",
+                    "description": "An event leading to disruption of some essential goods, fuel, raw materials, medicines and/or disruption of food to a number of people in a relatively small community for up to a month."
+                }
+            ],
+            "riskAppetite": [
+                {
+                    "name": "Eager",
+                    "otherNotation": "",
+                    "description": "Eagerness, focus  or requirement to be innovative, designed to maximise opportunity.  Approach in pursuit of very high reward but may carry very high residual risk."
+                },
+                {
+                    "name": "Open",
+                    "otherNotation": "",
+                    "description": "Aim to undertake activities that have a high degree of purpose  value, where the likeliness of success being a determining factor. Activity may carry a large amount of residual risk."
+                },
+                {
+                    "name": "Cautious",
+                    "otherNotation": "",
+                    "description": "Willingness to accept a degree of risk in order to achieve key purpose e.g.  Inherent risk is deemed controllable or acceptable to a large extent. "
+                },
+                {
+                    "name": "Minimalist",
+                    "otherNotation": "",
+                    "description": "Tendency to undertake activities that are considered safe in achieving objects.\nPursuit of opportunity is not a key driver where inherent risk is above low. "
+                },
+                {
+                    "name": "Averse",
+                    "otherNotation": "",
+                    "description": "Avoidance of risk in achievement of key objectives is paramount.  Activities only considered when carrying little low or very low (rare) Residual risk. "
+                }
+            ]
+        }
+    },
+    "cookies": { "currentRiskArea": "RA1", "lastRiskArea": "RA6" },
+    "overall": {
+        "Disclosure": {
+            "RAOverwrite": "Not Applicable",
+            "BIOverwrite": "Not Applicable",
+            "RAJustification": "",
+            "BIJustification": ""
+        },
+        "Tamper ": {
+            "RAOverwrite": "Not Applicable",
+            "BIOverwrite": "Not Applicable",
+            "RAJustification": "",
+            "BIJustification": ""
+        },
+        "Unavailability": {
+            "RAOverwrite": "Not Applicable",
+            "BIOverwrite": "Not Applicable",
+            "RAJustification": "",
+            "BIJustification": ""
+        },
+        "Financial Loss": {
+            "RAOverwrite": "Not Applicable",
+            "BIOverwrite": "Not Applicable",
+            "RAJustification": "",
+            "BIJustification": ""
+        },
+        "Reputational Damage ": {
+            "RAOverwrite": "Not Applicable",
+            "BIOverwrite": "Not Applicable",
+            "RAJustification": "",
+            "BIJustification": ""
+        },
+        "scoreNamesBI": ["Very High", "High", "Medium", "Low", "Very Low"],
+        "scoreNamesRA": ["Eager", "Open", "Cautious", "Minimalist", "Averse"],
+        "uniqueSecurityPropertyNames": [
+            "Disclosure",
+            "Tamper ",
+            "Unavailability",
+            "Financial Loss",
+            "Reputational Damage "
+        ],
+        "agreedRiskAppetite": "",
+        "justification": ""
+    },
+    "logo360Defence": "UK",
+    "colours": {
+        "BIVery High": "#FF9E98",
+        "BIHigh": "#D4D101",
+        "BIMedium": "#FFE699",
+        "BILow": "#BDDF6D",
+        "BIVery Low": "#DDEBF7",
+        "BINot Applicable": "#eeeeee",
+        "RAEager": "#8EA9DB",
+        "RAOpen": "#00B050",
+        "RACautious": "#FFFF00",
+        "RAMinimalist": "#808000",
+        "RAAverse": "#FF0000",
+        "RANot Applicable": "#eeeeee"
+    }
+}
