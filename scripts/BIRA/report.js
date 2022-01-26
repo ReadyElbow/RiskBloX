@@ -88,8 +88,14 @@ $(document).ready(function () {
         for (const [key, value] of Object.entries(
             riskArea.securityProperties
         )) {
-            let regexBIParsedScore = value.businessImpact.replace(/\s+$/, "");
-            let regexRAParsedScore = value.riskAppetite.replace(/\s+$/, "");
+            var regexBIParsedScore = value.businessImpact.replace(/\s+$/, "");
+            if (regexBIParsedScore == "") {
+                regexBIParsedScore = "Not Applicable";
+            }
+            var regexRAParsedScore = value.riskAppetite.replace(/\s+$/, "");
+            if (regexRAParsedScore == "") {
+                regexRAParsedScore = "Not Applicable";
+            }
             if (regexBIParsedScore != "Not Applicable") {
                 overallScores[key].BISelected += 1;
                 overallScores[key].BISumScore +=
