@@ -600,6 +600,8 @@ function generateDocumentation() {
             );
             var generalTextHeight = doc.getTextDimensions(generalNotesSplit).h;
             doc.text(generalNotesSplit, 56, lengthText + heightSummary + 10);
+        } else {
+            var generalTextHeight = 0;
         }
 
         doc.setFontSize(14);
