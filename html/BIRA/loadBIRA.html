@@ -80,8 +80,8 @@
                                     <li>
                                         <a
                                             class="dropdown-item"
-                                            href="/RiskBloX/start"
-                                            >Mitigate</a
+                                            href="/RiskBloX/start-assessment"
+                                            >ATT&CK Assessment</a
                                         >
                                     </li>
                                 </ul>
@@ -140,7 +140,7 @@
                             <li class="nav-item">
                                 <a
                                     href="
-                                    https://riskblox.auth.eu-west-1.amazoncognito.com/logout?client_id=3kr61qq6dpfs0c87t322m3ojth&logout_uri=https://riskblox.2t-security.co.uk/sign-out"
+                                                https://riskblox.auth.eu-west-1.amazoncognito.com/logout?client_id=3kr61qq6dpfs0c87t322m3ojth&logout_uri=https://riskblox.2t-security.co.uk/sign-out"
                                     class="badge badge-pill badge-light"
                                 >
                                     <i class="fas fa-sign-out-alt fa-2x"></i>
@@ -174,117 +174,93 @@
         </header>
         <main>
             <div class="container-fluid">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h4 class="card-title">Restart or Load BIRA</h4>
-                        <div class="col-md-4 offset-md-4 mt-3">
-                            <div class="input-group mb-3">
-                                <span class="input-group-text">BIRA Title</span>
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="projectName"
-                                    placeholder="Report Title"
-                                    aria-label="reportTitle"
-                                />
-                            </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text"
-                                    >Sensitivity Marking</span
-                                >
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="projectSensitivity"
-                                    placeholder="OFFICIAL-SENSITIVE, SECRET, TOP SECRET....
-                                    "
-                                    aria-label="projectSensitivity"
-                                />
-                            </div>
-                            <div class="mb-3">
-                                <label for="formFile" class="form-label"
-                                    ><b>Project Logo</b></label
-                                >
-                                <input
-                                    class="form-control"
-                                    type="file"
-                                    accept="image/*"
-                                    id="companyLogo"
-                                />
-                            </div>
-                        </div>
-                        <p class="card-text mt-5">
-                            Would you like to load a saved/custom BIRA, use a
-                            fresh example or load a current session?
-                        </p>
-                        <button
-                            type="button"
-                            id="sessionLoad"
-                            class="btn btn-primary"
-                        >
-                            Load from Session
-                        </button>
-                        <div class="col-md-4 offset-md-4 mt-3">
-                            <div class="input-group">
-                                <input
-                                    class="form-control"
-                                    type="file"
-                                    id="formFile"
-                                />
+                <div class="row">
+                    <div class="col-md-6 offset-md-3">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h4 class="card-title">Restart or Load BIRA</h4>
+                                <p class="card-text mt-5">
+                                    <b
+                                        >Would you like to load a saved/custom
+                                        BIRA, use a fresh example or load a
+                                        current session?</b
+                                    >
+                                </p>
                                 <button
                                     type="button"
+                                    id="sessionLoad"
                                     class="btn btn-primary"
-                                    id="JSONLoad"
                                 >
-                                    Load from Saved JSON
+                                    Load from Session
                                 </button>
+                                <div class="col-md-6 offset-md-3 mt-3">
+                                    <div class="input-group">
+                                        <input
+                                            class="form-control"
+                                            type="file"
+                                            id="formFile"
+                                        />
+                                        <button
+                                            type="button"
+                                            class="btn btn-primary"
+                                            id="JSONLoad"
+                                        >
+                                            Load from Saved JSON or Template
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 offset-md-3 mt-3">
+                                    <div class="input-group">
+                                        <select
+                                            class="form-select"
+                                            id="prebuilt"
+                                        >
+                                            <option value="TEPF.json">
+                                                Trade, Ecomics and Public
+                                                Finance
+                                            </option>
+                                            <option value="CNI.json">
+                                                Critical National Infrastructure
+                                            </option>
+                                            <option value="DIRSI.json">
+                                                Defence, International
+                                                Relations, Security and
+                                                Intelligence
+                                            </option>
+                                            <option value="OSLE.json">
+                                                Public Order, Public Safety and
+                                                Law Enforcement
+                                            </option>
+                                            <option value="PS.json">
+                                                Public Services
+                                            </option>
+                                        </select>
+                                        <button
+                                            type="button"
+                                            class="btn btn-primary"
+                                            id="prebuiltLoad"
+                                        >
+                                            Select a prebuilt BIRA
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <img
+                                    src="/images/BIRA/360D-UK-Logo.png"
+                                    class="rounded"
+                                    width="200"
+                                />
+                                <img
+                                    src="/images/BIRA/ANJB-Logo.png"
+                                    class="rounded"
+                                    width="180"
+                                />
+                            </div>
+                            <div>
+                                <p class="text-center">Created by</p>
                             </div>
                         </div>
-                        <div class="col-md-4 offset-md-4 mt-3">
-                            <div class="input-group">
-                                <select class="form-select" id="prebuilt">
-                                    <option value="TEPF.json">
-                                        Trade, Ecomics and Public Finance
-                                    </option>
-                                    <option value="CNI.json">
-                                        Critical National Infrastructure
-                                    </option>
-                                    <option value="DIRSI.json">
-                                        Defence, International Relations,
-                                        Security and Intelligence
-                                    </option>
-                                    <option value="OSLE.json">
-                                        Public Order, Public Safety and Law
-                                        Enforcement
-                                    </option>
-                                    <option value="PS.json">
-                                        Public Services
-                                    </option>
-                                </select>
-                                <button
-                                    type="button"
-                                    class="btn btn-primary"
-                                    id="prebuiltLoad"
-                                >
-                                    Select a prebuilt BIRA
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <img
-                            src="/images/BIRA/360D-UK-Logo.png"
-                            class="rounded"
-                            width="200"
-                        />
-                        <img
-                            src="/images/BIRA/ANJB-Logo.png"
-                            class="rounded"
-                            width="180"
-                        />
-                    </div>
-                    <div>
-                        <p class="text-center">Created by</p>
                     </div>
                 </div>
             </div>
@@ -331,6 +307,7 @@
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             crossorigin="anonymous"
         ></script>
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
         <script type="text/javascript" src="/scripts/BIRA/loadBIRA.js"></script>
         <script type="text/javascript" src="/scripts/userAuth.js"></script>
     </body>

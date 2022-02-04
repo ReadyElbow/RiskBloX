@@ -5,69 +5,67 @@ function generateAttackLayerCall() {
     var techniques = [];
     for (let [key, stringValue] of Object.entries(localStorage)) {
         if (key.match(/^T/)) {
-            value = JSON.parse(stringValue);
-            let tid = value.tid;
-            let tactics = value.tactic;
-            let score = value.score;
-            let techniqueComment = "";
-            let mitigations = value.mitigations;
+            var storageTechnique = JSON.parse(stringValue);
+            if (!storageTechnique["tid"].includes(".")) {
+                var tid = storageTechnique.tid;
+                let tactics = storageTechnique.tactic;
+                let score = storageTechnique.score;
+                let techniqueComment = storageTechnique.generalNotes;
+                let mitigations = storageTechnique.mitigations;
 
-            for (let [key, mitigation] of Object.entries(mitigations)) {
-                if (mitigation.notes != "") {
-                    techniqueComment += mitigation.mitigation_name + "(" + mitigation.mid + ") Notes: " + mitigation.notes + "\n\n";
+                for (i in mitigations) {
+                    if (mitigations[i].notes != "") {
+                        techniqueComment += `\n${mitigations[i].mitigation_name} (${mitigations[i].mid}) Notes: ${mitigations[i].notes}\n\n`;
+                    }
                 }
-            }
 
-            let technique = {};
-            technique["tid"] = tid;
-            technique["tactics"] = tactics;
-            technique["score"] = score;
-            technique["comment"] = techniqueComment;
-            techniques.push(technique);
+                let technique = {};
+                technique["tid"] = tid;
+                technique["tactics"] = tactics;
+                technique["score"] = score;
+                technique["comment"] = techniqueComment;
+                techniques.push(technique);
+            }
         }
     }
-    toPost["domain"] = getCookie("domain");
-    toPost["platforms"] = getCookie("platforms").split(",");
+    toPost["domain"] = Cookies.get("domain");
+    toPost["platforms"] = Cookies.get("platforms").split(",");
     toPost["techniques"] = techniques;
 
     apiGetLayer =
-        "https://sdf10urdoe.execute-api.eu-west-1.amazonaws.com/RiskBloXProd/attacklayer?layer=" + btoa(pako.deflate(JSON.stringify(toPost)));
+        "https://sdf10urdoe.execute-api.eu-west-1.amazonaws.com/RiskBloXProd/attacklayer?layer=" +
+        btoa(pako.deflate(JSON.stringify(toPost)));
 
     var navigator = document.getElementById("navIframe");
 
-    url = "https://mitre-attack.github.io/attack-navigator/";
-    // var domain = getCookie("domain");
-    // domainMap = {"enterprise_attack":"enterprise",
-    //              "mobile_attack": "mobile",
-    //              "ics_attack": "ICS"};
-    // urlDomain = domainMap[domain] + "/";
-
-    completeURL = url + "#leave_site_dialog=false&header=false&legend=false&layerURL=" + apiGetLayer;
-
-    navigator.setAttribute("src", completeURL);
-}
-
-function getCookie(name) {
-    let re = new RegExp((name += "=([^;]+)"));
-    let value = re.exec(document.cookie);
-    return value != null ? unescape(value[1]) : null;
+    url = `https://mitre-attack.github.io/attack-navigator/#leave_site_dialog=false&header=false&legend=false&layerURL=${apiGetLayer}`;
+    navigator.setAttribute("src", url);
 }
 
 function back() {
-    window.location.href = "/RiskBloX/technique-forms";
+    window.location.href = "/RiskBloX/mitigations";
 }
 
 function saveProgress() {
-    var savedJSON = {};
+    let savedJSON = {};
     savedJSON["cookies"] = document.cookie;
     techniques = {};
     for (let [key, stringValue] of Object.entries(localStorage)) {
-        if (key != "userAuth") {
-            if (!["tolerance", "impactThreshold", "scoreLimit"].includes(key)) {
-                techniques[key] = JSON.parse(stringValue);
-            } else {
-                techniques[key] = stringValue;
-            }
+        if (
+            [
+                "projectLogo",
+                "projectTitle",
+                "projectSensitivity",
+                "projectVersion",
+                "projectScope",
+                "tolerance",
+                "impactThreshold",
+                "scoreLimit",
+            ].includes(key)
+        ) {
+            savedJSON[key] = stringValue;
+        } else if (key != "userAuth") {
+            techniques[key] = JSON.parse(stringValue);
         }
     }
     savedJSON["techniques"] = techniques;
@@ -80,32 +78,118 @@ function saveProgress() {
     });
     const url = URL.createObjectURL(blob);
     download.href = url;
-    download.download = "RiskBloX-Save.json";
+    let title = localStorage.getItem("projectTitle");
+    let version = localStorage.getItem("projectVersion");
+    if (version == "" && title == "") {
+        download.download = "RiskBloX-Save.json";
+    } else if (title == "" || version == "") {
+        download.download = "RiskBloX-" + title + version + "-Save.json";
+    } else {
+        download.download = "RiskBloX-" + title + "-" + version + "-Save.json";
+    }
     download.click();
 }
 
 function generateDocumentation() {
     var doc = new jsPDF({
         orientation: "landscape",
+        unit: "px",
+        hotfixes: ["px_scaling"],
+        compress: true,
     });
-    domain = getCookie("domains");
-    platforms = getCookie("platforms");
-    tactics = getCookie("tactics");
-    groups = getCookie("groups");
-    currentTechnique = fetchIntegers(getCookie("currentTechnique"));
-
+    currentTechnique = fetchIntegers(Cookies.get("currentTechnique"));
+    var projectName = localStorage.getItem("projectTitle");
     doc.setFontSize(30);
-    doc.text("RiskBloX Report", 110, 100);
+    doc.text(
+        projectName,
+        doc.internal.pageSize.getWidth() / 2,
+        doc.internal.pageSize.getHeight() / 2 - 75,
+        "center"
+    );
+    doc.text(
+        "RiskBloX Assessment",
+        doc.internal.pageSize.getWidth() / 2,
+        doc.internal.pageSize.getHeight() / 2,
+        "center"
+    );
+
+    let logo360Version = localStorage.getItem("logo360Defence");
+    if (logo360Version == "2T" || logo360Version == null) {
+        doc.setFontSize(20);
+        doc.setTextColor("7030a0");
+        doc.text("2T Security", 28, 35);
+        doc.setTextColor(100);
+    } else {
+        var logo360 = new Image();
+        var anjbLogo = new Image();
+        if (logo360Version == null) {
+            logo360.src = "/images/BIRA/360D-UK-Logo.png";
+        } else {
+            logo360.src = "/images/BIRA/360D-" + logo360Version + "-Logo.png";
+        }
+        anjbLogo.src = "/images/BIRA/ANJB-Logo.png";
+        doc.addImage(logo360, 28, 35, 64, 64);
+        doc.addImage(anjbLogo, 100, 27, 80, 80);
+    }
+
+    var projectLogo = localStorage.getItem("projectLogo");
+    if (projectLogo != "null") {
+        doc.addImage(
+            projectLogo,
+            doc.internal.pageSize.getWidth() / 2 - 150,
+            doc.internal.pageSize.getHeight() / 2 + 50
+        );
+    }
+    var projectScope = localStorage.getItem("projectScope");
+    if (projectScope != "") {
+        doc.setFontSize(15);
+        doc.setTextColor("000000");
+        let pageSize = doc.internal.pageSize;
+        let pageWidth = pageSize.getWidth();
+        let text = doc.splitTextToSize(projectScope, pageWidth - 300, {});
+        if (projectLogo != "null") {
+            doc.text(
+                text,
+                doc.internal.pageSize.getWidth() / 2,
+                doc.internal.pageSize.getHeight() / 2 + 340,
+                "center"
+            );
+        } else {
+            doc.text(
+                text,
+                doc.internal.pageSize.getWidth() / 2,
+                doc.internal.pageSize.getHeight() / 2 + 100,
+                "center"
+            );
+        }
+    }
+    var version = localStorage.getItem("projectVersion");
+    doc.setFontSize(12);
+    if (version == "") {
+        doc.text(new Date().toDateString(), 940, 45);
+    } else {
+        doc.text(version + " / " + new Date().toDateString(), 940, 45);
+    }
+    var sensitivityMarking = localStorage.getItem("projectSensitivity");
+    if (sensitivityMarking != "") {
+        doc.setFontSize(12);
+        doc.text(
+            "[" + sensitivityMarking + "]",
+            doc.internal.pageSize.getWidth() / 2,
+            18,
+            "center"
+        );
+    }
 
     for (let i = 1; i <= currentTechnique; i++) {
         let technique = JSON.parse(localStorage.getItem("T" + i));
         let description = technique.description;
+        let generalNotes = technique.generalNotes;
         let techniqueName = technique.tid + ": " + technique.technique_name;
         let tactics = "Tactics: " + technique.tactic;
         let score = technique.score;
         let scoreString = "Score: " + technique.score;
         doc.addPage("landscape");
-        doc.setFontSize(20);
         if (score <= 20) {
             doc.setTextColor("#E50000");
         } else if (score <= 50) {
@@ -115,35 +199,57 @@ function generateDocumentation() {
         } else if (score <= 100) {
             doc.setTextColor("#008000");
         }
-        doc.text(techniqueName, 14, 22);
+        doc.setFontSize(25);
+        doc.text(techniqueName, 56, 80);
         doc.setFontSize(18);
-        doc.text(scoreString, 240, 22);
+        doc.text(scoreString, 1000, 80);
         doc.setFontSize(11);
         doc.setTextColor(100);
-        doc.text(tactics, 14, 30);
+        doc.text(tactics, 56, 120);
 
         let pageSize = doc.internal.pageSize;
         let pageWidth = pageSize.getWidth();
-        let text = doc.splitTextToSize(description, pageWidth - 35, {});
+        let text = doc.splitTextToSize(description, pageWidth - 140, {});
         let lengthText = doc.getTextDimensions(text).h;
-        let heightText = 35;
-        doc.text(text, 14, heightText);
+        let heightText = 160;
+        doc.text(text, 56, heightText);
+        if (generalNotes != "" && generalNotes != undefined) {
+            var generalNotesSplit = doc.splitTextToSize(
+                "Notes: " + generalNotes,
+                pageWidth - 140,
+                {}
+            );
+            var generalTextHeight = doc.getTextDimensions(generalNotesSplit).h;
+            doc.text(generalNotesSplit, 56, lengthText + heightText + 10);
+        }
 
         doc.autoTable({
-            startY: lengthText + heightText,
+            startY: lengthText + heightText + generalTextHeight,
             columnStyles: {
-                0: { cellWidth: 25 },
-                1: { cellWidth: 70 },
-                2: { cellWidth: 70 },
-                3: { cellWidth: 45 },
-                4: { cellWidth: 25 },
-                5: { cellWidth: 30 },
+                0: { cellWidth: 130 },
+                1: { cellWidth: 240 },
+                2: { cellWidth: 240 },
+                3: { cellWidth: 175 },
+                4: { cellWidth: 130 },
+                5: { cellWidth: 130 },
+            },
+            styles: {
+                minCellHeight: 80,
             },
             headStyles: { fillColor: "#0d6efd" },
             theme: "grid",
             showHead: "firstPage",
             rowPageBreak: "avoid",
-            head: [["Name", "Description", "Application", "Notes", "Positive Impact", "Implementation Confidence"]],
+            head: [
+                [
+                    "Name",
+                    "Description",
+                    "Application",
+                    "Notes",
+                    "Positive Impact",
+                    "Implementation Confidence",
+                ],
+            ],
             body: bodyRows(technique.mitigations),
         });
     }

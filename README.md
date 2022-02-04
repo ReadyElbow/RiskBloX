@@ -10,7 +10,7 @@ Upon assessing each Attack Technique, Mitre ATT&CK Navigator is used to give a g
  
 ## Useful Info
 
-The website version of this tool can be found at https://riskblox.2t-security.co.uk. The website itself contains a clear tutorial and walk-through of this tool and the further customizable options that exist to the user. 
+The website version of this tool can be found at https://riskblox.2t-security.co.uk/html/. The website itself contains a clear tutorial and walk-through of this tool and the further customizable options that exist to the user. 
 
 If you come across any bugs in this tool, please do not hesitate to raise this in GitHub issues and we will aim to fix this for you. If you are interested in this projects development and/or would you like to help develop it feel free to get in contact.
 

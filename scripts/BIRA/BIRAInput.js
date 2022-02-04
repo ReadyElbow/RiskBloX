@@ -1,20 +1,17 @@
-function getCookie(name) {
-    let re = new RegExp((name += "=([^;]+)"));
-    let value = re.exec(document.cookie);
-    return value != null ? unescape(value[1]) : null;
-}
-
 $(document).ready(function () {
-    let currentRiskArea = getCookie("currentRiskArea");
+    let currentRiskArea = Cookies.get("currentRiskArea");
     let riskAreaObject = JSON.parse(localStorage.getItem(currentRiskArea));
-
+    let generalNotes = riskAreaObject.generalNotes;
+    if (generalNotes != null || generalNotes != "") {
+        $("#generalNotes").val(generalNotes);
+    }
     $("#riskAreaTitle").text(riskAreaObject.name);
     $("#riskAreaDescription").text(riskAreaObject.description);
 
     var BISelectValues = ["Not Applicable"];
     var RASelectValues = ["Not Applicable"];
 
-    let riskAreaNav = getCookie("lastRiskArea").match(/\d*$/);
+    let riskAreaNav = Cookies.get("lastRiskArea").match(/\d*$/);
     var navObject = JSON.parse(sessionStorage.getItem("navigation"));
     for (let i = 1; i <= riskAreaNav; i++) {
         $(".riskAreaNavigation").append(
@@ -44,7 +41,9 @@ $(document).ready(function () {
     $("a").click(function () {
         if ($(this).hasClass("redirectRiskArea")) {
             saveInputs();
-            document.cookie = "currentRiskArea=" + $(this).attr("value");
+            Cookies.set("currentRiskArea", $(this).attr("value"), {
+                path: "/",
+            });
             window.location.reload();
         }
     });
@@ -144,9 +143,9 @@ function createSelect(names, selected) {
 }
 
 function saveInputs() {
-    let currentRiskArea = getCookie("currentRiskArea");
+    let currentRiskArea = Cookies.get("currentRiskArea");
     var riskAreaObject = JSON.parse(localStorage.getItem(currentRiskArea));
-
+    riskAreaObject.generalNotes = $("#generalNotes").val();
     $("#securityProperties > tr").each(function (index, tr) {
         //to fix the issue of not up to date textareas being fetched you need to add a classname to each cell
         //and search on that instead
@@ -172,19 +171,23 @@ function saveInputs() {
 }
 function nextSecurityProperty() {
     saveInputs();
-    if (getCookie("currentRiskArea") == getCookie("lastRiskArea")) {
-        document.cookie = "currentRiskArea=overview;";
+    if (Cookies.get("currentRiskArea") == Cookies.get("lastRiskArea")) {
+        Cookies.set("currentRiskArea", "overview", { path: "/" });
         window.location.href = "/BIRA/report";
     } else {
-        document.cookie = "currentRiskArea=" + increDecreString("increment");
+        Cookies.set("currentRiskArea", increDecreString("increment"), {
+            path: "/",
+        });
         window.location.reload();
     }
 }
 
 function previousSecurityProperty() {
     saveInputs();
-    if (getCookie("currentRiskArea") != "RA1") {
-        document.cookie = "currentRiskArea=" + increDecreString("decrement");
+    if (Cookies.get("currentRiskArea") != "RA1") {
+        Cookies.set("currentRiskArea", increDecreString("decrement"), {
+            path: "/",
+        });
         window.location.reload();
     } else {
         console.log("There is no previous Risk Area");
@@ -192,12 +195,14 @@ function previousSecurityProperty() {
 }
 function firstSecurityProperty() {
     saveInputs();
-    document.cookie = "currentRiskArea=RA1";
+    Cookies.set("currentRiskArea", "RA1", {
+        path: "/",
+    });
     window.location.reload();
 }
 
 function increDecreString(type) {
-    let str = getCookie("currentRiskArea");
+    let str = Cookies.get("currentRiskArea");
     let count = str.match(/\d*$/);
     if (type == "increment") {
         return str.substr(0, count.index) + ++count[0];
@@ -210,8 +215,8 @@ function increDecreString(type) {
 function generateJSONSave() {
     let savedJSON = {};
     savedJSON.cookies = {
-        currentRiskArea: getCookie("currentRiskArea"),
-        lastRiskArea: getCookie("lastRiskArea"),
+        currentRiskArea: Cookies.get("currentRiskArea"),
+        lastRiskArea: Cookies.get("lastRiskArea"),
     };
     for (let [key, stringValue] of Object.entries(localStorage)) {
         if (
@@ -220,6 +225,8 @@ function generateJSONSave() {
                 "projectTitle",
                 "projectSensitivity",
                 "logo360Defence",
+                "projectVersion",
+                "projectScope",
             ].includes(key)
         ) {
             savedJSON[key] = stringValue;
@@ -235,7 +242,14 @@ function generateJSONSave() {
     });
     const url = URL.createObjectURL(blob);
     download.href = url;
-    download.download =
-        "BIRA-" + localStorage.getItem("projectTitle") + "-Save.json";
+    let version = localStorage.getItem("projectVersion");
+    let title = localStorage.getItem("projectTitle");
+    if (version == "" && title == "") {
+        download.download = "BIRA-Save.json";
+    } else if (title == "" || version == "") {
+        download.download = "BIRA-" + title + version + "-Save.json";
+    } else {
+        download.download = "BIRA-" + title + "-" + version + "-Save.json";
+    }
     download.click();
 }

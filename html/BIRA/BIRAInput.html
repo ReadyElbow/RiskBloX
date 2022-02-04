@@ -83,8 +83,8 @@
                                         <a
                                             class="dropdown-item"
                                             onclick="saveInputs()"
-                                            href="/RiskBloX/start"
-                                            >Mitigate</a
+                                            href="/RiskBloX/start-assessment"
+                                            >ATT&CK Assessment</a
                                         >
                                     </li>
                                 </ul>
@@ -111,6 +111,7 @@
                                             >Introduction</a
                                         >
                                     </li>
+
                                     <li>
                                         <hr class="dropdown-divider" />
                                     </li>
@@ -145,7 +146,7 @@
                             <li class="nav-item">
                                 <a
                                     href="
-                                    https://riskblox.auth.eu-west-1.amazoncognito.com/logout?client_id=3kr61qq6dpfs0c87t322m3ojth&logout_uri=https://riskblox.2t-security.co.uk/sign-out"
+                                                https://riskblox.auth.eu-west-1.amazoncognito.com/logout?client_id=3kr61qq6dpfs0c87t322m3ojth&logout_uri=https://riskblox.2t-security.co.uk/sign-out"
                                     class="badge badge-pill badge-light"
                                 >
                                     <i class="fas fa-sign-out-alt fa-2x"></i>
@@ -240,6 +241,14 @@
                             </li>
                         </ul>
                     </nav>
+                    <div class="my-4">
+                        <textarea
+                            class="form-control"
+                            style="height: 60px; overflow-y: hidden"
+                            placeholder="General Notes"
+                            id="generalNotes"
+                        ></textarea>
+                    </div>
                     <div class="accordion" id="BIdescriptionAccordion">
                         <div class="accordion-item">
                             <h2 class="accordion-header">
@@ -366,6 +375,7 @@
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             crossorigin="anonymous"
         ></script>
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
         <script
             type="text/javascript"
             src="/scripts/BIRA/BIRAInput.js"

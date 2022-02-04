@@ -21,22 +21,18 @@ function parseIntString(riskAreaString) {
     return riskAreaString.match(/\d*$/)[0];
 }
 
-function getCookie(name) {
-    let re = new RegExp((name += "=([^;]+)"));
-    let value = re.exec(document.cookie);
-    return value != null ? unescape(value[1]) : null;
-}
-
 $(document).ready(function () {
-    var lastRiskArea = parseIntString(getCookie("lastRiskArea"));
-    document.cookie = "currentRiskArea=overview;";
+    var lastRiskArea = parseIntString(Cookies.get("lastRiskArea"));
+    Cookies.set("currentRiskArea", "overview", {
+        path: "/",
+    });
     var overallInformation = JSON.parse(localStorage.getItem("overall"));
     var securityPropertyNames = overallInformation.uniqueSecurityPropertyNames;
     var BIToIntegerScore = {};
     var integerToBIScore = {};
     var RAToIntegerScore = {};
     var integerToRAScore = {};
-    let riskAreaNav = getCookie("lastRiskArea").match(/\d*$/);
+    let riskAreaNav = Cookies.get("lastRiskArea").match(/\d*$/);
     var navObject = JSON.parse(sessionStorage.getItem("navigation"));
     for (let i = 1; i <= riskAreaNav; i++) {
         $(".riskAreaNavigation").append(
@@ -50,7 +46,9 @@ $(document).ready(function () {
     $("a").click(function () {
         if ($(this).hasClass("redirectRiskArea")) {
             saveInputs();
-            document.cookie = "currentRiskArea=" + $(this).attr("value");
+            Cookies.set("currentRiskArea", $(this).attr("value"), {
+                path: "/",
+            });
             window.location.href = "/BIRA/BIRAInput";
         }
     });
@@ -317,8 +315,8 @@ function saveInputs() {
 function generateJSONSave() {
     let savedJSON = {};
     savedJSON.cookies = {
-        currentRiskArea: getCookie("currentRiskArea"),
-        lastRiskArea: getCookie("lastRiskArea"),
+        currentRiskArea: Cookies.get("currentRiskArea"),
+        lastRiskArea: Cookies.get("lastRiskArea"),
     };
     for (let [key, stringValue] of Object.entries(localStorage)) {
         if (
@@ -327,6 +325,8 @@ function generateJSONSave() {
                 "projectTitle",
                 "projectSensitivity",
                 "logo360Defence",
+                "projectVersion",
+                "projectScope",
             ].includes(key)
         ) {
             savedJSON[key] = stringValue;
@@ -342,14 +342,23 @@ function generateJSONSave() {
     });
     const url = URL.createObjectURL(blob);
     download.href = url;
-    download.download =
-        "BIRA-" + localStorage.getItem("projectTitle") + "-Save.json";
+    let version = localStorage.getItem("projectVersion");
+    let title = localStorage.getItem("projectTitle");
+    if (version == "" && title == "") {
+        download.download = "BIRA-Save.json";
+    } else if (title == "" || version == "") {
+        download.download = "BIRA-" + title + version + "-Save.json";
+    } else {
+        download.download = "BIRA-" + title + "-" + version + "-Save.json";
+    }
     download.click();
 }
 
 function previousRiskArea() {
-    if (getCookie("currentRiskArea") != "RA1") {
-        document.cookie = "currentRiskArea=" + getCookie("lastRiskArea");
+    if (Cookies.get("currentRiskArea") != "RA1") {
+        Cookies.set("currentRiskArea", Cookies.get("lastRiskArea"), {
+            path: "/",
+        });
         window.location.href = "/BIRA/BIRAInput";
     } else {
         console.log("There is no previous Risk Area");
@@ -357,7 +366,9 @@ function previousRiskArea() {
 }
 
 function firstRiskArea() {
-    document.cookie = "currentRiskArea=RA1";
+    Cookies.set("currentRiskArea", "RA1", {
+        path: "/",
+    });
     window.location.href = "/BIRA/BIRAInput";
 }
 
@@ -366,6 +377,7 @@ function generateDocumentation() {
         orientation: "landscape",
         unit: "px",
         hotfixes: ["px_scaling"],
+        compress: true,
     });
     var projectName = localStorage.getItem("projectTitle");
     doc.setFontSize(30);
@@ -381,12 +393,15 @@ function generateDocumentation() {
         doc.internal.pageSize.getHeight() / 2,
         "center"
     );
-    var logo360 = new Image();
+
     let logo360Version = localStorage.getItem("logo360Defence");
-    if (logo360Version == "2T") {
-        logo360.src = "/images/2T-Security-Logo.png";
-        doc.addImage(logo360, 28, 35);
+    if (logo360Version == "2T" || logo360Version == null) {
+        doc.setFontSize(20);
+        doc.setTextColor("7030a0");
+        doc.text("2T Security", 28, 35);
+        doc.setTextColor(100);
     } else {
+        var logo360 = new Image();
         var anjbLogo = new Image();
         if (logo360Version == null) {
             logo360.src = "/images/BIRA/360D-UK-Logo.png";
@@ -397,13 +412,44 @@ function generateDocumentation() {
         doc.addImage(logo360, 28, 35, 64, 64);
         doc.addImage(anjbLogo, 100, 27, 80, 80);
     }
-    let projectLogo = localStorage.getItem("projectLogo");
+
+    var projectLogo = localStorage.getItem("projectLogo");
     if (projectLogo != "null") {
         doc.addImage(
-            localStorage.getItem("projectLogo"),
+            projectLogo,
             doc.internal.pageSize.getWidth() / 2 - 150,
             doc.internal.pageSize.getHeight() / 2 + 50
         );
+    }
+    var projectScope = localStorage.getItem("projectScope");
+    if (projectScope != "") {
+        doc.setFontSize(15);
+        doc.setTextColor("000000");
+        let pageSize = doc.internal.pageSize;
+        let pageWidth = pageSize.getWidth();
+        let text = doc.splitTextToSize(projectScope, pageWidth - 300, {});
+        if (projectLogo != "null") {
+            doc.text(
+                text,
+                doc.internal.pageSize.getWidth() / 2,
+                doc.internal.pageSize.getHeight() / 2 + 340,
+                "center"
+            );
+        } else {
+            doc.text(
+                text,
+                doc.internal.pageSize.getWidth() / 2,
+                doc.internal.pageSize.getHeight() / 2 + 100,
+                "center"
+            );
+        }
+    }
+    var version = localStorage.getItem("projectVersion");
+    doc.setFontSize(12);
+    if (version == "") {
+        doc.text(new Date().toDateString(), 940, 45);
+    } else {
+        doc.text(version + " / " + new Date().toDateString(), 940, 45);
     }
     var sensitivityMarking = localStorage.getItem("projectSensitivity");
     if (sensitivityMarking != "") {
@@ -518,7 +564,7 @@ function generateDocumentation() {
         },
     });
 
-    let lastRiskArea = fetchIntegers(getCookie("lastRiskArea"));
+    let lastRiskArea = fetchIntegers(Cookies.get("lastRiskArea"));
     for (let i = 1; i <= lastRiskArea; i++) {
         var riskArea = JSON.parse(localStorage.getItem("RA" + i));
         doc.addPage();
@@ -530,6 +576,7 @@ function generateDocumentation() {
             pageWidth - 140,
             {}
         );
+        var generalNotes = riskArea.generalNotes;
         doc.text(title, 56, 80);
         doc.setFontSize(11);
         let text = doc.splitTextToSize(
@@ -545,6 +592,16 @@ function generateDocumentation() {
         }
 
         doc.text(text, 56, heightSummary);
+        if (generalNotes != "" && generalNotes != undefined) {
+            var generalNotesSplit = doc.splitTextToSize(
+                "Notes: " + generalNotes,
+                pageWidth - 140,
+                {}
+            );
+            var generalTextHeight = doc.getTextDimensions(generalNotesSplit).h;
+            doc.text(generalNotesSplit, 56, lengthText + heightSummary + 10);
+        }
+
         doc.setFontSize(14);
 
         var headers = [
@@ -591,7 +648,7 @@ function generateDocumentation() {
                     );
                 }
             },
-            startY: lengthText + heightSummary,
+            startY: lengthText + heightSummary + generalTextHeight,
             columnStyles: {
                 0: { cellWidth: 160 },
                 1: { cellWidth: 160 },
