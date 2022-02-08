@@ -690,9 +690,13 @@ function fetchIntegers(value) {
 
 function fetchScoreColour(scoreType, value) {
     var colours = JSON.parse(localStorage.getItem("colours"));
-    if (scoreType == "BI") {
-        return colours["BI" + value];
-    } else if (scoreType == "RA") {
-        return colours["RA" + value];
+    if (colours != null) {
+        if (scoreType == "BI") {
+            return colours["BI" + value];
+        } else if (scoreType == "RA") {
+            return colours["RA" + value];
+        }
+    } else {
+        return "ffffff";
     }
 }
