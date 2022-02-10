@@ -107,7 +107,10 @@ $("button").click(function () {
         nextSecurityProperty();
     }
 });
-
+function updateProject() {
+    sessionStorage.setItem("updateProject", "true");
+    window.location.href = "/project-information";
+}
 function createTableCell(value) {
     let cell = document.createElement("td");
     cell.append(value);

@@ -211,6 +211,11 @@ $(document).ready(function () {
 });
 //For each object in overallScores add to the two separate rows in the table
 
+function updateProject() {
+    sessionStorage.setItem("updateProject", "true");
+    window.location.href = "/project-information";
+}
+
 function addToAverageTable(
     securityPropertyName,
     averageBIValue,

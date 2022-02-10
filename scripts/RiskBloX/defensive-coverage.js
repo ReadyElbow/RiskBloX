@@ -46,6 +46,11 @@ function back() {
     window.location.href = "/RiskBloX/mitigations";
 }
 
+function updateProject() {
+    sessionStorage.setItem("updateProject", "true");
+    window.location.href = "/project-information";
+}
+
 function saveProgress() {
     let savedJSON = {};
     savedJSON["cookies"] = document.cookie;
@@ -221,8 +226,6 @@ function generateDocumentation() {
             );
             var generalTextHeight = doc.getTextDimensions(generalNotesSplit).h;
             doc.text(generalNotesSplit, 56, lengthText + heightText + 10);
-        } else {
-            var generalTextHeight = 0;
         }
 
         doc.autoTable({

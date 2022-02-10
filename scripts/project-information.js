@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    if (Boolean(sessionStorage.getItem("updateProject")) == true) {
+        $("#projectStart").text("Continue Project");
+    }
     let projectTitle = localStorage.getItem("projectTitle");
     let projectSensitivity = localStorage.getItem("projectSensitivity");
     let projectScope = localStorage.getItem("projectScope");

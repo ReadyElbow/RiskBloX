@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="RiskBloX is a Risk Management website that offers two open-source tools. An ATT&CK Assessment leveraging Mitre ATT&CK resources, providing a concise interface to score mitigations and assess your defensive coverage. A Business Impact Risk Assessment (BIRA) against Risk Areas to determine the impact to the business if a risk is realised."
+        />
+        <title>RiskBloX | BIRA Create</title>
+        <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+            integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+            crossorigin="anonymous"
+        />
+        <link href="/css/global.css" rel="stylesheet" text="text/css" />
+        <link rel="stylesheet" href="/css/BIRA/createBIRA.css" />
+    </head>
+
+    <body>
+        <header>
+            <nav
+                class="navbar navbar-expand-md navbar-dark bg-primary fixed-top"
+            >
+                <div class="container-fluid">
+                    <img
+                        src="/images/riskblox-logo.png"
+                        width="45"
+                        height="40"
+                    />
+                    <a class="navbar-brand" href="#">RiskBloX</a>
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#toggleMenu"
+                        aria-controls="toggleMenu"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="toggleMenu">
+                        <ul class="navbar-nav nav me-auto text-center">
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link active"
+                                    aria-current="page"
+                                    href="/"
+                                    >Home</a
+                                >
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a
+                                    class="nav-link dropdown-toggle"
+                                    id="navbarDropdown"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                >
+                                    RiskBloX Analysis
+                                </a>
+                                <ul
+                                    class="dropdown-menu"
+                                    aria-labelledby="navbarDropdown"
+                                >
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="/RiskBloX/explanation"
+                                            >Introduction</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider" />
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="/RiskBloX/start-assessment"
+                                            >ATT&CK Assessment</a
+                                        >
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a
+                                    class="nav-link dropdown-toggle"
+                                    id="navbarDropdown"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                >
+                                    BIRA
+                                </a>
+                                <ul
+                                    class="dropdown-menu"
+                                    aria-labelledby="navbarDropdown"
+                                >
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="/BIRA/explanation"
+                                            >Introduction</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="/BIRA/createBIRA"
+                                            >Create BIRA Template</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider" />
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="/BIRA/loadBIRA"
+                                            >BIRA</a
+                                        >
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="https://attack.mitre.org/"
+                                    target="_blank"
+                                    >MITRE ATT&CK</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="https://mitre-attack.github.io/attack-navigator/"
+                                    target="_blank"
+                                    >MITRE ATT&CK Navigator</a
+                                >
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav nav ms-auto text-center">
+                            <li class="nav-item">
+                                <a
+                                    href="https://github.com/ReadyElbow/RiskBloX"
+                                    target="_blank"
+                                    class="badge badge-pill badge-light"
+                                >
+                                    <i class="fab fa-github fa-2x"></i>
+                                    Website/API Repo
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    href="https://github.com/mitre-attack/attack-navigator"
+                                    target="_blank"
+                                    class="badge badge-pill badge-light"
+                                >
+                                    <i class="fab fa-github fa-2x"></i>
+                                    Navigator Repo
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <div class="container-fluid">
+                <h1 class="text-center">BIRA Template Generator</h1>
+                <div id="userErrorAlerts"></div>
+                <div class="col-md-4 offset-md-4 my-3">
+                    <div class="input-group">
+                        <input
+                            class="form-control"
+                            type="file"
+                            id="formFile"
+                            accept=".json"
+                        />
+                        <button
+                            type="button"
+                            class="btn btn-primary"
+                            id="JSONLoad"
+                        >
+                            Load from Previous Template
+                        </button>
+                    </div>
+                </div>
+                <div id="templateGenerator">
+                    <form class="mb-3" id="areaTemplate">
+                        <div class="card">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">Risk Area</span>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="riskAreaTitle"
+                                    placeholder="Risk Area Title"
+                                    aria-label="Risk Area"
+                                    aria-describedby="riskarea"
+                                />
+                                <button
+                                    class="addRiskArea btn btn-primary"
+                                    type="button"
+                                >
+                                    <i
+                                        class="fa fa-plus fa-2"
+                                        aria-hidden="true"
+                                    ></i>
+                                </button>
+                                <button
+                                    hidden
+                                    class="removeRiskArea btn btn-primary"
+                                    id="removeRiskAreabtn"
+                                    type="button"
+                                >
+                                    <i
+                                        class="fa fa-minus fa-2"
+                                        aria-hidden="true"
+                                    ></i>
+                                </button>
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"
+                                    >Risk Area Description</span
+                                >
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="riskAreaDescription"
+                                    placeholder="Risk Area Description"
+                                    aria-label="Risk Area Description"
+                                    aria-describedby="riskarea"
+                                />
+                            </div>
+                            <div class="card-body">
+                                <div class="securityProperty">
+                                    <div class="securityAreas">
+                                        <div
+                                            class="input-group mt-4 mb-1"
+                                            id="securityPropertyTemplate"
+                                        >
+                                            <span class="input-group-text"
+                                                >Security Property/Bad
+                                                Outcome</span
+                                            >
+                                            <input
+                                                type="text"
+                                                class="form-control securityPropertyTitle"
+                                                placeholder="Security Property"
+                                                aria-label="Security Property"
+                                            />
+                                            <button
+                                                class="addSecurityProperty btn btn-secondary"
+                                                type="button"
+                                            >
+                                                <i
+                                                    class="fa fa-plus fa-2"
+                                                    aria-hidden="true"
+                                                ></i>
+                                            </button>
+                                            <button
+                                                hidden
+                                                class="removeSecurityProperty btn btn-secondary"
+                                                id="removeSecurityPropertybtn"
+                                                type="button"
+                                            >
+                                                <i
+                                                    class="fa fa-minus fa-2"
+                                                    aria-hidden="true"
+                                                ></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="table-responsive businessImpactScores"
+                                    >
+                                        <table
+                                            class="table table-hover table-bordered"
+                                        >
+                                            <thead class="table-dark">
+                                                <tr>
+                                                    <th
+                                                        scope="col"
+                                                        class="col-1"
+                                                    >
+                                                        Business Impact Scoring
+                                                    </th>
+                                                    <th
+                                                        scope="col"
+                                                        class="col-2"
+                                                    >
+                                                        Other notation
+                                                    </th>
+                                                    <th
+                                                        scope="col"
+                                                        class="col-6"
+                                                    >
+                                                        Description
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="scoringRow">
+                                                    <td>
+                                                        <textarea
+                                                            class="form-control scoreName"
+                                                        >
+Very High</textarea
+                                                        >
+                                                        <div
+                                                            class="d-flex justify-content-end rowControls"
+                                                        >
+                                                            <button
+                                                                class="addScoreArea btn btn-primary"
+                                                                type="button"
+                                                            >
+                                                                <i
+                                                                    class="fa fa-plus fa-2"
+                                                                    aria-hidden="true"
+                                                                ></i>
+                                                            </button>
+                                                            <button
+                                                                class="removeScoreArea btn btn-primary"
+                                                                type="button"
+                                                            >
+                                                                <i
+                                                                    class="fa fa-minus fa-2"
+                                                                    aria-hidden="true"
+                                                                ></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <textarea
+                                                            class="form-control otherNotation"
+                                                            style="
+                                                                height: 100px;
+                                                            "
+                                                        ></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <textarea
+                                                            class="BIDescription scoringDescription form-control"
+                                                            style="
+                                                                height: 100px;
+                                                            "
+                                                        ></textarea>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scoringRow">
+                                                    <td>
+                                                        <textarea
+                                                            class="form-control scoreName"
+                                                        >
+High</textarea
+                                                        >
+                                                        <div
+                                                            class="d-flex justify-content-end rowControls"
+                                                        >
+                                                            <button
+                                                                class="addScoreArea btn btn-primary"
+                                                                type="button"
+                                                            >
+                                                                <i
+                                                                    class="fa fa-plus fa-2"
+                                                                    aria-hidden="true"
+                                                                ></i>
+                                                            </button>
+                                                            <button
+                                                                class="removeScoreArea btn btn-primary"
+                                                                type="button"
+                                                            >
+                                                                <i
+                                                                    class="fa fa-minus fa-2"
+                                                                    aria-hidden="true"
+                                                                ></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <textarea
+                                                            class="form-control otherNotation"
+                                                            style="
+                                                                height: 100px;
+                                                            "
+                                                        ></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <textarea
+                                                            class="BIDescription scoringDescription form-control"
+                                                            style="
+                                                                height: 100px;
+                                                            "
+                                                        ></textarea>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scoringRow">
+                                                    <td>
+                                                        <textarea
+                                                            class="form-control scoreName"
+                                                        >
+Medium</textarea
+                                                        >
+                                                        <div
+                                                            class="d-flex justify-content-end rowControls"
+                                                        >
+                                                            <button
+                                                                class="addScoreArea btn btn-primary"
+                                                                type="button"
+                                                            >
+                                                                <i
+                                                                    class="fa fa-plus fa-2"
+                                                                    aria-hidden="true"
+                                                                ></i>
+                                                            </button>
+                                                            <button
+                                                                class="removeScoreArea btn btn-primary"
+                                                                type="button"
+                                                            >
+                                                                <i
+                                                                    class="fa fa-minus fa-2"
+                                                                    aria-hidden="true"
+                                                                ></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <textarea
+                                                            class="form-control otherNotation"
+                                                            style="
+                                                                height: 100px;
+                                                            "
+                                                        ></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <textarea
+                                                            class="BIDescription scoringDescription form-control"
+                                                            style="
+                                                                height: 100px;
+                                                            "
+                                                        ></textarea>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scoringRow">
+                                                    <td>
+                                                        <textarea
+                                                            class="form-control scoreName"
+                                                        >
+Low</textarea
+                                                        >
+                                                        <div
+                                                            class="d-flex justify-content-end rowControls"
+                                                        >
+                                                            <button
+                                                                class="addScoreArea btn btn-primary"
+                                                                type="button"
+                                                            >
+                                                                <i
+                                                                    class="fa fa-plus fa-2"
+                                                                    aria-hidden="true"
+                                                                ></i>
+                                                            </button>
+                                                            <button
+                                                                class="removeScoreArea btn btn-primary"
+                                                                type="button"
+                                                            >
+                                                                <i
+                                                                    class="fa fa-minus fa-2"
+                                                                    aria-hidden="true"
+                                                                ></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <textarea
+                                                            class="form-control otherNotation"
+                                                            style="
+                                                                height: 100px;
+                                                            "
+                                                        ></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <textarea
+                                                            class="BIDescription scoringDescription form-control"
+                                                            style="
+                                                                height: 100px;
+                                                            "
+                                                        ></textarea>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scoringRow">
+                                                    <td>
+                                                        <textarea
+                                                            class="form-control scoreName"
+                                                        >
+Very Low</textarea
+                                                        >
+                                                        <div
+                                                            class="d-flex justify-content-end rowControls"
+                                                        >
+                                                            <button
+                                                                class="addScoreArea btn btn-primary"
+                                                                type="button"
+                                                            >
+                                                                <i
+                                                                    class="fa fa-plus fa-2"
+                                                                    aria-hidden="true"
+                                                                ></i>
+                                                            </button>
+                                                            <button
+                                                                class="removeScoreArea btn btn-primary"
+                                                                type="button"
+                                                            >
+                                                                <i
+                                                                    class="fa fa-minus fa-2"
+                                                                    aria-hidden="true"
+                                                                ></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <textarea
+                                                            class="form-control otherNotation"
+                                                            style="
+                                                                height: 100px;
+                                                            "
+                                                        ></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <textarea
+                                                            class="BIDescription scoringDescription form-control"
+                                                            style="
+                                                                height: 100px;
+                                                            "
+                                                        ></textarea>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div
+                                        class="table-responsive riskAppetiteScores"
+                                    >
+                                        <table
+                                            class="table table-hover table-bordered"
+                                        >
+                                            <thead class="table-dark">
+                                                <tr>
+                                                    <th
+                                                        scope="col"
+                                                        class="col-1"
+                                                    >
+                                                        Risk Appetite Scoring
+                                                    </th>
+                                                    <th
+                                                        scope="col"
+                                                        class="col-2"
+                                                    >
+                                                        Other notation
+                                                    </th>
+                                                    <th
+                                                        scope="col"
+                                                        class="col-6"
+                                                    >
+                                                        Description
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="scoringRow">
+                                                    <td>
+                                                        <textarea
+                                                            class="form-control scoreName"
+                                                        >
+Eager</textarea
+                                                        >
+                                                        <div
+                                                            class="d-flex justify-content-end rowControls"
+                                                        >
+                                                            <button
+                                                                class="addScoreArea btn btn-primary"
+                                                                type="button"
+                                                            >
+                                                                <i
+                                                                    class="fa fa-plus fa-2"
+                                                                    aria-hidden="true"
+                                                                ></i>
+                                                            </button>
+                                                            <button
+                                                                class="removeScoreArea btn btn-primary"
+                                                                type="button"
+                                                            >
+                                                                <i
+                                                                    class="fa fa-minus fa-2"
+                                                                    aria-hidden="true"
+                                                                ></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <textarea
+                                                            class="form-control otherNotation"
+                                                            style="
+                                                                height: 100px;
+                                                            "
+                                                        ></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <textarea
+                                                            class="scoringDescription form-control"
+                                                            style="
+                                                                height: 100px;
+                                                            "
+                                                        ></textarea>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scoringRow">
+                                                    <td>
+                                                        <textarea
+                                                            class="form-control scoreName"
+                                                        >
+Open</textarea
+                                                        >
+                                                        <div
+                                                            class="d-flex justify-content-end rowControls"
+                                                        >
+                                                            <button
+                                                                class="addScoreArea btn btn-primary"
+                                                                type="button"
+                                                            >
+                                                                <i
+                                                                    class="fa fa-plus fa-2"
+                                                                    aria-hidden="true"
+                                                                ></i>
+                                                            </button>
+                                                            <button
+                                                                class="removeScoreArea btn btn-primary"
+                                                                type="button"
+                                                            >
+                                                                <i
+                                                                    class="fa fa-minus fa-2"
+                                                                    aria-hidden="true"
+                                                                ></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <textarea
+                                                            class="form-control otherNotation"
+                                                            style="
+                                                                height: 100px;
+                                                            "
+                                                        ></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <textarea
+                                                            class="scoringDescription form-control"
+                                                            style="
+                                                                height: 100px;
+                                                            "
+                                                        ></textarea>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scoringRow">
+                                                    <td>
+                                                        <textarea
+                                                            class="form-control scoreName"
+                                                        >
+Cautious</textarea
+                                                        >
+                                                        <div
+                                                            class="d-flex justify-content-end rowControls"
+                                                        >
+                                                            <button
+                                                                class="addScoreArea btn btn-primary"
+                                                                type="button"
+                                                            >
+                                                                <i
+                                                                    class="fa fa-plus fa-2"
+                                                                    aria-hidden="true"
+                                                                ></i>
+                                                            </button>
+                                                            <button
+                                                                class="removeScoreArea btn btn-primary"
+                                                                type="button"
+                                                            >
+                                                                <i
+                                                                    class="fa fa-minus fa-2"
+                                                                    aria-hidden="true"
+                                                                ></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <textarea
+                                                            class="form-control otherNotation"
+                                                            style="
+                                                                height: 100px;
+                                                            "
+                                                        ></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <textarea
+                                                            class="scoringDescription form-control"
+                                                            style="
+                                                                height: 100px;
+                                                            "
+                                                        ></textarea>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scoringRow">
+                                                    <td>
+                                                        <textarea
+                                                            class="form-control scoreName"
+                                                        >
+Minimalist</textarea
+                                                        >
+                                                        <div
+                                                            class="d-flex justify-content-end rowControls"
+                                                        >
+                                                            <button
+                                                                class="addScoreArea btn btn-primary"
+                                                                type="button"
+                                                            >
+                                                                <i
+                                                                    class="fa fa-plus fa-2"
+                                                                    aria-hidden="true"
+                                                                ></i>
+                                                            </button>
+                                                            <button
+                                                                class="removeScoreArea btn btn-primary"
+                                                                type="button"
+                                                            >
+                                                                <i
+                                                                    class="fa fa-minus fa-2"
+                                                                    aria-hidden="true"
+                                                                ></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <textarea
+                                                            class="form-control otherNotation"
+                                                            style="
+                                                                height: 100px;
+                                                            "
+                                                        ></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <textarea
+                                                            class="scoringDescription form-control"
+                                                            style="
+                                                                height: 100px;
+                                                            "
+                                                        ></textarea>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scoringRow">
+                                                    <td>
+                                                        <textarea
+                                                            class="form-control scoreName"
+                                                        >
+Averse</textarea
+                                                        >
+                                                        <div
+                                                            class="d-flex justify-content-end rowControls"
+                                                        >
+                                                            <button
+                                                                class="addScoreArea btn btn-primary"
+                                                                type="button"
+                                                            >
+                                                                <i
+                                                                    class="fa fa-plus fa-2"
+                                                                    aria-hidden="true"
+                                                                ></i>
+                                                            </button>
+                                                            <button
+                                                                class="removeScoreArea btn btn-primary"
+                                                                type="button"
+                                                            >
+                                                                <i
+                                                                    class="fa fa-minus fa-2"
+                                                                    aria-hidden="true"
+                                                                ></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <textarea
+                                                            class="form-control otherNotation"
+                                                            style="
+                                                                height: 100px;
+                                                            "
+                                                        ></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <textarea
+                                                            class="scoringDescription form-control"
+                                                            style="
+                                                                height: 100px;
+                                                            "
+                                                        ></textarea>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <hr class="bg-dark p-2" />
+                        <br />
+                    </form>
+                </div>
+            </div>
+            <div class="input-group justify-content-center mb-2">
+                <span class="input-group-text">360 Defence Logo</span>
+                <select class="form-select-sm text-center" id="360DLogo">
+                    <option value="UK">UK</option>
+                    <option value="Germany">Germany</option>
+                    <option value="Ireland">Ireland</option>
+                    <option value="Israel">Israel</option>
+                    <option value="Canada">Canada</option>
+                    <option value="USA">USA</option>
+                    <option value="Scotland">Scotland</option>
+                    <option value="Netherlands">Netherlands</option>
+                </select>
+            </div>
+            <div class="text-center">
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    onclick="generate()"
+                >
+                    Generate JSON
+                </button>
+            </div>
+
+            <!-- Modal for Colours, need to dynamically create the values-->
+            <div
+                class="modal fade"
+                id="BIScoreColoursModal"
+                aria-hidden="true"
+                aria-labelledby="BIScoreColoursModal"
+                tabindex="-1"
+            >
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">
+                                Define Business Impact Score Colours
+                            </h5>
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                These colours are used when generating a report.
+                                Place HEX values into the Text Areas in the form
+                                '#ffffff/ffffff'
+                            </p>
+                            <div class="table-responsive">
+                                <table
+                                    class="table table-hover table-bordered"
+                                    id="BIScoreColour"
+                                >
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th scope="col" class="col-2">
+                                                Score
+                                            </th>
+                                            <th scope="col" class="col-2">
+                                                Colour
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="BIScoreColourBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button
+                                class="btn btn-primary"
+                                data-bs-target="#RAScoreColoursModal"
+                                data-bs-toggle="modal"
+                                data-bs-dismiss="modal"
+                            >
+                                Define Risk Appetite Colours
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="modal fade"
+                id="RAScoreColoursModal"
+                aria-hidden="true"
+                aria-labelledby="RAScoreColoursModal"
+                tabindex="-1"
+            >
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">
+                                Define Risk Appetite Score Colours
+                            </h5>
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="table-responsive">
+                                <table
+                                    class="table table-hover table-bordered"
+                                    id="RAScoreColour"
+                                >
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th scope="col" class="col-2">
+                                                Score
+                                            </th>
+                                            <th scope="col" class="col-2">
+                                                Colour
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="RAScoreColourBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button
+                                type="button"
+                                id="secondModalClose"
+                                class="btn btn-primary"
+                                data-bs-dismiss="modal"
+                            >
+                                Generate JSON
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer
+            class="fixed-bottom text-center"
+            style="background-color: #d3d3d3"
+        >
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-6 mb-2 mb-md-0">
+                        <h4 class="mb-3" style="color: #7030a0">2T Security</h4>
+                        <p>
+                            <a
+                                href="https://www.2t-security.com/"
+                                target="_blank"
+                                >About us</a
+                            >
+                            <a
+                                href="https://risktree.2t-security.co.uk/"
+                                target="_blank"
+                                >Risk Tree</a
+                            >
+                        </p>
+                    </div>
+                    <div class="col-6 mb-2 mb-md-0">
+                        <h5>MITRE ATT&CK®</h5>
+                        <p>
+                            &copy;2022 The MITRE Corporation. This work is
+                            reproduced and distributed with the permission of
+                            The MITRE Corporation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            type="text/javascript"
+            src="/scripts/BIRA/createBIRA.js"
+        ></script>
+    </body>
+</html>

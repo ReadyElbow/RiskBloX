@@ -19,6 +19,8 @@ function fetchTechnique() {
                 notes: "",
             },
         ];
+        technique.mitigations = mitigations;
+        localStorage.setItem("currentTechnique", JSON.stringify(technique));
     } else {
         var mitigations = technique.mitigations;
     }
@@ -283,6 +285,11 @@ function nextTechnique() {
         });
         window.location.reload();
     }
+}
+
+function updateProject() {
+    sessionStorage.setItem("updateProject", "true");
+    window.location.href = "/project-information";
 }
 
 function updateStorage() {
