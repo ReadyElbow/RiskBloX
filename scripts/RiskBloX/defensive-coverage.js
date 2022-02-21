@@ -1,5 +1,5 @@
 window.jsPDF = window.jspdf.jsPDF;
-
+sessionStorage.setItem("RiskBloXType", "coverage");
 function generateAttackLayerCall() {
     var toPost = {};
     var techniques = [];
@@ -95,7 +95,7 @@ function saveProgress() {
     download.click();
 }
 
-function generateDocumentation() {
+function generateReport() {
     var doc = new jsPDF({
         orientation: "landscape",
         unit: "px",
@@ -217,6 +217,7 @@ function generateDocumentation() {
         let text = doc.splitTextToSize(description, pageWidth - 140, {});
         let lengthText = doc.getTextDimensions(text).h;
         let heightText = 160;
+        let generalTextHeight = 0;
         doc.text(text, 56, heightText);
         if (generalNotes != "" && generalNotes != undefined) {
             var generalNotesSplit = doc.splitTextToSize(
@@ -224,7 +225,7 @@ function generateDocumentation() {
                 pageWidth - 140,
                 {}
             );
-            var generalTextHeight = doc.getTextDimensions(generalNotesSplit).h;
+            generalTextHeight = doc.getTextDimensions(generalNotesSplit).h;
             doc.text(generalNotesSplit, 56, lengthText + heightText + 10);
         }
 

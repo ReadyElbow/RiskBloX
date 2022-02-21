@@ -36,8 +36,10 @@ function projectStart() {
         let projectType = sessionStorage.getItem("RiskBloXType");
         if (projectType == "new") {
             window.location.href = "/RiskBloX/technique-filters";
-        } else {
+        } else if (projectType == "mitigations") {
             window.location.href = "/RiskBloX/mitigations";
+        } else if (projectType == "coverage") {
+            window.location.href = "/RiskBloX/defensive-coverage";
         }
     }
 }

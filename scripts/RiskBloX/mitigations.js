@@ -1,5 +1,6 @@
 window.scoreCap = parseInt(localStorage.getItem("scoreLimit"));
 window.impactThreshold = parseInt(localStorage.getItem("impactThreshold"));
+sessionStorage.setItem("RiskBloXType", "mitigations");
 
 function fetchTechnique() {
     let currentTechnique = Cookies.get("currentTechnique");
