@@ -1,5 +1,7 @@
 # RiskBloX
 
+_To be overhauled to React Implementation_
+
 ## Description
 
 RiskBloX is an open source consisting of two Risk Management tools: BIRA and ATT&CK Assessment.
