@@ -12,7 +12,7 @@ function fetchTechnique() {
             {
                 application: technique.detection,
                 description:
-                    "No mitigations are available for this techique. A detection mechanism is supplied.",
+                    "No mitigations are available for this technique. A detection mechanism is supplied.",
                 mitigation_name: "Detection Mechanism",
                 mid: "D1",
                 impactLevel: 0,
@@ -48,7 +48,7 @@ function fetchTechnique() {
     }
     $("#technique-header").append(
         $(
-            `<h1>Technique: ${techniqueName} (${tid})<a href="https://attack.mitre.org/techniques/${tid}" target="_blank"><i class="fas fa-question-circle"></i></a></h1>Risk Score: <h2 id="overallScore">${score}</h2>`
+            `<h1>Technique: ${techniqueName} (${tid})<a href="https://attack.mitre.org/techniques/${tid.replace(".","/")}" target="_blank"><i class="fas fa-question-circle"></i></a></h1>Risk Score: <h2 id="overallScore">${score}</h2>`
         )
     );
     $("#technique-details").append(
