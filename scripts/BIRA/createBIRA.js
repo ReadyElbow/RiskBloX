@@ -141,7 +141,7 @@ function generate() {
                 riskAppetite: "",
                 riskAppetiteJustification: "",
             };
-            if (child == 0) {
+            if($.inArray(title, uniqueSecurityPropertyNames)<0) {
                 uniqueSecurityPropertyNames.push(title);
             }
         }
@@ -150,16 +150,19 @@ function generate() {
 
         scoringDescription.businessImpact = fetchTableRows(scoreTables[0]);
         scoringDescription.riskAppetite = fetchTableRows(scoreTables[1]);
-        if (child == 0) {
-            for (item in scoringDescription.businessImpact) {
-                uniqueBIScoreNames.push(
-                    scoringDescription.businessImpact[item].name
-                );
+        if($.inArray(title, uniqueSecurityPropertyNames)<0) {
+            uniqueSecurityPropertyNames.push(title);
+        }
+        for (item in scoringDescription.businessImpact) {
+            let scoreName = scoringDescription.businessImpact[item].name;
+            if($.inArray(scoreName, uniqueBIScoreNames)<0) {
+                uniqueBIScoreNames.push(scoreName);
             }
-            for (item in scoringDescription.riskAppetite) {
-                uniqueRAScoreNames.push(
-                    scoringDescription.riskAppetite[item].name
-                );
+        }
+        for (item in scoringDescription.riskAppetite) {
+            let scoreName = scoringDescription.riskAppetite[item].name;
+            if($.inArray(scoreName, uniqueRAScoreNames)<0) {
+                uniqueRAScoreNames.push(scoreName);
             }
         }
         //Add the security property to the JSON Risk Area through format of SA1 etc
@@ -258,8 +261,8 @@ function generate() {
     );
     modal1.show();
 }
-//Modal Listener, just read the html with the JScript plugin quickly :)
-$("#secondModalClose").on("click", function () {
+//Modal Listener
+$("#generateJSON").on("click", function () {
     biraTemplate = localStorage.getItem("tempObject");
     localStorage.removeItem("tempObject");
     biraJSONTemplate = JSON.parse(biraTemplate);
@@ -270,7 +273,7 @@ $("#secondModalClose").on("click", function () {
         let name = $(tr).find("td:eq(0)").text();
         let colour = $(tr).find(".hexColour").val();
         let placeholder = $(tr).find(".hexColour").attr("placeholder");
-        //Or if colour is in wrong fromat, length less than 7 and doesn't include a hashtag then error
+        //Or if colour is in wrong format, length less than 7 and doesn't include a hashtag then error
         if (colour == "") {
             colour = placeholder;
         }
@@ -282,7 +285,7 @@ $("#secondModalClose").on("click", function () {
         let name = $(tr).find("td:eq(0)").text();
         let colour = $(tr).find(".hexColour").val();
         let placeholder = $(tr).find(".hexColour").attr("placeholder");
-        //Or if colour is in wrong fromat, length less than 7 and doesn't include a hashtag then error
+        //Or if colour is in wrong format, length less than 7 and doesn't include a hashtag then error
         if (colour == "") {
             colour = placeholder;
         }
@@ -305,6 +308,26 @@ $("#secondModalClose").on("click", function () {
     $("body").find("#JSONDownloader").remove();
 });
 
+$("#summaryTemplate").on("click", function () {
+    biraTemplate = JSON.parse(localStorage.getItem("tempObject"));
+    $("#listSecProp").empty();
+    for (securityProperty of biraTemplate.overall.uniqueSecurityPropertyNames.sort()) {
+        if (securityProperty == ""){
+            $("#listSecProp").append(`<li><p>Empty Security Property</p></li>`);
+        }
+        else {
+            $("#listSecProp").append(`<li><p>${securityProperty}</p></li>`);
+        }
+    }
+    let summaryModal = new bootstrap.Modal(
+        document.getElementById("SummaryModal"),
+        {
+            keyboard: false,
+        }
+    );
+    summaryModal.show();
+})
+
 function fetchTableRows(tableDiv) {
     var scoringArray = [];
     $.each($(tableDiv).find(".scoringRow"), function () {
@@ -317,11 +340,6 @@ function fetchTableRows(tableDiv) {
     });
     return scoringArray;
 }
-
-//Issue with adding new elements on top of exisiting. SOmething going wrong where it might not be registring them for some reason......
-//Duplicate Security Properties
-//Unhide add button
-//Remove IDs
 
 $("#JSONLoad").click(function () {
     userInput = $("#formFile").prop("files")[0];
@@ -336,8 +354,6 @@ $("#JSONLoad").click(function () {
                 JSON.stringify(jsonTemplate.colours)
             );
         }
-        //Need to also wipe them of any data stored in them which requires rewriting function
-        // Need to delete the template that is now actually on the website also to avoid clashes
 
         for (let areaCounter = 1; areaCounter <= lastRiskArea; areaCounter++) {
             let template = riskAreaTemplate.clone();
@@ -416,11 +432,6 @@ function createRiskArea(riskAreaJSON, template) {
     }
     //Then delete the first row of tbody as it was used as a template
     $(template).find(".riskAppetiteScores").find("tr").eq(1).remove();
-
-    //
-    //At the end of the generation I need to check if it is NOT the first risk and then perform a wipe of any id atrrtibutes so I don't break above code!
-    //
-
     $("#templateGenerator").append(template);
 }
 

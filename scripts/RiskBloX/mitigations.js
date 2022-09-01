@@ -48,7 +48,7 @@ function fetchTechnique() {
     }
     $("#technique-header").append(
         $(
-            `<h1>Technique: ${techniqueName} (${tid})<a href="https://attack.mitre.org/techniques/${tid.replace(".","/")}" target="_blank"><i class="fas fa-question-circle"></i></a></h1>Risk Score: <h2 id="overallScore">${score}</h2>`
+            `<h1>Technique: ${techniqueName} (${tid})<a href="https://attack.mitre.org/techniques/${tid.replace(".", "/")}" target="_blank"><i class="fas fa-question-circle"></i></a></h1>Risk Score: <h2 id="overallScore">${score}</h2>`
         )
     );
     $("#technique-details").append(
@@ -377,6 +377,7 @@ function saveProgress() {
             [
                 "projectLogo",
                 "projectTitle",
+                "filename",
                 "projectSensitivity",
                 "projectVersion",
                 "projectScope",
@@ -400,14 +401,17 @@ function saveProgress() {
     });
     const url = URL.createObjectURL(blob);
     download.href = url;
-    let title = localStorage.getItem("projectTitle");
     let version = localStorage.getItem("projectVersion");
+    let title = localStorage.getItem("filename");
+    if (title == ""){
+        title = localStorage.getItem("projectTitle");
+    }
     if (version == "" && title == "") {
         download.download = "RiskBloX-Save.json";
-    } else if (title == "" || version == "") {
-        download.download = "RiskBloX-" + title + version + "-Save.json";
+    } else if ((title == "" || version == "" ) && !( title == "" && version == "")) {
+        download.download = "RiskBloX-" + title.replace(/\s+/g, "-") + version.replace(/\s+/g, "-") + "-Save.json";
     } else {
-        download.download = "RiskBloX-" + title + "-" + version + "-Save.json";
+        download.download = "RiskBloX-" + title.replace(/\s+/g, "-") + "-" + version.replace(/\s+/g, "-") + "-Save.json";
     }
     download.click();
 }

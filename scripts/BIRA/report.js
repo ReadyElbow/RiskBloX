@@ -17,6 +17,11 @@ $("button").click(function () {
     }
 });
 
+$(document).on('change','select',function(){
+    var selected = $(this).find(":selected");
+    $(this)[0].style.backgroundColor = $(selected)[0].style.backgroundColor;
+});
+
 function parseIntString(riskAreaString) {
     return riskAreaString.match(/\d*$/)[0];
 }
@@ -53,7 +58,7 @@ $(document).ready(function () {
         }
     });
 
-    //Defined required overall information - mappings for scores and an Overall Average calculater
+    //Defined required overall information - mappings for scores and an Overall Average calculator
     for (item in overallInformation.scoreNamesBI) {
         BIToIntegerScore[overallInformation.scoreNamesBI[item]] =
             parseInt(item) + 1;
@@ -187,6 +192,7 @@ $(document).ready(function () {
     finalJustification.append(
         createTableCell(
             createSelect(
+                "RA",
                 overallInformation.scoreNamesRA,
                 overallInformation.agreedRiskAppetite
             )
@@ -232,22 +238,23 @@ function addToAverageTable(
     let tableRow = document.createElement("tr");
     tableRow.append(
         createTableCell(securityPropertyName),
-        createTableCell(worstBI),
-        createTableCell(averageBIValue),
-        createTableCell(createSelect(BIScoringValues, BIOverwrite)),
+        createTableCell(worstBI, fetchScoreColour("BI", worstBI)),
+        createTableCell(averageBIValue, fetchScoreColour("BI", averageBIValue)),
+        createTableCell(createSelect("BI", BIScoringValues, BIOverwrite)),
         createTableCell(createTextArea(impactJustification, "BI")),
-        createTableCell(worstRA),
-        createTableCell(averageRAValue),
-        createTableCell(createSelect(RAScoringValues, RAOverwrite)),
+        createTableCell(worstRA, fetchScoreColour("RA", worstRA)),
+        createTableCell(averageRAValue, fetchScoreColour("RA", averageRAValue)),
+        createTableCell(createSelect("RA", RAScoringValues, RAOverwrite)),
         createTableCell(createTextArea(appetiteJustification, "RA"))
     );
 
     document.getElementById("overwriteAverages").append(tableRow);
 }
 
-function createTableCell(value) {
+function createTableCell(value, colour = "#ffffff") {
     let cell = document.createElement("td");
     cell.append(value);
+    cell.style.backgroundColor = colour;
     return cell;
 }
 
@@ -269,22 +276,24 @@ function createTextArea(innerValue, area) {
     return textArea;
 }
 
-function createSelect(names, selected) {
+function createSelect(type, options, selected) {
     var selectList = document.createElement("select");
     selectList.setAttribute("class", "form-select form-select-sm mb-3");
-    for (var i in names) {
+    let optionNA = document.createElement("option");
+    optionNA.value = "Not Applicable";
+    optionNA.innerHTML = "Not Applicable";
+    selectList.appendChild(optionNA);
+    for (var i in options) {
         let option = document.createElement("option");
-        option.value = names[i];
-        option.innerHTML = names[i];
-        if (names[i] == selected) {
+        option.value = options[i];
+        option.innerHTML = options[i];
+        option.style.background = fetchScoreColour(type, options[i]);
+        if (options[i] == selected) {
             option.selected = "selected";
+            selectList.setAttribute("style", `background-color: ${fetchScoreColour(type, options[i])}`);
         }
         selectList.appendChild(option);
     }
-    let option = document.createElement("option");
-    option.value = "Not Applicable";
-    option.innerHTML = "Not Applicable";
-    selectList.appendChild(option);
     return selectList;
 }
 
@@ -328,6 +337,7 @@ function generateJSONSave() {
             [
                 "projectLogo",
                 "projectTitle",
+                "filename",
                 "projectSensitivity",
                 "logo360Defence",
                 "projectVersion",
@@ -348,13 +358,16 @@ function generateJSONSave() {
     const url = URL.createObjectURL(blob);
     download.href = url;
     let version = localStorage.getItem("projectVersion");
-    let title = localStorage.getItem("projectTitle");
+    let title = localStorage.getItem("filename");
+    if (title == ""){
+        title = localStorage.getItem("projectTitle");
+    }
     if (version == "" && title == "") {
         download.download = "BIRA-Save.json";
-    } else if (title == "" || version == "") {
-        download.download = "BIRA-" + title + version + "-Save.json";
+    } else if ((title == "" || version == "" ) && !( title == "" && version == "")) {
+        download.download = "BIRA-" + title.replace(/\s+/g, "-") + version.replace(/\s+/g, "-") + "-Save.json";
     } else {
-        download.download = "BIRA-" + title + "-" + version + "-Save.json";
+        download.download = "BIRA-" + title.replace(/\s+/g, "-") + "-" + version.replace(/\s+/g, "-") + "-Save.json";
     }
     download.click();
 }
@@ -426,29 +439,7 @@ function generateDocumentation() {
             doc.internal.pageSize.getHeight() / 2 + 50
         );
     }
-    var projectScope = localStorage.getItem("projectScope");
-    if (projectScope != "") {
-        doc.setFontSize(15);
-        doc.setTextColor("000000");
-        let pageSize = doc.internal.pageSize;
-        let pageWidth = pageSize.getWidth();
-        let text = doc.splitTextToSize(projectScope, pageWidth - 300, {});
-        if (projectLogo != "null") {
-            doc.text(
-                text,
-                doc.internal.pageSize.getWidth() / 2,
-                doc.internal.pageSize.getHeight() / 2 + 340,
-                "center"
-            );
-        } else {
-            doc.text(
-                text,
-                doc.internal.pageSize.getWidth() / 2,
-                doc.internal.pageSize.getHeight() / 2 + 100,
-                "center"
-            );
-        }
-    }
+
     var version = localStorage.getItem("projectVersion");
     doc.setFontSize(12);
     if (version == "") {
@@ -465,6 +456,18 @@ function generateDocumentation() {
             18,
             "center"
         );
+    }
+
+    let projectScope = localStorage.getItem("projectScope");
+    if (projectScope != "") {
+        doc.addPage("landscape");
+        doc.setFontSize(25);
+        doc.text("Summary", 56, 80);
+        doc.setFontSize(12);
+        let pageSize = doc.internal.pageSize;
+        let pageWidth = pageSize.getWidth();
+        let text = doc.splitTextToSize(projectScope, pageWidth - 140, {});
+        doc.text(text,56,140,"left");
     }
 
     doc.addPage("landscape");
@@ -497,9 +500,9 @@ function generateDocumentation() {
     var headers = [
         "Security Property/Bad Outcome",
         "Impact Agreed",
-        "Impact Justififcation",
+        "Impact Justification",
         "Appetite Agreed",
-        "Appetite Justififcation",
+        "Appetite Justification",
     ];
     var body = [];
 
@@ -674,19 +677,38 @@ function generateDocumentation() {
             },
         });
     }
-    doc.save("BIRA-" + localStorage.getItem("projectTitle") + "-Report.pdf");
+
+    let title = localStorage.getItem("filename");
+    if (title == ""){
+        title = localStorage.getItem("projectTitle");
+    }
+    if (version == "" && title == "") {
+        doc.save("BIRA-Report.pdf");
+    } else if ((title == "" || version == "" ) && !( title == "" && version == "")) {
+        doc.save("BIRA-" + title.replace(/\s+/g, "-") + version.replace(/\s+/g, "-") + "-Report.pdf");
+    } else {
+        doc.save("BIRA-" + title.replace(/\s+/g, "-") + "-" + version.replace(/\s+/g, "-") + "-Report.pdf");
+    }
 }
 
 function fetchTable(object, name) {
     let row = [];
     row.push(
         name,
-        object.businessImpact,
+        valueCheck(object.businessImpact),
         object.businessImpactJustification,
-        object.riskAppetite,
+        valueCheck(object.riskAppetite),
         object.riskAppetiteJustification
     );
     return row;
+}
+
+function valueCheck(value) {
+    if (value == "") {
+        return "Not Applicable";
+    } else {
+        return value;
+    }
 }
 
 function fetchIntegers(value) {
@@ -695,13 +717,14 @@ function fetchIntegers(value) {
 
 function fetchScoreColour(scoreType, value) {
     var colours = JSON.parse(localStorage.getItem("colours"));
-    if (colours != null) {
+    try {
         if (scoreType == "BI") {
             return colours["BI" + value];
         } else if (scoreType == "RA") {
             return colours["RA" + value];
         }
-    } else {
-        return "ffffff";
-    }
+      }
+      catch(error) {
+        return "#ffffff";
+      }
 }

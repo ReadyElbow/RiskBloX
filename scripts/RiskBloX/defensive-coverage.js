@@ -60,6 +60,7 @@ function saveProgress() {
             [
                 "projectLogo",
                 "projectTitle",
+                "filename",
                 "projectSensitivity",
                 "projectVersion",
                 "projectScope",
@@ -83,14 +84,17 @@ function saveProgress() {
     });
     const url = URL.createObjectURL(blob);
     download.href = url;
-    let title = localStorage.getItem("projectTitle");
     let version = localStorage.getItem("projectVersion");
+    let title = localStorage.getItem("filename");
+    if (title == ""){
+        title = localStorage.getItem("projectTitle");
+    }
     if (version == "" && title == "") {
         download.download = "RiskBloX-Save.json";
-    } else if (title == "" || version == "") {
-        download.download = "RiskBloX-" + title + version + "-Save.json";
+    } else if ((title == "" || version == "" ) && !( title == "" && version == "")) {
+        download.download = "RiskBloX-" + title.replace(/\s+/g, "-") + version.replace(/\s+/g, "-") + "-Save.json";
     } else {
-        download.download = "RiskBloX-" + title + "-" + version + "-Save.json";
+        download.download = "RiskBloX-" + title.replace(/\s+/g, "-") + "-" + version.replace(/\s+/g, "-") + "-Save.json";
     }
     download.click();
 }
@@ -259,21 +263,32 @@ function generateReport() {
             body: bodyRows(technique.mitigations),
         });
     }
-    doc.save("RiskBloX-Report.pdf");
+    
+    let title = localStorage.getItem("filename");
+    if (title == ""){
+        title = localStorage.getItem("projectTitle");
+    }
+    if (version == "" && title == "") {
+        doc.save("RiskBloX-Report.pdf");
+    } else if ((title == "" || version == "" ) && !( title == "" && version == "")) {
+        doc.save("RiskBloX-" + title.replace(/\s+/g, "-") + version.replace(/\s+/g, "-") + "-Report.pdf");
+    } else {
+        doc.save("RiskBloX-" + title.replace(/\s+/g, "-") + "-" + version.replace(/\s+/g, "-") + "-Report.pdf");
+    }
 }
 
 function bodyRows(mitigations) {
     var body = [];
     for (var j = 0; j < mitigations.length; j++) {
-        mitgation = mitigations[j];
+        let mitigation = mitigations[j];
         let row = [];
         row.push(
-            mitgation.mid + ": " + mitgation.mitigation_name,
-            mitgation.description,
-            mitgation.application,
-            mitgation.notes,
-            mitgation.impactLevel,
-            mitgation.confidenceScore + "%"
+            mitigation.mid + ": " + mitigation.mitigation_name,
+            mitigation.description,
+            mitigation.application,
+            mitigation.notes,
+            mitigation.impactLevel,
+            mitigation.confidenceScore + "%"
         );
         body.push(row);
     }

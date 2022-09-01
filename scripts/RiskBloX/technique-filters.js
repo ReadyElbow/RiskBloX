@@ -164,7 +164,6 @@ function fetchFilters() {
         .catch((error) => console.log("error", error));
 }
 
-//Fetching TechniqueMitigation data
 function redirect() {
     localStorage.setItem(
         "scoreLimit",

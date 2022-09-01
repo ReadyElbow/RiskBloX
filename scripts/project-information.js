@@ -3,11 +3,15 @@ $(document).ready(function () {
         $("#projectStart").text("Continue Project");
     }
     let projectTitle = localStorage.getItem("projectTitle");
+    let filename = localStorage.getItem("filename");
     let projectSensitivity = localStorage.getItem("projectSensitivity");
     let projectScope = localStorage.getItem("projectScope");
     let projectVersion = localStorage.getItem("projectVersion");
     if (projectTitle != null) {
         $("#projectTitle").val(projectTitle);
+    }
+    if (filename != null) {
+        $("#filename").val(filename);
     }
     if (projectSensitivity != null) {
         $("#projectSensitivity").val(projectSensitivity);
@@ -21,10 +25,11 @@ $(document).ready(function () {
 });
 
 function projectStart() {
-    localStorage.setItem("projectTitle", $("#projectTitle").val());
-    localStorage.setItem("projectSensitivity", $("#projectSensitivity").val());
-    localStorage.setItem("projectScope", $("#projectScope").val());
-    localStorage.setItem("projectVersion", $("#projectVersion").val());
+    localStorage.setItem("projectTitle", $("#projectTitle").val().replace(/\s+$/, ""));
+    localStorage.setItem("filename", $("#filename").val().replace(/\s+$/, ""));
+    localStorage.setItem("projectSensitivity", $("#projectSensitivity").val().replace(/\s+$/, ""));
+    localStorage.setItem("projectScope", $("#projectScope").val().replace(/\s+$/, ""));
+    localStorage.setItem("projectVersion", $("#projectVersion").val().replace(/\s+$/, ""));
     projectLogo();
     if (sessionStorage.getItem("projectType") == "BIRA") {
         if (Cookies.get("currentRiskArea") == "overview") {

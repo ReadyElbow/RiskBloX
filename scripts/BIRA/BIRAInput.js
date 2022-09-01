@@ -74,10 +74,10 @@ $(document).ready(function () {
         let tableRow = document.createElement("tr");
         tableRow.append(
             createTableCell(name),
-            createTableCell(createSelect(BISelectValues, BISelected)),
-            createTableCell(createTextArea(impactJustification, "BI")),
-            createTableCell(createSelect(RASelectValues, RASelected)),
-            createTableCell(createTextArea(appetiteJustification, "RA"))
+            createTableCell(createSelect("BI", BISelectValues, BISelected)),
+            createTableCell(createTextArea("BI", impactJustification)),
+            createTableCell(createSelect("RA", RASelectValues, RASelected)),
+            createTableCell(createTextArea("RA", appetiteJustification))
         );
         document.getElementById("securityProperties").append(tableRow);
     }
@@ -105,8 +105,21 @@ $("button").click(function () {
         previousSecurityProperty();
     } else if (name == "next") {
         nextSecurityProperty();
+    } else if (name == "summary") {
+        redirectToSummary();
     }
 });
+
+$(document).on('change','select',function(){
+    var selected = $(this).find(":selected");
+    $(this)[0].style.backgroundColor = $(selected)[0].style.backgroundColor;
+});
+
+function redirectToSummary(){
+    saveInputs();
+    window.location.href = "/BIRA/report";
+}
+
 function updateProject() {
     sessionStorage.setItem("updateProject", "true");
     window.location.href = "/project-information";
@@ -117,11 +130,11 @@ function createTableCell(value) {
     return cell;
 }
 
-function createTextArea(innerValue, area) {
+function createTextArea(type, innerValue) {
     var textArea = document.createElement("textarea");
-    if (area == "BI") {
+    if (type == "BI") {
         textArea.setAttribute("class", "businessImpactJus form-control");
-    } else if (area == "RA") {
+    } else if (type == "RA") {
         textArea.setAttribute("class", "riskAreaJus form-control");
     }
 
@@ -130,15 +143,17 @@ function createTextArea(innerValue, area) {
     return textArea;
 }
 
-function createSelect(names, selected) {
+function createSelect(type, options, selected) {
     var selectList = document.createElement("select");
     selectList.setAttribute("class", "form-select form-select-sm mb-3");
-    for (var i in names) {
+    for (var i in options) {
         let option = document.createElement("option");
-        option.value = names[i];
-        option.innerHTML = names[i];
-        if (names[i] == selected) {
+        option.value = options[i];
+        option.innerHTML = options[i];
+        option.style.background = fetchScoreColour(type, options[i]);
+        if (options[i] == selected) {
             option.selected = "selected";
+            selectList.setAttribute("style", `background-color: ${fetchScoreColour(type, options[i])}`);
         }
         selectList.appendChild(option);
     }
@@ -226,6 +241,7 @@ function generateJSONSave() {
             [
                 "projectLogo",
                 "projectTitle",
+                "filename",
                 "projectSensitivity",
                 "logo360Defence",
                 "projectVersion",
@@ -246,13 +262,29 @@ function generateJSONSave() {
     const url = URL.createObjectURL(blob);
     download.href = url;
     let version = localStorage.getItem("projectVersion");
-    let title = localStorage.getItem("projectTitle");
+    let title = localStorage.getItem("filename");
+    if (title == ""){
+        title = localStorage.getItem("projectTitle");
+    }
     if (version == "" && title == "") {
         download.download = "BIRA-Save.json";
-    } else if (title == "" || version == "") {
-        download.download = "BIRA-" + title + version + "-Save.json";
+    } else if ((title == "" || version == "" ) && !( title == "" && version == "")) {
+        download.download = "BIRA-" + title.replace(/\s+/g, "-") + version.replace(/\s+/g, "-") + "-Save.json";
     } else {
-        download.download = "BIRA-" + title + "-" + version + "-Save.json";
+        download.download = "BIRA-" + title.replace(/\s+/g, "-") + "-" + version.replace(/\s+/g, "-") + "-Save.json";
     }
     download.click();
+}
+
+function fetchScoreColour(scoreType, value) {
+    let colours = JSON.parse(localStorage.getItem("colours"));
+    if (colours != null) {
+        if (scoreType == "BI") {
+            return colours["BI" + value];
+        } else if (scoreType == "RA") {
+            return colours["RA" + value];
+        }
+    } else {
+        return "#ffffff";
+    }
 }

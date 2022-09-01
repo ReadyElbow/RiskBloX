@@ -950,7 +950,47 @@ Averse</textarea
                         <div class="modal-footer">
                             <button
                                 type="button"
-                                id="secondModalClose"
+                                id="summaryTemplate"
+                                class="btn btn-primary"
+                                data-bs-dismiss="modal"
+                            >
+                                Template Summary
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="modal fade"
+                id="SummaryModal"
+                aria-hidden="true"
+                aria-labelledby="SummaryModal"
+                tabindex="-1"
+            >
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">
+                                Summary of Template
+                            </h5>
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        <div class="modal-body">
+                            </br>
+                            <p>
+                                <strong>Security Properties</strong>
+                            </p>
+                            <ul class="ms-auto" id="listSecProp"></ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button
+                                type="button"
+                                id="generateJSON"
                                 class="btn btn-primary"
                                 data-bs-dismiss="modal"
                             >
