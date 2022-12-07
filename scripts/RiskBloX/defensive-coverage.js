@@ -67,7 +67,6 @@ function saveProgress() {
         "tolerance",
         "impactThreshold",
         "scoreLimit",
-        "RiskBloXType",
       ].includes(key)
     ) {
       savedJSON[key] = stringValue;
