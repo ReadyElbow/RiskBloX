@@ -280,6 +280,7 @@ function nextTechnique() {
 }
 
 function updateProject() {
+  updateStorage();
   sessionStorage.setItem("updateProject", "true");
   window.location.href = "/project-information";
 }
