@@ -127,7 +127,7 @@ function displayMitigations(mitigations) {
     mitigationRow += `<td>${application}</td>`;
 
     mitigationRow += `<td><textarea class="mitigationNotes notes form-control" height="100px" style="height: 131px; overflow-y: hidden;">${
-      notes == null ? notes : ""
+      localStorage.getItem(mitigations[i]) !== null ? notes : ""
     }</textarea></td>`;
     mitigationRow += `<td><select class="form-select form-select-sm mb-3 impactLevel" onchange="updateScore()">`;
     for (let i = 0; i <= 10; i += 2) {
