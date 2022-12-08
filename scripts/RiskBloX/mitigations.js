@@ -295,33 +295,48 @@ function updateStorage() {
   techniqueStorage = JSON.parse(localStorage.getItem(currentTechnique));
   techniqueStorage.generalNotes = $("#generalNotes").val();
   techniqueStorage.score = parseFloat(overallScore.innerHTML);
-  for (let i = 0; i < techniqueStorage.mitigations.length; i++) {
-    techniqueStorage.mitigations[i].notes = notes[i].value.replace(
-      /[%&#]/g,
-      ""
-    );
-    techniqueStorage.mitigations[i].impactLevel = parseInt(
-      impactLevel[i].value
-    );
-    techniqueStorage.mitigations[i].confidenceScore = parseInt(
-      confidenceScores[i].value
-    );
-
-    //Prefill later mitigations --saving functionality
-    if (
-      !mitigationNames[i].innerHTML.startsWith(
-        "Mitigation: Detection Mechanism"
-      )
-    ) {
-      let saveMitigation = {};
-      saveMitigation.notes = notes[i].value.replace(/[%&#]/g, "");
-      saveMitigation.confidenceScore =
-        techniqueStorage.mitigations[i].confidenceScore;
-      saveMitigation.impactLevel = parseInt(impactLevel[i].value);
-      localStorage.setItem(
-        techniqueStorage.mitigations[i].mid,
-        JSON.stringify(saveMitigation)
+  totalMitigations = techniqueStorage.mitigations.length;
+  // No mitigations populated but detection exists
+  if (totalMitigations == 0 && techniqueStorage.detection != "") {
+    techniqueStorage.mitigations = {
+      application: techniqueStorage.detection,
+      description:
+        "No mitigations are available for this technique. A detection mechanism is supplied.",
+      mitigation_name: "Detection Mechanism",
+      mid: "D1",
+      impactLevel: parseInt(impactLevel[0].value),
+      confidenceScore: parseInt(confidenceScores[0].value),
+      notes: notes[0].value.replace(/[%&#]/g, ""),
+    };
+  } else {
+    for (let i = 0; i < totalMitigations; i++) {
+      techniqueStorage.mitigations[i].notes = notes[i].value.replace(
+        /[%&#]/g,
+        ""
       );
+      techniqueStorage.mitigations[i].impactLevel = parseInt(
+        impactLevel[i].value
+      );
+      techniqueStorage.mitigations[i].confidenceScore = parseInt(
+        confidenceScores[i].value
+      );
+
+      //Prefill later mitigations --saving functionality
+      if (
+        !mitigationNames[i].innerHTML.startsWith(
+          "Mitigation: Detection Mechanism"
+        )
+      ) {
+        let saveMitigation = {};
+        saveMitigation.notes = notes[i].value.replace(/[%&#]/g, "");
+        saveMitigation.confidenceScore =
+          techniqueStorage.mitigations[i].confidenceScore;
+        saveMitigation.impactLevel = parseInt(impactLevel[i].value);
+        localStorage.setItem(
+          techniqueStorage.mitigations[i].mid,
+          JSON.stringify(saveMitigation)
+        );
+      }
     }
   }
   localStorage.setItem(currentTechnique, JSON.stringify(techniqueStorage));
