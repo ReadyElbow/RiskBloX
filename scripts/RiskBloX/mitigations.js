@@ -83,6 +83,8 @@ function fetchTechnique() {
 }
 
 function displayMitigations(mitigations) {
+  let currentTechnique = Cookies.get("currentTechnique");
+  let furthestReachedTechnique = Cookies.get("furthestReachedT");
   for (let i = 0; i < mitigations.length; i++) {
     let mitigationRow = "<tr>";
     let mid = mitigations[i].mid;
@@ -103,10 +105,18 @@ function displayMitigations(mitigations) {
         },
       }
     ).replace(/\).Monitor/g, "");
-    let notes = mitigations[i].notes;
-    var confidenceScore = mitigations[i].confidenceScore;
-    var impactLevel = mitigations[i].impactLevel;
-
+    if (currentTechnique == furthestReachedTechnique) {
+      // If new technique, has there been a previously analysed mitigation?
+      var notes = localStorage.getItem(mitigations[i]).notes;
+      var confidenceScore = localStorage.getItem(
+        mitigations[i]
+      ).confidenceScore;
+      var impactLevel = localStorage.getItem(mitigations[i]).impactLevel;
+    } else {
+      var notes = mitigations[i].notes;
+      var confidenceScore = mitigations[i].confidenceScore;
+      var impactLevel = mitigations[i].impactLevel;
+    }
     if (mid.startsWith("M")) {
       mitigationRow += `<td class="mitigationName">Mitigation: ${mitigation_name} (${mid})<a href="https://attack.mitre.org/mitigations/${mid}" target="_blank"><i class="fas fa-question-circle"></i></a></td>`;
     } else {
@@ -116,7 +126,9 @@ function displayMitigations(mitigations) {
     mitigationRow += `<td>${description}</td>`;
     mitigationRow += `<td>${application}</td>`;
 
-    mitigationRow += `<td><textarea class="mitigationNotes notes form-control" height="100px" style="height: 131px; overflow-y: hidden;">${notes}</textarea></td>`;
+    mitigationRow += `<td><textarea class="mitigationNotes notes form-control" height="100px" style="height: 131px; overflow-y: hidden;">${
+      notes == null ? notes : ""
+    }</textarea></td>`;
     mitigationRow += `<td><select class="form-select form-select-sm mb-3 impactLevel" onchange="updateScore()">`;
     for (let i = 0; i <= 10; i += 2) {
       if (i == impactLevel) {
