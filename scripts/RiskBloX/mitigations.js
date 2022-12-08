@@ -107,7 +107,7 @@ function displayMitigations(mitigations) {
     ).replace(/\).Monitor/g, "");
     if (
       currentTechnique == furthestReachedTechnique &&
-      localStorage.getItem(mitigations[i]) !== null
+      localStorage.getItem(mid) !== null
     ) {
       // If new technique, has there been a previously analysed mitigation?
       var notes = localStorage.getItem(mitigations[i]).notes;
