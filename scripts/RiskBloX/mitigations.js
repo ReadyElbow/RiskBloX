@@ -107,14 +107,15 @@ function displayMitigations(mitigations) {
     ).replace(/\).Monitor/g, "");
     if (
       currentTechnique == furthestReachedTechnique &&
-      localStorage.getItem(mid) !== null
+      localStorage.getItem(mid) !== null &&
+      mitigations[i].confidenceScore == 0 && // Assumption that it has not been investigated
+      mitigations[i].impactLevel == 0 &&
+      mitigations[i].notes == ""
     ) {
       // If new technique, has there been a previously analysed mitigation?
-      var notes = localStorage.getItem(mitigations[i]).notes;
-      var confidenceScore = localStorage.getItem(
-        mitigations[i]
-      ).confidenceScore;
-      var impactLevel = localStorage.getItem(mitigations[i]).impactLevel;
+      var notes = localStorage.getItem(mid).notes;
+      var confidenceScore = localStorage.getItem(mid).confidenceScore;
+      var impactLevel = localStorage.getItem(mid).impactLevel;
     } else {
       var notes = mitigations[i].notes;
       var confidenceScore = mitigations[i].confidenceScore;
