@@ -105,7 +105,10 @@ function displayMitigations(mitigations) {
         },
       }
     ).replace(/\).Monitor/g, "");
-    if (currentTechnique == furthestReachedTechnique) {
+    if (
+      currentTechnique == furthestReachedTechnique &&
+      localStorage.getItem(mitigations[i]) !== null
+    ) {
       // If new technique, has there been a previously analysed mitigation?
       var notes = localStorage.getItem(mitigations[i]).notes;
       var confidenceScore = localStorage.getItem(
@@ -127,7 +130,7 @@ function displayMitigations(mitigations) {
     mitigationRow += `<td>${application}</td>`;
 
     mitigationRow += `<td><textarea class="mitigationNotes notes form-control" height="100px" style="height: 131px; overflow-y: hidden;">${
-      localStorage.getItem(mitigations[i]) !== null ? notes : ""
+      notes || ""
     }</textarea></td>`;
     mitigationRow += `<td><select class="form-select form-select-sm mb-3 impactLevel" onchange="updateScore()">`;
     for (let i = 0; i <= 10; i += 2) {
