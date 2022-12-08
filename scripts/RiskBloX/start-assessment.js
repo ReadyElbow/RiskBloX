@@ -40,7 +40,7 @@ function JSONLoad() {
 
   reader.onload = function (event) {
     let userFile = JSON.parse(event.target.result);
-    cookies = userFile["cookies"].split(";");
+    cookies = userFile["cookies"].split("; ");
     techniques = userFile["techniques"];
     for (let i = 0; i < cookies.length; i++) {
       let splitCookie = cookies[i].split(/=(.+)/);
