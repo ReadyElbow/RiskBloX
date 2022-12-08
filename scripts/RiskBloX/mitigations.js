@@ -113,9 +113,10 @@ function displayMitigations(mitigations) {
       mitigations[i].notes == ""
     ) {
       // If new technique, has there been a previously analysed mitigation?
-      var notes = localStorage.getItem(mid).notes;
-      var confidenceScore = localStorage.getItem(mid).confidenceScore;
-      var impactLevel = localStorage.getItem(mid).impactLevel;
+      previouslyFilledMitigation = JSON.parse(localStorage.getItem(mid));
+      var notes = previouslyFilledMitigation.notes;
+      var confidenceScore = previouslyFilledMitigation.confidenceScore;
+      var impactLevel = previouslyFilledMitigation.impactLevel;
     } else {
       var notes = mitigations[i].notes;
       var confidenceScore = mitigations[i].confidenceScore;
