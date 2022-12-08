@@ -298,16 +298,18 @@ function updateStorage() {
   totalMitigations = techniqueStorage.mitigations.length;
   // No mitigations populated but detection exists
   if (totalMitigations == 0 && techniqueStorage.detection != "") {
-    techniqueStorage.mitigations = {
-      application: techniqueStorage.detection,
-      description:
-        "No mitigations are available for this technique. A detection mechanism is supplied.",
-      mitigation_name: "Detection Mechanism",
-      mid: "D1",
-      impactLevel: parseInt(impactLevel[0].value),
-      confidenceScore: parseInt(confidenceScores[0].value),
-      notes: notes[0].value.replace(/[%&#]/g, ""),
-    };
+    techniqueStorage.mitigations = [
+      {
+        application: techniqueStorage.detection,
+        description:
+          "No mitigations are available for this technique. A detection mechanism is supplied.",
+        mitigation_name: "Detection Mechanism",
+        mid: "D1",
+        impactLevel: parseInt(impactLevel[0].value),
+        confidenceScore: parseInt(confidenceScores[0].value),
+        notes: notes[0].value.replace(/[%&#]/g, ""),
+      },
+    ];
   } else {
     for (let i = 0; i < totalMitigations; i++) {
       techniqueStorage.mitigations[i].notes = notes[i].value.replace(
