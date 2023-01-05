@@ -116,11 +116,6 @@ function generateAttackLayer() {
       ".json";
   }
   download.click();
-
-  var navigator = document.getElementById("navIframe");
-  url = `https://mitre-attack.github.io/attack-navigator/#leave_site_dialog=false&header=false&legend=false`;
-  navigator.setAttribute("src", url);
-
 }
 
 function back() {
