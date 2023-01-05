@@ -27,7 +27,7 @@
         <link href="/css/defensiveCoverage.css" rel="stylesheet" />
     </head>
 
-    <body onload="generateAttackLayer()">
+    <body>
         <header>
             <nav
                 class="navbar navbar-expand-md navbar-dark bg-primary fixed-top"
@@ -181,9 +181,9 @@
                 <div class="card text-center">
                     <div class="card-body">
                         <div class="alert alert-primary" role="alert">
-                            <h3>
-                                To visualise your defensive coverage, select 'Open Existing Layer' and upload the recently downloaded file. It is not recommended to Upgrade layer version at this stage.
-                            </h3>
+                            <h4>
+                                To visualise your defensive coverage, click 'Generate Mitre Navigator Layer'. Then select 'Open Existing Layer' in the below window and upload the recently downloaded file. It is not recommended to Upgrade layer version at this stage.
+                            </h4>
                         </div>
                         <div class="btn-group">
                             <button
@@ -205,6 +205,13 @@
                                 class="btn btn-outline-primary"
                             >
                                 Generate Report
+                            </button>
+                            <button
+                                type="button"
+                                onclick="generateAttackLayer()"
+                                class="btn btn-outline-primary"
+                            >
+                                Generate Mitre Navigator Layer
                             </button>
                             <li class="page-item">
                                 <button
