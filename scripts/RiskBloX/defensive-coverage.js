@@ -1,45 +1,126 @@
 window.jsPDF = window.jspdf.jsPDF;
 sessionStorage.setItem("RiskBloXType", "coverage");
-function generateAttackLayerCall() {
-  var toPost = {};
-  var techniques = [];
+function generateAttackLayer() {
+  let ATTACK_VERSION = "10"
+  let LAYER_VERSION = "4.3"
+  let NAV_VERSION = "4.5.5"
+  let NAME = "RiskBloX ATT&CK Assessment"
+  let DESCRIPTION = ""
+  let DOMAIN = decodeURIComponent(Cookies.get("domain")).replaceAll('_', '-');
+  let PLATFORMS = decodeURIComponent(Cookies.get("platforms")).split(",")
+  layer_json = {
+      "name": NAME,
+      "versions": {
+          "attack": ATTACK_VERSION,
+          "navigator": NAV_VERSION,
+          "layer": LAYER_VERSION
+      },
+      "domain": DOMAIN,
+      "description": DESCRIPTION,
+      "filters": {
+          "platforms": PLATFORMS
+      },
+      "sorting": 0,
+      "layout": {
+          "layout": "side",
+          "aggregateFunction": "average",
+          "showID": false,
+          "showName": true,
+          "showAggregateScores": false,
+          "countUnscored": false
+      },
+      "hideDisabled": false,
+      "techniques": [],
+      "gradient": {
+          "colors": [
+              "#ff6666",
+              "#ffe766",
+              "#8ec843"
+          ],
+          "minValue": 0,
+          "maxValue": 100
+      },
+      "legendItems": [],
+      "metadata": [],
+      "links": [],
+      "showTacticRowBackground": false,
+      "tacticRowBackground": "#dddddd",
+      "selectTechniquesAcrossTactics": true,
+      "selectSubtechniquesWithParent": false
+  }
+
+  let techniques = [];
   for (let [key, stringValue] of Object.entries(localStorage)) {
     if (key.match(/^T/)) {
-      var storageTechnique = JSON.parse(stringValue);
+      let storageTechnique = JSON.parse(stringValue);
       if (!storageTechnique["tid"].includes(".")) {
-        var tid = storageTechnique.tid;
-        let tactics = storageTechnique.tactic;
-        let score = storageTechnique.score;
+          
+        // Extracting Notes
         let techniqueComment = storageTechnique.generalNotes;
         let mitigations = storageTechnique.mitigations;
-
-        for (i in mitigations) {
-          if (mitigations[i].notes != "") {
+        for (let i in mitigations) {
+          if (!(mitigations[i].notes.search("\\w+"))) {
             techniqueComment += `\n${mitigations[i].mitigation_name} (${mitigations[i].mid}) Notes: ${mitigations[i].notes}\n\n`;
           }
         }
-
-        let technique = {};
-        technique["tid"] = tid;
-        technique["tactics"] = tactics;
-        technique["score"] = score;
-        technique["comment"] = techniqueComment;
-        techniques.push(technique);
+        for (let index in storageTechnique["tactic"]) {
+          let technique = {
+              "techniqueID": storageTechnique.tid,
+              "tactic": storageTechnique["tactic"][index],
+              "score": storageTechnique.score,
+              "color": "",
+              "comment": techniqueComment,
+              "enabled": true,
+              "metadata": [],
+              "links": [],
+              "showSubtechniques": false
+          }
+          techniques.push(technique);
+        }
       }
     }
   }
-  toPost["domain"] = Cookies.get("domain");
-  toPost["platforms"] = Cookies.get("platforms").split(",");
-  toPost["techniques"] = techniques;
+  layer_json["techniques"] = techniques
 
-  apiGetLayer =
-    "https://sdf10urdoe.execute-api.eu-west-1.amazonaws.com/RiskBloXProd/attacklayer?layer=" +
-    btoa(pako.deflate(JSON.stringify(toPost)));
+  download = document.createElement("a");
+
+  const str = JSON.stringify(layer_json);
+  const bytes = new TextEncoder().encode(str);
+  const blob = new Blob([bytes], {
+      type: "application/json;charset=utf-8",
+  });
+  const url = URL.createObjectURL(blob);
+  download.href = url;
+  let version = localStorage.getItem("projectVersion");
+  let title = localStorage.getItem("filename");
+  if (title == "") {
+      title = localStorage.getItem("projectTitle");
+  }
+  if (version == "" && title == "") {
+      download.download = "RiskBloX-Nav-Layer.json";
+  } else if (
+      (title == "" || version == "") &&
+      !(title == "" && version == "")
+  ) {
+      download.download =
+      "RiskBloX-Nav-Layer-" +
+      title.replace(/\s+/g, "-") +
+      version.replace(/\s+/g, "-") +
+      ".json";
+  } else {
+      download.download =
+      "RiskBloX-Nav-Layer-" +
+      title.replace(/\s+/g, "-") +
+      "-" +
+      version.replace(/\s+/g, "-") +
+      ".json";
+  }
+  download.click();
 
   var navigator = document.getElementById("navIframe");
-
-  url = `https://mitre-attack.github.io/attack-navigator/#leave_site_dialog=false&header=false&legend=false&layerURL=${apiGetLayer}`;
+  url = `https://mitre-attack.github.io/attack-navigator/#leave_site_dialog=false&header=false&legend=false`;
   navigator.setAttribute("src", url);
+
 }
 
 function back() {
